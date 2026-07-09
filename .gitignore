@@ -1,0 +1,27 @@
+# Variables d'environnement - NE JAMAIS COMMITER
+.env
+
+# Dépendances
+
+
+# Fichiers système macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Fichiers VS Code
+.vscode/
+*.code-workspace
+
+# Fichiers PHP temporaires
+*.log
+*.cache
+
+# Uploads utilisateurs (images des menus)
+public/assets/images/uploads/*
+!public/assets/images/uploads/.gitkeep
+
+# Fichiers de configuration IDE
+.idea/
+*.iml
