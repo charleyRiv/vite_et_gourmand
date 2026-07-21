@@ -25,3 +25,6 @@ public/assets/images/uploads/*
 # Fichiers de configuration IDE
 .idea/
 *.iml
+
+# Fichiers maquette trop volumineux
+public/assets/images/maquettes/Vite_et_Gourmand_Maquette.pdf
