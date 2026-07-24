@@ -53,7 +53,7 @@ class Router {
 
     private function abort(int $code, string $message): void {
         http_response_code($code);
-        $viewFile = __DIR__ . '/../Views/errors/' . $code . '.php';
+        $viewFile = __DIR__ . '/../../views/errors/' . $code . '.php';
         if (file_exists($viewFile)) {
             require_once $viewFile;
         } else {
