@@ -10,7 +10,7 @@ class UserController {
     public function dashboard(): void 
     {
         $pageTitle = 'Mon Espace - Vite & Gourmand';
-        $h1 = 'Mon Espace Personnel - From controller';
+        $h1 = 'Mon Espace Personnel';
         //Ajouter variable $name
         require_once __DIR__ . '/../../views/user/dashboard.php';
     }
@@ -18,40 +18,45 @@ class UserController {
     public function profileForm(): void 
     {
         $pageTitle = 'Mon Profil - Vite & Gourmand';
-        $h1 = 'Modifier mes informations personnelles - From controller';
+        $h1 = 'Modifier mes informations personnelles';
         //Récupérer et stocker dans variables les informations du user depuis la BDD
         require_once __DIR__ . '/../../views/user/profile.php';
     }
 
-    public function updateProfile(): void {
+    public function updateProfile(): void 
+    {
         // Logique pour mettre à jour le profil de l'utilisateur
         
         // Redirection
-        header('Location: /mon-espace/profil');
+        header('Location: /mon-espace');
         exit();
     }
 
-    public function showOrders(int $id): void {
+    public function showOrders(int $id): void 
+    {
         $pageTitle = 'Mes Commandes - Vite & Gourmand';
-        $h1 = 'Ma commande n°'. $id . '- From Controller';
+        $h1 = 'Ma commande n°'. $id;
         require_once __DIR__ . '/../../views/user/orders.php';
     }
 
-    public function cancelOrder(int $id): void {
+    public function cancelOrder(int $id): void 
+    {
         // Logique pour annuler la commande
         
         // Redirection
-        header('Location: /mon-espace/commande/' . $id);
+        header('Location: /mon-espace');
         exit();
     }
 
-    public function showOrderReviewForm(int $id): void {
+    public function showOrderReviewForm(int $id): void 
+    {
         $pageTitle = 'Noter la commande - Vite & Gourmand';
-        $h1 = 'Avis sur ma commande n°'. $id . '- From Controller';
+        $h1 = 'Formulaire avis';
         require_once __DIR__ . '/../../views/user/review.php';
     }
 
-    public function submitOrderReview(int $id): void {
+    public function submitOrderReview(int $id): void 
+    {
         // Logique pour soumettre l'avis sur la commande
         // Redirection
         header('Location: /mon-espace/commande/' . $id);

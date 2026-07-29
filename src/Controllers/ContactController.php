@@ -6,7 +6,7 @@ class ContactController {
     public function showContactForm(): void
     {
         $pageTitle = 'Contact - Vite & Gourmand';
-        $h1 = 'Formulaire de contact - From controller';
+        $h1 = 'Nous contacter';
         require_once __DIR__ . '/../../views/contact/contact.php';
     }
 

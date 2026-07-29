@@ -11,13 +11,22 @@ class AdminController extends EmployeeController{
     public function showEmployee(): void
     {
         $pageTitle = 'Gerer les employés - Vite & Gourmand';
-        $h1 = 'Gérer les employés - From Controller';
+        $h1 = 'Gérer les employés';
         require_once __DIR__ . '/../../views/admin/employeeForm.php';
     }
 
     public function createEmployee(): void
     {
         // Ajouter la creation du formulaire et l'envoie en BDD
+
+        //Redirection
+        header('Location : /admin/employes');
+        exit();
+    }
+
+    public function updateEmployee(): void
+    {
+        // Ajouter la modification du formulaire et l'envoie en BDD
 
         //Redirection
         header('Location : /admin/employes');
@@ -45,7 +54,7 @@ class AdminController extends EmployeeController{
     public function showStatistics(): void
     {
         $pageTitle = 'Statistiques - Vite & Gourmand';
-        $h1 = 'Statistiques - From Controller';
+        $h1 = 'Statistiques';
         require_once __DIR__ . '/../../views/admin/statistics.php';
     }
 }

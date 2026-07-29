@@ -41,7 +41,7 @@ $router->post('/connexion', 'AuthController', 'login');
 $router->get('/inscription', 'AuthController', 'showRegisterForm');
 $router->post('/inscription', 'AuthController', 'register');
 $router->get('/mot-de-passe-oublie', 'AuthController', 'passwordForgotten');
-$router->post('mot-de-passe-oublie', 'AuthController', 'requestModifyPassword');
+$router->post('/mot-de-passe-oublie', 'AuthController', 'requestModifyPassword');
 $router->get('/mot-de-passe-oublie/reinitialisation', 'AuthController', 'showResetPasswordForm');
 $router->post('/mot-de-passe-oublie/reinitialisation', 'AuthController', 'resetPassword');
 
@@ -70,7 +70,7 @@ $router->post('/mon-espace/commande/{id}/avis', 'UserController', 'submitOrderRe
 
 // ── Employee area ────────────────────────────────────────
 $router->get('/employe', 'EmployeeController', 'dashboard');
-$router->post('employe/mot-de-passe', 'EmployeeController', 'requestModifyPassword');
+$router->post('/employe/mot-de-passe', 'EmployeeController', 'requestModifyPassword');
     // Orders management
 $router->get('/employe/commandes', 'EmployeeController', 'listOrders');
 $router->post('/employe/commandes/{id}/gerer', 'EmployeeController', 'updateOrder');
@@ -121,6 +121,7 @@ $router->post('/admin/contenus/{id}/modifier', 'AdminController', 'updateContent
     // Employee management
 $router->get('/admin/employes', 'AdminController', 'showEmployee');
 $router->post('/admin/employes/creer', 'AdminController', 'createEmployee');
+$router->post('/admin/employes/update', 'AdminController', 'updateEmployee');
 $router->post('/admin/employes/{id}/desactiver', 'AdminController', 'desactivateEmployee');
 $router->post('/admin/employes/{id}/supprimer', 'AdminController', 'deleteEmployee');
     // Business management

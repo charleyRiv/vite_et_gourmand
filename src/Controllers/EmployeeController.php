@@ -11,7 +11,7 @@ class EmployeeController
         //Valeur fictive de test
         $role = 'administrateur'; 
         //$role = 'employee';
-        return $role === 'administrateur' ? '/admin' : '/employee';
+        return $role === 'administrateur' ? '/admin' : '/employe';
     }
 
     protected function getViewPath(): string
@@ -26,7 +26,7 @@ class EmployeeController
     public function dashboard(): void
     {
         $pageTitle = 'Dashboard - Vite & Gourmand';
-        $h1 = ' Dashboard - From controller';
+        $h1 = ' Mon espace ';
         require_once __DIR__ . '/../../views/' . $this->getViewPath() . '/dashboard.php';
     }
 
@@ -39,8 +39,8 @@ class EmployeeController
 
     public function listOrders(): void
     {
-        $pageTitle = 'Liste des commandes - Vite & Gourmand';
-        $h1 = 'Liste des commandes - From Controller';
+        $pageTitle = 'Gerer les commandes - Vite & Gourmand';
+        $h1 = 'Gérer les commandes';
         require_once __DIR__ . '/../../views/employee/orders.php';
     }
 
@@ -55,7 +55,7 @@ class EmployeeController
     public function listMenus(): void
     {
         $pageTitle = 'Gérer des menus - Vite & Gourmand';
-        $h1 = 'Gérer les menus - From Controller';
+        $h1 = 'Gérer les menus';
         require_once __DIR__ . '/../../views/employee/menus.php';
     } 
     
@@ -67,7 +67,7 @@ class EmployeeController
         $id = 1; //Id fictif pour test redirection à remplacer par vrai variable
         
         // Redirection
-        header('Location: /employee/menus/' . $id . '/modifier');
+        header('Location: /employe/menus/' . $id . '/modifier');
         exit();
     }
 
@@ -76,7 +76,7 @@ class EmployeeController
         $menuName = 'Menu Test'; // Donnée fictive. A remplacer par le menu correspondant à l'id en BDD
         
         $pageTitle = 'Gérer le menu - Vite & Gourmand';
-        $h1 = 'Gérer le menus ' . $menuName . ' - From Controller';
+        $h1 = 'Gérer le menus ' . $menuName;
         require_once __DIR__ . '/../../views/employee/menusForm.php';
     } 
 
@@ -85,7 +85,7 @@ class EmployeeController
         // Logique pour updater le menu
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/menus');
+        header('Location: ' . $this->getBasePath() . '/menus');
         exit();
     }
 
@@ -94,7 +94,8 @@ class EmployeeController
         // Logique pour désactiver le menu
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/menus');
+        //header('Location: /' . $this->getBasePath() . '/menus');
+        header('Location: /employe/menus');
         exit();
     }
 
@@ -103,14 +104,15 @@ class EmployeeController
         // Logique pour supprimer le menu
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/menus');
+        header('Location: ' . $this->getBasePath() . '/menus');
+        //header('Location: /employe/menus');
         exit();
     }
 
     public function listDishes(): void
     {
         $pageTitle = 'Gérer des plats - Vite & Gourmand';
-        $h1 = 'Gérer les plats - From Controller';
+        $h1 = 'Gérer les plats';
         require_once __DIR__ . '/../../views/employee/dish.php';
     } 
 
@@ -131,7 +133,7 @@ class EmployeeController
         $dishName = 'Plat Test'; // Donnée fictive. A remplacer par le menu correspondant à l'id en BDD
         
         $pageTitle = 'Gérer le plat - Vite & Gourmand';
-        $h1 = 'Gérer le plat ' . $dishName . ' - From Controller';
+        $h1 = 'Gérer le plat ' . $dishName;
         require_once __DIR__ . '/../../views/employee/dishForm.php';
     } 
 
@@ -140,7 +142,7 @@ class EmployeeController
         // Logique pour updater le plat
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/plats');
+        header('Location: ' . $this->getBasePath() . '/plats');
         exit();
     }
 
@@ -149,14 +151,14 @@ class EmployeeController
         // Logique pour supprimer le plat
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/plats');
+        header('Location: ' . $this->getBasePath() . '/plats');
         exit();
     }
 
     public function listReviews(): void
     {
         $pageTitle = 'Gérer des avis - Vite & Gourmand';
-        $h1 = 'Gérer les avis - From Controller';
+        $h1 = 'Gérer les avis';
         require_once __DIR__ . '/../../views/employee/review.php';
     } 
 
@@ -166,14 +168,14 @@ class EmployeeController
         //Logique pour inclure ou non dans la section Avis de la page d'accueil
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/avis');
+        header('Location: ' . $this->getBasePath() . '/avis');
         exit();
     }
 
     public function showEditContentForm(): void
     {
         $pageTitle = 'Gérer des contenus - Vite & Gourmand';
-        $h1 = 'Gérer les contenus - From Controller';
+        $h1 = 'Gérer les contenus';
         require_once __DIR__ . '/../../views/employee/contentForm.php';
     } 
 
@@ -182,7 +184,7 @@ class EmployeeController
         //Logique pour updater les contenus du site
         
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/contenus');
+        header('Location: ' . $this->getBasePath() . '/contenus');
         exit();
     }
 }
