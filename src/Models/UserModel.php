@@ -65,14 +65,17 @@ class UserModel{
     public function findByMail(string $email): ?array
     {
         $stmt = $this->db->prepare("
-        SELECT * FROM user
+        SELECT 
+            u.*,
+            r.label
+        FROM user u
+        JOIN role r ON u.role_id = r.role_id
         WHERE email = :email
         LIMIT 1
         ");
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch();
         return $user ?: null;
-
     }
 
     public function findById(int $id): ?array
@@ -85,6 +88,5 @@ class UserModel{
         $stmt->execute([':id' => $id]);
         $user = $stmt->fetch();
         return $user ?: null;
-
     }
 }

@@ -1,8 +1,8 @@
 <?php
-// Simulation pour le développement - à supprimer plus tard
-//$_SESSION['user_id'] = 1;
-$_SESSION['role'] = 'administrateur';
-//$_SESSION['role'] = 'employe';
+/**
+ * 
+ */
+var_dump($_SESSION)
 ?>
 
 <header>
@@ -10,19 +10,26 @@ $_SESSION['role'] = 'administrateur';
         <a href="/">Accueil</a>
         <a href="/menus">Nos Menus</a>
         <a href="/contact">Nous contacter</a>
-        <a href="/connexion">Connexion</a>
-        <a href="/inscription">Inscription</a>
+        
+        <!-- Switch connexion/deconnexion -->
+        <?php if(Session::isLoggedIn()): ?>
+            <form action="/deconnexion" method="POST">
+                <button type="submit">Deconnexion</button>
+            </form>
+            <?php if ($_SESSION['role'] === 'administrateur'): ?>
+                <a href="/admin">Dashboard admin</a>
 
-        <?php if ($_SESSION['role'] === 'administrateur'): ?>
-            <a href="/admin">Dashboard admin</a>
+            <?php elseif ($_SESSION['role'] === 'employe'): ?>
+                <a href="/employe">Dashboard employé</a>
 
-        <?php elseif ($_SESSION['role'] === 'employe'): ?>
-            <a href="/employe">Dashboard employé</a>
+            <?php else: ?>
+                <a href="/admin">Mon espace</a>
 
+            <?php endif; ?>
         <?php else: ?>
-            <a href="/admin">Mon espace</a>
-
-        <?php endif; ?>
+            <a href="/connexion">Connexion</a>
+            <a href="/inscription">Inscription</a>
+        <?php endif;?>
     
     </nav>
 </header>

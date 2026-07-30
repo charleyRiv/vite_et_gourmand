@@ -21,6 +21,11 @@ if (getenv('APP_ENV') === 'development') {
 
 // Loading core classes
 require_once __DIR__ . '/../src/Core/Router.php';
+require_once __DIR__ . '/../src/Core/Database.php';
+require_once __DIR__ . '/../src/Core/Session.php';
+
+// Start session
+Session::start();
 
 // Définition des routes
 $router = new Router();
@@ -38,6 +43,7 @@ $router->get('/cgv', 'CgvController', 'cgv');
 // ── Authentification ──────────────────────────────────────
 $router->get('/connexion', 'AuthController', 'showLoginForm');
 $router->post('/connexion', 'AuthController', 'login');
+$router->post('/deconnexion', 'AuthController', 'logout');
 $router->get('/inscription', 'AuthController', 'showRegisterForm');
 $router->post('/inscription', 'AuthController', 'register');
 $router->get('/mot-de-passe-oublie', 'AuthController', 'passwordForgotten');
