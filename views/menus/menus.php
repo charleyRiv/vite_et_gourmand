@@ -1,5 +1,6 @@
 <?php
 /**
+ * @var array $menu
  * @var string $h1
  */
 
@@ -113,10 +114,29 @@ require_once __DIR__ . '/../layouts/header.php';
 
         <br>
         </div>
-        <a href="/menus/{id}">Voir le détail</a>
-        <a href="/menus/{id}">Voir le détail</a>
-        <a href="/menus/{id}">Voir le détail</a>
-        <a href="/menus/{id}">Voir le détail</a>
+        <?php if (empty($menus)): ?>
+            <p>Aucun menu disponible pour le moment.</p>
+        <?php else: ?>
+            <?php foreach ($menus as $menu): ?>
+                <article>
+                    <!-- Photo du plat principale - A utiliser comme fond de la zone -->
+                    <?php if (!empty($menu['main_picture'])): ?>
+                        <img
+                            src="<?= htmlspecialchars($menu['main_picture']['url']) ?>"
+                            alt="<?= htmlspecialchars($menu['main_picture']['alt_text']) ?>"
+                        >
+                        <?php else: ?>
+                            <p>Photo indisponible</p>
+                    <?php endif;?>
+
+                    <h3><?= htmlspecialchars($menu['title']) ?></h3>
+                    <p><?= htmlspecialchars($menu['description']) ?></p>
+                    <p><?= htmlspecialchars($menu['price_per_person']) ?> € / personne</p>
+                    <p>Minimum <?= htmlspecialchars($menu['min_persons']) ?> personnes</p>
+                    <a href="/menus/<?= htmlspecialchars($menu['menu_id']) ?>">Voir le détail</a>
+                </article>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </section>
     <br>
     <div>
