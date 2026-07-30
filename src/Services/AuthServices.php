@@ -48,4 +48,9 @@ class AuthServices
             substr($uuid, 20,12)
         );
     }
+
+    public function generateToken(): string
+    {
+        return bin2hex(random_bytes(32));
+    }
 }

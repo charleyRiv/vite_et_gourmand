@@ -200,30 +200,97 @@ class AuthController {
         $h1 = 'Demande d\'un nouveau mot de passe';
         require_once __DIR__ . '/../../views/auth/password_forgotten.php';
     }
-
+    //POST /mot-de-passe-oublie
     public function requestModifyPassword(): void
     {
-        //Implementer la demande de nouveau mot de passe
-        //Implementer l'envoi du mail pour acceder à la page de resetPassword
+        $email = trim($_POST['email'] ?? '');
+        $errors = [];
+        $succes = false;
+
+        if (empty($errors)){
+            $user = $this->userModel->findByMail($email);
+
+            //Sécurite: même message si l'email existe ou non
+            //pour ne pas révéler si un compte existe
+            if ($user !== null){
+                $token = $this->authServices->generateToken();
+                $expiration = date('Y-m-d H:i:s', strtotime('+5 minutes'));
+
+                $this->userModel->setResetToken($email, $token, $expiration);
+                $this->mailService->sendPasswordReset($email, $token);
+            }
+            $succes = true;
+        }
+
+        $pageTitle = 'Mot de passe oublié - Vite & Gourmand';
+        $h1 = 'Demande d\'un nouveau mot de passe';
+        require_once __DIR__ . '/../../views/auth/password_forgotten.php';
         
-        //Redirection
-        header('Location: /');
-        exit();
     }
 
+    //GET /mot-de-passe-oublie/reinitialisation
     public function showResetPasswordForm(): void 
-    {
+    {   
+        $token = $_GET['token'] ?? '';
+        $errors = [];
+
+        if (empty($token)){
+            header('Location: /mot-de-passe-oublie');
+            exit();
+        }
+
+        //Verfier que le token est valide
+        $user = $this->userModel->findByResetToken($token);
+
+        if ($user === null){
+            $errors[] = 'Ce lien a expiré ou est invalide. Veuillez faire une nouvelle demande';
+        }
+
         $pageTitle = 'Réinitialiser le mot de passe - Vite & Gourmand';
         $h1 = 'Réinitialisation du mot de passe';
         require_once __DIR__ . '/../../views/auth/password_reset_form.php';
     }
 
+    // POST /mot-de-passe-oublie/reinitialisation
     public function resetPassword(): void 
     {
-        // Logique de réinitialisation du mot de passe
+        $token = $_POST['token'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $passwordConf = $_POST['password_confirm'] ?? '';
+        $errors = [];
+
+        //Verifier le token
+        $user = $this->userModel->findByResetToken($token);
+
+        if ($user === null){
+            $errors[] = 'Ce lien a expiré ou est invalide. Veuillez faire une nouvelle demande';
+        }
+
+        //Valider le mot de passe
+        if (!$this->authServices->validatePasswordStrength($password)) {
+            $errors[] = 'Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
+        }
+
+        if ($password !== $passwordConf){
+            $errors[] = 'Les mots de passe ne correspondent pas';
+        }
+
+        //S'il y a des erreurs
+        if(!empty($errors)){
+            $pageTitle = 'Réinitialiser le mot de passe - Vite & Gourmand';
+            $h1 = 'Réinitialisation du mot de passe';
+            require_once __DIR__ . '/../../views/auth/password_reset_form.php';
+            return;
+        }
+
+        //Mettre à jour le mot de passe et invalider le token
+        $this->userModel->updatePassword(
+            $user['user_id'],
+            $this->authServices->hashPassword($password)
+        );
 
         //Redirection vers la page de connexion
-        header('Location: /connexion');
+        header('Location: /connexion?resert=1');
         exit();
     }
 }

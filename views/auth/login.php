@@ -16,6 +16,11 @@ require_once __DIR__ . '/../layouts/header.php';
         <p> Compte créé avec succès ! Vous pouvez maintenant vous connecter</p>
     <?php endif ; ?>
 
+    <!-- Message succès après réinitialisation -->
+        <?php if (isset($_GET['reset'])): ?>
+            <p>Votre mot de passe a bien été modifié. Vous pouvez maintenant vous connecter</p>
+        <?php endif; ?>
+        
     <!-- Erreurs -->
     <?php if (!empty($errors)): ?>
         <ul>

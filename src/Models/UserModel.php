@@ -89,4 +89,48 @@ class UserModel{
         $user = $stmt->fetch();
         return $user ?: null;
     }
+
+    //Reinitialisation du mot de passe
+    public function setResetToken(string $email, string $token, string $expiration): bool
+    {
+        $stmt = $this->db->prepare("
+        UPDATE user
+        SET token_reset = :token,
+            token_reset_expiration = :expiration
+        WHERE email = :email
+        ");
+        return $stmt->execute([
+            ':token' => $token,
+            ':expiration' => $expiration,
+            ':email' => $email
+        ]);
+    }
+
+    public function findByResetToken(string $token): ?array
+    {
+        $stmt = $this->db->prepare("
+        SELECT $ FROM user
+        WHERE token_reset = :token
+        AND token_reset_expiration > NOW()
+        LIMIT 1
+        ");
+        $stmt->execute([':token' => $token]);
+        $user = $stmt->fetch();
+        return $user ?: null;
+    }
+
+    public function updatePassword(int $userId, string $hashedPassword): bool
+    {
+        $stmt = $this->db->prepare("
+        UPDATE user
+        SET password = :password,
+            token_reset = NULL,
+            token_reset_expiration = NULL
+        WHERE user_id = :user_id
+        ");
+        return $stmt->execute([
+            ':password' =>$hashedPassword,
+            ':user_id' => $userId
+        ]);
+    }
 }
