@@ -3,9 +3,11 @@
  * @package user_package
  */
 class UserController {
-    //Ajouter la vérification de l'authentification pour toutes les méthodes de ce contrôleur
-
-    //Ajouter la verification du rôle de l'utilisateur
+    //Vérification de l'authentification et du role client
+    public function __construct()
+    {
+        AuthMiddleware::requireRole(['client']);
+    }
     
     public function dashboard(): void 
     {

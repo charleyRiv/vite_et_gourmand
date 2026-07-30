@@ -23,6 +23,7 @@ if (getenv('APP_ENV') === 'development') {
 require_once __DIR__ . '/../src/Core/Router.php';
 require_once __DIR__ . '/../src/Core/Database.php';
 require_once __DIR__ . '/../src/Core/Session.php';
+require_once __DIR__ . '/../src/Middlewares/AuthMiddleware.php';
 
 // Start session
 Session::start();

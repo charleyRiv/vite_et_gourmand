@@ -5,13 +5,15 @@
 */
 class EmployeeController
 {
+    //Vérification de l'authentification et du role client
+    public function __construct()
+    {
+        AuthMiddleware::requireRole(['employe', 'administrateur']);
+    }
+
     protected function getBasePath(): string
     {
-        //return $_SESSION['role'] === 'administrateur' ? '/admin' : '/employee';
-        //Valeur fictive de test
-        $role = 'administrateur'; 
-        //$role = 'employee';
-        return $role === 'administrateur' ? '/admin' : '/employe';
+        return $_SESSION['role'] === 'administrateur' ? '/admin' : '/employee';
     }
 
     protected function getViewPath(): string

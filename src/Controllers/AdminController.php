@@ -6,7 +6,11 @@
 require_once __DIR__ . '/EmployeeController.php';
 
 class AdminController extends EmployeeController{
-    //ajoute function construct pour verifier le role
+    //Vérification de l'authentification et du role client
+    public function __construct()
+    {
+        AuthMiddleware::requireRole(['administrateur']);
+    }
 
     public function showEmployee(): void
     {
