@@ -1,6 +1,12 @@
 <?php
 /**
  * @var string $h1
+ * @var array $dishesType
+ * @var array $diets
+ * @var array $allergens
+ * @var array $dishes
+ * @var string $basePath
+ * @var array $dishAllergens
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -15,43 +21,46 @@ require_once __DIR__ . '/../layouts/header.php';
             <input type="texte" id="search" name="search">
 
             <!-- Filtre Catégorie -->
-            <fieldset>
-            <label for="categorie">Catégorie</label>
-                <select name="categorie" id="categorie">
-                    <option value="starter">Entrée</option>
-                    <option value="main-dish">Plat</option>
-                    <option value="dessert">Dessert</option>
-                </select>
-            </fieldset>
+                <select name="dish_type" id="dish_type" required>
+                    <option value="default">Catégorie</option>
+                    <?php foreach ($dishesType as $dishType): ?>
+                        <option 
+                            value="<?= htmlspecialchars($dishType) ?>"
+                            <?= (($dish['dish_type'] ?? '') === $dishType) ? 'selected' : '' ?>
+                        >
+                            <?= htmlspecialchars(translateDishType($dishType)) ?>
+                        </option>   
+                    <?php endforeach; ?>  
+                </select>            
 
             <!-- Filtre Régime -->
-            <fieldset>
-            <label for="diet">Régime</label>
                 <select name="diet" id="diet">
-                    <option value="veggie">vegetarien</option>
-                    <option value="vegan">vegan</option>
-                    <option value="in-hallal">hallal</option>
+                    <option value="default">Régime</option>
+                    <?php foreach ($diets as $diet): ?>
+                    <option value="<?= $diet['diet_id'] ?>">
+                        <?= $diet['label'] ?>
+                    </option>
+                    <?php endforeach; ?>    
                 </select>
-            </fieldset>
 
-            <!-- Filtre Thème -->
+            <!-- Allergènes -->
             <fieldset>
-            <label for="theme">Thème</label>
-                <select name="theme" id="theme">
-                    <option value="christmas">Noël</option>
-                    <option value="paques">Pâques</option>
-                    <option value="business">Entreprise</option>
-                </select>
-            </fieldset>
+                <legend>Allergènes</legend>
 
-            <!-- Filtre Allergène -->
-            <fieldset>
-            <label for="allergene">Allergène</label>
-                <select name="allergene" id="allergene">
-                    <option value="milk">Lait</option>
-                    <option value="arachide">Arachide</option>
-                    <option value="gluten">Gluten</option>
-                </select>
+                <?php foreach ($allergens as $allergen): ?>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="allergen_ids[]"
+                            value="<?= htmlspecialchars($allergen['allergen_id']) ?>"
+                            <?php if (isset($dishAllergens) && in_array($allergen['allergen_id'], array_column($dishAllergens, 'allergen_id'))): ?>
+                                checked
+                            <?php endif; ?>
+                        >
+                        <?= htmlspecialchars($allergen['label']) ?>
+                    </label>
+                <?php endforeach; ?>
+                            
             </fieldset>
 
             <!-- Boutons -->
@@ -59,38 +68,39 @@ require_once __DIR__ . '/../layouts/header.php';
             <input type="button" value="Reinitialiser">
         </form>
     </div>
-    <div>
-        <h3>Menu A</h3>
+    <section>
+        <?php foreach ($dishes as $dish): ?>
+        <h3><?= htmlspecialchars($dish['title']) ?></h3>
 
-            <a href="/employe/plats/1/modifier">Modifier</a>
-            <form action="/employe/plats/1/supprimer" method="POST">
-                <input type="submit" value="Supprimer">
-            </form> 
-    </div> 
+        <p><?= htmlspecialchars($dish['dish_type']) ?></p>
+        <p>Nombre de menus associés : <?= htmlspecialchars($dish['menu_count']) ?></p>
+        <p>Allergènes : 
+            <?php if (!empty($dish['dish_allergens'])): ?>
+                <?= htmlspecialchars(implode(', ', array_column($dish['dish_allergens'], 'label' ))) ?>
+            <?php else: ?>
+                Aucun
+            <?php endif; ?>
+        </p>
+        <p>
+            <?php if ($dish['dish_picture'] !== null): ?>
+                    <img
+                        src="<?= htmlspecialchars($dish['dish_picture']['url']) ?>"
+                        alt="<?= htmlspecialchars($dish['dish_picture']['alt_text']) ?>"
+                        style="max-width: 80px";
+                    >
+            <?php else: ?>
+                Pas de photos disponibles
+            <?php endif; ?>
+        </p>
 
-    <div>
-    <h3>Menu B</h3>
-        <a href="/employe/plats/2/modifier">Modifier</a>
-        <form action="/employe/plats/2/supprimer" method="POST">
-            <input type="submit" value="Supprimer">
-        </form>  
-    </div> 
-
-    <div>
-        <h3>Menu C</h3>
-        <a href="/employe/plats/3/modifier">Modifier</a>
-        <form action="/employe/plats/3/supprimer" method="POST">
-            <input type="submit" value="Supprimer">
+        <a href="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier">Modifier</a>
+        <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/supprimer" method="POST">
+            <button type="submit">
+                Supprimer
+            </button>
         </form> 
-    </div> 
-
-    <div>
-        <h3>Menu D</h3>
-        <a href="/employe/plats/4/modifier">Modifier</a>
-        <form action="/employe/plats/4/supprimer" method="POST">
-            <input type="submit" value="Supprimer">
-        </form> 
-    </div> 
+        <?php endforeach; ?>
+    </section> 
     <br>
     <div>
         <form action="/employe/plats/creer" method="POST">

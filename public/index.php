@@ -24,6 +24,7 @@ require_once __DIR__ . '/../src/Core/Router.php';
 require_once __DIR__ . '/../src/Core/Database.php';
 require_once __DIR__ . '/../src/Core/Session.php';
 require_once __DIR__ . '/../src/Middlewares/AuthMiddleware.php';
+require_once __DIR__ . '/../src/Core/Helpers.php';
 
 // Start session
 Session::start();
@@ -88,12 +89,17 @@ $router->get('/employe/menus/{id}/modifier', 'EmployeeController', 'showEditMenu
 $router->post('/employe/menus/{id}/modifier', 'EmployeeController', 'updateMenu');
 $router->post('/employe/menus/{id}/desactiver', 'EmployeeController', 'desactivateMenu');
 $router->post('/employe/menus/{id}/supprimer', 'EmployeeController', 'deleteMenu');
+$router->post('/employe/menus/{id}/photos/ajouter', 'EmployeeController', 'addPictureToMenu');
+$router->post('/employe/menus/photos/{pictureId}/supprimer', 'EmployeeController', 'deleteMenuPicture');
+$router->post('/employe/menus/{id}/photos/copier-depuis-plat', 'EmployeeController', 'copyDishPicturesToMenu');
     // Dishes management
 $router->get('/employe/plats', 'EmployeeController', 'listDishes');
 $router->post('/employe/plats/creer', 'EmployeeController', 'createDish');
 $router->get('/employe/plats/{id}/modifier', 'EmployeeController', 'showEditDishForm');
 $router->post('/employe/plats/{id}/modifier', 'EmployeeController', 'updateDish');
 $router->post('/employe/plats/{id}/supprimer', 'EmployeeController', 'deleteDish');
+$router->post('/employe/plats/{id}/photos/ajouter', 'EmployeeController', 'addPictureToDish');
+$router->post('/employe/plats/photos/{pictureId}/supprimer', 'EmployeeController', 'deleteDishPicture');
     // Reviews management
 $router->get('/employe/avis', 'EmployeeController', 'listReviews');
 $router->post('/employe/avis/{id}/statut', 'EmployeeController', 'updateStatusReview');

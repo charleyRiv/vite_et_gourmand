@@ -1,6 +1,8 @@
 <?php
 /**
  * @var string $h1
+ * @var array $errors
+ * @var bool $succes
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -9,19 +11,44 @@ require_once __DIR__ . '/../layouts/header.php';
 <main>
     <h1><?=  htmlspecialchars($h1)?></h1>
     <br>
-    <form action="/mot-de-passe-oublie" method="POST">
+    <!--Affichage des erreurs-->
+    <?php if (!empty($errors)): ?>
+    <ul>
+        <?php foreach ($errors as $error): ?>
+            <li><?= htmlspecialchars($error)?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+
+    <!--Message pour lien de réinitialisation -->
+    <?php if (isset($succes) && $succes): ?>
+        <p>
+            Si un compte est associé à cette adresse email, vous recevrez
+            dans quelques instants un lien de réinitialisation.
+            Pensez à vérifier vos spams.
+        </p>
+    <?php else: ?>
+
+        <form action="/mot-de-passe-oublie" method="POST">
+            
         <!-- Champs Email -->
-        <label for="Email">Email</label>
-        <input type="text" id="mail" name="mail" placeholder="mail@mail.fr" required>
+            <label for="email">Email</label>
+            <input 
+                type="text" 
+                id="email" 
+                name="email" 
+                value="<?= htmlspecialchars($_POST['email'] ?? '')?>"
+                placeholder="mail@mail.fr" 
+                required
+            >
 
-        <!-- Champs Mot de passe -->
-        <label for="motDePasse">Mot de passe</label>
-        <input type="password" id="password" name="password" required>
+            <!-- Bouton Se connecter -->
+            <button type="submit">Réinitialiser</button>
 
-        <!-- Bouton Se connecter -->
-        <input type="submit" value="Réinitialiser">
+        </form>
+    <?php endif; ?>
 
-    </form>
+    <a href="/connexion">← Retour à la connexion</a>
 </main>
 <br>
 

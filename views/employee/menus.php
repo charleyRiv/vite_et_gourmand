@@ -1,6 +1,11 @@
 <?php
 /**
  * @var string $h1
+ * @var array $diets
+ * @var array $themes
+ * @var array $menus
+ * @var array $statuses
+ * @var string $basePath
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -18,9 +23,12 @@ require_once __DIR__ . '/../layouts/header.php';
             <fieldset>
             <label for="diet">Régime</label>
                 <select name="diet" id="diet">
-                    <option value="veggie">vegetarien</option>
-                    <option value="vegan">vegan</option>
-                    <option value="in-hallal">hallal</option>
+                    <option value="default">--Filtrer les régimes</option>
+                    <?php foreach ($diets as $diet): ?>
+                    <option value="<?= $diet['diet_id'] ?>">
+                        <?= $diet['label'] ?>
+                    </option>
+                    <?php endforeach; ?>    
                 </select>
             </fieldset>
 
@@ -28,55 +36,57 @@ require_once __DIR__ . '/../layouts/header.php';
             <fieldset>
             <label for="theme">Thème</label>
                 <select name="theme" id="theme">
-                    <option value="christmas">Noël</option>
-                    <option value="paques">Pâques</option>
-                    <option value="business">Entreprise</option>
+                    <option value="default">-- Filtrer les thèmes --</option>
+                    <?php foreach ($themes as $theme): ?>
+                    <option value="<?= $theme['theme_id']?>">
+                        <?= $theme['label'] ?>
+                    </option>
+                    <?php endforeach; ?>
                 </select>
             </fieldset>
 
             <!-- Filtre Statut -->
             <fieldset>
             <label for="status">Statut</label>
-                <select name="status" id="status">
-                    <option value="enable">actif</option>
-                    <option value="disable">inactif</option>
+                <select id="filter-status">
+                    <option value="default">--Filtrer par statut--</option>
+                    <?php foreach ($statuses as $status): ?>
+                    <option value="<?= $status ?>">
+                        <?= $status === 1 ? 'Actif' : 'Inactif' ?>
+                    </option>
+                    <?php endforeach; ?>
                 </select>
             </fieldset>
-
+            
             <!-- Boutons -->
             <input type="button" value="Filtrer">
             <input type="button" value="Reinitialiser">
         </form>
     </div>
-    <div>
-        <h3>Menu A</h3>
 
-            <a href="/employe/menus/1/modifier">Modifier</a>
-            <form action="/employe/menus/1/supprimer" method="POST">
-                <input type="submit" value="Supprimer">
-            </form> 
-    </div> 
+    <section>
+    <?php foreach ($menus as $menu): ?>
+        <h3><?= htmlspecialchars($menu['title']) ?></h3>
 
-    <div>
-    <h3>Menu B</h3>
-        <a href="/employe/menus/2/modifier">Modifier</a>
-        <form action="/employe/menus/2/supprimer" method="POST">
-            <input type="submit" value="Supprimer">
+        <p>Thème : <?= htmlspecialchars($menu['theme']) ?></p>
+        <p>Régime : <?= htmlspecialchars($menu['diet']) ?></p>
+        <p>Prix : <?= htmlspecialchars($menu['price_per_person']) ?>€ /personne</p>
+        <p>Stock : <?= htmlspecialchars($menu['remaining_stock']) ?></p>
+        <p>Statut : <?= $menu['is_active'] === 1 ? 'actif' : 'inactif' ?></p>
+        
+        <a href="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/modifier">Modifier</a>
+        <form action="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/supprimer" method="POST">
+            <button type="submit"> Supprimer</button>
         </form> 
-    </div> 
-
-    <div>
-        <h3>Menu C</h3>
-        <a href="/employe/menus/3/modifier">Modifier</a>
-        <form action="/employe/menus/3/supprimer" method="POST">
-            <input type="submit" value="Supprimer">
-        </form> 
-    </div> 
+    <?php endforeach; ?>
+    </section>
 
     <br>
     <div>
         <form action="/employe/menus/creer" method="POST">
-            <input type="submit" value="Créer un nouveau menu">
+            <button type="submit">
+                Créer un nouveau menu
+            </button>
         </form> 
         <a href="">Precedent</a>
         <a href="">Suivant</a>
