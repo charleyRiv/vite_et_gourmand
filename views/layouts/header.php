@@ -20,7 +20,7 @@
                 <a href="/employe">Dashboard employé</a>
 
             <?php else: ?>
-                <a href="/admin">Mon espace</a>
+                <a href="/mon-espace">Mon espace</a>
 
             <?php endif; ?>
         <?php else: ?>
