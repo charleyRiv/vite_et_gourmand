@@ -237,6 +237,15 @@ class MenuModel
         return $stmt->execute([':id' => $id]);
     }
 
+    public function activateMenu(int $id): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE menu 
+            SET is_active = 1
+            WHERE menu_id = :id
+        ");
+        return $stmt->execute([':id' => $id]);
+    }
     public function setMenuActive(int $id, bool $isActive): bool
     {
         $stmt = $this->db->prepare("

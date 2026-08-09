@@ -187,13 +187,22 @@ class EmployeeController
         exit();
     }
 
-    public function desactivateMenu(): void
+    public function desactivateMenu(int $id): void
     {
-        $this->menuModel->desactivateMenu((int) $_POST['menu_id']);
+        $this->menuModel->desactivateMenu($id);
+
+        // Redirection
+        header('Location: ' . $this->getBasePath() . '/menus');
+        //header('Location: /employe/menus');
+        exit();
+    }
+
+    public function activateMenu(int $id): void
+    {
+        $this->menuModel->activateMenu($id);
         
         // Redirection
-        //header('Location: /' . $this->getBasePath() . '/menus');
-        header('Location: /employe/menus');
+        header('Location: ' . $this->getBasePath() . '/menus');
         exit();
     }
 

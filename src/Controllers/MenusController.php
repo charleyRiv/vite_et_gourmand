@@ -5,26 +5,49 @@
 
 require_once __DIR__ . '/../Models/MenuModel.php';
 require_once __DIR__ . '/../Models/DishModel.php';
+require_once __DIR__ . '/../Models/AllergenModel.php';
+require_once __DIR__ . '/../Models/DietModel.php';
+require_once __DIR__ . '/../Models/ThemeModel.php';
+require_once __DIR__ . '/../Models/PictureModel.php';
 
 class MenusController {
     private MenuModel $menuModel;
     private DishModel $dishModel;
+    private AllergenModel $allergenModel;
+    private DietModel $dietModel;
+    private ThemeModel $themeModel;
+    private PictureModel $pictureModel;
 
     public function __construct()
     {
         $this->menuModel = new MenuModel();
         $this->dishModel = new DishModel();
+        $this->allergenModel = new AllergenModel();
+        $this->dietModel = new DietModel();
+        $this->themeModel = new ThemeModel();
+        $this->pictureModel = new PictureModel();
     }
 
 
     public function index(): void
     {
         $menus = $this->menuModel->getAll();
+        $allergens = $this->allergenModel->getAll();
+        $themes = $this->themeModel->getAll();
+        $diets = $this->dietModel->getAll();
 
         //Pour chaque menu récupérer la photo du plat principal
         foreach ($menus as &$menu){
-            $menu['main_picture'] = $this->menuModel->getMenuPicture($menu['menu_id']);
+            $menu['pictures'] = $this->pictureModel->getByMenuId($menu['menu_id']);
+            $pictures = $menu['pictures'][0];
+            $menu['diets'] = $this->dietModel->getDietByMenuId($menu['menu_id']);
+            $menu['themes'] = $this->themeModel->getThemeByMenuId($menu['menu_id']);
+            $menu['dishes'] = $this->dishModel->getByMenuId($menu['menu_id']);
+            foreach ($menu['dishes'] as $dish){
+                $dish['allergens'] = $this->allergenModel->getAllergensByDishId($dish['dish_id']);
+            }
         }
+        unset($menu);
 
         $pageTitle = 'Menus - Vite & Gourmand';
         $h1 = 'Menus';
@@ -42,15 +65,21 @@ class MenusController {
             require_once __DIR__ . '/../../views/errors/404.php';
             return;
         }
+        
+        $menu['pictures'] = $this->pictureModel->getByMenuId($menu['menu_id']);
+        $menu['diets'] = $this->dietModel->getDietByMenuId($menu['menu_id']);
+        $menu['themes'] = $this->themeModel->getThemeByMenuId($menu['menu_id']);
 
         //Récupérer les plats
         $dishes = $this->dishModel->getByMenuId($id);
 
         //Pour chaque plat récupérer les allergens
         foreach ($dishes as &$dish){
-            $dish['allergens'] = $this->dishModel->getAllergensByDishId($dish['dish_id']);
-            $dish['pictures'] = $this->dishModel->getPicturesByDishId($dish['dish_id']);
+            $dish['allergens'] = $this->allergenModel->getAllergensByDishId($dish['dish_id']);  
+            $dish['dish_type'] = translateDishType($dish['dish_type']);
+            $dish['picture'] = $this->pictureModel->getByDishId($dish['dish_id'])[0] ?? null; 
         }
+        unset($dish);
 
         $pageTitle = htmlspecialchars($menu['title']) . ' - Vite & Gourmand';
         $h1 = htmlspecialchars($menu['title']) ; 

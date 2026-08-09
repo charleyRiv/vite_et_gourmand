@@ -157,10 +157,17 @@ require_once __DIR__ . '/../layouts/header.php';
             <!-- Boutons -->
             <button type="submit">Valider</button>
         </form>
+        
+        <?php if ($menu['is_active'] === 1):?>
+            <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/desactiver" method="POST">
+                <button type="submit">Désactiver</button>
+            </form>
+        <?php else: ?>
+            <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/activer" method="POST">
+                <button type="submit">Activer</button>
+            </form>
+        <?php endif; ?>
 
-        <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/desactiver" method="POST">
-            <button type="submit">Désactiver</button>
-        </form>
 
     </div>
 

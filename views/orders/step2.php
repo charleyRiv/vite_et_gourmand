@@ -1,6 +1,8 @@
 <?php
 /**
  * @var string $h1
+ * @var array $menus
+ * @var int $preselectedMenuId
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -11,15 +13,24 @@ require_once __DIR__ . '/../layouts/header.php';
     <br>
     <form action="/commande/etape-2" method="POST">
 
-        <label for="menu_id">Choisissez votre menu</label>
+        <label for="title">Sélectionner un menu</label>
         <select id="menu_id" name="menu_id" required>
-
-        <option value="">-- Sélectionnez un menu --</option>
-        <option value="">-- Sélectionnez un menu --</option>
-        <option value="">-- Sélectionnez un menu --</option>
+            <option value="default"></option>
+            <?php foreach ($menus as $menu): ?>
+                <option value="<?= $menu['menu_id']?>"
+                <?= ($preselectedMenuId == $menu['menu_id']) ? 'selected' : '' ?>
+                >
+                    <?= htmlspecialchars($menu['title'])?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     <br>
-        <!-- Bouton S'inscrire -->
-        <input type="submit" value="Suivant">
+
+        <!-- Bouton Précédent -->
+        <a href="/commande/etape-1">Précédent</a>
+        
+        <!-- Bouton Suivant -->
+        <button type="submit">Suivant</button>
 
     </form>
 </main>

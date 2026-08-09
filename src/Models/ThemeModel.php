@@ -40,6 +40,7 @@ class ThemeModel
             FROM theme t
             JOIN menu m ON t.theme_id = m.theme_id
             WHERE m.menu_id = :menu_id
+            ORDER BY label ASC
         ");
         $stmt->execute([':menu_id' => $menuId]);
         $theme = $stmt->fetch();

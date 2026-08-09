@@ -3,30 +3,28 @@
  * @var array $menu
  * @var array $dishes
  * @var int $h1
+ * @var array $picture
  */
 require_once __DIR__ . '/../layouts/header.php';
-
 ?>
 <br>
 <main>
     <h1><?= htmlspecialchars($h1)?></h1>
     <section>
         <p><?= htmlspecialchars($menu['description']) ?></p>
-        <p><?= htmlspecialchars($menu['theme']) ?></p>
-        <p><?= htmlspecialchars($menu['diet']) ?></p>
+        <p>Thème : <?= htmlspecialchars($menu['theme']) ?></p>
+        <p>Régime : <?= htmlspecialchars($menu['diet']) ?></p>
         <div>
             <?php foreach ($dishes as $dish): ?>
                 <article>
                     <!-- photos -->
-                    <?php if (!empty($dish['pictures'])): ?>
-                        <?php foreach($dish['pictures'] as $picture): ?>
-                            <img 
-                                src="<?= htmlspecialchars($picture['url']) ?>"
-                                alt="<?= htmlspecialchars($picture['alt_text']) ?>"
-                            >
-                        <?php endforeach;?>
-                        <?php else : ?>
-                            <p>Image indisponible</p>
+                    <?php if (!empty($dish['picture'])): ?>
+                        <img 
+                            src="<?= $dish['picture']['url'] ?>"
+                            alt="<?= $dish['picture']['alt_text'] ?>"
+                        >
+                    <?php else : ?>
+                        <p>Image indisponible</p>
                     <?php endif; ?>
 
                     <!-- infos plat -->
@@ -45,7 +43,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <?php endforeach ;?>
 
         </div>
-        <p><?= htmlspecialchars($menu['price_per_person']) ?>/ personne</p>
+        <p><?= htmlspecialchars($menu['price_per_person']) ?>€/ personne</p>
         <p>Minimum <?= htmlspecialchars($menu['min_persons']) ?> personnes</p>
         <p>Stock : <?php if ($menu['remaining_stock'] === 0): ?>
                         <span>Bientôt disponible</span>
@@ -53,7 +51,8 @@ require_once __DIR__ . '/../layouts/header.php';
                         <?= htmlspecialchars($menu['remaining_stock']) ?> disponible(s)
                     <?php endif; ?></p>
         <p>Conditions de réservation: <?= htmlspecialchars($menu['conditions']) ?></p>
-        <a href="/commande/etape-1">Commander</a>
+        <a href="/commande/etape-1?menu_id=<?= $menu['menu_id'] ?>">Commander</a>
+        <a href="/menus">Revenir à la liste des menus</a>
     </section>
 </main>
 

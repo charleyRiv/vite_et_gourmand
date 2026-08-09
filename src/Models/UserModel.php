@@ -82,7 +82,7 @@ class UserModel{
     {
         $stmt = $this->db->prepare("
         SELECT * FROM user
-        WHERE id = :id
+        WHERE user_id = :id
         LIMIT 1
         ");
         $stmt->execute([':id' => $id]);

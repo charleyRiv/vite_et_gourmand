@@ -1,10 +1,15 @@
 <?php
 /**
- * @var array $menu
+ * @var array $menus
  * @var string $h1
+ * @var array $allergens
+ * @var array $themes
+ * @var array $diets
+ * @var array $pictures
  */
 
 require_once __DIR__ . '/../layouts/header.php';
+
 ?>
 <main>
     <h1><?= htmlspecialchars($h1) ?></h1>
@@ -42,53 +47,32 @@ require_once __DIR__ . '/../layouts/header.php';
                 <!-- Section Thème -->
                 <fieldset>
                     <legend>Thème</legend>
-
+                    <?php foreach ($themes as $theme): ?>
                     <label>
-                        <input type="checkbox" name="themes[]" value="1">
-                        Noël
+                        <input 
+                            type="checkbox" 
+                            name="themes[]" 
+                            value="<?= $theme['theme_id']?>"
+                        >
+                        <?= $theme['label'] ?>
                     </label>
-                    <label>
-                        <input type="checkbox" name="themes[]" value="2">
-                        Pâques
-                    </label>
-                    <label>
-                        <input type="checkbox" name="themes[]" value="3">
-                        Classique
-                    </label>
-                    <label>
-                        <input type="checkbox" name="themes[]" value="4">
-                        Événement
-                    </label>
+                    <?php endforeach; ?>
                 </fieldset>
 
                 <!-- Section Régime -->
                 <fieldset>
                     <legend>Régime alimentaire</legend>
-
+                    <?php foreach ($diets as $diet): ?>
                     <label>
-                        <input type="checkbox" name="diets[]" value="1">
-                        Classique
+                        <input 
+                            type="checkbox" 
+                            name="diets[]" 
+                            value="<?= $diet['diet_id']?>"
+                        >
+                        <?= $diet['label'] ?>
                     </label>
-                    <label>
-                        <input type="checkbox" name="diets[]" value="2">
-                        Végétarien
-                    </label>
-                    <label>
-                        <input type="checkbox" name="diets[]" value="3">
-                        Vegan
-                    </label>
-                    <label>
-                        <input type="checkbox" name="diets[]" value="4">
-                        Sans gluten
-                    </label>
-                    <label>
-                        <input type="checkbox" name="diets[]" value="5">
-                        Halal
-                    </label>
-                    <label>
-                        <input type="checkbox" name="diets[]" value="6">
-                        Casher
-                    </label>
+                    <?php endforeach; ?>
+                    
                 </fieldset>
 
                 <!-- Section Nombre de personnes -->
@@ -114,29 +98,31 @@ require_once __DIR__ . '/../layouts/header.php';
 
         <br>
         </div>
-        <?php if (empty($menus)): ?>
-            <p>Aucun menu disponible pour le moment.</p>
-        <?php else: ?>
-            <?php foreach ($menus as $menu): ?>
-                <article>
-                    <!-- Photo du plat principale - A utiliser comme fond de la zone -->
-                    <?php if (!empty($menu['main_picture'])): ?>
-                        <img
-                            src="<?= htmlspecialchars($menu['main_picture']['url']) ?>"
-                            alt="<?= htmlspecialchars($menu['main_picture']['alt_text']) ?>"
-                        >
-                        <?php else: ?>
-                            <p>Photo indisponible</p>
-                    <?php endif;?>
-
-                    <h3><?= htmlspecialchars($menu['title']) ?></h3>
-                    <p><?= htmlspecialchars($menu['description']) ?></p>
-                    <p><?= htmlspecialchars($menu['price_per_person']) ?> € / personne</p>
-                    <p>Minimum <?= htmlspecialchars($menu['min_persons']) ?> personnes</p>
-                    <a href="/menus/<?= htmlspecialchars($menu['menu_id']) ?>">Voir le détail</a>
-                </article>
-            <?php endforeach; ?>
-        <?php endif; ?>
+    </section>
+    <section>
+    <?php if (empty($menus)): ?>
+        <p>Aucun menu disponible pour le moment.</p>
+    <?php else: ?>
+        <?php foreach ($menus as $menu): ?>
+            <article>
+                <!-- Photo du plat principale - A utiliser comme fond de la zone -->
+                <?php if (!empty($pictures)): ?>
+                    <img
+                        src="<?= htmlspecialchars($pictures['url']) ?>"
+                        alt="<?= htmlspecialchars($pictures['alt_text']) ?>"
+                        style="max-width: 100px";
+                    >
+                    <?php else: ?>
+                        <p>Photo indisponible</p>
+                <?php endif;?>
+                <h3><?= htmlspecialchars($menu['title']) ?></h3>
+                <p><?= htmlspecialchars($menu['description']) ?></p>
+                <p><?= htmlspecialchars($menu['price_per_person']) ?> € / personne</p>
+                <p>Minimum <?= htmlspecialchars($menu['min_persons']) ?> personnes</p>
+                <a href="/menus/<?= htmlspecialchars($menu['menu_id']) ?>">Voir le détail</a>
+            </article>
+        <?php endforeach; ?>
+    <?php endif; ?>
     </section>
     <br>
     <div>
