@@ -70,6 +70,8 @@ $router->get('/mon-espace', 'UserController', 'dashboard');
 $router->get('/mon-espace/profil', 'UserController', 'profileForm');
 $router->post('/mon-espace/profil', 'UserController', 'updateProfile');
     // Gestion des commandes
+$router->get('/mon-espace/commande/{id}/modifier', 'UserController','showEditOrderForm');
+$router->post('/mon-espace/commande/{id}/modifier','UserController', 'updateOrder');
 $router->get('/mon-espace/commande/{id}', 'UserController', 'showOrders');
 $router->post('/mon-espace/commande/{id}/annuler', 'UserController', 'cancelOrder');
     // Gestion des avis
@@ -88,7 +90,7 @@ $router->post('/employe/menus/creer', 'EmployeeController', 'createMenu');
 $router->get('/employe/menus/{id}/modifier', 'EmployeeController', 'showEditMenuForm');
 $router->post('/employe/menus/{id}/modifier', 'EmployeeController', 'updateMenu');
 $router->post('/employe/menus/{id}/desactiver', 'EmployeeController', 'desactivateMenu');
-$router->post('/employe/menus/{id}/activer', 'EmployeeController', 'activateMenu');
+$router->post('/employe/menus/{id}/activer', 'EmployeeController', 'm');
 $router->post('/employe/menus/{id}/supprimer', 'EmployeeController', 'deleteMenu');
 $router->post('/employe/menus/{id}/photos/ajouter', 'EmployeeController', 'addPictureToMenu');
 $router->post('/employe/menus/photos/{pictureId}/supprimer', 'EmployeeController', 'deleteMenuPicture');

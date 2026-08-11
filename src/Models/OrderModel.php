@@ -49,6 +49,7 @@ class OrderModel
                 co.event_date,
                 co.delivery_time,
                 co.delivery_street_number,
+                co.delivery_street_type,
                 co.delivery_street_name,
                 co.delivery_zip_code,
                 co.delivery_city,
@@ -107,14 +108,14 @@ class OrderModel
 
         //Construction de la clause WHERE
         $where = !empty($conditions)
-            ? 'WHERE' . implode(' AND ', $conditions)
+            ? 'WHERE ' . implode(' AND ', $conditions)
             : '';
 
 
         //requete
         $stmt = $this->db->prepare("
             SELECT
-                co.order_id
+                co.order_id,
                 co.order_date,
                 co.event_date,
                 co.delivery_time,
@@ -129,7 +130,7 @@ class OrderModel
                 co.discount,
                 co.total_price,
                 co.current_status,
-                co.material_lent
+                co.material_lent,
                 u.first_name,
                 u.last_name,
                 u.email,
@@ -141,7 +142,7 @@ class OrderModel
             ORDER BY co.event_date ASC
         ");
 
-        $stmt->execute([$params]);
+        $stmt->execute($params);
         return $stmt->fetchAll();
     }
 
@@ -238,14 +239,14 @@ class OrderModel
         return (int) $this->db->lastInsertId();
     }
 
-    public function updateStatus(int $id, array $data): int
+    public function updateOrder(int $id, array $data): bool
     {
         $stmt = $this->db->prepare("
             UPDATE customer_order SET
-                order_date = :order_date,
                 event_date = :event_date,
                 delivery_time = :delivery_time,
                 delivery_street_number = :delivery_street_number,
+                delivery_street_type = :delivery_street_type,
                 delivery_street_name = :delivery_street_name,
                 delivery_zip_code = :delivery_zip_code,
                 delivery_city = :delivery_city,
@@ -256,15 +257,16 @@ class OrderModel
                 discount = :discount,
                 total_price = :total_price,
                 current_status = :current_status,
-                material_lent = :material_lent
+                material_lent = :material_lent,
+                menu_id = :menu_id
             WHERE order_id = :id
         ");
 
         return $stmt->execute([
-            ':order_date' => $data['order_date'],
             ':event_date' => $data['event_date'],
             ':delivery_time' => $data['delivery_time'],
             ':delivery_street_number' => $data['delivery_street_number'],
+            ':delivery_street_type' => $data['delivery_street_type'],
             ':delivery_street_name' => $data['delivery_street_name'],
             ':delivery_zip_code' => $data['delivery_zip_code'],
             ':delivery_city' => $data['delivery_city'],
@@ -276,6 +278,7 @@ class OrderModel
             ':total_price' => $data['total_price'],
             ':current_status' => $data['current_status'],
             ':material_lent' => $data['material_lent'],
+            ':menu_id' => $data['menu_id'],
             ':id' => $id
         ]);
     }
@@ -297,7 +300,9 @@ class OrderModel
         WHERE order_id = :id
         ");
 
-        return $stmt->execute([':id' => $id]);
+        return $stmt->execute([
+            ':id' => $id,
+            ]);
     }
 
     //Historique des statuts
@@ -335,12 +340,12 @@ class OrderModel
                 contact_mode,
                 order_id
             FROM history_status_order
-            WHERE orderId = :order_id
+            WHERE order_id = :order_id
             ORDER BY modified_at ASC
         ");
 
         $stmt->execute([':order_id' => $orderId]);
-        return $stmt->fetch();
+        return $stmt->fetchAll();
 
     }
 

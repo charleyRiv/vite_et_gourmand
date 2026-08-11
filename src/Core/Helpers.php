@@ -11,6 +11,22 @@ function translateDishType(string $dishType): string
     };
 }
 
+//Extraire le statut d'une commande et le traduire en français
+function translateStatusOrder(string $status): string
+{
+    return match($status) {
+        'pending' => 'en attente',
+        'accepted'    => 'acceptée',
+        'in_preparation' => 'en préparation',
+        'in_delivery' => 'en cours de livraison',
+        'delivered' => 'livrée',
+        'waiting_material' => 'en attente de retour matériel',
+        'completed' => 'terminée',
+        'cancelled' => 'annulée',
+        default   => $status
+    };
+}
+
 //créer un slug à partir d'un texte
 function generateSlug(string $text): string
 {
