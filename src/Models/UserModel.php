@@ -133,4 +133,43 @@ class UserModel{
             ':user_id' => $userId
         ]);
     }
+
+    public function updateProfile(array $data): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE user
+            SET last_name = :last_name,
+                first_name = :first_name,
+                phone = :phone,
+                street_number = :street_number,
+                street_type = :street_type,
+                street_name = :street_name,
+                zip_code = :zip_code,
+                city = :city,
+                country = :country,
+                modified_at = current_timestamp
+            WHERE user_id = :user_id
+        ");
+        return $stmt->execute([
+            ':last_name' => $data['last_name'],
+            ':first_name' => $data['first_name'],
+            ':phone' => $data['phone'],
+            ':street_number' => $data['street_number'],
+            ':street_type' => $data['street_type'],
+            ':street_name' => $data['street_name'],
+            ':zip_code'=> $data['zip_code'],
+            ':city' => $data['city'],
+            ':country' => $data['country'],
+            ':user_id' => $data['user_id']
+        ]);
+    }
+
+    public function deleteUser(int $id): bool 
+    {
+        $stmt = $this->db->prepare("
+            DELETE FROM user 
+            WHERE user_id = :id
+        ");
+        return $stmt->execute([':id' => $id]);
+    }
 }

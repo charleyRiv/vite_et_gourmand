@@ -153,6 +153,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </tfoot>
             </table>
         </fieldset>
+        <a href="/mon-espace">Revenir à mon espace</a>
         <button type="submit">Valider les modifications</button>
     </form>
     

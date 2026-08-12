@@ -37,25 +37,52 @@ class UserController {
         unset($order);
         
         $pageTitle = 'Mon Espace - Vite & Gourmand';
-        $h1 = 'Mon Espace -' . $user['first_name'];
+        $h1 = 'Mon Espace - ' . $user['first_name'];
 
         require_once __DIR__ . '/../../views/user/dashboard.php';
     }
 
     public function profileForm(): void 
     {
+        //Recupération des données personnelles
+        $user_id = Session::get('user_id');
+        $user = $this->userModel->findById($user_id);
+
         $pageTitle = 'Mon Profil - Vite & Gourmand';
         $h1 = 'Modifier mes informations personnelles';
-        //Récupérer et stocker dans variables les informations du user depuis la BDD
         require_once __DIR__ . '/../../views/user/profile.php';
     }
 
     public function updateProfile(): void 
     {
-        // Logique pour mettre à jour le profil de l'utilisateur
+        //Récupération des données du formulaire
+        $data = $this->getProfileDataFromPost();  
+        $erros = $this->validateProfileData($data);  
         
+        if (!empty($errors)) {
+            $user_id = Session::get('user_id');
+            $user = $this->userModel->findById($user_id);
+
+            $h1 = 'Modifier mes informations personnelles';
+            require_once __DIR__ . '/../../views/user/profile.php';
+        }
+
+        $this->userModel->updateProfile($data);
+
         // Redirection
         header('Location: /mon-espace');
+        exit();
+    }
+
+    public function deleteProfile():void
+    {
+        $user_id = Session::get('user_id');
+
+        $this->userModel->deleteUser($user_id);
+
+        Session::destroy();
+        //Redirection
+        header('Location: /');
         exit();
     }
 
@@ -240,6 +267,35 @@ class UserController {
 
         if (empty($data['menu_id']))
             $errors[] = "la selection d'un menu est obligatoire.";
+
+        return $errors;
+    }
+
+    private function getProfileDataFromPost(): array
+    {
+        return[
+            'user_id' => (int) (Session::get('user_id')) ?? 0,
+            'last_name' => trim($_POST['last_name'] ?? ''),
+            'first_name' => trim($_POST['first_name'] ?? ''),
+            'phone' => trim($_POST['phone'] ?? ''),
+            'street_number' => trim($_POST['street_number'] ?? ''),
+            'street_type' => trim($_POST['street_type'] ?? ''),
+            'street_name' => trim($_POST['street_name'] ?? ''),
+            'zip_code' => trim($_POST['zip_code'] ?? ''),
+            'city' => trim($_POST['city'] ?? ''),
+            'country' => trim($_POST['country'] ?? ''),
+        ];
+    }
+
+    private function validateProfileData(array $data): array
+    {
+        $errors = [];
+
+        if (empty($data['last_name']) || empty($data['first_name']))
+            $errors[] = 'Les noms et prénoms sont obligatoires';
+
+        if (empty($data['email']))
+            $errors[] = "l'email est obligatoir";
 
         return $errors;
     }

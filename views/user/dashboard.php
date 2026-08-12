@@ -42,12 +42,13 @@ require_once __DIR__ . '/../layouts/header.php';
                     <?= htmlspecialchars($user['country']) ?>
                 </td>
             </tr>
-            <tr>
-                <td>Mot de passe : </td>
-                <td>**********</td>
-            </tr>
         </table>
         <a href="/mon-espace/profil">Modifier</a>
+        <form action="/mon-espace/supprimer" method="post">
+            <button 
+                type="submit"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">Supprimer mon compte client</button>
+        </form>
     </section>
     <br>
     <section>

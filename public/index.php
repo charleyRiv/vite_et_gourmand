@@ -69,6 +69,8 @@ $router->get('/mon-espace', 'UserController', 'dashboard');
     // Gestion du profil
 $router->get('/mon-espace/profil', 'UserController', 'profileForm');
 $router->post('/mon-espace/profil', 'UserController', 'updateProfile');
+$router->post('/mon-espace/supprimer', 'UserController', 'deleteProfile');
+
     // Gestion des commandes
 $router->get('/mon-espace/commande/{id}/modifier', 'UserController','showEditOrderForm');
 $router->post('/mon-espace/commande/{id}/modifier','UserController', 'updateOrder');
