@@ -43,7 +43,7 @@ class MailService {
                 <h1>Bienvenue {$firstName} !</h1>
                 <p>Votre compte a bien été créé sur Vite & Gourmand.</p>
                 <p>Vous pouvez dès maintenant consulter nos menus et passer commande.</p>
-                <p>À bientôt,<br>L'équipe Vite & Gourmand</p>
+                <p>À bientôt,<br>Julie et José, L'équipe Vite & Gourmand</p>
             ";
             $this->mailer->AltBody = "Bienvenue {$firstName} ! Votre compte a bien été créé.";
             $this->mailer->send();
@@ -67,13 +67,19 @@ class MailService {
                 <h1>Votre commande est confirmée !</h1>
                 <p>Merci pour votre commande. Voici le récapitulatif :</p>
                 <ul>
+                    <li>N° de commande : {$orderData['order_id']}</li>
                     <li>Menu : {$orderData['menu_title']}</li>
-                    <li>Date de prestation : {$orderData['event_date']}</li>
                     <li>Nombre de personnes : {$orderData['nb_persons']}</li>
+                    <li>Date de prestation : {$orderData['event_date_fr']}</li>
+                    <li>Heure de livraison : {$orderData['delivery_time_fr']}</li>
+                    <li>Adresse de livraison : {$orderData['delivery_street_number']} 
+                    {$orderData['delivery_street_type']} {$orderData['delivery_street_name']}, 
+                    {$orderData['delivery_zip_code']} {$orderData['delivery_city']}, 
+                    {$orderData['delivery_country']}
                     <li>Prix total : {$orderData['total_price']}€</li>
                 </ul>
                 <p>Notre équipe va prendre en charge votre commande.</p>
-                <p>À bientôt,<br>L'équipe Vite & Gourmand</p>
+                <p>À bientôt,<br>Julie et José, l'équipe Vite & Gourmand</p>
             ";
             $this->mailer->send();
             return true;
@@ -88,8 +94,8 @@ class MailService {
      */
     public function sendPasswordReset(string $email, string $token): bool {
         try {
-            $resetLink = $_ENV['APP_URL'] . '/reinitialiser-mot-de-passe?token=' . $token;
-            $this->mailer->clearAddresses();
+            $resetLink = $_ENV['APP_URL'] . '/mot-de-passe-oublie/reinitialisation?token=' . $token;
+            $this->mailer->setFrom('noreply@viteetgourmand.fr', 'Vite & Gourmand');
             $this->mailer->addAddress($email);
             $this->mailer->Subject = 'Réinitialisation de votre mot de passe - Vite & Gourmand';
             $this->mailer->isHTML(true);
@@ -98,14 +104,14 @@ class MailService {
                 <p>Vous avez demandé la réinitialisation de votre mot de passe.</p>
                 <p>Cliquez sur le lien ci-dessous pour le réinitialiser :</p>
                 <p><a href='{$resetLink}'>Réinitialiser mon mot de passe</a></p>
-                <p>Ce lien est valable 20 minutes.</p>
+                <p>Ce lien est valable <strong>5 minutes</strong>.</p>
                 <p>Si vous n'êtes pas à l'origine de cette demande, ignorez ce mail.</p>
                 <p>L'équipe Vite & Gourmand</p>
             ";
             $this->mailer->send();
             return true;
         } catch (Exception $e) {
-            error_log('Erreur mail reset password : ' . $e->getMessage());
+            error_log('Erreur envoi mail resrt : ' . $e->getMessage());
             return false;
         }
     }

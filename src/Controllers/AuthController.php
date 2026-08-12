@@ -187,7 +187,8 @@ class AuthController {
             'role_id' => 1 //client par défaut 
         ]);
 
-        //Implementer l'envoie du mail de bienvenue
+        //Envoyer un mail de bienvenue
+        $this->mailService->sendWelcome($email, $firstName);
 
         //Redirection
         header('Location: /');
@@ -196,6 +197,10 @@ class AuthController {
 
     public function passwordForgotten(): void 
     {
+        $email = '';
+        if (Session::isLoggedIn()) {
+            $email = Session::get('email') ?? '';
+        }
         $pageTitle = 'Mot de passe oublié - Vite & Gourmand';
         $h1 = 'Demande d\'un nouveau mot de passe';
         require_once __DIR__ . '/../../views/auth/password_forgotten.php';
@@ -203,9 +208,13 @@ class AuthController {
     //POST /mot-de-passe-oublie
     public function requestModifyPassword(): void
     {
-        $email = trim($_POST['email'] ?? '');
+        $email = trim(Session::get('email') ?? '');
         $errors = [];
         $succes = false;
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Veuillez saisir une adresse email valide.';
+        }
 
         if (empty($errors)){
             $user = $this->userModel->findByMail($email);
@@ -214,9 +223,9 @@ class AuthController {
             //pour ne pas révéler si un compte existe
             if ($user !== null){
                 $token = $this->authServices->generateToken();
-                $expiration = date('Y-m-d H:i:s', strtotime('+5 minutes'));
+                //$expiration = gmdate('Y-m-d H:i:s', strtotime('+5 minutes'));
 
-                $this->userModel->setResetToken($email, $token, $expiration);
+                $this->userModel->setResetToken($email, $token);
                 $this->mailService->sendPasswordReset($email, $token);
             }
             $succes = true;
@@ -234,6 +243,7 @@ class AuthController {
         $token = $_GET['token'] ?? '';
         $errors = [];
 
+
         if (empty($token)){
             header('Location: /mot-de-passe-oublie');
             exit();
@@ -241,11 +251,11 @@ class AuthController {
 
         //Verfier que le token est valide
         $user = $this->userModel->findByResetToken($token);
-
         if ($user === null){
             $errors[] = 'Ce lien a expiré ou est invalide. Veuillez faire une nouvelle demande';
         }
-
+        var_dump($token);
+        var_dump($user = $this->userModel->findByResetToken($token));
         $pageTitle = 'Réinitialiser le mot de passe - Vite & Gourmand';
         $h1 = 'Réinitialisation du mot de passe';
         require_once __DIR__ . '/../../views/auth/password_reset_form.php';
@@ -264,6 +274,10 @@ class AuthController {
 
         if ($user === null){
             $errors[] = 'Ce lien a expiré ou est invalide. Veuillez faire une nouvelle demande';
+            $pageTitle = 'Réinitialiser le mot de passe - Vite & Gourmand';
+            $h1 = 'Réinitialisation du mot de passe';
+            require_once __DIR__ . '/../../views/auth/password_reset_form.php';
+            return;
         }
 
         //Valider le mot de passe
@@ -290,7 +304,7 @@ class AuthController {
         );
 
         //Redirection vers la page de connexion
-        header('Location: /connexion?resert=1');
+        header('Location: /connexion?reset=1');
         exit();
     }
 }

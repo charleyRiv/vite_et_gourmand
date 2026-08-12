@@ -7,12 +7,14 @@ require_once __DIR__ . '/../Models/UserModel.php';
 require_once __DIR__ . '/../Models/MenuModel.php';
 //require_once __DIR__ . '/../Models/DishModel.php';
 require_once __DIR__ . '/../Services/DistanceService.php';
+require_once __DIR__ . '/../Services/MailService.php';
 class OrdersController {
 
     private OrderModel $orderModel;
     private UserModel $userModel;
     private MenuModel $menuModel;
     //private DishModel $dishModel;
+    private MailService $mailService;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class OrdersController {
         $this->userModel = new UserModel();
         $this->menuModel = new MenuModel();
         //$this->dishModel = new DishModel();
+        $this->mailService = new MailService();
     }
     public function step1(): void 
     {
@@ -281,6 +284,14 @@ class OrdersController {
             null,
             null
         );
+
+        //Envoyer le mail de confirmation 
+        $email = $step1['email'];
+        $orderData = $this->orderModel->getById($orderId);
+        $orderData['menu_title'] = $menu['title'];
+        $orderData['event_date_fr'] = formatDateFr($orderData['event_date']);
+        $orderData['delivery_time_fr'] = formatTimeFr($orderData['delivery_time']);
+        $this->mailService->sendOrderConfirmation($email, $orderData);
 
         // Vider les données de commande en session
         Session::set('order_step1', null);

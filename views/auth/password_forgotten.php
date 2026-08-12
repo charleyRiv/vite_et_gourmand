@@ -3,6 +3,7 @@
  * @var string $h1
  * @var array $errors
  * @var bool $succes
+ * @var string $email
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -37,7 +38,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 type="text" 
                 id="email" 
                 name="email" 
-                value="<?= htmlspecialchars($_POST['email'] ?? '')?>"
+                value="<?= htmlspecialchars($email ?? '')?>"
                 placeholder="mail@mail.fr" 
                 required
             >

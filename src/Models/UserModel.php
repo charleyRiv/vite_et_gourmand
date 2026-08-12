@@ -91,17 +91,16 @@ class UserModel{
     }
 
     //Reinitialisation du mot de passe
-    public function setResetToken(string $email, string $token, string $expiration): bool
+    public function setResetToken(string $email, string $token): bool
     {
         $stmt = $this->db->prepare("
         UPDATE user
         SET token_reset = :token,
-            token_reset_expiration = :expiration
+            token_reset_expiration = DATE_ADD(NOW(), INTERVAL 5 MINUTE)
         WHERE email = :email
         ");
         return $stmt->execute([
             ':token' => $token,
-            ':expiration' => $expiration,
             ':email' => $email
         ]);
     }
@@ -109,7 +108,7 @@ class UserModel{
     public function findByResetToken(string $token): ?array
     {
         $stmt = $this->db->prepare("
-        SELECT $ FROM user
+        SELECT * FROM user
         WHERE token_reset = :token
         AND token_reset_expiration > NOW()
         LIMIT 1
@@ -125,7 +124,8 @@ class UserModel{
         UPDATE user
         SET password = :password,
             token_reset = NULL,
-            token_reset_expiration = NULL
+            token_reset_expiration = NULL,
+            modified_at = NOW()
         WHERE user_id = :user_id
         ");
         return $stmt->execute([
