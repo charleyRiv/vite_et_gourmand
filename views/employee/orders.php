@@ -1,6 +1,11 @@
 <?php
 /**
  * @var string $h1
+ * @var array $orders
+ * @var array $activClients
+ * @var array $activStatuses
+ * @var array $statuses
+ * @var array $statusHistory
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -11,74 +16,128 @@ require_once __DIR__ . '/../layouts/header.php';
     <div>
         <form action="/employe/commandes" method="POST">
             <fieldset>
-            <label for="status">Status</label>
-                <select name="status" id="status">
-                    <option value="canceled">annulée</option>
-                    <option value="validate">acceptée</option>
-                    <option value="in-preparation">en préparation</option>
-                </select>
+                <legend>Status</legend>
+                <?php foreach ($activStatuses as $activStatus) : ?>
+                <div>
+                    <input type="checkbox" id="<?= htmlspecialchars($activStatus['current_status'][0])?>" name=""
+                    value="<?= htmlspecialchars($activStatus['current_status'])?>" checked />
+                    <label for="<?= htmlspecialchars($activStatus['current_status'])?>"><?= htmlspecialchars($activStatus['current_status'])?></label>
+                </div>
+                <?php endforeach; ?>
             </fieldset>
             <fieldset>
-            <label for="clientName">Client</label>
-                <select name="clientName" id="clientName">
-                    <option value="clientID1">client 1</option>
-                    <option value="clientID2">client 2</option>
-                    <option value="clientID3">client 3</option>
-                </select>
+                <legend>Client</legend>
+                <?php foreach ($activClients as $client) : ?>
+                <div>
+                    <input type="checkbox" id="client_name" name="client_name"
+                    value="<?= htmlspecialchars($client['last_name'])?>" checked />
+                    <label for="client_name"><?= htmlspecialchars($client['last_name'])?> <?= htmlspecialchars($client['first_name'])?>"</label>
+                </div>
+                <?php endforeach; ?>
             </fieldset>
             <input type="button" value="Filtrer">
             <input type="button" value="Reinitialiser">
         </form>
     </div>
-    <div>
-        <h3>Commande n°12345</h3>
-        <form action="/employe/commandes/12345/gerer" method="POST">
-            
+    <?php foreach ($orders as $order) : ?>
+        <section>
+        <h3>Commande n°<?= $order['order_id'] ?></h3>    
+        <table>
+            <thead>
+                <tr>
+                    <th>Menu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Menu choisi</td>
+                    <td><?= htmlspecialchars($order['menu_title'] ?? '')?></td>
+                </tr>
+                <tr>
+                    <td>Nombre de personnes </td>
+                    <td><?= htmlspecialchars($order['nb_persons'] ?? '')?></td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Informations de livraison</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nom du client</td>
+                    <td><?= htmlspecialchars($order['last_name'])?> <?= htmlspecialchars($order['first_name'])?></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><?= htmlspecialchars($order['email'])?></td>
+                </tr>
+                <tr>
+                    <td>Téléphone</td>
+                    <td><?= htmlspecialchars($order['phone'])?></td>
+                </tr>
+                <tr>
+                    <td>Adresse</td>
+                    <td>
+                        <?= htmlspecialchars($order['delivery_street_number'])?> 
+                        <?= htmlspecialchars($order['delivery_street_type'])?> 
+                        <?= htmlspecialchars($order['delivery_street_name'])?> <br>
+                        <?= htmlspecialchars($order['delivery_zip_code'])?> 
+                        <?= htmlspecialchars($order['delivery_city'])?>, 
+                        <?= htmlspecialchars($order['delivery_country'])?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date de la prestation</td>
+                    <td><?= htmlspecialchars($order['event_date_fr'])?></td>
+                </tr>
+                <tr>
+                    <td>Heure de livraison</td>
+                    <td><?= htmlspecialchars($order['delivery_time_fr'])?></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="/employe/commandes/<?= $order['order_id'] ?>/gerer" method="POST">
             <!-- Champs Satut -->
             <!--label for="status">Status</label-->
-            <select name="status" id="status">
-                <option value="canceled">annulée</option>
-                <option value="validate">acceptée</option>
-                <option value="in-preparation">en préparation</option>
+            <select name="current_status" id="current_status">
+                <option value="">statut</option>
+            <?php foreach ($statuses as $value => $label) : ?>
+                <option value="<?= htmlspecialchars($value) ?>"
+                <?= ($value === $order['current_status']) ? 'selected' : ''?>
+                >
+                    <?= htmlspecialchars($label) ?>
+                </option>
+            <?php endforeach; ?>
             </select>
 
+            <br>
             <!-- Champs Mode de contact en cas d'annulation -->
-            <label for="contact-mode">Mode de contact</label>
-            <input type="text" id="contact-mode" name="contact-mode">
+            <label for="contact_mode">Mode de contact</label>
+            <input 
+                type="text" 
+                id="contact_mode" 
+                name="contact_mode"
+            >
 
+            <br>
             <!-- Champs Motif d'annulation -->
-            <label for="cancel-reason">Motif d'annulation</label>
-            <input type="text" id="cancel-reason" name="cancel-reason">
+            <label for="reason">Motif d'annulation</label>
+            <textarea 
+                id="reason" name="reason"
+            ></textarea>
+            <br>
+            <button type="submit">valider</button>
         </form>
-    </div>
-    <div>
-        <h3>Commande n°12346</h3>
-        <form action="/employe/commandes/12346/gerer" method="POST">
-            
-            <!-- Champs Satut -->
-            <!--label for="status">Status</label-->
-            <select name="status" id="status">
-                <option value="canceled">annulée</option>
-                <option value="validate">acceptée</option>
-                <option value="in-preparation">en préparation</option>
-            </select>
 
-        </form>
-    </div>
-        <div>
-        <h3>Commande n°12347</h3>
-        <form action="/employe/commandes/12347/gerer" method="POST">
-            
-            <!-- Champs Satut -->
-            <!--label for="status">Status</label-->
-            <select name="status" id="status">
-                <option value="canceled">annulée</option>
-                <option value="validate">acceptée</option>
-                <option value="in-preparation">en préparation</option>
-            </select>
-
-        </form>
-    </div>
+        <a href="/employe/commandes/<?= $order['order_id'] ?>/historique">Voir l'historique</a>
+        </section>
+    <?php endforeach; ?>
         <br>
     <div>
         <a href="">Precedent</a>

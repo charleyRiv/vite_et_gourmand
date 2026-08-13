@@ -10,6 +10,9 @@ require_once __DIR__ . '/../Models/AllergenModel.php';
 require_once __DIR__ . '/../Models/DietModel.php';
 require_once __DIR__ . '/../Models/ThemeModel.php';
 require_once __DIR__ . '/../Models/PictureModel.php';
+require_once __DIR__ . '/../Models/OrderModel.php';
+require_once __DIR__ . '/../Models/UserModel.php';
+require_once __DIR__ . '/../Services/MailService.php';
 
 class EmployeeController
 {
@@ -19,6 +22,10 @@ class EmployeeController
     private DietModel $dietModel;
     private ThemeModel $themeModel;
     private PictureModel $pictureModel;
+    private OrderModel $orderModel;
+    private UserModel $userModel;
+    private MailService $mailService;
+
     //Vérification de l'authentification et du role client
     public function __construct()
     {
@@ -29,6 +36,9 @@ class EmployeeController
         $this->dietModel = new DietModel();
         $this->themeModel = new ThemeModel();
         $this->pictureModel = new PictureModel();
+        $this->orderModel = new OrderModel();
+        $this->userModel = new UserModel();
+        $this->mailService = new MailService();
     }
 
     protected function getBasePath(): string
@@ -57,17 +67,140 @@ class EmployeeController
 
     public function listOrders(): void
     {
+        $orders = $this->orderModel->getAll();
+        $activClients = $this->orderModel->getAllClient();
+        $activStatuses = $this->orderModel->getAllStatus();
+
+
+        //Traduit les status actifs en francais
+        foreach ($activStatuses as &$activStatus) {
+            $activStatus['current_status'] = translateStatusOrder($activStatus['current_status']);
+        }
+        unset($activStatus);
+
+        //Récupérer les status des commandes en français
+        foreach ($orders as &$order){
+            $order['current_status_fr'] = translateStatusOrder($order['current_status']);
+            $order['event_date_fr'] = formatDateFr($order['event_date']);
+            $order['delivery_time_fr'] = formatTimeFr($order['delivery_time']);        }
+        unset($order);
+
+        $statuses = [
+            'pending' => translateStatusOrder('pending'),
+            'accepted' => translateStatusOrder('accepted'),
+            'in_preparation' => translateStatusOrder('in_preparation'),
+            'in_delivery' => translateStatusOrder('in_delivery'),
+            'delivered' => translateStatusOrder('delivered'),
+            'waiting_material' => translateStatusOrder('waiting_material'),
+            'completed' => translateStatusOrder('completed'),
+            'cancelled' => translateStatusOrder('cancelled')
+        ];
+
         $pageTitle = 'Gerer les commandes - Vite & Gourmand';
         $h1 = 'Gérer les commandes';
         require_once __DIR__ . '/../../views/employee/orders.php';
     }
 
-    public function updateOrder(): void
+    public function updateOrder(int $id): void
     {
-        // Logique pour soumettre le changement de statut d'une commmande
+        //Récupération des données formulaire
+        $data = [
+            'current_status' => trim($_POST['current_status'] ?? ''),
+            'contact_mode' => trim($_POST['contact_mode']) ?? '',
+            'reason' => trim($_POST['reason']) ?? ''
+        ];
+
+
+        $errors= [];
+
+        if ($data['current_status'] == null){
+            $errors[] = 'Veuillez renseigner un status';
+        }
+
+        if ($data['current_status'] === 'cancelled') {
+            if ($data['contact_mode'] == null || $data['reason'] == null) {
+                $errors[] = 'Veuillez renseigner le mode de contact et le motif de l\'annulation';
+            }
+        }
+
+        if (!empty($errors)) {
+            $orders = $this->orderModel->getAll();
+            $activClients = $this->orderModel->getAllClient();
+            $activStatuses = $this->orderModel->getAllStatus();
+
+
+            //Traduit les status actifs en francais
+            foreach ($activStatuses as &$activStatus) {
+                $activStatus['current_status'] = translateStatusOrder($activStatus['current_status']);
+            }
+            unset($activStatus);
+
+            //Récupérer les status des commandes en français
+            foreach ($orders as &$order){
+                $order['current_status_fr'] = translateStatusOrder($order['current_status']);
+                $order['event_date_fr'] = formatDateFr($order['event_date']);
+                $order['delivery_time_fr'] = formatTimeFr($order['delivery_time']);
+            }
+            unset($order);
+
+            $statuses = [
+                'pending' => translateStatusOrder('pending'),
+                'accepted' => translateStatusOrder('accepted'),
+                'in_preparation' => translateStatusOrder('in_preparation'),
+                'in_delivery' => translateStatusOrder('in_delivery'),
+                'delivered' => translateStatusOrder('delivered'),
+                'waiting_material' => translateStatusOrder('waiting_material'),
+                'completed' => translateStatusOrder('completed'),
+                'cancelled' => translateStatusOrder('cancelled')
+            ];
+                $pageTitle = 'Gerer les commandes - Vite & Gourmand';
+                $h1 = 'Gérer les commandes';
+                require_once __DIR__ . '/../../views/employee/orders.php';
+                return;
+        }
+
+
+        $this->orderModel->updateStatus($id, $data['current_status']);
+        $this->orderModel->addStatusHistory($id, $data['current_status'], $data['reason'], $data['contact_mode']);
+
+        //récupération infos client pour envoie de mail
+        $order = $this->orderModel->getById($id);
+        //Envoyer un mail en cas de pret de materiel
+        if ($data['current_status'] === "waiting_material") {
+            $this->mailService->sendMaterialReturn($order['email'], $order['first_name']);
+        }
+
+        //Envoie de mail pour proposer au client de donner son avis sur la commande
         // Redirection
-        header('Location: /' . $this->getBasePath() . '/commandes/');
+        if ($data['current_status'] === 'completed') {
+            $this->mailService->sendReviewInvitation($order['email'], $order['first_name']);
+        }
+        header('Location: ' . $this->getBasePath() . '/commandes/');
         exit();
+    }
+
+    public function showHistoryOrder(int $id):void
+    {
+        $order = $this->orderModel->getById($id);
+        $statuses = $this->orderModel->getStatusHistory($id);
+        $client = $this->userModel->findById($order['user_id']);
+        $basePath = $this->getBasePath();
+
+        foreach ($statuses as &$status) {
+            $status['status_fr'] = translateStatusOrder($status['status']);
+        }
+        unset($status);
+
+        if ($order === null){
+            http_response_code(404);
+            require_once __DIR__ . '/../../views/errors/404.php';
+            return;
+        }
+
+
+        $pageTitle = 'Commande historique - Vite & Gourmand';
+        $h1 = 'Commande n°' . $id ;
+        require_once __DIR__ . '/../../views/employee/orderHistory.php';
     }
     
     public function listMenus(): void

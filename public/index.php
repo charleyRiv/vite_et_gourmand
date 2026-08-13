@@ -86,6 +86,8 @@ $router->post('/employe/mot-de-passe', 'EmployeeController', 'requestModifyPassw
     // Orders management
 $router->get('/employe/commandes', 'EmployeeController', 'listOrders');
 $router->post('/employe/commandes/{id}/gerer', 'EmployeeController', 'updateOrder');
+$router->get('/employe/commandes/{id}/historique', 'EmployeeController', 'showHistoryOrder');
+
     // Menus management
 $router->get('/employe/menus', 'EmployeeController', 'listMenus');
 $router->post('/employe/menus/creer', 'EmployeeController', 'createMenu');

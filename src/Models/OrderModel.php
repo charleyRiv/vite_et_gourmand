@@ -13,10 +13,12 @@ class OrderModel
     {
         $stmt = $this->db->prepare("
             SELECT
+                co.order_id,
                 co.order_date,
                 co.event_date,
                 co.delivery_time,
                 co.delivery_street_number,
+                co.delivery_street_type,
                 co.delivery_street_name,
                 co.delivery_zip_code,
                 co.delivery_city,
@@ -27,11 +29,18 @@ class OrderModel
                 co.discount,
                 co.total_price,
                 co.current_status,
-                co.material_lent
+                co.material_lent,
+                co.menu_id,
+                co.user_id,
+                m.title AS menu_title,
+                u.first_name,
+                u.last_name,
+                u.email, 
+                u.phone
             FROM customer_order co
             JOIN user u ON co.user_id = u.user_id
             JOIN menu m ON co.menu_id = m.menu_id
-            ORDER BY co.order_date ASC
+            ORDER BY co.event_date ASC
         ");
 
         $stmt->execute();
@@ -60,7 +69,12 @@ class OrderModel
                 co.discount,
                 co.total_price,
                 co.current_status,
-                co.material_lent
+                co.material_lent,
+                m.title AS menu_title,
+                u.first_name,
+                u.last_name,
+                u.email, 
+                u.phone
             FROM customer_order co
             JOIN user u ON co.user_id = u.user_id
             JOIN menu m ON co.menu_id = m.menu_id
@@ -283,6 +297,19 @@ class OrderModel
         ]);
     }
 
+    public function updateStatus(int $id,string $status): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE customer_order SET
+            current_status = :current_status
+            WHERE order_id = :id
+        ");
+        return $stmt->execute([
+            ':current_status' => $status,
+            ':id' => $id
+        ]);   
+    }
+
 
     public function deleteOrder(int $id): bool
     {
@@ -303,6 +330,40 @@ class OrderModel
         return $stmt->execute([
             ':id' => $id,
             ]);
+    }
+
+    public function getAllClient(): array
+    {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT
+                u.user_id,
+                u.first_name,
+                u.last_name,
+                u.email
+            FROM customer_order co
+            JOIN user u ON co.user_id = u.user_id
+            WHERE (
+                co.current_status NOT IN ('completed' || 'cancelled')
+                )
+            OR (
+                co.current_status IN ('completed' || 'cancelled')
+                AND co.event_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+                )
+            ORDER BY u.last_name ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getAllStatus(): array
+    {
+        $stmt = $this->db->prepare("
+            SELECT DISTINCT
+                current_status
+            FROM customer_order
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     //Historique des statuts
@@ -341,7 +402,7 @@ class OrderModel
                 order_id
             FROM history_status_order
             WHERE order_id = :order_id
-            ORDER BY modified_at ASC
+            ORDER BY modified_at DESC
         ");
 
         $stmt->execute([':order_id' => $orderId]);
