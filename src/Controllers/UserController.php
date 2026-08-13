@@ -7,11 +7,13 @@ require_once __DIR__ . '/../Models/UserModel.php';
 require_once __DIR__ . '/../Models/OrderModel.php';
 require_once __DIR__ . '/../Models/MenuModel.php';
 require_once __DIR__ . '/../Services/DistanceService.php';
+require_once __DIR__ . '/../Models/ReviewModel.php';
 
 class UserController {
     private UserModel $userModel;
     private OrderModel $orderModel;
     private MenuModel $menuModel;
+    private ReviewModel $reviewModel;
     //Vérification de l'authentification et du role client
     public function __construct()
     {
@@ -19,6 +21,7 @@ class UserController {
         $this->userModel = new UserModel();
         $this->orderModel = new OrderModel();
         $this->menuModel = new MenuModel();
+        $this->reviewModel = new ReviewModel();
     }
     
     public function dashboard(): void 
@@ -33,6 +36,7 @@ class UserController {
         foreach ($orders as &$order) {
             $order['DateFr'] = formatDateFr($order['event_date']);
             $order['TimeFr'] = formatTimeFr($order['delivery_time']);
+            $order['current_status_fr'] = translateStatusOrder($order['current_status']);
         }
         unset($order);
         
@@ -130,6 +134,7 @@ class UserController {
         $order = $this->orderModel->getById($id);
         $menu = $this->menuModel->getById($order['menu_id']);
         $menus = $this->menuModel->getAll();
+        $review = $this->reviewModel->getByOrderId($id);
 
         $pageTitle = "Modifier ma commande - Vite & Gourmand";
         $h1 = 'Modifier ma commande n°' . $id;
@@ -210,6 +215,9 @@ class UserController {
 
     public function showOrderReviewForm(int $id): void 
     {
+        $order = $this->orderModel->getById($id);
+        $order['DateFr'] = formatDateFr($order['event_date']);
+
         $pageTitle = 'Noter la commande - Vite & Gourmand';
         $h1 = 'Formulaire avis';
         require_once __DIR__ . '/../../views/user/review.php';
@@ -217,7 +225,35 @@ class UserController {
 
     public function submitOrderReview(int $id): void 
     {
-        // Logique pour soumettre l'avis sur la commande
+        $order = $this->orderModel->getById($id);
+        $data = [
+            'rating' => (int) ($_POST['rating'] ?? 0),
+            'comment' => trim($_POST['comment'] ?? ''),
+            'order_id' => (int) ($order['order_id']?? 0),
+            'user_id' => (int) ($order['user_id'] ?? 0)
+        ];
+
+        $errors = [];
+
+        if (empty($data['rating'])) {
+            $errors[] = 'Veuillez renseigner votre note';
+        }
+
+        if (empty($data['comment'])) {
+            $errors[] = 'Veuillez completer votre commentaire';
+        }
+
+        if (!empty($errors)) {
+            $order = $this->orderModel->getById($id);
+            $order['DateFr'] = formatDateFr($order['event_date']);
+
+            $pageTitle = 'Noter la commande - Vite & Gourmand';
+            $h1 = 'Noter ma commande n°' . $id;
+            require_once __DIR__ . '/../../views/user/updateOrdersForm.php';
+            return;
+        }
+
+        $this->reviewModel->createReview($data);
         // Redirection
         header('Location: /mon-espace/commande/' . $id);
         exit();

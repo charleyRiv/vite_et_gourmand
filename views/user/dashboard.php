@@ -60,7 +60,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <p>Pour le <?= htmlspecialchars($order['DateFr'])?>
                 à <?= htmlspecialchars($order['TimeFr'])?>
             </p>
-            <p><?= htmlspecialchars($order['current_status'])?></p>
+            <p><?= htmlspecialchars($order['current_status_fr'])?></p>
 
             <a href="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>">Voir le détail</a>
         </div>

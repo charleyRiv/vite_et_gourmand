@@ -5,6 +5,7 @@
  * @var array $statuses
  * @var array $menu
  * @var array $dishes
+ * @var array $review
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -88,7 +89,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <?php endif; ?>
 
         
-        <?php if ($order['current_status'] === 'completed') : ?>
+        <?php if ($order['current_status'] === 'completed' && !empty($review)) : ?>
         <a href="/mon-espace/commande/<?= $order['order_id']?>/avis">Poster un avis</a>
         <?php endif; ?>
     </div>
