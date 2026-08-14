@@ -253,5 +253,5 @@ require_once __DIR__ . '/../layouts/header.php';
 <a href="<?= $basePath ?>/menus">Retour à la liste des menus</a>
 
 <?php
-require_once __DIR__ . '/../layouts/footer.php';
+//require_once __DIR__ . '/../layouts/footer.php';
 ?>

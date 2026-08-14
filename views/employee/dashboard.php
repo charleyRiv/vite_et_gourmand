@@ -26,5 +26,5 @@ require_once __DIR__ . '/../layouts/header.php';
 <br>
 
 <?php
-require_once __DIR__ . '/../layouts/footer.php';
+//require_once __DIR__ . '/../layouts/footer.php';
 ?>

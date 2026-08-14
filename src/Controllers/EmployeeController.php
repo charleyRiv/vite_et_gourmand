@@ -14,6 +14,7 @@ require_once __DIR__ . '/../Models/OrderModel.php';
 require_once __DIR__ . '/../Models/UserModel.php';
 require_once __DIR__ . '/../Services/MailService.php';
 require_once __DIR__ . '/../Models/ReviewModel.php';
+require_once __DIR__ . '/../Models/ContentModel.php';
 
 class EmployeeController
 {
@@ -27,6 +28,7 @@ class EmployeeController
     private UserModel $userModel;
     private MailService $mailService;
     private ReviewModel $reviewModel;
+    private ContentModel $contentModel;
 
     //Vérification de l'authentification et du role client
     public function __construct()
@@ -42,6 +44,7 @@ class EmployeeController
         $this->userModel = new UserModel();
         $this->mailService = new MailService();
         $this->reviewModel = new ReviewModel();
+        $this->contentModel = new ContentModel();
     }
 
     protected function getBasePath(): string
@@ -459,6 +462,7 @@ class EmployeeController
         exit();
     }
 
+    // ___ REVIEWS ___
     public function listReviews(): void
     {
         $reviews = $this->reviewModel->getAll();
@@ -467,7 +471,6 @@ class EmployeeController
             $review['validation_status_fr'] = translateStatusReview($review['validation_status']);
         }
         unset($review);
-
 
         $pageTitle = 'Gérer des avis - Vite & Gourmand';
         $h1 = 'Gérer les avis';
@@ -492,21 +495,86 @@ class EmployeeController
         exit();
     }
 
+    //____ CONTENTS ____
     public function showEditContentForm(): void
     {
+        $contents = $this->contentModel->getAll();
+
         $pageTitle = 'Gérer des contenus - Vite & Gourmand';
         $h1 = 'Gérer les contenus';
         require_once __DIR__ . '/../../views/employee/contentForm.php';
     } 
 
-    public function updateContent(): void
+    public function createContent():void
     {
-        //Logique pour updater les contenus du site
+        $data = [
+            'page' => trim($_POST['page'] ?? ''),
+            'section' => trim($_POST['section'] ?? ''),
+            'content' => trim($_POST['content'] ?? '')
+        ];
+
+        $errors = [];
+
+        if (empty($data['page'])) {
+            $errors[] = 'Le nom de la page est obligatoire';
+        }
+        if (empty($data['section'])) {
+            $errors[] = 'Le nom de la section est obligatoire';
+        }
+        if (empty($data['content'])) {
+            $errors[] = 'Le contenu est obligatoire';
+        }
+
+        if (!empty($errors)) {
+            $contents = $this->contentModel->getAll();
+
+            $pageTitle = 'Gérer des contenus - Vite & Gourmand';
+            $h1 = 'Gérer les contenus';
+            require_once __DIR__ . '/../../views/employee/contentForm.php';
+            return;
+        }
+
+        $this->contentModel->createContent($data);
+
+        //Redirection
+        header('Location: ' . $this->getBasePath() . '/contenus');
+        exit();
+    }
+
+    public function updateContent(int $id): void
+    {
+        //Récupérer les données content
+        $content = ['content' => trim($_POST['content'])];
+
+        //Gérer les erreurs
+        if (empty($content)) {
+            $errors[] = "Veuillez renseigner le contenu";
+
+            $contents = $this->contentModel->getAll();
+
+            $pageTitle = 'Gérer des contenus - Vite & Gourmand';
+            $h1 = 'Gérer les contenus';
+            require_once __DIR__ . '/../../views/employee/contentForm.php';
+            return;
+        }
+
+        $this->contentModel->updateContent($id, $content);
         
         // Redirection
         header('Location: ' . $this->getBasePath() . '/contenus');
         exit();
     }
+
+    public function deleteContent(int $id): void
+    {
+        $this->contentModel->deleteContent($id);
+        
+        // Redirection
+        header('Location: ' . $this->getBasePath() . '/contenus');
+        exit();
+    }
+
+    // ____ PICTURES ____
 
     public function addPictureToDish(int $id): void
     {

@@ -114,7 +114,9 @@ $router->post('/employe/avis/{id}/refused', 'EmployeeController', 'refusedStatus
 
     // Content management
 $router->get('/employe/contenus', 'EmployeeController', 'showEditContentForm');
+$router->post('/employe/contenus/creer', 'EmployeeController', 'createContent');
 $router->post('/employe/contenus/{id}/modifier', 'EmployeeController', 'updateContent');
+$router->post('/employe/contenus/{id}/supprimer', 'EmployeeController', 'deleteContent');
 
 // ── Admin area ─────────────────────────────────
 $router->get('/admin', 'AdminController', 'dashboard');
