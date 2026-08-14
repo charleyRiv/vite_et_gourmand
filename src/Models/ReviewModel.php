@@ -59,6 +59,32 @@ class ReviewModel
         return $stmt->fetch();
     }
 
+    public function getAllValidated(): array
+    {
+        $stmt = $this->db->prepare("
+            SELECT
+                r.review_id,
+                r.rating,
+                r.comment,
+                r.validation_status,
+                r.reviewed_at,
+                r.order_id,
+                r.user_id,
+                u.last_name,
+                u.first_name,
+                co.menu_id
+            FROM review r
+            JOIN customer_order co ON r.order_id = co.order_id
+            JOIN user u ON r.user_id = u.user_id
+            WHERE r.validation_status = 'validated'
+            ORDER BY reviewed_at DESC
+            LIMIT 3
+        ");
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function createReview(array $data): int
     {
         $stmt = $this->db->prepare("
@@ -111,5 +137,18 @@ class ReviewModel
         return $stmt->execute([
             ':id' => $id
         ]);
+    }
+
+    //Fonctions utilitaires
+    public function formatDiffDate(string $date): string
+    {
+        $diff = date_diff(date_create($date), date_create('now'));
+
+        if ($diff->days === 0)   return "Aujourd'hui";
+        if ($diff->days === 1)   return "Hier";
+        if ($diff->days < 30)    return $diff->days . ' jours';
+        if ($diff->m < 12)  return $diff->m . ' mois';
+
+        return $diff->y . ' an(s)';
     }
 }
