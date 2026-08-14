@@ -23,8 +23,8 @@ class ReviewModel
                 u.last_name,
                 u.first_name
             FROM review r
-            JOIN order o ON r.order_id = o.order_id
-            JOIN user u ON r.user_id = u_user_id
+            JOIN customer_order co ON r.order_id = co.order_id
+            JOIN user u ON r.user_id = u.user_id
             ORDER BY reviewed_at ASC
         ");
 
@@ -85,17 +85,30 @@ class ReviewModel
         return (int) $this->db->lastInsertId();
     }
 
-    public function updateStatus(int $id, string $status): bool
+    public function validateReview(int $id): bool
     {
         $stmt = $this->db->prepare("
             UPDATE review SET
-                validation_status = :status,
+                validation_status = 'validated',
                 reviewed_at = CURRENT_TIMESTAMP
             WHERE review_id = :id
         ");
 
         return $stmt->execute([
-            ':status' => $status,
+            ':id' => $id
+        ]);
+    }
+
+    public function refuseReview(int $id): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE review SET
+                validation_status = 'refused',
+                reviewed_at = CURRENT_TIMESTAMP
+            WHERE review_id = :id
+        ");
+
+        return $stmt->execute([
             ':id' => $id
         ]);
     }

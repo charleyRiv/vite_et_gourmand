@@ -1,6 +1,7 @@
 <?php
 /**
  * @var string $h1
+ * @var array $reviews
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -26,7 +27,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <label for="date">Date</label>
             <input type="date" id="date" name="date">
                         
-            <!-- Filtre Allergène -->
+            <!-- Filtre Statut -->
             <fieldset>
             <label for="status">Statut</label>
                 <select name="status" id="status">
@@ -43,22 +44,42 @@ require_once __DIR__ . '/../layouts/header.php';
         </form>
     </div>
 
+    <?php foreach ($reviews as $review) : ?>
     <div>
-        <h4>Avis n° 1</h4>
-        <form action="/employe/avis/1/statut" method="POST">
-            <!-- Filtre Statut -->
-            <fieldset>
-            <label for="status">Choisir le statut</label>
-                <select name="status" id="status">
-                    <option value="validate">Valider</option>
-                    <option value="refuse">Refuser</option>
-                </select>
-            </fieldset>
+        
+        <section>
+            <h4>Avis n° <?= htmlspecialchars($review['review_id'])?></h4>
+            <p> Date : <?= htmlspecialchars($review['reviewed_at'])?></p>
+            <p><?= htmlspecialchars($review['first_name'])?> <?= htmlspecialchars($review['last_name'])?></p>
+            <p>
+                <span style="color: #f7bc4d;">
+                    <?= str_repeat('★', (int) $review['rating']) ?>
+                </span>
+                <span style="color: #ccc;">
+                    <?= str_repeat('☆', 5 - (int) $review['rating']) ?>
+                </span>
+                <?= htmlspecialchars($review['rating'])?>/5</p>
+            <p>Commande n° <?= htmlspecialchars($review['order_id'])?></p>
+            <p><?= htmlspecialchars($review['comment'])?></p>
+        </section>
+        <section>
+            <?php if ($review['validation_status'] === 'pending') : ?>
+                <form action="/employe/avis/<?= htmlspecialchars($review['review_id']) ?>/validate" method="POST">
 
-            <!-- Champs Update -->
-            <input type="submit" value="Valider">
-        </form>
+                    <!-- Champs Valider -->
+                    <button type="submit">Valider</button>
+                </form>
+                <form action="/employe/avis/<?= htmlspecialchars($review['review_id']) ?>/refused" method="POST">
+
+                    <!-- Champs Refuser -->
+                    <button type="submit">Refuser</button>
+                </form>
+            <?php else : ?>
+                <p><?= htmlspecialchars($review['validation_status_fr'])?> le <?= htmlspecialchars($review['reviewed_at'])?></p>
+            <?php endif; ?>
+        </section>
     </div>
+    <?php endforeach; ?>
 
 </main>
 <br>

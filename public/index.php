@@ -109,7 +109,9 @@ $router->post('/employe/plats/{id}/photos/ajouter', 'EmployeeController', 'addPi
 $router->post('/employe/plats/photos/{pictureId}/supprimer', 'EmployeeController', 'deleteDishPicture');
     // Reviews management
 $router->get('/employe/avis', 'EmployeeController', 'listReviews');
-$router->post('/employe/avis/{id}/statut', 'EmployeeController', 'updateStatusReview');
+$router->post('/employe/avis/{id}/validate', 'EmployeeController', 'validateStatusReview');
+$router->post('/employe/avis/{id}/refused', 'EmployeeController', 'refusedStatusReview');
+
     // Content management
 $router->get('/employe/contenus', 'EmployeeController', 'showEditContentForm');
 $router->post('/employe/contenus/{id}/modifier', 'EmployeeController', 'updateContent');

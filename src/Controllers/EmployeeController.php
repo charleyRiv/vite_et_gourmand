@@ -13,6 +13,7 @@ require_once __DIR__ . '/../Models/PictureModel.php';
 require_once __DIR__ . '/../Models/OrderModel.php';
 require_once __DIR__ . '/../Models/UserModel.php';
 require_once __DIR__ . '/../Services/MailService.php';
+require_once __DIR__ . '/../Models/ReviewModel.php';
 
 class EmployeeController
 {
@@ -25,6 +26,7 @@ class EmployeeController
     private OrderModel $orderModel;
     private UserModel $userModel;
     private MailService $mailService;
+    private ReviewModel $reviewModel;
 
     //Vérification de l'authentification et du role client
     public function __construct()
@@ -39,6 +41,7 @@ class EmployeeController
         $this->orderModel = new OrderModel();
         $this->userModel = new UserModel();
         $this->mailService = new MailService();
+        $this->reviewModel = new ReviewModel();
     }
 
     protected function getBasePath(): string
@@ -458,16 +461,32 @@ class EmployeeController
 
     public function listReviews(): void
     {
+        $reviews = $this->reviewModel->getAll();
+
+        foreach ($reviews as &$review) {
+            $review['validation_status_fr'] = translateStatusReview($review['validation_status']);
+        }
+        unset($review);
+
+
         $pageTitle = 'Gérer des avis - Vite & Gourmand';
         $h1 = 'Gérer les avis';
         require_once __DIR__ . '/../../views/employee/review.php';
     } 
 
-    public function updateStatusReview(): void
+    public function validateStatusReview(int $id): void
     {
-        //Logique pour changer le statut d'un avis et update la BDD
-        //Logique pour inclure ou non dans la section Avis de la page d'accueil
+        $this->reviewModel->validateReview($id);
         
+        // Redirection
+        header('Location: ' . $this->getBasePath() . '/avis');
+        exit();
+    }
+
+    public function refusedStatusReview(int $id): void
+    {
+        $this->reviewModel->refuseReview($id);
+
         // Redirection
         header('Location: ' . $this->getBasePath() . '/avis');
         exit();

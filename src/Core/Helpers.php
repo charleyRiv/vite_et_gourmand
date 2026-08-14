@@ -27,6 +27,17 @@ function translateStatusOrder(string $status): string
     };
 }
 
+//Extraire le statut d'une commande et le traduire en français
+function translateStatusReview(string $status): string
+{
+    return match($status) {
+        'pending' => 'en attente',
+        'validated'    => 'validé',
+        'refused' => 'refusé',
+        default   => $status
+    };
+}
+
 //créer un slug à partir d'un texte
 function generateSlug(string $text): string
 {
