@@ -172,4 +172,97 @@ class UserModel{
         ");
         return $stmt->execute([':id' => $id]);
     }
+
+    //Fonction coté administrateur
+    public function getAllEmployee(): array
+    {
+        $stmt = $this->db->prepare("
+            SELECT 
+                user_id,
+                last_name,
+                first_name,
+                email,
+                is_active
+            FROM user
+            WHERE role_id = 2
+            ORDER BY last_name ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function createEmployee(array $data): int
+    {
+        $stmt = $this->db->prepare("
+            INSERT INTO user (
+                public_token, 
+                email, 
+                password, 
+                last_name,
+                first_name,
+                phone,
+                street_number,
+                street_type,
+                street_name,
+                zip_code,
+                city,
+                country,
+                role_id 
+            )
+            VALUES (
+                :public_token, 
+                :email, 
+                :password, 
+                :last_name,
+                :first_name,
+                :phone,
+                :street_number,
+                :street_type,
+                :street_name,
+                :zip_code,
+                :city,
+                :country,
+                :role_id 
+            )
+        ");
+
+        $stmt->execute([
+            ':public_token' => $data['public_token'], 
+            ':email'=> $data['email'], 
+            ':password'=> $data['password'], 
+            ':last_name'=> $data['last_name'],
+            ':first_name'=> $data['first_name'],
+            ':phone'=> 'exempted',
+            ':street_number'=> 'exempted',
+            ':street_type'=> 'exempted',
+            ':street_name'=> 'exempted',
+            ':zip_code'=> 'exempted',
+            ':city'=> 'exempted',
+            ':country'=> 'exempted',
+            ':role_id'=> '2'
+        ]);
+
+        return (int) $this->db->lastInsertId();
+    }
+
+    public function disableEmploye(int $id): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE user SET
+            is_active = 0
+            WHERE user_id = :id
+        ");
+
+        return $stmt->execute([':id' => $id]);
+    }
+
+    public function enableEmploye(int $id): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE user SET
+            is_active = 1
+            WHERE user_id = :id
+        ");
+
+        return $stmt->execute([':id' => $id]);
+    }
 }

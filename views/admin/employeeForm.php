@@ -1,6 +1,8 @@
 <?php
 /**
  * @var string $h1
+ * @var array $users
+ * @var array $errors
  */
 
 require_once __DIR__ . '/../layouts/header.php';
@@ -19,8 +21,8 @@ require_once __DIR__ . '/../layouts/header.php';
                 <input type="texte" id="search" name="search">
 
                 <!-- Filtre Catégorie -->
-                <label for="mail">Mail</label>
-                <input type="texte" id="mail" name="mail">
+                <label for="email">Mail</label>
+                <input type="texte" id="email" name="email">
 
                 <!-- Filtre Régime -->
                 <label for="status">Statut</label>
@@ -31,65 +33,76 @@ require_once __DIR__ . '/../layouts/header.php';
 
 
                 <!-- Boutons -->
-                <input type="button" value="Filtrer">
-                <input type="button" value="Reinitialiser">
+                <button type="button">Filtrer</button>
+                <button type="button">Réinitialiser</button>
             </form>
         </div>
-
-        <div>
-            <!-- Boutons -->
-            <!-- Désactiver -->
-            <form action="/admin/employes/1/desactiver" method="POST">
-                <input type="submit" value="Désactiver">
-            </form>
-
-            <!-- Supprimer -->
-            <form action="/admin/employes/1/supprimer" method="POST">
-                <input type="submit" value="Supprimer">
-            </form>
-        </div>
-
-        <div>
-            <!-- Boutons -->
-            <!-- Désactiver -->
-            <form action="/admin/employes/1/desactiver" method="POST">
-                <input type="submit" value="Désactiver">
-            </form>
-
-            <!-- Supprimer -->
-            <form action="/admin/employes/1/supprimer" method="POST">
-                <input type="submit" value="Supprimer">
-            </form>
-        </div>
+    </section>
     <section>
+        <?php foreach ($users as $user) : ?>
         <div>
-            <!-- Creer un nouvel employé -->
-            <form action="/admin/employes/creer" method="POST">
-                <input type="submit" value="Créer un nouvel employé">
+            <p><?= htmlspecialchars($user['last_name'])?> <?= htmlspecialchars($user['first_name'])?></p>
+            <p>Email : <?= htmlspecialchars($user['email'])?></p>
+            <p>Statut : <?= htmlspecialchars($user['is_active']=== 1 ? 'actif' : 'inactif')?></p>
+            <!-- Boutons -->
+            <?php if ($user['is_active'] === 1) : ?>
+            <!-- Désactiver -->
+            <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/desactiver" method="POST">
+                <button type="submit">Désactiver</button>
             </form>
+            <?php else: ?>
+            <!-- Activer -->
+            <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/activer" method="POST">
+                <button type="submit">Activer</button>
+            </form>
+            <?php endif; ?>
 
+            <!-- Supprimer -->
+            <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/supprimer" method="POST">
+                <button type="submit">Supprimer</button>
+            </form>
         </div>
+        <?php endforeach; ?>
+    </section>
+    <section>
+        <?php if (!empty($errors)) : ?>
+            <?php foreach ($errors as $error) : ?>
+                <p><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-        <div>
-            <form action="/admin/employes/update" method="POST">
+            <!-- Creer un nouvel employé -->
+            <button type="button">Créer un nouvel employé</button>
 
+            <form action="/admin/employes/creer" method="POST">
+
+                <!-- Champs Nom -->
+                <label for="last_name">Nom</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <!-- Champs Prenom -->
+                <label for="first_name">Prénom</label>
+                <input type="text" id="first_name" name="first_name" required>
+                <br>
                 <!-- Champs Email -->
-                <label for="Email">Email</label>
-                <input type="text" id="mail" name="mail" required>
-
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+                <br>
+                <br>
                 <!-- Champs Mot de passe -->
-                <label for="motDePasse">Mot de passe</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
 
+                <br>
                 <!-- Champs Confirmation mot de passe-->
-                <label for="motDePasseConfirm">Confirmation mot de passe</label>
-                <input type="password" id="password" name="passwordConfirm" required>
+                <label for="password_confirm">Confirmation mot de passe</label>
+                <input type="password" id="password_confirm" name="password_confirm" required>
 
+                <br>
                 <!-- Bouton S'inscrire -->
-                <input type="submit" value="Valider">
+                <button type="submit">Créer</button>
 
             </form>
-        </div>
     </section>
 </main>
 

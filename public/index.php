@@ -120,33 +120,50 @@ $router->post('/employe/contenus/{id}/supprimer', 'EmployeeController', 'deleteC
 
 // ── Admin area ─────────────────────────────────
 $router->get('/admin', 'AdminController', 'dashboard');
+
     // Orders management
 $router->get('/admin/commandes', 'AdminController', 'listOrders');
 $router->post('/admin/commandes/{id}/gerer', 'AdminController', 'updateOrder');
+$router->get('/admin/commandes/{id}/historique', 'AdminController', 'showHistoryOrder');
+
     // Menus management
 $router->get('/admin/menus', 'AdminController', 'listMenus');
 $router->post('/admin/menus/creer', 'AdminController', 'createMenu');
 $router->get('/admin/menus/{id}/modifier', 'AdminController', 'showEditMenuForm');
 $router->post('/admin/menus/{id}/modifier', 'AdminController', 'updateMenu');
 $router->post('/admin/menus/{id}/desactiver', 'AdminController', 'desactivateMenu');
+$router->post('/admin/menus/{id}/activer', 'AdminController', 'm');
 $router->post('/admin/menus/{id}/supprimer', 'AdminController', 'deleteMenu');
+$router->post('/admin/menus/{id}/photos/ajouter', 'AdminController', 'addPictureToMenu');
+$router->post('/admin/menus/photos/{pictureId}/supprimer', 'AdminController', 'deleteMenuPicture');
+$router->post('/admin/menus/{id}/photos/copier-depuis-plat', 'AdminController', 'copyDishPicturesToMenu');
+
     // Dishes management
 $router->get('/admin/plats', 'AdminController', 'listDishes');
 $router->post('/admin/plats/creer', 'AdminController', 'createDish');
 $router->get('/admin/plats/{id}/modifier', 'AdminController', 'showEditDishForm');
 $router->post('/admin/plats/{id}/modifier', 'AdminController', 'updateDish');
 $router->post('/admin/plats/{id}/supprimer', 'AdminController', 'deleteDish');
+$router->post('/admin/plats/{id}/photos/ajouter', 'AdminController', 'addPictureToDish');
+$router->post('/admin/plats/photos/{pictureId}/supprimer', 'AdminController', 'deleteDishPicture');
+
     // Reviews management
 $router->get('/admin/avis', 'AdminController', 'listReviews');
-$router->post('/admin/avis/{id}/statut', 'AdminController', 'updateStatusReview');
+$router->post('/admin/avis/{id}/validate', 'AdminController', 'validateStatusReview');
+$router->post('/admin/avis/{id}/refused', 'AdminController', 'refusedStatusReview');
+
     // Content management
 $router->get('/admin/contenus', 'AdminController', 'showEditContentForm');
+$router->post('/admin/contenus/creer', 'AdminController', 'createContent');
 $router->post('/admin/contenus/{id}/modifier', 'AdminController', 'updateContent');
+$router->post('/admin/contenus/{id}/supprimer', 'AdminController', 'deleteContent');
+
     // Employee management
 $router->get('/admin/employes', 'AdminController', 'showEmployee');
 $router->post('/admin/employes/creer', 'AdminController', 'createEmployee');
 $router->post('/admin/employes/update', 'AdminController', 'updateEmployee');
 $router->post('/admin/employes/{id}/desactiver', 'AdminController', 'desactivateEmployee');
+$router->post('/admin/employes/{id}/activer', 'AdminController', 'activateEmployee');
 $router->post('/admin/employes/{id}/supprimer', 'AdminController', 'deleteEmployee');
     // Business management
 $router->get('/admin/statistiques', 'AdminController', 'showStatistics');

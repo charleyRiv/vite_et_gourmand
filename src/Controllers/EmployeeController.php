@@ -18,17 +18,17 @@ require_once __DIR__ . '/../Models/ContentModel.php';
 
 class EmployeeController
 {
-    private MenuModel $menuModel;
-    private DishModel $dishModel;
-    private AllergenModel $allergenModel;
-    private DietModel $dietModel;
-    private ThemeModel $themeModel;
-    private PictureModel $pictureModel;
-    private OrderModel $orderModel;
-    private UserModel $userModel;
-    private MailService $mailService;
-    private ReviewModel $reviewModel;
-    private ContentModel $contentModel;
+    protected MenuModel $menuModel;
+    protected DishModel $dishModel;
+    protected AllergenModel $allergenModel;
+    protected DietModel $dietModel;
+    protected ThemeModel $themeModel;
+    protected PictureModel $pictureModel;
+    protected OrderModel $orderModel;
+    protected UserModel $userModel;
+    protected MailService $mailService;
+    protected ReviewModel $reviewModel;
+    protected ContentModel $contentModel;
 
     //Vérification de l'authentification et du role client
     public function __construct()
@@ -49,19 +49,21 @@ class EmployeeController
 
     protected function getBasePath(): string
     {
-        return $_SESSION['role'] === 'administrateur' ? '/admin' : '/employe';
+        return Session::get('role') === 'administrateur' ? '/admin' : '/employe';
     }
 
     protected function getViewPath(): string
     {
-        return $_SESSION['role'] === 'administrateur' ? '/admin' : '/employee';
+        return Session::get('role') === 'administrateur' ? '/admin' : '/employee';
     }
 
     public function dashboard(): void
     {
+        var_dump(Session::get('role'));
+        var_dump($this->getViewPath());
         $pageTitle = 'Dashboard - Vite & Gourmand';
         $h1 = ' Mon espace ';
-        require_once __DIR__ . '/../../views/' . $this->getViewPath() . '/dashboard.php';
+        require_once __DIR__ . '/../../views' . $this->getViewPath() . '/dashboard.php';
     }
 
     public function requestModifyPassword(): void
