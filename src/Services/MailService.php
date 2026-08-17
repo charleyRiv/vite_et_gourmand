@@ -190,4 +190,32 @@ class MailService {
             return false;
         }
     }
+
+    /**
+     * Mail de notification envoyé à contact@viteetgourmand.fr pour un message client
+     */
+    public function sendContactNotification(array $data): bool 
+    {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->addAddress('contact@viteetgourmand.fr', 'Vite & Gourmand');            $this->mailer->addReplyTo($data['email']);
+
+            $this->mailer->isHTML(true);
+            $this->mailer->Subject = " Message client -Vite & Gourmand";
+            $this->mailer->Body = "
+            <h1>Nouveau message de contact</h1>
+            <p><strong>De :</strong> {$data['email']}</p>
+            <p><strong>Sujet :</strong> {$data['title']}</p>
+            <p><strong>Message :</strong></p>
+            <p>{$data['content']}</p>
+            <p>Vous pouvez retrouver tous vos messages dans votre espace personnel</p>
+            ";
+
+            $this->mailer->send();
+            return true;
+        } catch (Exception $e) {
+            error_log('Erreur mail contact :' . $e->getMessage());
+            return false;
+        }
+    }
 }

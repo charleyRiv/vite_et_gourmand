@@ -15,6 +15,7 @@ require_once __DIR__ . '/../Models/UserModel.php';
 require_once __DIR__ . '/../Services/MailService.php';
 require_once __DIR__ . '/../Models/ReviewModel.php';
 require_once __DIR__ . '/../Models/ContentModel.php';
+require_once __DIR__ . '/../Models/ContactModel.php';
 
 class EmployeeController
 {
@@ -29,6 +30,7 @@ class EmployeeController
     protected MailService $mailService;
     protected ReviewModel $reviewModel;
     protected ContentModel $contentModel;
+    protected ContactModel $contactModel;
 
     //Vérification de l'authentification et du role client
     public function __construct()
@@ -45,6 +47,7 @@ class EmployeeController
         $this->mailService = new MailService();
         $this->reviewModel = new ReviewModel();
         $this->contentModel = new ContentModel();
+        $this->contactModel = new ContactModel();
     }
 
     protected function getBasePath(): string
@@ -59,8 +62,6 @@ class EmployeeController
 
     public function dashboard(): void
     {
-        var_dump(Session::get('role'));
-        var_dump($this->getViewPath());
         $pageTitle = 'Dashboard - Vite & Gourmand';
         $h1 = ' Mon espace ';
         require_once __DIR__ . '/../../views' . $this->getViewPath() . '/dashboard.php';
@@ -661,6 +662,20 @@ class EmployeeController
          // Redirection vers le formulaire de modification du menu
         header('Location: ' . $this->getBasePath() . '/menus/' . $id . '/modifier');
         exit();
+    }
+
+    public function listMessages():void
+    {
+        $filters = [
+            'date_from' => $_GET['date_from'] ?? null,
+            'date_to' => $_GET['date_to'] ?? null
+        ];
+
+        $messages = $this->contactModel->getAllWithFilters($filters);
+
+        $pageTitle = 'Messages client - Vite & Gourmand';
+        $h1 = 'Messages clients';
+        require_once __DIR__ . '/../../views/employee/messages.php';
     }
     // Méthodes privées utilitaires
 

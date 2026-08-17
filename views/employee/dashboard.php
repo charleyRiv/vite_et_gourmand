@@ -22,6 +22,8 @@ require_once __DIR__ . '/../layouts/header.php';
         <a href="/employe/plats">Gérer les plats</a>
 
         <a href="/employe/contenus">Gérer les contenus</a>
+
+        <a href="/employe/contact">Voir les messages clients</a>
 </main>
 <br>
 

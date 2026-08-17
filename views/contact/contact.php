@@ -1,6 +1,7 @@
 <?php
 /**
  * @var string $h1
+ * @var array $user
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -10,16 +11,28 @@ require_once __DIR__ . '/../layouts/header.php';
     <br>
     <form action="/contact" method="POST">
         <!-- Champs Email --> 
-        <label for="Email">Email</label>
+        <label for="email">Email</label>
+        <?php if (!empty($user)) : ?>
+        <input 
+            type="text" 
+            id="email" 
+            name="email" 
+            value="<?= htmlspecialchars($user['email'])?>" 
+            required>
+        <?php else : ?>
         <input type="text" id="email" name="email" required>
+        <?php endif; ?>
+        <br>
         <!-- Champ Titre -->
-        <label for="Titre">Titre</label>
-        <input type="text" id="titre" name="titre" required>
+        <label for="title">Titre</label>
+        <input type="text" id="title" name="title" required>
+        <br>
         <!-- Champ Message -->
-        <label for="Message">Message</label>
-        <input type="text" id="message" name="message" required>
+        <label for="content">Message</label>
+        <textarea id="content" name="content" rows="10" cols="60" required></textarea>
+        <br>    
         <!-- Bouton submit -->
-        <input type="submit" value="Envoyer">
+        <button type="submit">Envoyer</button>
     </form>
 </main>
 

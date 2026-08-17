@@ -25,6 +25,8 @@ require_once __DIR__ . '/../src/Core/Database.php';
 require_once __DIR__ . '/../src/Core/Session.php';
 require_once __DIR__ . '/../src/Middlewares/AuthMiddleware.php';
 require_once __DIR__ . '/../src/Core/Helpers.php';
+require_once __DIR__ . '/../src/Core/MongoDB.php';
+require_once __DIR__ . '/../src/Services/StatsService.php';
 
 // Start session
 Session::start();
@@ -117,7 +119,8 @@ $router->get('/employe/contenus', 'EmployeeController', 'showEditContentForm');
 $router->post('/employe/contenus/creer', 'EmployeeController', 'createContent');
 $router->post('/employe/contenus/{id}/modifier', 'EmployeeController', 'updateContent');
 $router->post('/employe/contenus/{id}/supprimer', 'EmployeeController', 'deleteContent');
-
+    // Client contact
+$router->get('/employe/contact','EmployeeController','listMessages');
 // ── Admin area ─────────────────────────────────
 $router->get('/admin', 'AdminController', 'dashboard');
 
@@ -167,6 +170,8 @@ $router->post('/admin/employes/{id}/activer', 'AdminController', 'activateEmploy
 $router->post('/admin/employes/{id}/supprimer', 'AdminController', 'deleteEmployee');
     // Business management
 $router->get('/admin/statistiques', 'AdminController', 'showStatistics');
+   // Client contact
+$router->get('/admin/contact','AdminController','listMessages');
 
 //Request dispatch
 $router->dispatch(
