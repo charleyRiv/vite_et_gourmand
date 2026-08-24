@@ -189,6 +189,19 @@ class OrderModel
         $stmt->execute([':current_status' => $current_status]);
         return $stmt->fetch();
     }
+
+    public function getActiveOrdersCount(): int
+    {
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) AS total
+            FROM customer_order
+            WHERE current_status NOT IN ('completed', 'cancelled', 'pending')
+        ");
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return (int) $result['total'];
+    }
+
     public function createOrder(array $data): int
     {
         $stmt = $this->db->prepare("

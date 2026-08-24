@@ -1,7 +1,7 @@
 <?php
 
 ?>
-
+<body>
 <header>
     <nav class="navbar">
         <a href="/">Accueil</a>

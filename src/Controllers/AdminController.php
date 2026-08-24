@@ -139,6 +139,170 @@ class AdminController extends EmployeeController{
 
     public function showStatistics(): void
     {
+        //KPI
+        $kpi = [];
+        //Nombre de commandes totales
+        $kpi['TotalOrders'] = $this->statsService->getOrderCountTotal();
+        //Menu le plus commandé
+        $kpi['MostOrderedMenu'] = $this->statsService->getMostOrderedMenu();
+        //Nombre de commandes en cours (exclus terminées)
+        $kpi['ActiveOrders'] = $this->orderModel->getActiveOrdersCount();
+        //CA total
+        $kpi['CATotal'] = $this->statsService->getTotalRevenue();
+
+
+        //---Nombre de commandes par menu
+        $dateFrom = $_GET['chart_date_from'] ?? null;
+        $dateTo = $_GET['chart_date_to'] ?? null;
+
+        $ordersByMenu = $this->statsService->getOrderCountByMenu($dateFrom, $dateTo);
+        
+        //Récupérer tous les menus depuis MariaBD
+        $allMenus = $this->menuModel->getAll();
+        
+        //Indexer les résultats MongoDB par titre de menu
+        $mongoData = [];
+        foreach ($ordersByMenu as $item) {
+            $mongoData[$item['_id']] = $item['count'];
+        }
+
+        //Fusionner tous les menus avec 0 par defaut
+        $chartLabels = [];
+        $chartData = [];
+
+        foreach ($allMenus as $menu) {
+            $chartLabels[] = $menu['title'];
+            $chartData[] = $mongoData[$menu['title']]?? 0;
+        }
+
+        $extraJs = ['/assets/js/admin/statistics.js'];
+        //Encoder en JSON pour Javascript
+        $chartLabelsJson = json_encode($chartLabels);
+        $chartDataJson = json_encode($chartData);
+
+        //---Tableau du nombre de commandes
+        //Calculer le total
+        $totalOrders = array_sum(
+            array_column(
+                iterator_to_array($ordersByMenu) ?? [],
+                'count'
+        ));
+
+        //Ajouter le pourcentage à chaque item
+        $ordersByMenuWithStats = [];
+        foreach ($ordersByMenu as $item) {
+            $ordersByMenuWithStats[] = [
+                '_id' => $item['_id'],
+                'count' => $item['count'],
+                'percentage' => $totalOrders > 0 
+                    ? round(($item['count'] / $totalOrders) * 100, 1)
+                    : 0
+            ];
+            }
+
+
+        //CA par menu
+        //Données concaténées pour tableau
+        $revenuByMenu = $this->statsService->getRevenueByMenu();
+
+        //Calculer le total des commandes
+        $CATotalOrders = array_sum(
+            array_column(
+                iterator_to_array($revenuByMenu) ?? [],
+                'count'
+        ));
+
+        $CATotalRevenus = array_sum(
+            array_column(
+                iterator_to_array($revenuByMenu) ?? [],
+                'total'
+            ));
+
+        $CATotalAvg = !empty($revenuByMenu)
+            ? round(
+                array_sum(
+                    array_column($revenuByMenu, 'total'))
+                    / count($revenuByMenu), 2)
+            : 0;
+
+        //var_dump($revenuByMenu);
+        // Graphique 1 - Barres CA par mois ou par menu
+        $barMode    = $_GET['bar_mode'] ?? 'month'; // 'month' ou 'menu'
+        $barDateFrom = $_GET['bar_date_from'] ?? null;
+        $barDateTo   = $_GET['bar_date_to'] ?? null;
+
+        if ($barMode === 'month') {
+            $barData = $this->statsService->getRevenueByMonth($barDateFrom, $barDateTo);
+            $barLabels   = array_map(fn($item) => $item['_id'], $barData);
+            $barDatasets = [array_map(fn($item) => (float) $item['total'], $barData)];
+        } else {
+            $barData = $this->statsService->getRevenueByMenu(null, $barDateFrom, $barDateTo);
+            $barLabels  = array_map(fn($item) => $item['_id']['menu_title'], $barData);
+            $barDatasets = [array_map(fn($item) => (float) $item['total'], $barData)];
+        }
+
+        // Graphique 2 - Ligne évolution CA total
+        $lineMode     = $_GET['line_mode'] ?? 'total'; // 'total' ou 'by_menu'
+        $lineDateFrom = $_GET['line_date_from'] ?? null;
+        $lineDateTo   = $_GET['line_date_to'] ?? null;
+
+        if ($lineMode === 'total') {
+            $lineData = $this->statsService->getRevenueByMonth($lineDateFrom, $lineDateTo);
+            $lineLabels   = array_map(fn($item) => $item['_id'], $lineData);
+            $lineDatasets = [[
+                'label' => 'CA total',
+                'data'  => array_map(fn($item) => (float) $item['total'], $lineData)
+            ]];
+        } else {
+            // Une ligne par menu
+            $lineData = $this->statsService->getRevenueByMenuAndMonth($lineDateFrom, $lineDateTo);
+
+            // Extraire tous les mois uniques
+            $months = array_unique(array_map(fn($item) => $item['_id']['month'], $lineData));
+            sort($months);
+            $lineLabels = array_values($months);
+
+            // Extraire tous les menus uniques
+            $menuTitles = array_unique(array_map(fn($item) => $item['_id']['menu_title'], $lineData));
+
+            // Indexer les données par menu et mois
+            $indexed = [];
+            foreach ($lineData as $item) {
+                $indexed[$item['_id']['menu_title']][$item['_id']['month']] = (float) $item['total'];
+            }
+
+            // Construire les datasets - un par menu
+            $lineDatasets = [];
+            foreach ($menuTitles as $title) {
+                $data = [];
+                foreach ($lineLabels as $month) {
+                    $data[] = $indexed[$title][$month] ?? 0;
+                }
+                $lineDatasets[] = [
+                    'label' => $title,
+                    'data'  => $data
+                ];
+            }
+        }
+
+        // Graphique 1 - Barres
+        $barLabelsJson = json_encode($barLabels);
+        $barDatasetsJson   = json_encode($barDatasets);
+        $barModeJson   = json_encode($barMode);
+
+        // Graphique 2 - Ligne
+        $lineLabelsJson  = json_encode($lineLabels);
+        $lineDatasetsJson    = json_encode($lineDatasets);
+        $lineModeJson     = json_encode($lineMode);
+        $allMenuTitlesJson    = json_encode(array_column($allMenus, 'title'));
+
+
+        //Passer à la vue
+        $ordersByMenu = $ordersByMenuWithStats;
+        $totalOrders = array_sum(array_column($ordersByMenu, 'count'));
+        $totalPercentage = array_sum(array_column($ordersByMenu, 'percentage'));
+        
+
         $pageTitle = 'Statistiques - Vite & Gourmand';
         $h1 = 'Statistiques';
         require_once __DIR__ . '/../../views/admin/statistics.php';

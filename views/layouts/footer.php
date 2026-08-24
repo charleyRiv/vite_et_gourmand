@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../src/Models/ContentModel.php';
 $contentModel = new ContentModel();
 $schedule = $contentModel->getByFilter('footer', 'Horaires');
+
 ?>
 <footer class="footer">
     <section>
@@ -18,3 +19,13 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
         <a href="/cgv">cgv</a>
     </section>
 </footer>
+
+<!-- Scripts de page -->
+<?php if (isset($extraJs)): ?>
+    <?php foreach ($extraJs as $js): ?>
+        <script src="<?= htmlspecialchars($js) ?>"></script>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+</body>
+</html>

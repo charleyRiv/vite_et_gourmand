@@ -16,6 +16,8 @@ require_once __DIR__ . '/../Services/MailService.php';
 require_once __DIR__ . '/../Models/ReviewModel.php';
 require_once __DIR__ . '/../Models/ContentModel.php';
 require_once __DIR__ . '/../Models/ContactModel.php';
+require_once __DIR__ . '/../Services/StatsService.php';
+require_once __DIR__ . '/../Core/MongoDB.php';
 
 class EmployeeController
 {
@@ -31,6 +33,7 @@ class EmployeeController
     protected ReviewModel $reviewModel;
     protected ContentModel $contentModel;
     protected ContactModel $contactModel;
+    protected StatsService $statsService;
 
     //Vérification de l'authentification et du role client
     public function __construct()
@@ -48,6 +51,7 @@ class EmployeeController
         $this->reviewModel = new ReviewModel();
         $this->contentModel = new ContentModel();
         $this->contactModel = new ContactModel();
+        $this->statsService = new StatsService();
     }
 
     protected function getBasePath(): string
@@ -115,8 +119,8 @@ class EmployeeController
         //Récupération des données formulaire
         $data = [
             'current_status' => trim($_POST['current_status'] ?? ''),
-            'contact_mode' => trim($_POST['contact_mode']) ?? '',
-            'reason' => trim($_POST['reason']) ?? ''
+            'contact_mode' => trim($_POST['contact_mode'] ?? ''),
+            'reason' => trim($_POST['reason'] ?? '')
         ];
 
 
@@ -172,6 +176,11 @@ class EmployeeController
         $this->orderModel->updateStatus($id, $data['current_status']);
         $this->orderModel->addStatusHistory($id, $data['current_status'], $data['reason'], $data['contact_mode']);
 
+        //Si la commande est acceptée -> alimenter MongoDB
+        if ($data['current_status'] === 'accepted') {
+            $orderMDB = $this->orderModel->getById($id);
+            $this->statsService->insertOrder($orderMDB);
+        }
         //récupération infos client pour envoie de mail
         $order = $this->orderModel->getById($id);
         //Envoyer un mail en cas de pret de materiel
@@ -612,7 +621,8 @@ class EmployeeController
         $this->pictureModel->deleteFromDish($pictureId);
 
         // Redirection vers la page précédente
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        $redirect = $_POST['redirect'] ?? '/employe/commandes';
+        header('Location: ' . $redirect);
         exit();
     }
 
