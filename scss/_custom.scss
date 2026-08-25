@@ -1,0 +1,153 @@
+// Surcharge des variables Bootstrap
+$white: #FFF7F2;
+$primary: #FB9C75;
+$secondary: #87C093;
+$dark:#341E34;
+$black:  #341E34;
+$light: #EDE0CE;
+$success: #2E7D4F;
+$info: #144680;
+$danger: #C0392B;
+$warning: #A14F08;
+$font-family-sans-serif: "Inter", sans-serif !default;
+$font-family-lato: "Lato", sans-serif;
+
+
+// Import de Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Variables
+
+
+/* Typographie */
+body {
+    background-color: $white;
+    color: $dark;
+    font-family: $font-family-sans-serif;
+    font-size: 18px;
+}
+
+h1 {
+    color: $dark;
+    font-weight: 600;
+    font-size: 44px;
+}
+
+h2 {
+    color: $dark;
+    font-weight: 500;
+    font-size: 34px;
+}
+
+h3 {
+    color: $dark;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+h4 {
+    color: $dark;
+    font-family: $font-family-lato;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+h5, h6 {
+    color: $dark;
+    font-family: $font-family-lato;
+    font-weight: 700;
+}
+
+small,
+.small,
+.text-small {
+    font-family: $font-family-lato;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+a {
+    color: $info;
+    text-decoration: underline;
+
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+    }
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: $white;
+    border-bottom: 1px solid rgba($dark, 0.1);
+    padding: 1rem 0;
+    min-height: 52px;
+
+    .container {
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 2rem;
+    }
+
+    .navbar-brand img {
+        height: 52px;
+        width: auto;
+        mix-blend-mode: multiply;
+    }
+
+    .nav-link {
+        color: $dark;
+        transition: color 0.2s ease;
+        padding: 0.4rem 0.8rem;
+
+        &:hover,
+        &.active {
+            color: $primary;
+            font-weight: 500;
+        }
+    }
+
+    .navbar-toggler {
+        border-color: rgba($dark, 0.3);
+    }
+
+    .bi {
+        font-size: 40px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .navbar-collapse {
+        text-align: right;
+
+        .navbar-nav {
+            //Aligner les éléments à droite
+            align-items: flex-end;
+            padding: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 0;
+        }
+
+        //Boutons alignés à droite
+        .btn {
+            margin-top: 0.5rem;
+        }
+        form {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}
+
+.btn-primary {
+    background-color: $primary;
+    border-color: #CC8263;
+}
+
+.btn-secondary {
+    background-color: $secondary;
+    border-color: $dark;
+}

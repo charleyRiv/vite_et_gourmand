@@ -28,3 +28,6 @@ public/assets/images/uploads/*
 
 # Fichiers maquette trop volumineux
 public/assets/images/maquettes/Vite_et_gourmand_Maquette.pdf
+
+# Source maps
+public/assets/css/*.map

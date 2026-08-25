@@ -20,6 +20,9 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
     </section>
 </footer>
 
+<!-- Bootsrap-->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
 <!-- Scripts de page -->
 <?php if (isset($extraJs)): ?>
     <?php foreach ($extraJs as $js): ?>
