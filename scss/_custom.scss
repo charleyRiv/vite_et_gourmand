@@ -114,30 +114,22 @@ a {
     .bi {
         font-size: 40px;
     }
+
+    .btn-primary {
+        margin-left: 0.5rem;
+    }
 }
 
 @include media-breakpoint-down(lg) {
     .navbar-collapse {
-        text-align: right;
-
-        .navbar-nav {
-            //Aligner les éléments à droite
-            align-items: flex-end;
-            padding: 1rem 0;
-            gap: 0.5rem;
-        }
-
         .nav-link {
+            gap: 2rem;
             padding: 0.5rem 0;
+            padding-top: 0.1rem ;
+            padding-bottom: 0.3rem;
         }
-
-        //Boutons alignés à droite
-        .btn {
+        .btn-primary {
             margin-top: 0.5rem;
-        }
-        form {
-            display: flex;
-            justify-content: flex-end;
         }
     }
 }

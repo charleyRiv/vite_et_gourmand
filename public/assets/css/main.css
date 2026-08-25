@@ -12070,25 +12070,19 @@ a:hover {
 .navbar .bi {
   font-size: 40px;
 }
+.navbar .btn-primary {
+  margin-left: 0.5rem;
+}
 
 @media (max-width: 991.98px) {
-  .navbar-collapse {
-    text-align: right;
-  }
-  .navbar-collapse .navbar-nav {
-    align-items: flex-end;
-    padding: 1rem 0;
-    gap: 0.5rem;
-  }
   .navbar-collapse .nav-link {
+    gap: 2rem;
     padding: 0.5rem 0;
+    padding-top: 0.1rem;
+    padding-bottom: 0.3rem;
   }
-  .navbar-collapse .btn {
+  .navbar-collapse .btn-primary {
     margin-top: 0.5rem;
-  }
-  .navbar-collapse form {
-    display: flex;
-    justify-content: flex-end;
   }
 }
 .btn-primary {
