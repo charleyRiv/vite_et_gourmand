@@ -46,27 +46,28 @@ h1 {
 
 h2 {
     color: $dark;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 34px;
 }
 
 h3 {
     color: $dark;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 24px;
 }
 
 h4 {
     color: $dark;
     font-family: $font-family-lato;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
 }
 
 h5, h6 {
     color: $dark;
     font-family: $font-family-lato;
-    font-weight: 700;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 small,
@@ -155,6 +156,21 @@ a {
 .btn-secondary {
     background-color: $secondary;
     border-color: $dark;
+}
+
+.btn-dashboard {
+    height: 55px;
+    background-color: $light;
+    border: 1px solid $dark;
+    border-radius: 10px;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-filters {
+    background-color: $dark;
+    color: $white;
 }
 
 .hero {
@@ -378,3 +394,229 @@ img {
         border-radius: 0px;
     }
 }
+//--- MENUS
+.menus-filters {
+    .d-flex {
+        justify-content: flex-end;
+        padding-right: 30px;
+
+        @include media-breakpoint-up(lg) {
+            padding-right: 260px;
+        }
+    }
+}
+
+.filters-aside {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background-color: $white;
+    border-left: 1px solid rgba($dark, 0.2);
+    padding: 2 rem;
+    z-index: 1050;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+
+    &.open {
+        right: 0;
+    }
+
+    .filters-aside-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0.2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba($color: $dark, $alpha: 0.1);
+    }
+
+    .container {
+        padding: 30px;
+        row-gap: 5px;
+
+        &:start {
+            padding-top: 0px;
+        }
+
+        &:end {
+            padding-bottom: 0px;
+        }
+    }
+}
+
+.price-filter, 
+.theme-filter,
+.diet-filter,
+.pers-filter {
+    border: 1px solid rgba($color: $dark, $alpha: 0.5);
+    border-radius: 20px;
+    padding: 1rem;
+}
+.filters-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba($color: $dark, $alpha: 0.4);
+    z-index: 1040;
+
+    &.open {
+        display: block;
+    }
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.price-slider {
+    position: relative;
+    height: 6px;
+    margin: 20px 0;
+
+    input[type="range"] {
+        position: absolute;
+        width: 100%;
+        height: 6px;
+        background: none;
+        pointer-events: none;
+        appearance: none;
+        -webkit-appearance: none;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &::-webkit-slider-thumb {
+            pointer-events: all;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: $secondary;
+            border: 2px solid $dark;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+
+        &::-webkit-slider-runnable-track {
+            background: rgba($color: $dark, $alpha: 0.2);
+            height: 5px;
+            border-radius: 5px;
+        }
+    }
+}
+.section-menus {
+    .container {
+        @include media-breakpoint-up(lg) {
+            padding-left: 260px;
+            padding-right: 260px;
+        }
+        .row {
+            align-items: stretch;
+            justify-content: center;
+
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 1rem;
+
+            .page-link {
+                background-color: $dark;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary;
+                    border-color: $dark;
+                    color: $white;
+                }
+            }
+        
+            .page-item.active .page-link {
+                background-color: $primary;
+                border-color: $dark;
+                color: $white;
+            }
+        
+            .page-item.disabled .page-link {
+                background-color: $dark;
+                color: rgba($white, 0.4);
+            }
+        
+        }
+
+    }
+
+    .menus {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        align-items: stretch;        
+        text-align: center;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        border-radius: 20px;
+
+        /*border: 1px solid $dark;*/
+
+        .menus-overlay {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: -1rem;
+            margin-bottom: -1rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-radius: 20px;
+            border: 1px solid $dark;
+            overflow: hidden;
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 20px;
+            }
+
+            > * {
+                position: relative;
+                z-index: 1;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    
+        .separator {
+            /*margin: 0 -1rem;*/
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border-color: $dark;
+            opacity: 1;
+        }
+    }
+}
+
+
+//--- DASHBOARD ADMIN
+.section-dashboard-admin {
+
+    .container {
+        .row {
+            row-gap: 30px;                
+        }
+
+        @include media-breakpoint-up(lg) {
+            padding-left: 200px;
+            padding-right: 200px
+        }
+    }
+}
+

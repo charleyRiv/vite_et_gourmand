@@ -276,4 +276,126 @@ class MenuModel
         return $stmt->execute([':menu_id' => $menuId]);
     }
 
+    public function countWithFilters(array $filters = []): int
+    {
+        $conditions = ['m.is_active = 1'];
+        $params     = [];
+
+        if (!empty($filters['prix_min'])) {
+            $conditions[] = 'm.price_per_person >= :prix_min';
+            $params[':prix_min'] = (float) $filters['prix_min'];
+        }
+
+        if (!empty($filters['prix_max'])) {
+            $conditions[] = 'm.price_per_person <= :prix_max';
+            $params[':prix_max'] = (float) $filters['prix_max'];
+        }
+
+        if (!empty($filters['themes'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':theme_' . $i, array_keys($filters['themes'])));
+            $conditions[] = 'm.theme_id IN (' . $placeholders . ')';
+            foreach ($filters['themes'] as $i => $themeId) {
+                $params[':theme_' . $i] = (int) $themeId;
+            }
+        }
+
+        if (!empty($filters['diets'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':diet_' . $i, array_keys($filters['diets'])));
+            $conditions[] = 'm.diet_id IN (' . $placeholders . ')';
+            foreach ($filters['diets'] as $i => $dietId) {
+                $params[':diet_' . $i] = (int) $dietId;
+            }
+        }
+
+        if (!empty($filters['nb_persons'])) {
+            $conditions[] = 'm.min_persons <= :nb_persons';
+            $params[':nb_persons'] = (int) $filters['nb_persons'];
+        }
+
+        $where = 'WHERE ' . implode(' AND ', $conditions);
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) AS total 
+            FROM menu m
+            JOIN theme t ON m.theme_id = t.theme_id
+            JOIN diet d ON m.diet_id = d.diet_id
+            $where
+        ");
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+        $stmt->execute();
+        return (int) $stmt->fetch()['total'];
+    }
+
+    public function getAllWithFilters(array $filters = [], int $limit = 4, int $offset = 0): array
+    {
+        $conditions = ['m.is_active = 1'];
+        $params = [];
+
+        if (!empty($filters['prix_min'])) {
+            $conditions[] = 'm.price_per_person >= :prix_min';
+            $params[':prix_min'] = (float) $filters['prix_min'];
+        }
+
+        if (!empty($filters['prix_max'])) {
+            $conditions[] = 'm.price_per_person <= :prix_max';
+            $params[':prix_max'] = (float) $filters['prix_max'];
+        }
+
+        if (!empty($filters['themes'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':theme' . $i, array_keys($filters['themes'])));
+            $conditions[] = 'm.theme_id IN (' . $placeholders . ')';
+            foreach ($filters['themes'] as $i => $themeId) {
+                $params[':theme' . $i] = (int) $themeId;
+            }
+        }
+
+        if (!empty($filters['diets'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':diet_' . $i, array_keys($filters['diets'])));
+            $conditions[] = 'm.diet_id IN (' . $placeholders . ')';
+            foreach ($filters['diets'] as $i => $dietId) {
+                $params[':diet_' . $i] = (int) $dietId;
+            }
+        }
+
+        if (!empty($filters['nb_persons'])) {
+            $conditions[] = 'm.min_persons <= :nb_persons';
+            $params[':nb_persons'] = (int) $filters['nb_persons'];
+        }
+
+        $where = 'WHERE ' . implode(' AND ', $conditions);
+        $stmt = $this->db->prepare("
+            SELECT 
+                m.menu_id, 
+                m.title, 
+                m.description,
+                m.price_per_person, 
+                m.min_persons,
+                t.label AS theme, 
+                d.label AS diet,
+                m.remaining_stock,
+                m.conditions,
+                m.is_active
+            FROM menu m
+            JOIN theme t ON m.theme_id = t.theme_id
+            JOIN diet d ON m.diet_id = d.diet_id
+            $where
+            ORDER BY m.title ASC
+            LIMIT :limit 
+            OFFSET :offset
+        ");
+
+        $params[':limit'] = $limit;
+        $params[':offset'] = $offset;
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

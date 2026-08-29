@@ -31,7 +31,24 @@ class MenusController {
 
     public function index(): void
     {
-        $menus = $this->menuModel->getAll();
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 4;
+
+        // Récupérer les filtres depuis GET
+        $filters = [
+            'prix_min'   => $_GET['prix_min']   ?? null,
+            'prix_max'   => $_GET['prix_max']   ?? null,
+            'themes'     => $_GET['themes']     ?? [],
+            'diets'      => $_GET['diets']      ?? [],
+            'nb_persons' => $_GET['nb_persons'] ?? null,
+        ];
+        $offset = ($currentPage -1) * $perPage;
+
+        $totalMenus = $this->menuModel->countWithFilters($filters);
+        $totalPages = ceil($totalMenus / $perPage);
+        
+        $menus = $this->menuModel->getAllWithFilters($filters, $perPage, $offset);
+        //$menus = $this->menuModel->getAll();
         $allergens = $this->allergenModel->getAll();
         $themes = $this->themeModel->getAll();
         $diets = $this->dietModel->getAll();
@@ -51,6 +68,7 @@ class MenusController {
 
         $pageTitle = 'Menus - Vite & Gourmand';
         $h1 = 'Menus';
+        $extraJs = ['/assets/js/menus/menus.js'];
         require_once __DIR__ . '/../../views/menus/menus.php';
     }
 
