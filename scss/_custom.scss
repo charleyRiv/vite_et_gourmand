@@ -394,7 +394,7 @@ img {
         border-radius: 0px;
     }
 }
-//--- MENUS
+//--- MENUS GLOBAUX
 .menus-filters {
     .d-flex {
         justify-content: flex-end;
@@ -604,6 +604,90 @@ img {
     }
 }
 
+//--- MENU DETAIL
+.section-menu-details {
+    .container {
+        .row {
+            row-gap: 25px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            padding-left: 200px;
+            padding-right: 200px;
+            gap: 25px;
+        }
+
+        p {
+            margin-bottom: 0px;
+        }
+
+    }
+    .description {
+        text-align: center;
+    }
+
+    .categorie {
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .menu-dish {
+        align-items: stretch;
+        justify-content: space-between;
+        padding: 10px;
+        
+
+        .menu-picture-dish {
+            width: 100%;
+            border: 1px solid $dark;
+            box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+            margin-bottom: 10px;
+        }
+
+        .menu-details {
+            background-color: $secondary;
+            border-radius: 20px;
+            text-align: center;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            margin-top: 10px;
+
+
+            @include media-breakpoint-up(lg) {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-bottom: 2rem;
+                padding-top: 2rem;
+            }
+        }
+
+        .menu-allergen {
+            text-align: start;
+            margin-top: 2rem;
+            padding-left: 0.5rem;
+        }
+    }
+
+    .menu-infos {
+        justify-content: space-around;
+        align-items: center;
+    }
+    .menu-condition {
+        text-align: center;
+    }
+    .menu-commande {
+        justify-content: space-between;
+        align-items: center;
+        text-align: end;
+
+        @include media-breakpoint-up(lg) {
+            flex-direction: row-reverse;
+        }
+    }
+
+}
 
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {

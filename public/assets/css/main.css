@@ -12492,6 +12492,78 @@ img {
   opacity: 1;
 }
 
+.section-menu-details .container .row {
+  row-gap: 25px;
+}
+@media (min-width: 992px) {
+  .section-menu-details .container {
+    padding-left: 200px;
+    padding-right: 200px;
+    gap: 25px;
+  }
+}
+.section-menu-details .container p {
+  margin-bottom: 0px;
+}
+.section-menu-details .description {
+  text-align: center;
+}
+.section-menu-details .categorie {
+  justify-content: space-around;
+  align-items: center;
+}
+.section-menu-details .menu-dish {
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 10px;
+}
+.section-menu-details .menu-dish .menu-picture-dish {
+  width: 100%;
+  border: 1px solid #341E34;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+}
+.section-menu-details .menu-dish .menu-details {
+  background-color: #87C093;
+  border-radius: 20px;
+  text-align: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 10px;
+}
+@media (min-width: 992px) {
+  .section-menu-details .menu-dish .menu-details {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
+}
+.section-menu-details .menu-dish .menu-allergen {
+  text-align: start;
+  margin-top: 2rem;
+  padding-left: 0.5rem;
+}
+.section-menu-details .menu-infos {
+  justify-content: space-around;
+  align-items: center;
+}
+.section-menu-details .menu-condition {
+  text-align: center;
+}
+.section-menu-details .menu-commande {
+  justify-content: space-between;
+  align-items: center;
+  text-align: end;
+}
+@media (min-width: 992px) {
+  .section-menu-details .menu-commande {
+    flex-direction: row-reverse;
+  }
+}
+
 .section-dashboard-admin .container .row {
   row-gap: 30px;
 }
