@@ -690,7 +690,8 @@ img {
 }
 
 //--- LEGAL
-.section-legal {
+.section-legal,
+.section-cgv {
     .container {
 
         @include media-breakpoint-up(lg) {

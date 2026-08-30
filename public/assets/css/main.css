@@ -12565,25 +12565,33 @@ img {
 }
 
 @media (min-width: 992px) {
-  .section-legal .container {
+  .section-legal .container,
+  .section-cgv .container {
     padding-left: 200px;
     padding-right: 200px;
   }
 }
-.section-legal .container .row {
+.section-legal .container .row,
+.section-cgv .container .row {
   row-gap: 15px;
   justify-content: flex-start;
   text-align: start;
 }
-.section-legal .container .row p {
+.section-legal .container .row p,
+.section-cgv .container .row p {
   margin-bottom: 0px;
 }
 @media (min-width: 992px) {
-  .section-legal .container .row {
+  .section-legal .container .row,
+  .section-cgv .container .row {
     row-gap: 30px;
   }
 }
-.section-legal .container .row h1, .section-legal .container .row .h1, .section-legal .container .row .hero .hero-title, .hero .section-legal .container .row .hero-title {
+.section-legal .container .row h1, .section-legal .container .row .h1, .section-legal .container .row .hero .hero-title, .hero .section-legal .container .row .hero-title,
+.section-cgv .container .row h1,
+.section-cgv .container .row .h1,
+.section-cgv .container .row .hero .hero-title,
+.hero .section-cgv .container .row .hero-title {
   text-align: center;
 }
 

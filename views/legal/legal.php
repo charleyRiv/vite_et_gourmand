@@ -4,8 +4,6 @@
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
-
-<br>
 <main class="page-legal">
     <section class="section-legal">
         <div class="container">
