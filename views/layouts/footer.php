@@ -11,7 +11,7 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
             <div class="row flex-lg-row-reverse justify-content-around align-items-center">
                 
                 <!-- Footer links - apparait en dernier sur lg -->
-                <div class="col-12 col-lg-auto footer-links">
+                <div class="col-12 col-lg-3 footer-links">
                     <div class="d-flex flex-lg-column justify-content-center align-items-center">
                         <a href="">
                             <img 
@@ -34,7 +34,7 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
                 </div>               
 
                 <!-- Footer legal -apparait en premier sur lg -->
-                <div class="col-12 col-lg-auto footer-schedule">
+                <div class="col-12 col-lg-6 footer-schedule">
                         <h4 class="text-center">Horaires</h4>
                     <div class="d-flex justify-content-between">
                         <ul class="list-unstyled text-start">
@@ -51,7 +51,7 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
                 </div>
 
                 <!-- Footer legal - apparait en premier sur lg -->
-                <div class="col-12 col-lg-auto footer-legal">
+                <div class="col-12 col-lg-3 footer-legal">
                     <div class="d-flex flex-lg-column justify-content-center align-items-lg-center">
                         <a href="/legal">Mention légales</a>
                         <a href="/cgv">cgv</a>
