@@ -689,6 +689,32 @@ img {
 
 }
 
+//--- LEGAL
+.section-legal {
+    .container {
+
+        @include media-breakpoint-up(lg) {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+        .row {
+            row-gap: 15px;
+            justify-content: flex-start;
+            text-align: start;
+            p {
+                margin-bottom: 0px;
+            }
+
+            @include media-breakpoint-up(lg) {
+                row-gap: 30px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        }
+    }
+}
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 

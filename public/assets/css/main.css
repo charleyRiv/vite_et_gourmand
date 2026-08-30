@@ -12564,6 +12564,29 @@ img {
   }
 }
 
+@media (min-width: 992px) {
+  .section-legal .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.section-legal .container .row {
+  row-gap: 15px;
+  justify-content: flex-start;
+  text-align: start;
+}
+.section-legal .container .row p {
+  margin-bottom: 0px;
+}
+@media (min-width: 992px) {
+  .section-legal .container .row {
+    row-gap: 30px;
+  }
+}
+.section-legal .container .row h1, .section-legal .container .row .h1, .section-legal .container .row .hero .hero-title, .hero .section-legal .container .row .hero-title {
+  text-align: center;
+}
+
 .section-dashboard-admin .container .row {
   row-gap: 30px;
 }
