@@ -32,6 +32,7 @@ class AuthController {
         $pageTitle = 'Connexion - Vite & Gourmand';
         $h1 = 'Formulaire de connexion';
         $errors = [];
+        $extraJs = ['/assets/js/auth/login.js'];
 
         //Message succès après inscription
         $registrered = isset ($_GET['registrered']);

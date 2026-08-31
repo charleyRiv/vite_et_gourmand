@@ -26,6 +26,7 @@ class ContactController {
 
         $pageTitle = 'Contact - Vite & Gourmand';
         $h1 = 'Nous contacter';
+        $extraJs = ['/assets/js/contact/contact.js'];
         require_once __DIR__ . '/../../views/contact/contact.php';
     }
 

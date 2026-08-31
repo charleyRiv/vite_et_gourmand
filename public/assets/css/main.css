@@ -12564,6 +12564,49 @@ img {
   }
 }
 
+@media (min-width: 1400px) {
+  .section-contact .container {
+    padding-left: 555px;
+    padding-right: 555px;
+  }
+}
+.section-contact .container .row {
+  row-gap: 5px;
+}
+.section-contact .container .row .contact-input {
+  margin-bottom: 10px;
+}
+.section-contact .container .btn {
+  text-align: end;
+}
+.section-contact .container input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-contact .container textarea {
+  width: 100%;
+  min-height: 10rem;
+  resize: vertical;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-contact .contact-title.is-valid,
+.section-contact .contact-email.is-valid,
+.section-contact .contact-content.is-valid {
+  border: 2px solid #2e7d4f;
+}
+.section-contact .contact-title.is-invalid,
+.section-contact .contact-email.is-invalid,
+.section-contact .contact-content.is-invalid {
+  border: 2px solid #c0392b;
+}
+.section-contact .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
 @media (min-width: 992px) {
   .section-legal .container,
   .section-cgv .container {
@@ -12593,6 +12636,63 @@ img {
 .section-cgv .container .row .hero .hero-title,
 .hero .section-cgv .container .row .hero-title {
   text-align: center;
+}
+
+@media (min-width: 1400px) {
+  .section-login .container {
+    padding-left: 400px;
+    padding-right: 400px;
+  }
+}
+.section-login .container .login-form {
+  max-width: 330px;
+}
+.section-login .container .login-form .col-12 {
+  margin-bottom: 5px;
+}
+.section-login .container .row {
+  row-gap: 5px;
+  justify-content: center;
+}
+.section-login .container .row .login-input {
+  margin-bottom: 15px;
+}
+.section-login .container .row h1, .section-login .container .row .h1, .section-login .container .row .hero .hero-title, .hero .section-login .container .row .hero-title {
+  text-align: start;
+  max-width: 600px;
+}
+@media (min-width: 992px) {
+  .section-login .container .row h1, .section-login .container .row .h1, .section-login .container .row .hero .hero-title, .hero .section-login .container .row .hero-title {
+    text-align: center;
+  }
+}
+.section-login .container .btn {
+  text-align: center;
+}
+.section-login .container .login-subscribe a {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.section-login .container .login-subscribe {
+  text-align: center;
+}
+.section-login .container input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-login .login-email.is-valid,
+.section-login .login-password.is-valid {
+  border: 2px solid #2e7d4f;
+}
+.section-login .login-email.is-invalid,
+.section-login .login-password.is-invalid {
+  border: 2px solid #c0392b;
+}
+.section-login .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
 }
 
 .section-dashboard-admin .container .row {

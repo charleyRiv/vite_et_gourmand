@@ -689,6 +689,61 @@ img {
 
 }
 
+//--- CONTACT
+.section-contact {
+    .container {
+
+        @include media-breakpoint-up(xxl) {
+            padding-left: 555px;
+            padding-right: 555px;
+        }
+
+        .row {
+            row-gap: 5px;
+
+            .contact-input {
+                margin-bottom: 10px;
+            }
+        }
+
+        .btn {
+            text-align: end;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 10rem;
+            resize: vertical;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+    }
+
+    .contact-title,
+    .contact-email,
+    .contact-content {
+        &.is-valid {
+            border: 2px solid rgba($success, 1);
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1);
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+}
+
 //--- LEGAL
 .section-legal,
 .section-cgv {
@@ -714,6 +769,79 @@ img {
                 text-align: center;
             }
         }
+    }
+}
+
+//---LOGIN
+.section-login {
+    .container {
+
+        @include media-breakpoint-up(xxl) {
+            padding-left: 400px;
+            padding-right: 400px;
+        }
+
+        .login-form {
+            max-width: 330px;
+
+            .col-12 {
+                margin-bottom: 5px;
+            }
+        }
+
+        .row {
+            row-gap: 5px;
+            justify-content: center;
+
+
+            .login-input {
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                text-align: start;
+                max-width: 600px;
+
+                @include media-breakpoint-up(lg) {
+                    text-align: center;
+                }
+            }
+        }
+
+        .btn {
+            text-align: center;
+        }
+
+        .login-subscribe {
+            a {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+    }
+
+    .login-email,
+    .login-password {
+        &.is-valid {
+            border: 2px solid rgba($success, 1);
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1);
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
     }
 }
 //--- DASHBOARD ADMIN
