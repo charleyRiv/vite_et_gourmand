@@ -12567,6 +12567,21 @@ img {
     flex-direction: row-reverse;
   }
 }
+.section-menu-details .carousel-img {
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid #341E34;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+.section-menu-details .carousel-indicators button {
+  background-color: #FB9C75;
+}
+.section-menu-details .carousel-control-prev-icon,
+.section-menu-details .carousel-control-next-icon {
+  filter: invert(1);
+}
 
 @media (min-width: 1400px) {
   .section-contact .container {

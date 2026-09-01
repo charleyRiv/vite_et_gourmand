@@ -691,6 +691,25 @@ img {
         }
     }
 
+    .carousel-img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px;
+        border: 1px solid $dark;
+        box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .carousel-indicators {
+        button {
+            background-color: $primary;
+        }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        filter: invert(1); // ← rend les flèches visibles sur fond clair
+    }
+
 }
 
 //--- CONTACT

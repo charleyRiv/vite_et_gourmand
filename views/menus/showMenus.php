@@ -28,21 +28,72 @@ require_once __DIR__ . '/../layouts/hero.php';
                         <p>Régime : <?= htmlspecialchars($menu['diet']) ?></p>
                     </div>
                 </div>
+
+                <!-- Carousel photos du menu -->
+                <?php if (!empty($menu['pictures'])): ?>
+                <div class="col-12 mb-4 d-lg-none">
+                    <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel">
+                
+                        <!-- Indicators -->
+                        <div class="carousel-indicators">
+                            <?php foreach ($menu['pictures'] as $index => $picture): ?>
+                                <button 
+                                    type="button" 
+                                    data-bs-target="#menuCarousel" 
+                                    data-bs-slide-to="<?= $index ?>"
+                                    class="<?= $index === 0 ? 'active' : '' ?>"
+                                    aria-label="Photo <?= $index + 1 ?>"
+                                ></button>
+                            <?php endforeach; ?>
+                        </div>
+                            
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+                            <?php foreach ($menu['pictures'] as $index => $picture): ?>
+                                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                                    <img 
+                                        src="<?= htmlspecialchars($picture['url']) ?>"
+                                        alt="<?= htmlspecialchars($picture['alt_text']) ?>"
+                                        class="d-block w-100 carousel-img"
+                                    >
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                            
+                        <!-- Controls -->
+                        <button class="carousel-control-prev" type="button" 
+                            data-bs-target="#menuCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" 
+                            data-bs-target="#menuCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
+                            
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <div class="row g-0 mb-0">
                     <?php foreach ($dishes as $dish): ?>
                     <div class="col-12 col-lg-4">
                         <article class="menu-dish">
                             <!-- photos -->
                             <div class="col-12">
-                                <?php if (!empty($dish['picture'])): ?>
-                                    <img 
-                                        src="<?= $dish['picture']['url'] ?>"
-                                        alt="<?= $dish['picture']['alt_text'] ?>"
-                                        class="menu-picture-dish"
-                                    >
-                                <?php else : ?>
-                                    <p>Image indisponible</p>
-                                <?php endif; ?>
+                                <!-- Photo - cachée en dessous de lg -->
+                                <div class="col-12 d-none d-lg-block">
+                                    <?php if (!empty($dish['picture'])): ?>
+                                        <img 
+                                            src="<?= $dish['picture']['url'] ?>"
+                                            alt="<?= $dish['picture']['alt_text'] ?>"
+                                            class="menu-picture-dish"
+                                        >
+                                    <?php else : ?>
+                                        <p>Image indisponible</p>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         
                             <!-- infos plat -->
