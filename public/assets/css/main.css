@@ -12108,6 +12108,10 @@ a:hover {
   align-items: center;
 }
 
+.btn-success {
+  background-color: #2E7D4F;
+}
+
 .btn-filters {
   background-color: #341E34;
   color: #FFF7F2;
@@ -12767,6 +12771,157 @@ img {
   padding: 0;
 }
 .section-register .input-eye-wrapper .btn-eye:hover {
+  color: #FB9C75;
+}
+
+.section-reinit-password .container .reinit-password-form {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 330px;
+  justify-content: center;
+}
+.section-reinit-password .container .reinit-password-form .col-12 {
+  margin-bottom: 5px;
+}
+@media (min-width: 1200px) {
+  .section-reinit-password .container {
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+.section-reinit-password .container .row {
+  row-gap: 5px;
+  justify-content: center;
+}
+.section-reinit-password .container .row .reinit-password-input {
+  margin-bottom: 15px;
+}
+.section-reinit-password .container .row h1, .section-reinit-password .container .row .h1, .section-reinit-password .container .row .hero .hero-title, .hero .section-reinit-password .container .row .hero-title {
+  text-align: start;
+}
+@media (min-width: 1200px) {
+  .section-reinit-password .container .row h1, .section-reinit-password .container .row .h1, .section-reinit-password .container .row .hero .hero-title, .hero .section-reinit-password .container .row .hero-title {
+    text-align: center;
+  }
+}
+.section-reinit-password .container .row p {
+  text-align: center;
+}
+.section-reinit-password .container .row .error {
+  color: #C0392B;
+  text-align: center;
+}
+.section-reinit-password .container .btn-reinit {
+  text-align: center;
+}
+.section-reinit-password .container input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-reinit-password .reinit-password-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-reinit-password .reinit-password-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-reinit-password .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 1400px) {
+  .section-reset-password .container {
+    padding-left: 420px;
+    padding-right: 420px;
+  }
+}
+.section-reset-password .container .row {
+  row-gap: 5px;
+  justify-content: center;
+}
+.section-reset-password .container .row .reset-password-label {
+  margin-top: 15px;
+}
+.section-reset-password .container .row h1, .section-reset-password .container .row .h1, .section-reset-password .container .row .hero .hero-title, .hero .section-reset-password .container .row .hero-title {
+  text-align: start;
+}
+.section-reset-password .container .row p {
+  text-align: center;
+}
+.section-reset-password .container .row .error {
+  color: #C0392B;
+  text-align: center;
+}
+.section-reset-password .container .row .new-request {
+  text-align: center;
+}
+.section-reset-password .container .reset-password-form {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 330px;
+  justify-content: center;
+}
+.section-reset-password .container .reset-password-form .col-12 {
+  margin-bottom: 5px;
+}
+.section-reset-password .container .btn-validate {
+  text-align: start;
+  margin-top: 1.5rem;
+}
+.section-reset-password .container span {
+  color: #C0392B;
+}
+.section-reset-password .container .reset-password-detail {
+  color: #144680;
+}
+.section-reset-password .container input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-reset-password .reset-password-input.is-valid,
+.section-reset-password input.register-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-reset-password .reset-password-input.is-invalid,
+.section-reset-password input.register-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-reset-password .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.section-reset-password .input-eye-wrapper {
+  position: relative;
+  display: block;
+}
+.section-reset-password .input-eye-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+.section-reset-password .input-eye-wrapper .btn-eye {
+  position: absolute;
+  right: 0.75rem;
+  top: 0;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #341E34;
+  padding: 0;
+}
+.section-reset-password .input-eye-wrapper .btn-eye:hover {
   color: #FB9C75;
 }
 

@@ -222,7 +222,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <button type="button" class="btn-eye" id="btn-eye-passwordConf">
                                         <i class="bi bi-eye" id="icon-eye-passwordConf"></i>
                                     </button>
-                                    <div class="invalid-feedback">Veuillez confirmer le mot de passe</div>
+                                    <div class="invalid-feedback">Les mots de passe ne correspondent pas</div>
 
                                 </div>
 

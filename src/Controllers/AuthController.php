@@ -205,12 +205,13 @@ class AuthController {
         }
         $pageTitle = 'Mot de passe oublié - Vite & Gourmand';
         $h1 = 'Demande d\'un nouveau mot de passe';
+        $extraJs = ['/assets/js/auth/password_forgotten.js'];
         require_once __DIR__ . '/../../views/auth/password_forgotten.php';
     }
     //POST /mot-de-passe-oublie
     public function requestModifyPassword(): void
     {
-        $email = trim(Session::get('email') ?? '');
+        $email = trim($_POST['email'] ?? '');
         $errors = [];
         $succes = false;
 
@@ -235,6 +236,8 @@ class AuthController {
 
         $pageTitle = 'Mot de passe oublié - Vite & Gourmand';
         $h1 = 'Demande d\'un nouveau mot de passe';
+        $extraJs = ['/assets/js/auth/reset_password_form.js'];
+
         require_once __DIR__ . '/../../views/auth/password_forgotten.php';
         
     }
@@ -256,10 +259,10 @@ class AuthController {
         if ($user === null){
             $errors[] = 'Ce lien a expiré ou est invalide. Veuillez faire une nouvelle demande';
         }
-        var_dump($token);
-        var_dump($user = $this->userModel->findByResetToken($token));
+        
         $pageTitle = 'Réinitialiser le mot de passe - Vite & Gourmand';
         $h1 = 'Réinitialisation du mot de passe';
+        $extraJs = ['/assets/js/auth/reset_password_form.js'];
         require_once __DIR__ . '/../../views/auth/password_reset_form.php';
     }
 

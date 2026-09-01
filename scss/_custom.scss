@@ -168,6 +168,10 @@ a {
     align-items: center;
 }
 
+.btn-success {
+    background-color: $success;
+}
+
 .btn-filters {
     background-color: $dark;
     color: $white;
@@ -943,7 +947,199 @@ img {
     
     } 
 }
+//--- REINIT PASSWORD
+.section-reinit-password {
+    .container {
+        .reinit-password-form {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 330px;
+            justify-content: center;
 
+            .col-12 {
+                margin-bottom: 5px;
+            }
+        }
+
+        @include media-breakpoint-up(xl) {
+            padding-left: 400px;
+            padding-right: 400px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .row {
+            row-gap: 5px;
+            justify-content: center;
+
+            .reinit-password-input {
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                text-align: start;
+
+                @include media-breakpoint-up(xl) {
+                    text-align: center;
+                }
+            }
+
+            p {
+                text-align: center;
+            }
+
+            .error {
+                color: $danger;
+                text-align: center;
+            }
+        }
+
+        
+        .btn-reinit {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+    }
+
+    .reinit-password-input {
+        &.is-valid {
+            border: 2px solid rgba($success, 1) !important;
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1) !important;
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+}
+//--- RESERT PASSWORD
+.section-reset-password {
+    .container {
+
+        @include media-breakpoint-up(xxl) {
+            padding-left: 420px;
+            padding-right: 420px;
+        }
+
+        .row {
+            row-gap: 5px;
+            justify-content: center;
+
+
+            .reset-password-label {
+                margin-top: 15px;
+            }
+
+            h1 {
+                text-align: start;
+            }
+
+            p {
+                text-align: center;
+            }
+
+            .error {
+                color: $danger;
+                text-align: center;
+            }
+
+            .new-request {
+                text-align: center;
+            }
+        }
+
+        .reset-password-form {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 330px;
+            justify-content: center;
+
+            .col-12 {
+                margin-bottom: 5px;
+            }
+        }
+
+        .btn-validate {
+            text-align: start;
+            margin-top: 1.5rem;
+            
+        }
+
+        span {
+            color: $danger;
+        }
+
+        .reset-password-detail {
+            color: $info;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+    }
+
+    .reset-password-input,
+    input.register-input {
+        &.is-valid {
+            border: 2px solid rgba($success, 1) !important;
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1) !important;
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+
+    .input-eye-wrapper {
+        position: relative;
+        display: block;
+
+        input {
+            width: 100%;
+            padding-right: 2.5rem;
+        }
+    
+        .btn-eye {
+            position: absolute;
+            right: 0.75rem;
+            top: 0;
+            height: 35px; // ← hauteur standard d'un input Bootstrap
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: $dark;
+            padding: 0;
+        
+            &:hover {
+                color: $primary;
+            }
+        }
+    
+    } 
+}
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 
