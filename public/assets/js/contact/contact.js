@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             message: 'Le titre doit contenir au moins 3 caractères.'
         },
         content: {
-            validate: (val) => val.trim().length >= 10,
+            validate: (val) => val.trim().length >=10,
             message: 'Le message doit contenir au moins 10 caractères.'
         }
     };

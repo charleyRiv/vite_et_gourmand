@@ -820,7 +820,8 @@ img {
             text-align: center;
         }
 
-        input {
+        input,
+        .register-input {
             width: 100%;
             border-radius: 5px;
             border: 1px solid rgba($dark, 1);
@@ -844,6 +845,105 @@ img {
         margin-top: 0.25rem;
     }
 }
+
+//---REGISTER
+.section-register {
+    .container {
+
+        @include media-breakpoint-up(xxl) {
+            padding-left: 350px;
+            padding-right: 350px;
+        }
+
+        .row {
+            row-gap: 5px;
+            justify-content: center;
+
+
+            .register-label,
+            .register-consent,
+            .btn-register,
+            .register-login {
+                margin-top: 15px;
+            }
+
+            .register-consent {
+                .d-flex {
+                    align-items: start;
+                }
+            }
+
+            h1 {
+                text-align: start;
+            }
+        }
+
+        .btn-register {
+            text-align: start;
+        }
+
+        span {
+            color: $danger;
+        }
+
+        .register-detail {
+            color: $info;
+        }
+
+        input:not([type="checkbox"]):not([type="radio"]) {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+    }
+
+    .register-input,
+    input.register-input {
+        &.is-valid {
+            border: 2px solid rgba($success, 1) !important;
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1) !important;
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+
+    .input-eye-wrapper {
+        position: relative;
+        display: block;
+
+        input {
+            width: 100%;
+            padding-right: 2.5rem;
+        }
+    
+        .btn-eye {
+            position: absolute;
+            right: 0.75rem;
+            top: 0;
+            height: 35px; // ← hauteur standard d'un input Bootstrap
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: $dark;
+            padding: 0;
+        
+            &:hover {
+                color: $primary;
+            }
+        }
+    
+    } 
+}
+
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 

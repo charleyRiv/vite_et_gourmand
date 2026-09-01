@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
+    const form = document.getElementById('login-form');
     const passwordInput = document.getElementById('password');
     const emailInput = document.getElementById('email');
     const submitBtn = document.getElementById('btn-submit');
@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             message: 'Veuillez saisir une adresse mail valide.'
         },
         password: {
-            validate: (val) => val.trim().length >= 10,
-            message: 'Le mot de passe doit contenir au moins 10 caractères.'
+            validate: (val) => val.trim().length >= 8,
+            message: 'Le mot de passe doit contenir au moins 8 caractères.'
         }
     };
 

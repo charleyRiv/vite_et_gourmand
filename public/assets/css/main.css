@@ -12676,7 +12676,8 @@ img {
 .section-login .container .login-subscribe {
   text-align: center;
 }
-.section-login .container input {
+.section-login .container input,
+.section-login .container .register-input {
   width: 100%;
   border-radius: 5px;
   border: 1px solid #341e34;
@@ -12693,6 +12694,80 @@ img {
   color: #C0392B;
   font-size: 0.85rem;
   margin-top: 0.25rem;
+}
+
+@media (min-width: 1400px) {
+  .section-register .container {
+    padding-left: 350px;
+    padding-right: 350px;
+  }
+}
+.section-register .container .row {
+  row-gap: 5px;
+  justify-content: center;
+}
+.section-register .container .row .register-label,
+.section-register .container .row .register-consent,
+.section-register .container .row .btn-register,
+.section-register .container .row .register-login {
+  margin-top: 15px;
+}
+.section-register .container .row .register-consent .d-flex {
+  align-items: start;
+}
+.section-register .container .row h1, .section-register .container .row .h1, .section-register .container .row .hero .hero-title, .hero .section-register .container .row .hero-title {
+  text-align: start;
+}
+.section-register .container .btn-register {
+  text-align: start;
+}
+.section-register .container span {
+  color: #C0392B;
+}
+.section-register .container .register-detail {
+  color: #144680;
+}
+.section-register .container input:not([type=checkbox]):not([type=radio]) {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-register .register-input.is-valid,
+.section-register input.register-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-register .register-input.is-invalid,
+.section-register input.register-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-register .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.section-register .input-eye-wrapper {
+  position: relative;
+  display: block;
+}
+.section-register .input-eye-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+.section-register .input-eye-wrapper .btn-eye {
+  position: absolute;
+  right: 0.75rem;
+  top: 0;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #341E34;
+  padding: 0;
+}
+.section-register .input-eye-wrapper .btn-eye:hover {
+  color: #FB9C75;
 }
 
 .section-dashboard-admin .container .row {

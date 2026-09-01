@@ -117,6 +117,7 @@ class AuthController {
     {
         $pageTitle = 'Inscription - Vite & Gourmand';
         $h1 = 'Formulaire d\'inscription';
+        $extraJs = ['/assets/js/auth/register.js'];
         require_once __DIR__ . '/../../views/auth/register.php';
     }
     //POST /inscription - traite le formulaire

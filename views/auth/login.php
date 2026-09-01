@@ -66,7 +66,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 required
                                 autocomplete="current-password"
                             >
-                            <div class="invalid-feedback">Le mot de passe doit contenir au moins 10 caractères</div>
+                            <div class="invalid-feedback">Le mot de passe doit contenir au moins 8 caractères</div>
                         </div>
                         <div class="col-12">       
                             <a href="/mot-de-passe-oublie">Mot de passe oublié ?</a>
