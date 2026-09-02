@@ -65,6 +65,10 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
 <!-- Bootsrap-->
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
+<!-- Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
 <!-- Scripts de page -->
 <?php if (isset($extraJs)): ?>
     <?php foreach ($extraJs as $js): ?>

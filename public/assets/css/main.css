@@ -217,7 +217,7 @@ hr {
   opacity: 0.25;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
+h6, .h6, h5, .h5, h4, .h4, h3, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -243,11 +243,11 @@ h2, .h2 {
   }
 }
 
-h3, .h3 {
+h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 @media (min-width: 1200px) {
-  h3, .h3 {
+  h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
     font-size: 1.75rem;
   }
 }
@@ -12004,7 +12004,7 @@ h2, .h2 {
   font-size: 34px;
 }
 
-h3, .h3 {
+h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   color: #341E34;
   font-weight: 400;
   font-size: 24px;
@@ -12938,6 +12938,107 @@ img {
 }
 .section-reset-password .input-eye-wrapper .btn-eye:hover {
   color: #FB9C75;
+}
+
+@media (min-width: 992px) {
+  .page-order1 .section-order1-intro .container {
+    padding-left: 360px;
+    padding-right: 360px;
+  }
+}
+.page-order1 .section-order1-intro .container .row {
+  justify-content: start;
+}
+.page-order1 .section-order1-intro .container .row .order1-infos {
+  color: #A14F08;
+  text-align: center;
+}
+.page-order1 .section-order1-intro .container .row .order1-infos p {
+  font-size: 1rem;
+}
+.page-order1 .section-order1-intro .container h1, .page-order1 .section-order1-intro .container .h1, .page-order1 .section-order1-intro .container .hero .hero-title, .hero .page-order1 .section-order1-intro .container .hero-title,
+.page-order1 .section-order1-intro .container h4,
+.page-order1 .section-order1-intro .container .h4 {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .page-order1 .section-order1-form .container {
+    padding-left: 360px;
+    padding-right: 360px;
+  }
+}
+.page-order1 .section-order1-form .container .row {
+  justify-content: start;
+}
+.page-order1 .section-order1-form .container .row input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.page-order1 .section-order1-form .container fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+.page-order1 .section-order1-form .container fieldset legend {
+  margin-bottom: 1rem;
+}
+.page-order1 .section-order1-form .container fieldset .order1-label,
+.page-order1 .section-order1-form .container fieldset input.order1-label {
+  margin-bottom: 0.2rem;
+}
+.page-order1 .section-order1-form .container fieldset .order1-input,
+.page-order1 .section-order1-form .container fieldset input.order1-input {
+  margin-bottom: 1.5rem;
+  justify-content: stretch;
+}
+.page-order1 .section-order1-form .container fieldset .order1-input:last-child,
+.page-order1 .section-order1-form .container fieldset input.order1-input:last-child {
+  margin-bottom: 0rem;
+}
+.page-order1 .section-order1-form .container .order1-input.is-valid,
+.page-order1 .section-order1-form .container input.order1-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.page-order1 .section-order1-form .container .order1-input.is-invalid,
+.page-order1 .section-order1-form .container input.order1-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.page-order1 .section-order1-form .container .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.page-order1 .section-order1-form .container .next-step {
+  display: flex;
+  flex-direction: row;
+}
+@media (min-width: 992px) {
+  .page-order1 .section-order1-form .container .next-step {
+    flex-direction: row-reverse;
+    /*text-align: center;*/
+  }
+}
+.page-order1 .section-order1-form .container .next-step .back {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .page-order1 .section-order1-form .container .next-step .back {
+    text-align: start;
+  }
+}
+.page-order1 .section-order1-form .container .next-step .btn-next {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .page-order1 .section-order1-form .container .next-step .btn-next {
+    text-align: end;
+  }
 }
 
 .section-dashboard-admin .container .row {

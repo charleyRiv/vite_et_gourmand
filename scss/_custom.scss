@@ -1159,6 +1159,157 @@ img {
     
     } 
 }
+
+//--- ORDERS - STEP1
+.page-order1 {
+    .section-order1-intro {
+        .container {
+
+            @include media-breakpoint-up(lg) {
+                padding-left: 360px;
+                padding-right: 360px;
+            }
+            .row {
+                justify-content: start;
+
+                .order1-infos {
+                color: $warning;
+                text-align: center;
+
+                p {
+                    font-size: 1rem;
+                }
+            }
+            }
+
+
+            h1,
+            h4 {
+                text-align: center;
+            }
+        }
+    }
+
+    .section-order1-form {
+        .container {
+            @include media-breakpoint-up(lg) {
+                padding-left: 360px;
+                padding-right: 360px;
+            }
+            .row {
+                justify-content: start;
+
+                input {
+                    width: 100%;
+                    border-radius: 5px;
+                    border: 1px solid rgba($dark, 1);
+                }
+            }
+
+            fieldset {
+                background-color: white;
+                border: 1px solid $dark;
+                border-radius: 10px;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 10px;
+                padding-bottom: 25px;
+                margin-bottom: 25px;
+
+                
+                legend {
+                    @extend h3;
+                    margin-bottom: 1rem;
+                }
+
+                .order1-label,
+                input.order1-label {
+                    margin-bottom: 0.2rem;
+                }
+
+                .order1-input,
+                input.order1-input {
+    
+                    margin-bottom: 1.5rem;
+                    justify-content: stretch;
+
+                    &:last-child {
+                        margin-bottom: 0rem;
+                    }
+                }
+            }
+
+            .order1-input,
+            input.order1-input {
+                &.is-valid {
+                    border: 2px solid rgba($success, 1) !important;
+                }
+            
+                &.is-invalid {
+                    border: 2px solid rgba($danger, 1) !important;
+                }
+            }
+        
+            .invalid-feedback {
+                color: $danger;
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+            }
+
+        .next-step {
+            display: flex;
+            flex-direction: row;
+
+            @include media-breakpoint-up(lg) {
+                flex-direction: row-reverse;
+                /*text-align: center;*/
+            }
+            .back {
+                text-align: center;
+
+                @include media-breakpoint-up(lg) {
+                    text-align: start;
+                }
+            }
+            .btn-next {
+                text-align: center;
+
+                @include media-breakpoint-up(lg) {
+                    text-align: end;
+                }
+            }
+        }
+
+        // Styles Flatpickr
+        .flatpickr-day {
+            &.disabled,
+            &.disabled:hover {
+                color: rgba($dark, 0.3) !important;
+                background: transparent !important;
+                border-color: transparent !important;
+                cursor: not-allowed !important;
+                text-decoration: line-through;
+            }
+        
+            &.selected {
+                background-color: $primary !important;
+                border-color: $primary !important;
+            }
+        
+            &:hover:not(.disabled) {
+                background-color: $light !important;
+                border-color: $light !important;
+            }
+        }
+        
+        .flatpickr-calendar {
+            border: 1px solid rgba($dark, 0.2);
+            border-radius: 10px;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+        }
+        }
+    }
+}
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 
