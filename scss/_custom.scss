@@ -46,7 +46,7 @@ h1 {
 
 h2 {
     color: $dark;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 34px;
 }
 
@@ -1176,10 +1176,10 @@ img {
                 color: $warning;
                 text-align: center;
 
-                p {
-                    font-size: 1rem;
+                    p {
+                        font-size: 1rem;
+                    }
                 }
-            }
             }
 
 
@@ -1256,60 +1256,127 @@ img {
                 margin-top: 0.25rem;
             }
 
-        .next-step {
-            display: flex;
-            flex-direction: row;
-
-            @include media-breakpoint-up(lg) {
-                flex-direction: row-reverse;
-                /*text-align: center;*/
-            }
-            .back {
-                text-align: center;
+            .next-step {
+                display: flex;
+                flex-direction: row;
 
                 @include media-breakpoint-up(lg) {
-                    text-align: start;
+                    flex-direction: row-reverse;
+                    /*text-align: center;*/
+                }
+                .back {
+                    text-align: center;
+
+                    @include media-breakpoint-up(lg) {
+                        text-align: start;
+                    }
+                }
+                .btn-next {
+                    text-align: center;
+
+                    @include media-breakpoint-up(lg) {
+                        text-align: end;
+                    }
                 }
             }
-            .btn-next {
-                text-align: center;
 
-                @include media-breakpoint-up(lg) {
-                    text-align: end;
+            // Styles Flatpickr
+            .flatpickr-day {
+                &.disabled,
+                &.disabled:hover {
+                    color: rgba($dark, 0.3) !important;
+                    background: transparent !important;
+                    border-color: transparent !important;
+                    cursor: not-allowed !important;
+                    text-decoration: line-through;
+                }
+            
+                &.selected {
+                    background-color: $primary !important;
+                    border-color: $primary !important;
+                }
+            
+                &:hover:not(.disabled) {
+                    background-color: $light !important;
+                    border-color: $light !important;
                 }
             }
-        }
 
-        // Styles Flatpickr
-        .flatpickr-day {
-            &.disabled,
-            &.disabled:hover {
-                color: rgba($dark, 0.3) !important;
-                background: transparent !important;
-                border-color: transparent !important;
-                cursor: not-allowed !important;
-                text-decoration: line-through;
+            .flatpickr-calendar {
+                border: 1px solid rgba($dark, 0.2);
+                border-radius: 10px;
+                box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
             }
-        
-            &.selected {
-                background-color: $primary !important;
-                border-color: $primary !important;
-            }
-        
-            &:hover:not(.disabled) {
-                background-color: $light !important;
-                border-color: $light !important;
-            }
-        }
-        
-        .flatpickr-calendar {
-            border: 1px solid rgba($dark, 0.2);
-            border-radius: 10px;
-            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
-        }
         }
     }
 }
+
+//--- ORDERS - STEP2
+.section-order2-form {
+    margin-bottom: 15rem;
+    .container {
+        @include media-breakpoint-up(lg) {
+            padding-left: 360px;
+            padding-right: 360px;
+        }
+
+        .row {
+            row-gap: 5px;
+            h2 {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .order2-form {
+            
+            input,
+            select {
+                width: 100%;
+                border-radius: 5px;
+                border: 1px solid rgba($dark, 1);
+            }
+            
+        
+            .order2-label {
+                margin-bottom: 0.1rem;
+            }
+            .order2-input,
+            select.order2-input {
+                margin-bottom: 1.5rem;
+                justify-content: stretch;
+
+                &:last-child {
+                    margin-bottom: 0rem;
+                }
+            }
+            .order2-input,
+            select.order2-input {
+                &.is-valid {
+                    border: 2px solid rgba($success, 1) !important;
+                }
+            
+                &.is-invalid {
+                    border: 2px solid rgba($danger, 1) !important;
+                }
+            }
+        
+            .invalid-feedback {
+                color: $danger;
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+            }
+            .back {
+                text-align: start;
+            }
+            .btn-next {
+                text-align: end;
+            }
+        }
+        }
+    }
+    
+}
+
+
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 

@@ -7,34 +7,48 @@
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
-<br>
-<main>
-    <h1><?=  htmlspecialchars($h1)?></h1>
-    <br>
-    <form action="/commande/etape-2" method="POST">
+<main class="page-order2">
+    <section class="section-order2-form">
+        <div class="container">
+            <div class="row">
+                <h2><?=  htmlspecialchars($h1)?></h2>
 
-        <label for="title">Sélectionner un menu</label>
-        <select id="menu_id" name="menu_id" required>
-            <option value="default"></option>
-            <?php foreach ($menus as $menu): ?>
-                <option value="<?= $menu['menu_id']?>"
-                <?= ($preselectedMenuId == $menu['menu_id']) ? 'selected' : '' ?>
-                >
-                    <?= htmlspecialchars($menu['title'])?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    <br>
+                <form action="/commande/etape-2" method="POST">
+                    <div class="row order2-form">
+                        <div class="col-12 order2-label">
+                            <label for="title">Séléctionner un menu</label>
+                        </div>
+                        <div class="col-12">
+                            <select id="menu_id" name="menu_id" class="order2-input" required>
+                                <option value=""></option>
+                                <?php foreach ($menus as $menu): ?>
+                                    <option value="<?= $menu['menu_id']?>"
+                                    <?= ($preselectedMenuId == $menu['menu_id']) ? 'selected' : '' ?>
+                                    >
+                                        <?= htmlspecialchars($menu['title'])?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Veuillez sélectionner un menu.
+                            </div>
+                        </div>
 
-        <!-- Bouton Précédent -->
-        <a href="/commande/etape-1">Précédent</a>
-        
-        <!-- Bouton Suivant -->
-        <button type="submit">Suivant</button>
-
-    </form>
+                        <!-- Bouton Précédent -->
+                        <div class="col-6 back">
+                            <a href="/commande/etape-1" class="btn btn-primary">Précédent</a>
+                        </div>
+                                
+                        <!-- Bouton Suivant -->
+                        <div class="col-6 btn-next">
+                            <button type="submit" id="btn-submit" class="btn btn-primary">Suivant</button>
+                        </div>
+                    </div>        
+                </form>
+            </div>
+        </div>
+    </section>
 </main>
-<br>
 
 <?php
 require_once __DIR__ . '/../layouts/footer.php';

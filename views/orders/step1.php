@@ -11,7 +11,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1><?=  htmlspecialchars($h1)?></h1>
+                    <h2><?=  htmlspecialchars($h1)?></h2>
                 </div>
                 <div class="col-auto order1-infos">
                     <p> 🕐 Délai de commande <br>

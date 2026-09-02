@@ -40,10 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSubmitBtn();
         }
     });
-const fp = flatpickr('#date_livraison', {
-    // ...
-});
-console.log(fp);
+
     // Horaires par jour de la semaine
     const schedules = {
         0: null,                        // Dimanche - fermé
@@ -104,7 +101,7 @@ console.log(fp);
         }
 
         const schedule = schedules[dayOfWeek];
-        
+
         if (!schedule) {
             timeSelect.innerHTML = '<option value="">-- Créneaux indisponibles--</option>';
             timeSelect.disabled  = true;

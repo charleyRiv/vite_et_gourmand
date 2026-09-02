@@ -12000,7 +12000,7 @@ h1, .hero .hero-title, .h1 {
 
 h2, .h2 {
   color: #341E34;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 34px;
 }
 
@@ -13039,6 +13039,80 @@ img {
   .page-order1 .section-order1-form .container .next-step .btn-next {
     text-align: end;
   }
+}
+.page-order1 .section-order1-form .container .flatpickr-day.disabled, .page-order1 .section-order1-form .container .flatpickr-day.disabled:hover {
+  color: rgba(52, 30, 52, 0.3) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+}
+.page-order1 .section-order1-form .container .flatpickr-day.selected {
+  background-color: #FB9C75 !important;
+  border-color: #FB9C75 !important;
+}
+.page-order1 .section-order1-form .container .flatpickr-day:hover:not(.disabled) {
+  background-color: #EDE0CE !important;
+  border-color: #EDE0CE !important;
+}
+.page-order1 .section-order1-form .container .flatpickr-calendar {
+  border: 1px solid rgba(52, 30, 52, 0.2);
+  border-radius: 10px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.section-order2-form {
+  margin-bottom: 15rem;
+}
+@media (min-width: 992px) {
+  .section-order2-form .container {
+    padding-left: 360px;
+    padding-right: 360px;
+  }
+}
+.section-order2-form .container .row {
+  row-gap: 5px;
+}
+.section-order2-form .container .row h2, .section-order2-form .container .row .h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.section-order2-form .container .row .order2-form input,
+.section-order2-form .container .row .order2-form select {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-order2-form .container .row .order2-form .order2-label {
+  margin-bottom: 0.1rem;
+}
+.section-order2-form .container .row .order2-form .order2-input,
+.section-order2-form .container .row .order2-form select.order2-input {
+  margin-bottom: 1.5rem;
+  justify-content: stretch;
+}
+.section-order2-form .container .row .order2-form .order2-input:last-child,
+.section-order2-form .container .row .order2-form select.order2-input:last-child {
+  margin-bottom: 0rem;
+}
+.section-order2-form .container .row .order2-form .order2-input.is-valid,
+.section-order2-form .container .row .order2-form select.order2-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-order2-form .container .row .order2-form .order2-input.is-invalid,
+.section-order2-form .container .row .order2-form select.order2-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-order2-form .container .row .order2-form .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.section-order2-form .container .row .order2-form .back {
+  text-align: start;
+}
+.section-order2-form .container .row .order2-form .btn-next {
+  text-align: end;
 }
 
 .section-dashboard-admin .container .row {
