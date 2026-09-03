@@ -78,6 +78,8 @@ small,
     font-size: 0.85rem;
 }
 
+
+
 a {
     color: $info;
     text-decoration: underline;
@@ -1464,6 +1466,7 @@ img {
                     width: 100%;
                     background-color: white;
                     margin-bottom: 0rem;
+                    
 
 
                     tr {
@@ -1498,6 +1501,143 @@ img {
             }
             .btn-next {
                 text-align: end;
+            }
+        }
+    }
+    
+}
+
+//--- ORDER - STEP4 / CONFIRMATION
+.section-order4,
+.section-order-confirmation {
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 360px;
+            padding-right: 360px;
+        }
+
+        .row {
+            row-gap: 5px;
+            h2 {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            p{
+                text-align: center;
+                margin-bottom: 0rem;
+            }
+
+            .info {
+                margin-bottom: 4rem;
+                color: $danger;
+            }
+            .order4-form {
+
+                margin-bottom: 3rem;
+            
+                input {
+                    width: 100%;
+                    border-radius: 5px;
+                    border: 1px solid rgba($dark, 1);
+                }
+
+            
+                .order4-label {
+                    margin-bottom: 0.1rem;
+                    margin-top: 3rem;
+                }
+                .order4-input,
+                input.order4-input {
+                    margin-bottom: 1.5rem;
+                    justify-content: stretch;
+
+                    &:last-child {
+                        margin-bottom: 0rem;
+                    }
+                }
+            
+                .invalid-feedback {
+                    color: $danger;
+                    font-size: 0.85rem;
+                    margin-top: 0.25rem;
+                }
+            }
+
+            fieldset {
+                background-color: white;
+                border: 1px solid $dark;
+                border-radius: 10px;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                margin-bottom: 25px;
+
+                
+                legend {
+                    @extend h3;
+                    background-color: white;
+                    margin-bottom: 1rem;
+                }
+
+                table {
+                    width: 100%;
+                    background-color: white;
+                    margin-bottom: 0rem;
+
+
+                    tr {
+                        background-color: white;
+                    }
+
+                    td {
+                        background-color: white;
+                        color: $dark;
+                        line-height: 1rem;
+                        width: 50%;
+                        text-align: start;
+                        font-family: $font-family-lato;
+                        font-weight: 500;
+                        /*font-size: 0.85rem;*/
+
+                        small {
+                            color: $warning;
+                            margin-left: 0.5rem;
+                        }
+                    }
+
+                    .detail {
+                        padding-left: 2rem;
+                    }
+                }
+            }
+
+            .order4-price,
+            .order-confirmation-price {
+                        td:last-child {
+                            text-align: end;
+                        }
+                    }
+
+            .order4-conditions,
+            .order-confirmation-conditions {
+                p {
+                    padding-left: 3rem;
+                    padding-right: 3rem;
+                }
+                
+                text-align: center;
+            }
+
+            .back,
+            .validate {
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-success {
+                transform: scale(1.2);
             }
         }
     }

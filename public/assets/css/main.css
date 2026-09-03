@@ -217,7 +217,8 @@ hr {
   opacity: 0.25;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
+h6, .h6, h5, .h5, h4, .h4, h3, .section-order4 .container .row fieldset legend,
+.section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -243,11 +244,13 @@ h2, .h2 {
   }
 }
 
-h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+h3, .section-order4 .container .row fieldset legend,
+.section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 @media (min-width: 1200px) {
-  h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+  h3, .section-order4 .container .row fieldset legend,
+  .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
     font-size: 1.75rem;
   }
 }
@@ -12004,7 +12007,8 @@ h2, .h2 {
   font-size: 34px;
 }
 
-h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+h3, .section-order4 .container .row fieldset legend,
+.section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   color: #341E34;
   font-weight: 400;
   font-size: 24px;
@@ -13217,6 +13221,145 @@ img {
 }
 .section-order3 .container .row .btn-next {
   text-align: end;
+}
+
+@media (min-width: 1200px) {
+  .section-order4 .container,
+  .section-order-confirmation .container {
+    padding-left: 360px;
+    padding-right: 360px;
+  }
+}
+.section-order4 .container .row,
+.section-order-confirmation .container .row {
+  row-gap: 5px;
+}
+.section-order4 .container .row h2, .section-order4 .container .row .h2,
+.section-order-confirmation .container .row h2,
+.section-order-confirmation .container .row .h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.section-order4 .container .row p,
+.section-order-confirmation .container .row p {
+  text-align: center;
+  margin-bottom: 0rem;
+}
+.section-order4 .container .row .info,
+.section-order-confirmation .container .row .info {
+  margin-bottom: 4rem;
+  color: #C0392B;
+}
+.section-order4 .container .row .order4-form,
+.section-order-confirmation .container .row .order4-form {
+  margin-bottom: 3rem;
+}
+.section-order4 .container .row .order4-form input,
+.section-order-confirmation .container .row .order4-form input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-order4 .container .row .order4-form .order4-label,
+.section-order-confirmation .container .row .order4-form .order4-label {
+  margin-bottom: 0.1rem;
+  margin-top: 3rem;
+}
+.section-order4 .container .row .order4-form .order4-input,
+.section-order4 .container .row .order4-form input.order4-input,
+.section-order-confirmation .container .row .order4-form .order4-input,
+.section-order-confirmation .container .row .order4-form input.order4-input {
+  margin-bottom: 1.5rem;
+  justify-content: stretch;
+}
+.section-order4 .container .row .order4-form .order4-input:last-child,
+.section-order4 .container .row .order4-form input.order4-input:last-child,
+.section-order-confirmation .container .row .order4-form .order4-input:last-child,
+.section-order-confirmation .container .row .order4-form input.order4-input:last-child {
+  margin-bottom: 0rem;
+}
+.section-order4 .container .row .order4-form .invalid-feedback,
+.section-order-confirmation .container .row .order4-form .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.section-order4 .container .row fieldset,
+.section-order-confirmation .container .row fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+.section-order4 .container .row fieldset legend,
+.section-order-confirmation .container .row fieldset legend {
+  background-color: white;
+  margin-bottom: 1rem;
+}
+.section-order4 .container .row fieldset table,
+.section-order-confirmation .container .row fieldset table {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 0rem;
+}
+.section-order4 .container .row fieldset table tr,
+.section-order-confirmation .container .row fieldset table tr {
+  background-color: white;
+}
+.section-order4 .container .row fieldset table td,
+.section-order-confirmation .container .row fieldset table td {
+  background-color: white;
+  color: #341E34;
+  line-height: 1rem;
+  width: 50%;
+  text-align: start;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  /*font-size: 0.85rem;*/
+}
+.section-order4 .container .row fieldset table td small, .section-order4 .container .row fieldset table td .small,
+.section-order-confirmation .container .row fieldset table td small,
+.section-order-confirmation .container .row fieldset table td .small {
+  color: #A14F08;
+  margin-left: 0.5rem;
+}
+.section-order4 .container .row fieldset table .detail,
+.section-order-confirmation .container .row fieldset table .detail {
+  padding-left: 2rem;
+}
+.section-order4 .container .row .order4-price td:last-child,
+.section-order4 .container .row .order-confirmation-price td:last-child,
+.section-order-confirmation .container .row .order4-price td:last-child,
+.section-order-confirmation .container .row .order-confirmation-price td:last-child {
+  text-align: end;
+}
+.section-order4 .container .row .order4-conditions p,
+.section-order4 .container .row .order-confirmation-conditions p,
+.section-order-confirmation .container .row .order4-conditions p,
+.section-order-confirmation .container .row .order-confirmation-conditions p {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.section-order4 .container .row .order4-conditions,
+.section-order4 .container .row .order-confirmation-conditions,
+.section-order-confirmation .container .row .order4-conditions,
+.section-order-confirmation .container .row .order-confirmation-conditions {
+  text-align: center;
+}
+.section-order4 .container .row .back,
+.section-order4 .container .row .validate,
+.section-order-confirmation .container .row .back,
+.section-order-confirmation .container .row .validate {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.section-order4 .container .row .btn-success,
+.section-order-confirmation .container .row .btn-success {
+  transform: scale(1.2);
 }
 
 .section-dashboard-admin .container .row {
