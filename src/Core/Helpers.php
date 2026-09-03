@@ -97,4 +97,20 @@ function maskEmail(string $email): string
     return $masked;
 }
 
+// Attribuer un classe css en fonction un statut de commande
+function getStatusClass(string $status): string
+{
+    return match($status) {
+        'pending'          => 'btn-white',
+        'accepted'         => 'btn-light',
+        'in_preparation'   => 'btn-primary',
+        'in_delivery'      => 'btn-primary',
+        'delivered'        => 'btn-secondary',
+        'waiting_material' => 'btn-secondary',
+        'completed'        => 'btn-success',
+        'cancelled'        => 'btn-danger',
+        default            => 'btn-white'
+    };
+}
+
 ?>

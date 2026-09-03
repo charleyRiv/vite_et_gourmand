@@ -81,21 +81,46 @@ require_once __DIR__ . '/../layouts/hero.php';
             </div>
         </div>
     </section>
-    <br>
-    <section>
-        <h2>Mes commandes</h2>
-        <?php foreach ($orders as $order) : ?>
-        <div>
-            <p>Commande n°<?= htmlspecialchars($order['order_id'])?></p>
-            <p><?= htmlspecialchars($order['menu_title'])?> pour <?= htmlspecialchars($order['nb_persons']) ?> personnes</p>
-            <p>Pour le <?= htmlspecialchars($order['DateFr'])?>
-                à <?= htmlspecialchars($order['TimeFr'])?>
-            </p>
-            <p><?= htmlspecialchars($order['current_status_fr'])?></p>
 
-            <a href="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>">Voir le détail</a>
+    <section class="section-orders">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <h3>Mes commandes</h3>
+                </div>
+        
+                <?php foreach ($orders as $order) : ?>
+                <fieldset>
+                    <div class="row infos">
+                        <div class="col-12 col-lg-8 orders-info">
+                            <div class="col-12 title">
+                                <p>Commande n°<?= htmlspecialchars($order['order_id'])?></p>
+                            </div>
+                            <div class="col-12 details">
+                                <p><?= htmlspecialchars($order['menu_title'])?> pour <?= htmlspecialchars($order['nb_persons']) ?> personnes</p>
+
+                                <p>Pour le <?= htmlspecialchars($order['DateFr'])?>
+                                    à <?= htmlspecialchars($order['TimeFr'])?>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4 boutons-next">
+                            <div class="boutons">
+                                <div class="col-5 col-lg-12 status">
+                                    <div class="btn <?= getStatusClass($order['current_status']) ?>"><?= htmlspecialchars($order['current_status_fr'])?></div>
+                                </div>
+
+                                <div class="col-5 col-lg-12">
+                                    <a href="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>" class="btn btn-primary">Voir le détail</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <?php endforeach; ?>
+            </div>
         </div>
-        <?php endforeach; ?>
     </section>
 </main>
 

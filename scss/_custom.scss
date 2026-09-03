@@ -179,6 +179,11 @@ a {
     color: $white;
 }
 
+.btn-white {
+    background-color: $white;
+    color: $dark;
+}
+
 .hero {
     position: relative;
     height: 360px;
@@ -1646,14 +1651,20 @@ img {
 
 //--- DASHBOARD CLIENT
 .page-dashboard-client {
+    @include media-breakpoint-up(xl) {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
     .container {
         text-align: center;
+        
         @include media-breakpoint-up(xl) {
             padding-left: 200px;
             padding-right: 200px;
         }
     }
-    .section-profil {
+    .section-profil,
+    .section-orders {
         fieldset {
             background-color: white;
             border: 1px solid $dark;
@@ -1662,10 +1673,10 @@ img {
             padding-right: 1rem;
             padding-top: 10px;
             padding-bottom: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 0px;
 
             .row {
-                align-items: stretch; 
+                align-items: start; 
             }
 
             .infos {
@@ -1675,6 +1686,24 @@ img {
                     flex-direction: column;
                 }
                 align-items: center;
+
+                .orders-info {
+                    text-align: start;
+                    padding-left: 1.5rem;
+                    
+                    p {
+                        margin-bottom: 0px;
+                        padding-bottom: 0.2rem;
+                        padding-top: 0.5rem;
+                    }
+
+                    .title {
+                        color: $info;
+                        font-weight: 500;
+                        padding-left: 2rem;
+                        padding-bottom: 0.5rem;
+                    }
+                }
             }
 
             table {
@@ -1690,13 +1719,14 @@ img {
                     td {
                         background-color: white;
                         color: $dark;
-                        line-height: 1rem;
+                        line-height: 1.2rem;
                         text-align: start;
                     }
 
                     td:first-child {
                         width: 30%;
                         color: $info;
+                        font-weight: 500;
                     }
 
                     td:last-child {
@@ -1738,6 +1768,12 @@ img {
                         text-align: center;
                         align-items: center;
                         justify-content: center;
+                    }
+
+                    .status {
+                        .btn {
+                            border: 1px solid $dark;
+                        }
                     }
                 }
             }

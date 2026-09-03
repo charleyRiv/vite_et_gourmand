@@ -12121,6 +12121,11 @@ a:hover {
   color: #FFF7F2;
 }
 
+.btn-white {
+  background-color: #FFF7F2;
+  color: #341E34;
+}
+
 .hero {
   position: relative;
   height: 360px;
@@ -13362,6 +13367,12 @@ img {
   transform: scale(1.2);
 }
 
+@media (min-width: 1200px) {
+  .page-dashboard-client {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
 .page-dashboard-client .container {
   text-align: center;
 }
@@ -13371,7 +13382,8 @@ img {
     padding-right: 200px;
   }
 }
-.page-dashboard-client .section-profil fieldset {
+.page-dashboard-client .section-profil fieldset,
+.page-dashboard-client .section-orders fieldset {
   background-color: white;
   border: 1px solid #341E34;
   border-radius: 10px;
@@ -13379,48 +13391,78 @@ img {
   padding-right: 1rem;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 0px;
 }
-.page-dashboard-client .section-profil fieldset .row {
-  align-items: stretch;
+.page-dashboard-client .section-profil fieldset .row,
+.page-dashboard-client .section-orders fieldset .row {
+  align-items: start;
 }
-.page-dashboard-client .section-profil fieldset .infos > [class*=col] {
+.page-dashboard-client .section-profil fieldset .infos > [class*=col],
+.page-dashboard-client .section-orders fieldset .infos > [class*=col] {
   display: flex;
   flex-direction: column;
 }
-.page-dashboard-client .section-profil fieldset .infos {
+.page-dashboard-client .section-profil fieldset .infos,
+.page-dashboard-client .section-orders fieldset .infos {
   align-items: center;
 }
-.page-dashboard-client .section-profil fieldset table {
+.page-dashboard-client .section-profil fieldset .infos .orders-info,
+.page-dashboard-client .section-orders fieldset .infos .orders-info {
+  text-align: start;
+  padding-left: 1.5rem;
+}
+.page-dashboard-client .section-profil fieldset .infos .orders-info p,
+.page-dashboard-client .section-orders fieldset .infos .orders-info p {
+  margin-bottom: 0px;
+  padding-bottom: 0.2rem;
+  padding-top: 0.5rem;
+}
+.page-dashboard-client .section-profil fieldset .infos .orders-info .title,
+.page-dashboard-client .section-orders fieldset .infos .orders-info .title {
+  color: #144680;
+  font-weight: 500;
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+}
+.page-dashboard-client .section-profil fieldset table,
+.page-dashboard-client .section-orders fieldset table {
   width: 100%;
   background-color: white;
   margin-bottom: 0rem;
 }
-.page-dashboard-client .section-profil fieldset table tr {
+.page-dashboard-client .section-profil fieldset table tr,
+.page-dashboard-client .section-orders fieldset table tr {
   background-color: white;
 }
-.page-dashboard-client .section-profil fieldset table td {
+.page-dashboard-client .section-profil fieldset table td,
+.page-dashboard-client .section-orders fieldset table td {
   background-color: white;
   color: #341E34;
-  line-height: 1rem;
+  line-height: 1.2rem;
   text-align: start;
 }
-.page-dashboard-client .section-profil fieldset table td:first-child {
+.page-dashboard-client .section-profil fieldset table td:first-child,
+.page-dashboard-client .section-orders fieldset table td:first-child {
   width: 30%;
   color: #144680;
+  font-weight: 500;
 }
-.page-dashboard-client .section-profil fieldset table td:last-child {
+.page-dashboard-client .section-profil fieldset table td:last-child,
+.page-dashboard-client .section-orders fieldset table td:last-child {
   width: 70%;
 }
-.page-dashboard-client .section-profil fieldset .boutons-next {
+.page-dashboard-client .section-profil fieldset .boutons-next,
+.page-dashboard-client .section-orders fieldset .boutons-next {
   flex: 1;
   display: flex;
   align-items: center;
 }
-.page-dashboard-client .section-profil fieldset .boutons-next form {
+.page-dashboard-client .section-profil fieldset .boutons-next form,
+.page-dashboard-client .section-orders fieldset .boutons-next form {
   width: 100%;
 }
-.page-dashboard-client .section-profil fieldset .boutons-next .boutons {
+.page-dashboard-client .section-profil fieldset .boutons-next .boutons,
+.page-dashboard-client .section-orders fieldset .boutons-next .boutons {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -13428,22 +13470,29 @@ img {
   gap: 1rem;
 }
 @media (max-width: 991.98px) {
-  .page-dashboard-client .section-profil fieldset .boutons-next .boutons {
+  .page-dashboard-client .section-profil fieldset .boutons-next .boutons,
+  .page-dashboard-client .section-orders fieldset .boutons-next .boutons {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
   }
-  .page-dashboard-client .section-profil fieldset .boutons-next .boutons > div {
+  .page-dashboard-client .section-profil fieldset .boutons-next .boutons > div,
+  .page-dashboard-client .section-orders fieldset .boutons-next .boutons > div {
     display: flex;
     flex: 1;
   }
 }
-.page-dashboard-client .section-profil fieldset .boutons-next .boutons .btn {
+.page-dashboard-client .section-profil fieldset .boutons-next .boutons .btn,
+.page-dashboard-client .section-orders fieldset .boutons-next .boutons .btn {
   width: 100%;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+.page-dashboard-client .section-profil fieldset .boutons-next .boutons .status .btn,
+.page-dashboard-client .section-orders fieldset .boutons-next .boutons .status .btn {
+  border: 1px solid #341E34;
 }
 
 .section-dashboard-admin .container .row {
