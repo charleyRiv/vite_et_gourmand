@@ -41,7 +41,7 @@ class UserController {
         unset($order);
         
         $pageTitle = 'Mon Espace - Vite & Gourmand';
-        $h1 = 'Mon Espace - ' . $user['first_name'];
+        $h1 = 'Mon Espace';
 
         require_once __DIR__ . '/../../views/user/dashboard.php';
     }

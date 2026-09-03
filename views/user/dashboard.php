@@ -3,52 +3,83 @@
  * @var string $h1
  * @var array $user
  * @var array $orders
+ * @var string $heroImage
  * 
  */
 require_once __DIR__ . '/../layouts/header.php';
+
+$heroTitle = htmlspecialchars($h1);
+$heroImage    = '/assets/images/uploads/hero_banner_charte_001.jpeg';
+require_once __DIR__ . '/../layouts/hero.php';
 ?>
 
-<br>
-<main>
-    <h1><?=  htmlspecialchars($h1)?></h1>
-    <br>
-    <section>
-        <h2>Mes informations</h2>
-        <table>
-            <tr>
-                <td>Nom : </td>
-                <td><?= htmlspecialchars($user['last_name']) ?></td>
-            </tr>
-            <tr>
-                <td>Prénom : </td>
-                <td><?= htmlspecialchars($user['first_name']) ?></td>
-            </tr>
-            <tr>
-                <td>Téléphone : </td>
-                <td><?= htmlspecialchars($user['phone']) ?></td>
-            </tr>
-            <tr>
-                <td>Email : </td>
-                <td><?= htmlspecialchars($user['email']) ?></td>
-            </tr>
-            <tr>
-                <td>Adresse : </td>
-                <td>
-                    <?= htmlspecialchars($user['street_number']) ?> 
-                    <?= htmlspecialchars($user['street_type']) ?> 
-                    <?= htmlspecialchars($user['street_name']) ?><br>
-                    <?= htmlspecialchars($user['zip_code']) ?> 
-                    <?= htmlspecialchars($user['city']) ?>, 
-                    <?= htmlspecialchars($user['country']) ?>
-                </td>
-            </tr>
-        </table>
-        <a href="/mon-espace/profil">Modifier</a>
-        <form action="/mon-espace/supprimer" method="post">
-            <button 
-                type="submit"
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">Supprimer mon compte client</button>
-        </form>
+<main class="page-dashboard-client">
+    <section class="section-profil">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Mes informations</h3>
+                </div>
+
+                <fieldset>
+                    <div class="row infos">
+                        <!-- Colonne de gauche -->
+                        <div class="col-12 col-lg-8">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Nom</td>
+                                    <td><?= htmlspecialchars($user['last_name']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom</td>
+                                    <td><?= htmlspecialchars($user['first_name']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Téléphone</td>
+                                    <td><?= htmlspecialchars($user['phone']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><?= htmlspecialchars($user['email']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Adresse</td>
+                                    <td>
+                                        <?= htmlspecialchars($user['street_number']) ?> 
+                                        <?= htmlspecialchars($user['street_type']) ?> 
+                                        <?= htmlspecialchars($user['street_name']) ?><br>
+                                        <?= htmlspecialchars($user['zip_code']) ?> 
+                                        <?= htmlspecialchars($user['city']) ?>, 
+                                        <?= htmlspecialchars($user['country']) ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Colonne de droite -->
+                        <div class="col-12 col-lg-4 boutons-next">
+                            <form action="/mon-espace/supprimer" method="post">
+                                <div class="boutons">
+                                    <div class="col-5 col-lg-12 modify">
+                                        <a href="/mon-espace/profil" class="btn btn-primary">Modifier</a>
+                                    </div>
+
+                                    <div class="col-5 col-lg-12">
+                                        <button 
+                                            type="submit"
+                                            class="btn btn-danger"
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')"
+                                        >
+                                            Supprimer mon compte
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
     </section>
     <br>
     <section>
@@ -67,7 +98,6 @@ require_once __DIR__ . '/../layouts/header.php';
         <?php endforeach; ?>
     </section>
 </main>
-<br>
 
 <?php
 require_once __DIR__ . '/../layouts/footer.php';

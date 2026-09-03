@@ -13362,6 +13362,90 @@ img {
   transform: scale(1.2);
 }
 
+.page-dashboard-client .container {
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .page-dashboard-client .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-dashboard-client .section-profil fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+.page-dashboard-client .section-profil fieldset .row {
+  align-items: stretch;
+}
+.page-dashboard-client .section-profil fieldset .infos > [class*=col] {
+  display: flex;
+  flex-direction: column;
+}
+.page-dashboard-client .section-profil fieldset .infos {
+  align-items: center;
+}
+.page-dashboard-client .section-profil fieldset table {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 0rem;
+}
+.page-dashboard-client .section-profil fieldset table tr {
+  background-color: white;
+}
+.page-dashboard-client .section-profil fieldset table td {
+  background-color: white;
+  color: #341E34;
+  line-height: 1rem;
+  text-align: start;
+}
+.page-dashboard-client .section-profil fieldset table td:first-child {
+  width: 30%;
+  color: #144680;
+}
+.page-dashboard-client .section-profil fieldset table td:last-child {
+  width: 70%;
+}
+.page-dashboard-client .section-profil fieldset .boutons-next {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.page-dashboard-client .section-profil fieldset .boutons-next form {
+  width: 100%;
+}
+.page-dashboard-client .section-profil fieldset .boutons-next .boutons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+@media (max-width: 991.98px) {
+  .page-dashboard-client .section-profil fieldset .boutons-next .boutons {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .page-dashboard-client .section-profil fieldset .boutons-next .boutons > div {
+    display: flex;
+    flex: 1;
+  }
+}
+.page-dashboard-client .section-profil fieldset .boutons-next .boutons .btn {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
 .section-dashboard-admin .container .row {
   row-gap: 30px;
 }
