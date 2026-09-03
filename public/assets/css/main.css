@@ -217,7 +217,7 @@ hr {
   opacity: 0.25;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
+h6, .h6, h5, .h5, h4, .h4, h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -243,11 +243,11 @@ h2, .h2 {
   }
 }
 
-h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 @media (min-width: 1200px) {
-  h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+  h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
     font-size: 1.75rem;
   }
 }
@@ -12004,7 +12004,7 @@ h2, .h2 {
   font-size: 34px;
 }
 
-h3, .page-order1 .section-order1-form .container fieldset legend, .h3 {
+h3, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   color: #341E34;
   font-weight: 400;
   font-size: 24px;
@@ -12956,7 +12956,7 @@ img {
 .page-order1 .section-order1-intro .container .row .order1-infos p {
   font-size: 1rem;
 }
-.page-order1 .section-order1-intro .container h1, .page-order1 .section-order1-intro .container .h1, .page-order1 .section-order1-intro .container .hero .hero-title, .hero .page-order1 .section-order1-intro .container .hero-title,
+.page-order1 .section-order1-intro .container h2, .page-order1 .section-order1-intro .container .h2,
 .page-order1 .section-order1-intro .container h4,
 .page-order1 .section-order1-intro .container .h4 {
   text-align: center;
@@ -13112,6 +13112,108 @@ img {
   text-align: start;
 }
 .section-order2-form .container .row .order2-form .btn-next {
+  text-align: end;
+}
+
+.section-order3 {
+  /*margin-bottom: 15rem;*/
+}
+@media (min-width: 1200px) {
+  .section-order3 .container {
+    padding-left: 360px;
+    padding-right: 360px;
+  }
+}
+.section-order3 .container .row {
+  row-gap: 5px;
+}
+.section-order3 .container .row h2, .section-order3 .container .row .h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.section-order3 .container .row p {
+  text-align: center;
+  margin-bottom: 0rem;
+}
+.section-order3 .container .row .order3-form {
+  margin-bottom: 3rem;
+}
+.section-order3 .container .row .order3-form .warning {
+  color: #A14F08;
+}
+.section-order3 .container .row .order3-form input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-order3 .container .row .order3-form .order3-label {
+  margin-bottom: 0.1rem;
+  margin-top: 3rem;
+}
+.section-order3 .container .row .order3-form .order3-input,
+.section-order3 .container .row .order3-form input.order3-input {
+  margin-bottom: 1.5rem;
+  justify-content: stretch;
+}
+.section-order3 .container .row .order3-form .order3-input:last-child,
+.section-order3 .container .row .order3-form input.order3-input:last-child {
+  margin-bottom: 0rem;
+}
+.section-order3 .container .row .order3-form .order3-input.is-valid,
+.section-order3 .container .row .order3-form input.order3-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-order3 .container .row .order3-form .order3-input.is-invalid,
+.section-order3 .container .row .order3-form input.order3-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-order3 .container .row .order3-form .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.section-order3 .container .row fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+.section-order3 .container .row fieldset legend {
+  margin-bottom: 1rem;
+}
+.section-order3 .container .row fieldset table {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 0rem;
+}
+.section-order3 .container .row fieldset table tr {
+  background-color: white;
+}
+.section-order3 .container .row fieldset table td {
+  background-color: white;
+  color: #341E34;
+  line-height: 1.2rem;
+}
+.section-order3 .container .row fieldset table td small, .section-order3 .container .row fieldset table td .small {
+  color: #A14F08;
+  margin-left: 0.5rem;
+}
+.section-order3 .container .row fieldset table td:first-child {
+  width: 70%;
+  text-align: start;
+}
+.section-order3 .container .row fieldset table td:last-child {
+  width: 30%;
+  text-align: end;
+}
+.section-order3 .container .row .back {
+  text-align: start;
+}
+.section-order3 .container .row .btn-next {
   text-align: end;
 }
 

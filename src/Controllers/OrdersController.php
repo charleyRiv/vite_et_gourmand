@@ -95,6 +95,7 @@ class OrdersController {
 
         $pageTitle = 'Commandes - etape-3 - Vite & Gourmand';
         $h1= 'Commander - Etape 3/4';
+        $extraJs = ['/assets/js/orders/step3.js'];
         require_once __DIR__ . '/../../views/orders/step3.php';
     }
 
