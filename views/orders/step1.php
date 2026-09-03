@@ -141,10 +141,10 @@ require_once __DIR__ . '/../layouts/header.php';
 
                             <!-- Heure -->
                             <div class="col-12 col-xl-6">
-                                <label for="heure_livraison" class="order1-label">Heure de livraison</label>
+                                <label for="heure_livraison" class="order1-label time">Heure de livraison</label>
 
 
-                                <select id="delivery_time" name="delivery_time" class="order1-input" required>
+                                <select id="delivery_time" name="heure_livraison" class="order1-input time" required>
                                     <option value="">-- Choisir un créneau --</option>
                                     <?php
                                     $start = strtotime('09:00');

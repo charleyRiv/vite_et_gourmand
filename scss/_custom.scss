@@ -1215,7 +1215,6 @@ img {
                 padding-top: 10px;
                 padding-bottom: 25px;
                 margin-bottom: 25px;
-
                 
                 legend {
                     @extend h3;
@@ -1228,7 +1227,8 @@ img {
                 }
 
                 .order1-input,
-                input.order1-input {
+                input.order1-input,
+                select.order1-input {
     
                     margin-bottom: 1.5rem;
                     justify-content: stretch;
@@ -1240,7 +1240,8 @@ img {
             }
 
             .order1-input,
-            input.order1-input {
+            input.order1-input
+            select.order1-input {
                 &.is-valid {
                     border: 2px solid rgba($success, 1) !important;
                 }
