@@ -53,7 +53,8 @@ class UserController {
         $user = $this->userModel->findById($user_id);
 
         $pageTitle = 'Mon Profil - Vite & Gourmand';
-        $h1 = 'Modifier mes informations personnelles';
+        $h1 = 'Données personnelles';
+        $extraJs = ['/assets/js/user/profile.js'];
         require_once __DIR__ . '/../../views/user/profile.php';
     }
 

@@ -13495,6 +13495,89 @@ img {
   border: 1px solid #341E34;
 }
 
+@media (min-width: 1400px) {
+  .section-profil-client-modify .container {
+    padding-left: 350px;
+    padding-right: 350px;
+  }
+}
+.section-profil-client-modify .container .row {
+  row-gap: 5px;
+  justify-content: center;
+}
+.section-profil-client-modify .container .row.boutons-next {
+  row-gap: 20px;
+  text-align: start;
+  margin: 1rem;
+}
+.section-profil-client-modify .container .row .profil-client-label {
+  margin-top: 15px;
+}
+.section-profil-client-modify .container .row h1, .section-profil-client-modify .container .row .h1, .section-profil-client-modify .container .row .hero .hero-title, .hero .section-profil-client-modify .container .row .hero-title {
+  text-align: center;
+}
+.section-profil-client-modify .container span {
+  color: #C0392B;
+}
+.section-profil-client-modify .container input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.section-profil-client-modify .container .row.validate {
+  display: flex;
+  flex-direction: row-reverse;
+  row-gap: 15px;
+  align-items: center;
+}
+.section-profil-client-modify .container .row.validate .btn-success {
+  transform: scale(1.2);
+}
+@media (max-width: 991.98px) {
+  .section-profil-client-modify .container .row.validate {
+    text-align: center;
+    align-items: center;
+  }
+  .section-profil-client-modify .container .row.validate .btn-success {
+    width: 100%;
+  }
+}
+.section-profil-client-modify .container .row.validate .btn-submit {
+  text-align: end;
+}
+.section-profil-client-modify .container .row.validate .back {
+  text-align: start;
+}
+@media (max-width: 991.98px) {
+  .section-profil-client-modify .container .row.validate .back {
+    text-align: center;
+  }
+}
+.section-profil-client-modify .container .modify-password {
+  text-align: end;
+}
+@media (max-width: 991.98px) {
+  .section-profil-client-modify .container .modify-password {
+    text-align: center;
+  }
+  .section-profil-client-modify .container .modify-password .btn-primary {
+    width: 90%;
+  }
+}
+.section-profil-client-modify .profil-client-input.is-valid,
+.section-profil-client-modify input.profil-client-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.section-profil-client-modify .profil-client-input.is-invalid,
+.section-profil-client-modify input.profil-client-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.section-profil-client-modify .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
 .section-dashboard-admin .container .row {
   row-gap: 30px;
 }

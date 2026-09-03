@@ -236,7 +236,7 @@ class AuthController {
 
         $pageTitle = 'Mot de passe oublié - Vite & Gourmand';
         $h1 = 'Demande d\'un nouveau mot de passe';
-        $extraJs = ['/assets/js/auth/reset_password_form.js'];
+        $extraJs = ['/assets/js/auth/password_forgotten.js'];
 
         require_once __DIR__ . '/../../views/auth/password_forgotten.php';
         

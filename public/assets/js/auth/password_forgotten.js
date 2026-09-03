@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('register-form');
     const emailInput = document.getElementById('email');
     const submitBtn = document.getElementById('btn-submit');
 
@@ -10,6 +9,21 @@ document.addEventListener('DOMContentLoaded', function() {
             message: 'Veuillez saisir une adresse mail valide.'
         }
     };
+
+    // ── Validation initiale des champs pré-remplis ────────
+    function validatePrefilledFields() {
+        const fields = [
+            { input: emailInput,        rule: rules.email },
+        ];
+
+        fields.forEach(({ input, rule }) => {
+            if (input && input.value.trim() !== '') {
+                validateField(input, rule);
+            }
+        });
+
+        updateSubmitBtn();
+    }
 
     //Fonctions utilitaires
     function setValid(input) {
@@ -48,5 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Etat initial - bouton désactivé
     submitBtn.disabled = true;
+    validatePrefilledFields();
 
 });

@@ -1782,6 +1782,110 @@ img {
     }
 }
 
+// CLIENT - PROFIL
+.section-profil-client-modify {
+    .container {
+
+        @include media-breakpoint-up(xxl) {
+            padding-left: 350px;
+            padding-right: 350px;
+        }
+
+        .row {
+            row-gap: 5px;
+            justify-content: center;
+
+            &.boutons-next {
+                row-gap: 20px;
+                text-align: start;
+                margin: 1rem;
+            }
+
+
+            .profil-client-label {
+                margin-top: 15px;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        }
+
+        span {
+            color: $danger;
+        }
+
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid rgba($dark, 1);
+        }
+
+        .row.validate {
+            display: flex;
+            flex-direction: row-reverse;
+            row-gap: 15px;
+            align-items: center;
+            
+            .btn-success {
+                transform: scale(1.2);
+            }
+
+            @include media-breakpoint-down(lg) {
+                text-align: center;
+                align-items: center;
+                
+                .btn-success {
+                    width: 100%;
+                }
+            }
+
+
+            .btn-submit {
+                text-align: end;
+                
+            }
+
+            .back {
+                text-align: start;
+                @include media-breakpoint-down(lg) {
+                    text-align: center;
+                }
+            }
+
+        }
+
+        .modify-password {
+            text-align: end;
+
+            @include media-breakpoint-down(lg) {
+                text-align: center;
+                .btn-primary {
+                    width: 90%;
+                }
+            }
+        }
+    }
+
+    .profil-client-input,
+    input.profil-client-input {
+        &.is-valid {
+            border: 2px solid rgba($success, 1) !important;
+        }
+
+        &.is-invalid {
+            border: 2px solid rgba($danger, 1) !important;
+        }
+    }
+
+    .invalid-feedback {
+        color: $danger;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+}
+
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 
