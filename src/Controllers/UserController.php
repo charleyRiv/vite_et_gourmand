@@ -110,7 +110,8 @@ class UserController {
         $order['TimeFr'] = formatTimeFr($order['delivery_time']);
         
         $pageTitle = 'Mes Commandes - Vite & Gourmand';
-        $h1 = 'Ma commande n°'. $id;
+        $h1 = 'Commande n°'. $id;
+        $extraJs = ['/assets/js/user/orders.js'];
         require_once __DIR__ . '/../../views/user/orders.php';
     }
 

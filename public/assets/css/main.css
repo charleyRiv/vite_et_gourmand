@@ -217,7 +217,8 @@ hr {
   opacity: 0.25;
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .section-order4 .container .row fieldset legend,
+h6, .h6, h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .h4, h3, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -264,7 +265,8 @@ h4, .h4 {
   }
 }
 
-h5, .h5 {
+h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5 {
   font-size: 1.25rem;
 }
 
@@ -12021,7 +12023,8 @@ h4, .h4 {
   font-size: 20px;
 }
 
-h5, .h5, h6, .h6 {
+h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h6, .h6 {
   color: #341E34;
   font-family: "Lato", sans-serif;
   font-weight: 600;
@@ -13573,6 +13576,210 @@ img {
   border: 2px solid #c0392b !important;
 }
 .section-profil-client-modify .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 1200px) {
+  .page-client-order {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+.page-client-order .container {
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .page-client-order .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-client-order .section-client-order-menu fieldset,
+.page-client-order .section-client-order-historique fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  margin-bottom: 0px;
+  margin: 1rem;
+  padding: 1rem;
+}
+.page-client-order .section-client-order-menu fieldset legend,
+.page-client-order .section-client-order-historique fieldset legend {
+  font-size: 1.2rem;
+  font-weight: 500;
+  background-color: white;
+  margin-bottom: 1rem;
+  text-align: start;
+}
+.page-client-order .section-client-order-menu fieldset .row,
+.page-client-order .section-client-order-historique fieldset .row {
+  align-items: start;
+}
+.page-client-order .section-client-order-menu fieldset table,
+.page-client-order .section-client-order-historique fieldset table {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 0rem;
+}
+.page-client-order .section-client-order-menu fieldset table tr,
+.page-client-order .section-client-order-historique fieldset table tr {
+  background-color: white;
+}
+.page-client-order .section-client-order-menu fieldset table td,
+.page-client-order .section-client-order-historique fieldset table td {
+  background-color: white;
+  color: #341E34;
+  line-height: 1.2rem;
+  text-align: start;
+}
+.page-client-order .section-client-order-menu fieldset table td:first-child,
+.page-client-order .section-client-order-historique fieldset table td:first-child {
+  width: 40%;
+  color: #144680;
+  font-weight: 500;
+}
+.page-client-order .section-client-order-menu fieldset table td:last-child,
+.page-client-order .section-client-order-historique fieldset table td:last-child {
+  width: 60%;
+}
+.page-client-order .section-client-order-menu fieldset table .detail,
+.page-client-order .section-client-order-historique fieldset table .detail {
+  padding-left: 2rem;
+}
+.page-client-order .section-client-order-menu fieldset .historique,
+.page-client-order .section-client-order-menu fieldset .menu,
+.page-client-order .section-client-order-historique fieldset .historique,
+.page-client-order .section-client-order-historique fieldset .menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 0rem;
+}
+.page-client-order .section-client-order-menu fieldset .historique > [class*=col],
+.page-client-order .section-client-order-menu fieldset .menu > [class*=col],
+.page-client-order .section-client-order-historique fieldset .historique > [class*=col],
+.page-client-order .section-client-order-historique fieldset .menu > [class*=col] {
+  display: flex;
+  flex-direction: column;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-detail,
+.page-client-order .section-client-order-menu fieldset .infos,
+.page-client-order .section-client-order-historique fieldset .cancel-detail,
+.page-client-order .section-client-order-historique fieldset .infos {
+  align-items: center;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-detail p,
+.page-client-order .section-client-order-menu fieldset .infos p,
+.page-client-order .section-client-order-historique fieldset .cancel-detail p,
+.page-client-order .section-client-order-historique fieldset .infos p {
+  margin-bottom: 0px;
+}
+@media (min-width: 992px) {
+  .page-client-order .section-client-order-menu fieldset .cancel-detail,
+  .page-client-order .section-client-order-menu fieldset .infos,
+  .page-client-order .section-client-order-historique fieldset .cancel-detail,
+  .page-client-order .section-client-order-historique fieldset .infos {
+    align-items: start;
+    text-align: start;
+  }
+}
+@media (max-width: 991.98px) {
+  .page-client-order .section-client-order-menu fieldset .cancel-detail,
+  .page-client-order .section-client-order-historique fieldset .cancel-detail {
+    padding-top: 1rem;
+  }
+}
+.page-client-order .section-client-order-menu fieldset .boutons-next,
+.page-client-order .section-client-order-historique fieldset .boutons-next {
+  /*flex: 1;*/
+  display: flex;
+  align-items: center;
+  /*height: 100%;*/
+}
+.page-client-order .section-client-order-menu fieldset .boutons-next form,
+.page-client-order .section-client-order-historique fieldset .boutons-next form {
+  width: 100%;
+}
+.page-client-order .section-client-order-menu fieldset .boutons-next .boutons,
+.page-client-order .section-client-order-historique fieldset .boutons-next .boutons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  justify-content: center;
+  height: 100%;
+}
+@media (max-width: 991.98px) {
+  .page-client-order .section-client-order-menu fieldset .boutons-next .boutons,
+  .page-client-order .section-client-order-historique fieldset .boutons-next .boutons {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .page-client-order .section-client-order-menu fieldset .boutons-next .boutons > div,
+  .page-client-order .section-client-order-historique fieldset .boutons-next .boutons > div {
+    display: flex;
+    flex: 1;
+  }
+}
+.page-client-order .section-client-order-menu fieldset .boutons-next .boutons .btn,
+.page-client-order .section-client-order-historique fieldset .boutons-next .boutons .btn {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.page-client-order .section-client-order-menu fieldset .boutons-next .boutons .status .btn,
+.page-client-order .section-client-order-historique fieldset .boutons-next .boutons .status .btn {
+  border: 1px solid #341E34;
+}
+.page-client-order .section-client-order-menu fieldset .pending-options,
+.page-client-order .section-client-order-historique fieldset .pending-options {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  row-gap: 0.5rem;
+}
+.page-client-order .section-client-order-menu fieldset .pending-options .btn,
+.page-client-order .section-client-order-historique fieldset .pending-options .btn {
+  transform: scale(0.9);
+}
+.page-client-order .section-client-order-menu fieldset .cancel-form,
+.page-client-order .section-client-order-historique fieldset .cancel-form {
+  width: 100%;
+  align-items: start;
+  text-align: start;
+  justify-content: stretch;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-form .btn,
+.page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-input,
+.page-client-order .section-client-order-menu fieldset .cancel-form textarea.cancel-form-input,
+.page-client-order .section-client-order-historique fieldset .cancel-form .btn,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-input,
+.page-client-order .section-client-order-historique fieldset .cancel-form textarea.cancel-form-input {
+  width: 100%;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label {
+  padding-left: 0.5rem;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-form-input.is-valid,
+.page-client-order .section-client-order-menu fieldset textarea.cancel-form-input.is-valid,
+.page-client-order .section-client-order-historique fieldset .cancel-form-input.is-valid,
+.page-client-order .section-client-order-historique fieldset textarea.cancel-form-input.is-valid {
+  border: 2px solid #2e7d4f !important;
+}
+.page-client-order .section-client-order-menu fieldset .cancel-form-input.is-invalid,
+.page-client-order .section-client-order-menu fieldset textarea.cancel-form-input.is-invalid,
+.page-client-order .section-client-order-historique fieldset .cancel-form-input.is-invalid,
+.page-client-order .section-client-order-historique fieldset textarea.cancel-form-input.is-invalid {
+  border: 2px solid #c0392b !important;
+}
+.page-client-order .section-client-order-menu fieldset .invalid-feedback,
+.page-client-order .section-client-order-historique fieldset .invalid-feedback {
   color: #C0392B;
   font-size: 0.85rem;
   margin-top: 0.25rem;
