@@ -305,6 +305,16 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSubmitBtn();
     });
 
+    menuInput.addEventListener('change', function() {
+        validateField(this, rules.menu);
+        updateSubmitBtn();
+    })
+
+    nbPersonsInput.addEventListener('input', function() {
+        validateField(this, rules.nbPersons);
+        updateSubmitBtn();
+    })
+
     //Fonction de calcul des frais de livraison via API
     async function fetchDeliveryFees() {
         const formData = new FormData();

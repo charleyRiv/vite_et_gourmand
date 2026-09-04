@@ -22,17 +22,18 @@ require_once __DIR__ . '/../layouts/header.php';
                     </div>
                         <fieldset class="client-update-order-date-form">
                             <legend>Date et heure de livraison</legend>
+                            <hr>
 
                             <div class="row date-form">
                                 <!-- Date -->
                                 <div class="col-12 col-xl-6">
-                                    <label for="date_livraison" class="order1-label">Date de livraison</label>
+                                    <label for="date_livraison" class="client-update-order-label">Date de livraison</label>
 
                                     <input 
                                         type="text" 
                                         id="date_livraison" 
                                         name="event_date" 
-                                        class="order1-input datepicker"
+                                        class="client-update-order-input datepicker"
                                         placeholder="Sélectionner une date"
                                         value="<?= htmlspecialchars($order['event_date'] ?? '') ?>"
                                         required>
@@ -44,8 +45,8 @@ require_once __DIR__ . '/../layouts/header.php';
 
                                     <!-- Heure -->
                                 <div class="col-12 col-xl-6">
-                                    <label for="heure_livraison" class="order1-label time">Heure de livraison</label>
-                                    <select id="heure_livraison" name="heure_livraison" class="order1-input time" required>
+                                    <label for="heure_livraison" class=" col-12 client-update-order-label time">Heure de livraison</label>
+                                    <select id="heure_livraison" name="heure_livraison" class="col-12 client-update-order-input time" required>
                                         <option value="">-- Choisir un créneau --</option>
                                         <?php
                                         $start = strtotime('09:00');
@@ -67,6 +68,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                         <fieldset class="client-update-order-delivery-form">
                             <legend>Adresse de livraison</legend>
+                            <hr>
                                 
                             <div class="row street">
                                 <!-- Champs N° voie -->
@@ -165,6 +167,8 @@ require_once __DIR__ . '/../layouts/header.php';
                         
                         <fieldset class="client-update-order-menu-form">
                             <legend>Menu</legend>
+                            <hr>
+
                             <div class="col-12 client-update-order-label">
                                 <label for="title">Sélectionner un menu</label>
                             </div>
@@ -208,6 +212,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                         <fieldset class="client-update-order-prices">
                             <legend>Détail du nouveau prix</legend>
+                            <hr>
 
                             <table class="table table-borderless"> 
                                 <tr>
@@ -244,10 +249,10 @@ require_once __DIR__ . '/../layouts/header.php';
                         </fieldset>
 
                         <div class="row boutons-next">
-                            <div class="col-12 col-lg-5 back">
+                            <div class="col-12 col-xl-6 back">
                                 <a href="/mon-espace">Revenir à mon espace</a>
                             </div>
-                            <div class="col-12 col-lg-5 validate">
+                            <div class="col-12 col-xl-6 validate">
                                 <button type="submit" id="btn-submit" class="btn btn-success">Valider les modifications</button>
                             </div>
                         </div>
