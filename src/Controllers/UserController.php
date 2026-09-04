@@ -140,6 +140,7 @@ class UserController {
 
         $pageTitle = "Modifier ma commande - Vite & Gourmand";
         $h1 = 'Modifier ma commande n°' . $id;
+        $extraJs = ['/assets/js/user/updateOrdersForm.js'];
         require_once __DIR__ . '/../../views/user/updateOrdersForm.php';
     }
 
@@ -204,6 +205,7 @@ class UserController {
             $menu = $this->menuModel->getById($order['menu_id']);
             $menus = $this->menuModel->getAll();
             $h1 = 'Modifier ma commande n°' . $id;
+            $extraJs = ['/assets/js/user/orders.js'];
             require_once __DIR__ . '/../../views/user/updateOrdersForm.php';
             return;
         }

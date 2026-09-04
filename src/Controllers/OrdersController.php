@@ -342,4 +342,40 @@ class OrdersController {
         $h1= 'Commande n°' . $orderId;
         require_once __DIR__ . '/../../views/orders/confirmation.php';
     }
+
+
+// Méthodes utilitaires
+
+//Calcul des frais de livraison
+    public function calculateDeliveryFees(): void
+    {
+        header('Content-Type: application/json');
+    
+        $city        = trim($_POST['city'] ?? '');
+        $street      = implode(' ', [
+            trim($_POST['street_number'] ?? ''),
+            trim($_POST['street_type']   ?? ''),
+            trim($_POST['street_name']   ?? '')
+        ]);
+        $address = implode(', ', [
+            $street,
+            trim($_POST['zip_code'] ?? ''),
+            $city,
+            trim($_POST['country'] ?? '')
+        ]);
+    
+        $distanceService = new DistanceService();
+        $distance        = floor($distanceService->getDistance($address)) ?? 0;
+    
+        $deliveryFees = strtolower($city) !== 'bordeaux'
+            ? $this->orderModel->deliveryCharges($distance)
+            : 0;
+    
+        echo json_encode([
+            'distance'      => $distance,
+            'delivery_fees' => $deliveryFees,
+            'city'          => $city
+        ]);
+        exit();
+    }
 }

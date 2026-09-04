@@ -129,7 +129,8 @@ require_once __DIR__ . '/../layouts/header.php';
                             <div class="col-12 post">
                                 <a href="/mon-espace/commande/<?= $order['order_id']?>/avis" class="btn btn-primary">Poster un avis</a>
                             </div> 
-                        <?php else: ?>   
+                        <?php endif; ?>
+                        <?php if ($order['current_status'] === 'completed' && empty($review)) : ?>  
                             <div class="col-12 post">
                                 <div class="btn btn-success disabled">Merci pour votre avis</div>
                             </div>

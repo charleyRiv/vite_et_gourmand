@@ -173,6 +173,10 @@ $router->get('/admin/statistiques', 'AdminController', 'showStatistics');
    // Client contact
 $router->get('/admin/contact','AdminController','listMessages');
 
+//endpoint 
+    //Calcul des frais kilométriques
+$router->post('/api/delivery-fees', 'OrdersController', 'calculateDeliveryFees');
+
 //Request dispatch
 $router->dispatch(
     $_SERVER['REQUEST_METHOD'], 
