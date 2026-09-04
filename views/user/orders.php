@@ -15,7 +15,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="container">
             <div class="row">
                 <div class="col-12 title">
-                    <h3><?=  htmlspecialchars($h1)?></h3>
+                    <h2><?=  htmlspecialchars($h1)?></h2>
                 </div>
                     <div class="col-12 delivery-details">
                         <p>Date de livraison : <?= htmlspecialchars($order['DateFr']) ?></p>           
@@ -125,8 +125,14 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
                     </fieldset>
                         
-                        <?php if ($order['current_status'] === 'completed' && !empty($review)) : ?>
-                        <a href="/mon-espace/commande/<?= $order['order_id']?>/avis">Poster un avis</a>
+                        <?php if ($order['current_status'] === 'completed' && !empty($review)) : ?> 
+                            <div class="col-12 post">
+                                <a href="/mon-espace/commande/<?= $order['order_id']?>/avis" class="btn btn-primary">Poster un avis</a>
+                            </div> 
+                        <?php else: ?>   
+                            <div class="col-12 post">
+                                <div class="btn btn-success disabled">Merci pour votre avis</div>
+                            </div>
                         <?php endif; ?>
                     
             </div>
@@ -137,7 +143,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="container">
             <div class="row">
                 <div class="col-12 title">
-                    <h3>Historique</h3>
+                    <h2>Historique</h2>
                 </div>
 
                     <?php foreach ($statuses as $status) : ?>
@@ -167,7 +173,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <?php endif; ?>
                         </fieldset>
                     <?php endforeach; ?>
-                    <div class="col-12">
+                    <div class="col-12 back">
                         <a href="/mon-espace" class="btn btn-primary">retour à mon espace</a>
                     </div>
             </div>

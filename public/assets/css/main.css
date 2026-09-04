@@ -13596,6 +13596,20 @@ img {
     padding-right: 200px;
   }
 }
+.page-client-order .section-client-order-menu .post,
+.page-client-order .section-client-order-menu .back,
+.page-client-order .section-client-order-historique .post,
+.page-client-order .section-client-order-historique .back {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .page-client-order .section-client-order-menu .post,
+  .page-client-order .section-client-order-menu .back,
+  .page-client-order .section-client-order-historique .post,
+  .page-client-order .section-client-order-historique .back {
+    text-align: start;
+  }
+}
 .page-client-order .section-client-order-menu fieldset,
 .page-client-order .section-client-order-historique fieldset {
   background-color: white;

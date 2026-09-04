@@ -32,7 +32,7 @@ class ReviewModel
         return $stmt->fetchAll();
     }
 
-    public function getByOrderId(int $id): array
+    public function getByOrderId(int $id): ?array
     {
         $stmt = $this->db->prepare("
             SELECT
@@ -46,8 +46,8 @@ class ReviewModel
                 u.last_name,
                 u.first_name
             FROM review r
-            JOIN order o ON r.order_id = o.order_id
-            JOIN user u ON r.user_id = u_user_id
+            JOIN customer_order o ON r.order_id = o.order_id
+            JOIN user u ON r.user_id = u.user_id
             WHERE r.order_id = :order_id
             ORDER BY reviewed_at ASC
         ");
@@ -56,7 +56,8 @@ class ReviewModel
             ':order_id' => $id
         ]);
 
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        return $result ?: null;
     }
 
     public function getAllValidated(): array

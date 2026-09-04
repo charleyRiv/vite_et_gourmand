@@ -1899,8 +1899,17 @@ img {
             padding-right: 200px;
         }
     }
+
     .section-client-order-menu,
     .section-client-order-historique {
+        .post,
+        .back {
+            text-align: center;
+
+            @include media-breakpoint-up(lg) {
+                text-align: start;
+            }
+        }
 
         fieldset {
             background-color: white;
