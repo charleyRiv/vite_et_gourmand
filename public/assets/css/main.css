@@ -3018,7 +3018,7 @@ textarea.form-control-lg {
   opacity: var(--bs-btn-disabled-opacity);
 }
 
-.btn-primary {
+.btn-primary, .btn-dashboard:hover {
   --bs-btn-color: #341E34;
   --bs-btn-bg: #FB9C75;
   --bs-btn-border-color: #FB9C75;
@@ -12080,7 +12080,7 @@ a:hover {
 .navbar .bi {
   font-size: 40px;
 }
-.navbar .btn-primary {
+.navbar .btn-primary, .navbar .btn-dashboard:hover {
   margin-left: 0.5rem;
 }
 
@@ -12091,11 +12091,11 @@ a:hover {
     padding-top: 0.1rem;
     padding-bottom: 0.3rem;
   }
-  .navbar-collapse .btn-primary {
+  .navbar-collapse .btn-primary, .navbar-collapse .btn-dashboard:hover {
     margin-top: 0.5rem;
   }
 }
-.btn-primary {
+.btn-primary, .btn-dashboard:hover {
   background-color: #FB9C75;
   border-color: #CC8263;
 }
@@ -12114,7 +12114,6 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
-
 .btn-success {
   background-color: #2E7D4F;
 }
@@ -13565,7 +13564,7 @@ img {
   .section-profil-client-modify .container .modify-password {
     text-align: center;
   }
-  .section-profil-client-modify .container .modify-password .btn-primary {
+  .section-profil-client-modify .container .modify-password .btn-primary, .section-profil-client-modify .container .modify-password .btn-dashboard:hover {
     width: 90%;
   }
 }
@@ -14016,12 +14015,26 @@ img {
   width: fit-content;
 }
 
-.section-dashboard-admin .container .row {
+.section-dashboard-admin .container .row,
+.section-dashboard-employee .container .row {
   row-gap: 30px;
+  text-align: center;
 }
+.section-dashboard-admin .container .btn,
+.section-dashboard-employee .container .btn {
+  width: 100%;
+}
+
 @media (min-width: 992px) {
   .section-dashboard-admin .container {
     padding-left: 200px;
     padding-right: 200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .section-dashboard-employee .container {
+    padding-left: 350px;
+    padding-right: 350px;
   }
 }/*# sourceMappingURL=main.css.map */

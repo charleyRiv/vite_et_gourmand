@@ -5,28 +5,49 @@
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
-<br>
 <main>
-    <h1><?=  htmlspecialchars($h1)?></h1>
-    <br>
-        <form action="/employe/mot-de-passe" method="POST">
-            <input type="submit" value="Modifier mon mot de passe">
-        </form>
+    <section class="section-dashboard-employee">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2><?=  htmlspecialchars($h1)?></h2>
+                </div>
 
-        <a href="/employe/commandes">Gérer les commandes</a>
+                <div class="col-12">
+                <form action="/employe/mot-de-passe" method="POST">
+                        <button type="submit" class="btn btn-dashboard">Modifier mon mot de passe</button>
+                </form>
+                </div>
 
-        <a href="/employe/avis">Gérer les avis</a>
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/commandes" class="btn btn-dashboard">Gérer les commandes</a>
+                </div>
+                
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/avis" class="btn btn-dashboard">Gérer les avis</a>
+                </div>
 
-        <a href="/employe/menus">Gérer les menus</a>
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/menus" class="btn btn-dashboard">Gérer les menus</a>
+                </div>
 
-        <a href="/employe/plats">Gérer les plats</a>
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/plats" class="btn btn-dashboard">Gérer les plats</a>
+                </div>
 
-        <a href="/employe/contenus">Gérer les contenus</a>
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/contenus" class="btn btn-dashboard">Gérer les contenus</a>
+                </div>
 
-        <a href="/employe/contact">Voir les messages clients</a>
+                <div class="col-12 col-xl-6">
+                    <a href="/employe/contact" class="btn btn-dashboard">Voir les messages clients</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
-<br>
+
 
 <?php
-//require_once __DIR__ . '/../layouts/footer.php';
+require_once __DIR__ . '/../layouts/footer.php';
 ?>

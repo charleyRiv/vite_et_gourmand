@@ -150,6 +150,8 @@ a {
     }
 }
 
+// BOUTONS
+
 .btn-primary {
     background-color: $primary;
     border-color: #CC8263;
@@ -168,6 +170,10 @@ a {
     display: flex ;
     justify-content: center;
     align-items: center;
+
+    &:hover {
+        @extend .btn-primary;
+    }
 }
 
 .btn-success {
@@ -2361,17 +2367,36 @@ img {
     }
 
 }
-//--- DASHBOARD ADMIN
-.section-dashboard-admin {
+//--- DASHBOARD ADMIN/EMPLOYE
+.section-dashboard-admin,
+.section-dashboard-employee {
 
     .container {
         .row {
-            row-gap: 30px;                
+            row-gap: 30px;  
+            text-align: center;              
         }
 
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+.section-dashboard-admin {
+    .container {
         @include media-breakpoint-up(lg) {
             padding-left: 200px;
             padding-right: 200px
+        }
+    }
+}
+
+.section-dashboard-employee {
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 350px;
+            padding-right: 350px
         }
     }
 }

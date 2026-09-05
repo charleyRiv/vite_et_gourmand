@@ -8,8 +8,8 @@ require_once __DIR__ . '/../layouts/header.php';
 <main>
     <section class="section-dashboard-admin">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-12 text-center">
+            <div class="row">
+                <div class="col-12">
                     <h2><?=  htmlspecialchars($h1)?></h2>
                 </div>
                 <div class="col-12 col-lg-6 col-xl-4">
