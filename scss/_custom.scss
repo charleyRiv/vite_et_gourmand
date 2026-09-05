@@ -2250,6 +2250,117 @@ img {
         }
     }
 }
+
+//--- CLIENT REVIEW
+.page-client-review {
+    .container {
+        @include media-breakpoint-up(xl) {
+                        padding-left: 360px;
+                        padding-right: 360px;
+                    }
+            .row {
+                justify-content: start;
+
+                input {
+                    width: 100%;
+                    border-radius: 5px;
+                    border: 1px solid rgba($dark, 1);
+                }
+
+            .title {
+                text-align: center;
+            }
+            }
+
+            fieldset {
+                background-color: white;
+                border: 1px solid $dark;
+                border-radius: 10px;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                margin-bottom: 25px;
+                
+                legend {
+                    @extend h4;
+                    margin-bottom: 1rem;
+                }
+
+                table {
+                    width: 100%;
+                    background-color: white;
+                    margin-bottom: 0rem;
+
+
+                    tr {
+                        background-color: white;
+                    }
+
+                    td {
+                        background-color: white;
+                        color: $dark;
+                        line-height: 1.2rem;
+                        text-align: start;
+                    }
+
+                    td:first-child {
+                        width: 40%;
+                        color: $info;
+                        font-weight: 500;
+                    }
+
+                    td:last-child {
+                        width: 60%;
+                        text-align: end;
+                    }
+
+                    .detail {
+                        padding-left: 2rem;
+                    }
+                }
+            }
+    }
+
+    .section-client-review-rate {
+        .stars-rating {
+            display: flex;
+            gap: 0.5rem;
+            cursor: pointer;
+
+            .etoile-rating {
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+                transition: transform 0.1s ease;
+            
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+        .comment {
+            /*display: flex;
+            align-items: stretch;
+            justify-content: stretch;*/
+            textarea {
+                width: 100%;
+                min-height: 15rem;
+            }
+        }
+
+        .validate {
+            text-align: end;
+        }
+
+        fieldset.rate {
+            width: fit-content;
+        }
+
+    }
+
+}
 //--- DASHBOARD ADMIN
 .section-dashboard-admin {
 

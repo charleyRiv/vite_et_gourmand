@@ -224,6 +224,7 @@ class UserController {
 
         $pageTitle = 'Noter la commande - Vite & Gourmand';
         $h1 = 'Formulaire avis';
+        $extraJs = ['/assets/js/user/review.js'];
         require_once __DIR__ . '/../../views/user/review.php';
     }
 
