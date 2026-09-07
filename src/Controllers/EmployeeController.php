@@ -239,7 +239,22 @@ class EmployeeController
     
     public function listMenus(): void
     {
-        $menus = $this->menuModel->getAllAdmin();
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 4;
+
+        // Récupérer les filtres depuis GET
+        $filters = [
+            'diets'   => $_GET['diet']   ?? [],
+            'themes'   => $_GET['theme']  ?? [],
+            'status' => $_GET['status'] ?? [],
+            'search' => $_GET['search'] ?? '',
+        ];
+        $offset = ($currentPage -1) * $perPage;
+
+        $totalMenus = $this->menuModel->countWithFilters($filters);
+        $totalPages = ceil($totalMenus / $perPage);
+
+        $menus = $this->menuModel->getAllWithFilters($filters, $perPage, $offset);
         $diets = $this->dietModel->getAll();
         $themes = $this->themeModel->getAll();
         $basePath = $this->getBasePath();
@@ -250,6 +265,7 @@ class EmployeeController
 
         $pageTitle = 'Gérer des menus - Vite & Gourmand';
         $h1 = 'Gérer les menus';
+        $extraJs = ['/assets/js/employee/menus.js'];
         require_once __DIR__ . '/../../views/employee/menus.php';
     } 
     

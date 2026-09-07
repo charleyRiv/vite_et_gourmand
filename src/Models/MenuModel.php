@@ -312,7 +312,23 @@ class MenuModel
             $params[':nb_persons'] = (int) $filters['nb_persons'];
         }
 
-        $where = 'WHERE ' . implode(' AND ', $conditions);
+        if (!empty($filters['status'])) {
+            if (in_array('is_active', $filters['status']) && !in_array('is_inactive', $filters['status'])) {
+                $conditions[] = 'm.is_active = 1';
+            } elseif (!in_array('is_active', $filters['status']) && in_array('is_inactive', $filters['status'])) {
+                $conditions[] = 'm.is_active = 0';
+            }
+        }
+
+        if (!empty($filters['search'])) {
+            $conditions[] = 'm.title LIKE :search';
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+
+        $where = !empty($conditions)
+            ? 'WHERE ' . implode(' AND ', $conditions)
+            : '';
+
         $stmt = $this->db->prepare("
             SELECT COUNT(*) AS total 
             FROM menu m
@@ -331,7 +347,7 @@ class MenuModel
 
     public function getAllWithFilters(array $filters = [], int $limit = 4, int $offset = 0): array
     {
-        $conditions = ['m.is_active = 1'];
+        $conditions = [];
         $params = [];
 
         if (!empty($filters['prix_min'])) {
@@ -365,7 +381,23 @@ class MenuModel
             $params[':nb_persons'] = (int) $filters['nb_persons'];
         }
 
-        $where = 'WHERE ' . implode(' AND ', $conditions);
+        if (!empty($filters['status'])) {
+            if (in_array('is_active', $filters['status']) && !in_array('is_inactive', $filters['status'])) {
+                $conditions[] = 'm.is_active = 1';
+            } elseif (!in_array('is_active', $filters['status']) && in_array('is_inactive', $filters['status'])) {
+                $conditions[] = 'm.is_active = 0';
+            }
+        }
+
+        if (!empty($filters['search'])) {
+            $conditions[] = 'm.title LIKE :search';
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+
+        $where = !empty($conditions)
+            ? 'WHERE ' . implode(' AND ', $conditions)
+            : '';
+
         $stmt = $this->db->prepare("
             SELECT 
                 m.menu_id, 
