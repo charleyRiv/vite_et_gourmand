@@ -8,6 +8,7 @@
  * @var array $statusHistory
  * @var int $totalPages
  * @var int $currentPage
+ * @var string $basePath
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -201,7 +202,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <div class="col-12 boutons">
                                 <button type="submit" class="col-6 btn btn-primary" id="submit-btn">valider</button>
                             
-                                <a href="/employe/commandes/<?= $order['order_id'] ?>/historique" class="col-4 btn btn-secondary">Voir l'historique</a>
+                                <a href="<?= $basePath ?>/commandes/<?= $order['order_id'] ?>/historique" class="col-4 btn btn-secondary">Voir l'historique</a>
                             </div>
                         </form>                    
                     </fieldset>
@@ -215,7 +216,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="container">
             <div class="row">
                 <div class="col-auto">
-                    <a href="/employe/">retour au dashboard</a>
+                    <a href="<?= $basePath ?>/">retour au dashboard</a>
                 </div>
                 <?php if ($totalPages > 1): ?>
                     <div class="col-auto">

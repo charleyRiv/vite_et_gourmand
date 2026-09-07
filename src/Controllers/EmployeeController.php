@@ -80,6 +80,7 @@ class EmployeeController
 
     public function listOrders(): void
     {
+        $basePath = $this->getBasePath();
         $currentPage = (int) ($_GET['page'] ?? 1);
         $perPage = 3;
 
