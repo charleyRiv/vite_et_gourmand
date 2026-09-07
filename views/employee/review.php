@@ -26,7 +26,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 Note <i class="bi bi-chevron-compact-down"></i>
                             </button>
                         </div> 
-                        <div id="rate_filter" class="col-auto checkboxes " >
+                        <div id="rate_filter" class="col-auto checkboxes d-none" >
                             <?php
                             // Chargement initial = pas de filtre rate dans l'URL
                             $isInitialLoadRate = !isset($_GET['rate']);
@@ -62,7 +62,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 Dates <i class="bi bi-chevron-compact-down"></i>
                             </button>
                         </div>
-                        <div id="dates-filter" class="col-auto checkboxes ">
+                        <div id="dates-filter" class="col-auto checkboxes d-none">
                             <div>
                                 <label for="date_from">Du :</label>
                                 <input 
@@ -91,7 +91,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 Status <i class="bi bi-chevron-compact-down"></i>
                             </button>
                         </div>
-                        <div id="status_filter" class="col-auto checkboxes">
+                        <div id="status_filter" class="col-auto checkboxes d-none">
                             <?php $isInitialLoadStatus = !isset($_GET['status']); ?>
 
                             <div>
@@ -202,7 +202,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <?php else : ?>
                                 <div class="col-12">
                                     <?= htmlspecialchars($review['validation_status_fr'])?> le <?= htmlspecialchars($review['reviewed_at'])?>
-                                </div-->
+                                </div>
                             <?php endif; ?>
                                 </div>
                             </div>
