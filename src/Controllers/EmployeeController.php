@@ -493,7 +493,25 @@ class EmployeeController
     // ___ REVIEWS ___
     public function listReviews(): void
     {
-        $reviews = $this->reviewModel->getAll();
+        $basePath = $this->getBasePath();
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 4;
+
+        // Récupérer les filtres depuis GET
+        $filters = [
+            'rate'   => $_GET['rate']   ?? [],
+            'date_from'   => $_GET['date_from']  ?? [],
+            'date_to' => $_GET['date_to'] ?? [],
+            'status' => $_GET['status'] ?? [],
+        ];
+        $offset = ($currentPage -1) * $perPage;
+
+        $totalReviews = $this->reviewModel->countWithFilters($filters);
+        $totalPages = ceil($totalReviews / $perPage);
+
+
+        $reviews = $this->reviewModel->getAllWithFilters($filters, $perPage, $offset);
+        //$reviews = $this->reviewModel->getAll();
 
         foreach ($reviews as &$review) {
             $review['validation_status_fr'] = translateStatusReview($review['validation_status']);
@@ -502,6 +520,7 @@ class EmployeeController
 
         $pageTitle = 'Gérer des avis - Vite & Gourmand';
         $h1 = 'Gérer les avis';
+        $extraJs = ['/assets/js/employee/reviews.js'];
         require_once __DIR__ . '/../../views/employee/review.php';
     } 
 

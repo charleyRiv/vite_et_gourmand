@@ -2609,3 +2609,146 @@ img {
 
 }
 
+//--- EMPLOYE REVIEWS
+.page-employee-reviews {
+    h2 {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+    }
+    
+    .section-filters {
+        .row.filters {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin: 0px;
+            row-gap: 2rem;
+        }
+
+        .rate-filter,
+        .dates-filter,
+        .status-filter {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0rem;
+            width: fit-content;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
+
+            /*.bouton {
+            padding: 0px;
+        }*/
+        }
+
+        .boutons-filters {
+            display: flex;
+            flex-direction: row;
+            row-gap: 1rem;
+            width: fit-content;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            
+        }
+
+        .checkboxes {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 5px;
+            margin: 0rem;
+            margin-left: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    .section-employee-reviews {
+        .row.reviews {
+            gap: 30px;
+            justify-content: center;
+            align-items: stretch;
+            text-align: start;
+        }
+
+
+        fieldset {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 10px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            @extend small;
+        
+            
+            .row {
+                margin-bottom: 0px;
+            }
+
+            .row.review-info {
+                row-gap: 10px
+            }
+            
+            legend {
+                @extend h4;
+                margin-bottom: 1rem;
+                padding-left: 3rem;
+            }
+
+            .user-name {
+                color: $info;
+            }
+            .stars-rating {
+                width: 7rem;
+                justify-content: flex-start;
+            }
+
+            .boutons {
+
+                .col-12 {
+                    display: flex;
+                flex-direction: row;
+                text-align: center;
+                align-items: stretch;
+                justify-content: space-around;
+                height: 100%;
+                }
+                .btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                }
+            }
+        }
+    }
+
+    .section-pagination {
+        .row {
+            justify-content: space-between;
+        }
+        ul {
+        justify-content: center;
+        text-align: center;
+        }
+    }
+
+}

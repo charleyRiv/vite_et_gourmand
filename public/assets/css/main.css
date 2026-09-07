@@ -218,7 +218,7 @@ hr {
 }
 
 h6, .h6, h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
-.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -256,11 +256,11 @@ h3, .page-client-update-order .section-client-update-order .container fieldset l
   }
 }
 
-h4, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+h4, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
   font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
-  h4, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+  h4, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
     font-size: 1.5rem;
   }
 }
@@ -330,7 +330,7 @@ strong {
   font-weight: bolder;
 }
 
-small, .page-employee-orders .section-employee-orders fieldset table td, .small {
+small, .page-employee-reviews .section-employee-reviews fieldset, .page-employee-orders .section-employee-orders fieldset table td, .small {
   font-size: 0.875em;
 }
 
@@ -12016,7 +12016,7 @@ h3, .page-client-update-order .section-client-update-order .container fieldset l
   font-size: 24px;
 }
 
-h4, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+h4, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
   color: #341E34;
   font-family: "Lato", sans-serif;
   font-weight: 600;
@@ -12031,7 +12031,7 @@ h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-
   font-size: 18px;
 }
 
-small, .page-employee-orders .section-employee-orders fieldset table td,
+small, .page-employee-reviews .section-employee-reviews fieldset, .page-employee-orders .section-employee-orders fieldset table td,
 .small,
 .text-small {
   font-family: "Lato", sans-serif;
@@ -12976,6 +12976,8 @@ img {
 }
 .page-order1 .section-order1-intro .container h2, .page-order1 .section-order1-intro .container .h2,
 .page-order1 .section-order1-intro .container h4,
+.page-order1 .section-order1-intro .container .page-employee-reviews .section-employee-reviews fieldset legend,
+.page-employee-reviews .section-employee-reviews fieldset .page-order1 .section-order1-intro .container legend,
 .page-order1 .section-order1-intro .container .page-employee-orders .section-employee-orders fieldset legend,
 .page-employee-orders .section-employee-orders fieldset .page-order1 .section-order1-intro .container legend,
 .page-order1 .section-order1-intro .page-client-review .container fieldset legend,
@@ -13222,7 +13224,7 @@ img {
   color: #341E34;
   line-height: 1.2rem;
 }
-.section-order3 .container .row fieldset table td small, .section-order3 .container .row .page-employee-orders .section-employee-orders fieldset table td td, .page-employee-orders .section-employee-orders .section-order3 .container .row fieldset table td td, .section-order3 .container .row fieldset table td .small {
+.section-order3 .container .row fieldset table td small, .section-order3 .container .row fieldset table td .page-employee-reviews .section-employee-reviews fieldset, .page-employee-reviews .section-employee-reviews .section-order3 .container .row fieldset table td fieldset, .section-order3 .container .row .page-employee-orders .section-employee-orders fieldset table td td, .page-employee-orders .section-employee-orders .section-order3 .container .row fieldset table td td, .section-order3 .container .row fieldset table td .small {
   color: #A14F08;
   margin-left: 0.5rem;
 }
@@ -13339,8 +13341,10 @@ img {
   font-weight: 500;
   /*font-size: 0.85rem;*/
 }
-.section-order4 .container .row fieldset table td small, .section-order4 .container .row .page-employee-orders .section-employee-orders fieldset table td td, .page-employee-orders .section-employee-orders .section-order4 .container .row fieldset table td td, .section-order4 .container .row fieldset table td .small,
+.section-order4 .container .row fieldset table td small, .section-order4 .container .row fieldset table td .page-employee-reviews .section-employee-reviews fieldset, .page-employee-reviews .section-employee-reviews .section-order4 .container .row fieldset table td fieldset, .section-order4 .container .row .page-employee-orders .section-employee-orders fieldset table td td, .page-employee-orders .section-employee-orders .section-order4 .container .row fieldset table td td, .section-order4 .container .row fieldset table td .small,
 .section-order-confirmation .container .row fieldset table td small,
+.section-order-confirmation .container .row fieldset table td .page-employee-reviews .section-employee-reviews fieldset,
+.page-employee-reviews .section-employee-reviews .section-order-confirmation .container .row fieldset table td fieldset,
 .section-order-confirmation .container .row .page-employee-orders .section-employee-orders fieldset table td td,
 .page-employee-orders .section-employee-orders .section-order-confirmation .container .row fieldset table td td,
 .section-order-confirmation .container .row fieldset table td .small {
@@ -14204,6 +14208,119 @@ img {
   justify-content: space-between;
 }
 .page-employee-orders .section-pagination ul {
+  justify-content: center;
+  text-align: center;
+}
+
+.page-employee-reviews h2, .page-employee-reviews .h2 {
+  justify-content: center;
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .page-employee-reviews .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-employee-reviews .section-filters .row.filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 0px;
+  row-gap: 2rem;
+}
+.page-employee-reviews .section-filters .rate-filter,
+.page-employee-reviews .section-filters .dates-filter,
+.page-employee-reviews .section-filters .status-filter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  /*.bouton {
+      padding: 0px;
+  }*/
+}
+.page-employee-reviews .section-filters .boutons-filters {
+  display: flex;
+  flex-direction: row;
+  row-gap: 1rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.page-employee-reviews .section-filters .checkboxes {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 5px;
+  margin: 0rem;
+  margin-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.page-employee-reviews .section-employee-reviews .row.reviews {
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  text-align: start;
+}
+.page-employee-reviews .section-employee-reviews fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.page-employee-reviews .section-employee-reviews fieldset .row {
+  margin-bottom: 0px;
+}
+.page-employee-reviews .section-employee-reviews fieldset .row.review-info {
+  row-gap: 10px;
+}
+.page-employee-reviews .section-employee-reviews fieldset legend {
+  margin-bottom: 1rem;
+  padding-left: 3rem;
+}
+.page-employee-reviews .section-employee-reviews fieldset .user-name {
+  color: #144680;
+}
+.page-employee-reviews .section-employee-reviews fieldset .stars-rating {
+  width: 7rem;
+  justify-content: flex-start;
+}
+.page-employee-reviews .section-employee-reviews fieldset .boutons .col-12 {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: stretch;
+  justify-content: space-around;
+  height: 100%;
+}
+.page-employee-reviews .section-employee-reviews fieldset .boutons .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-employee-reviews .section-pagination .row {
+  justify-content: space-between;
+}
+.page-employee-reviews .section-pagination ul {
   justify-content: center;
   text-align: center;
 }/*# sourceMappingURL=main.css.map */
