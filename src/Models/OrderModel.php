@@ -85,15 +85,31 @@ class OrderModel
         return $stmt->fetch();
     }
 
-    public function getAllWithFilters(array $filters = []): ?array
+    public function getAllWithFilters(array $filters = [], int $limit = 3, int $offset = 0): ?array
     {
         $conditions = [];
         $params = [];
 
         // Filtre par statut
+        //if (!empty($filters['status'])) {
+        //    $conditions[] = 'co.current_status = :status';
+        //    $params[':status'] = $filters['status'];
+        //}
         if (!empty($filters['status'])) {
-            $conditions[] = 'co.current_status = :status';
-            $params[':status'] = $filters['status'];
+            $placeholders = implode(',', array_map(fn($i) => ':status_' . $i, array_keys($filters['status'])));
+            $conditions[] = 'co.current_status IN (' . $placeholders . ')';
+            foreach ($filters['status'] as $i => $status) {
+                $params[':status_' . $i] = $status;
+            }
+        }
+
+        //Filtre par client
+        if (!empty($filters['client'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':client_' . $i, array_keys($filters['client'])));
+            $conditions[] = 'u.last_name IN (' . $placeholders . ')';
+            foreach ($filters['client'] as $i => $client) {
+                $params[':client_' . $i] = $client;
+            }
         }
 
         // Filtre par menu
@@ -134,6 +150,7 @@ class OrderModel
                 co.event_date,
                 co.delivery_time,
                 co.delivery_street_number,
+                co.delivery_street_type,
                 co.delivery_street_name,
                 co.delivery_zip_code,
                 co.delivery_city,
@@ -148,15 +165,26 @@ class OrderModel
                 u.first_name,
                 u.last_name,
                 u.email,
+                u.phone,
                 m.title AS menu_title
             FROM customer_order co
             JOIN user u ON co.user_id = u.user_id
             JOIN menu m ON co.menu_id = m.menu_id
             $where
             ORDER BY co.event_date ASC
+            LIMIT :limit 
+            OFFSET :offset
         ");
 
-        $stmt->execute($params);
+        $params[':limit'] = $limit;
+        $params[':offset'] = $offset;
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+
+        $stmt->execute();
         return $stmt->fetchAll();
     }
 
@@ -434,6 +462,54 @@ class OrderModel
         $deliveryCharges = 5 + (floor($distance) * 0.59);
         return $deliveryCharges;
     }
+
+
+
+    public function countWithFilters(array $filters = []): int
+        {
+            $conditions = [];
+            $params     = [];
+
+            if (!empty($filters['current_status'])) {
+                $placeholders = implode(',', array_map(fn($i) => ':status_' . $i, array_keys($filters['status'])));
+                $conditions[] = 'co.current_status IN (' . $placeholders . ')';
+                foreach ($filters['status'] as $i => $status) {
+                    $params[':status_' . $i] = $status;
+                }
+            }
+
+            if (!empty($filters['client'])) {
+                $placeholders = implode(',', array_map(fn($i) => ':client_' . $i, array_keys($filters['client'])));
+                $conditions[] = 'u.last_name IN (' . $placeholders . ')';
+                foreach ($filters['client'] as $i => $client) {
+                    $params[':client_' . $i] = $client;
+                }
+            }
+
+            if (!empty($filters['user_id'])) {
+                $conditions[] = 'o.user_id = :user_id';
+                $params[':user_id'] = (int) $filters['user_id'];
+            }
+
+
+            $where = !empty($conditions)
+            ? 'WHERE ' . implode(' AND ', $conditions) 
+            : '' ;
+
+            $stmt = $this->db->prepare("
+                SELECT COUNT(*) AS total 
+                FROM customer_order o
+                JOIN user u ON o.user_id = u.user_id
+                $where
+            ");
+
+            foreach ($params as $key => $value) {
+                $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+                $stmt->bindValue($key, $value, $type);
+            }
+            $stmt->execute();
+            return (int) $stmt->fetch()['total'];
+        }
 
 }
 

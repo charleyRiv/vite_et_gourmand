@@ -80,14 +80,28 @@ class EmployeeController
 
     public function listOrders(): void
     {
-        $orders = $this->orderModel->getAll();
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 3;
+
+        // Récupérer les filtres depuis GET
+        $filters = [
+            'status'   => $_GET['status']   ?? [],
+            'client'   => $_GET['client']   ?? [],
+        ];
+        $offset = ($currentPage -1) * $perPage;
+
+        $totalOrders = $this->orderModel->countWithFilters($filters);
+        $totalPages = ceil($totalOrders / $perPage);
+
+
+        $orders = $this->orderModel->getAllWithFilters($filters, $perPage, $offset);
         $activClients = $this->orderModel->getAllClient();
         $activStatuses = $this->orderModel->getAllStatus();
 
 
         //Traduit les status actifs en francais
         foreach ($activStatuses as &$activStatus) {
-            $activStatus['current_status'] = translateStatusOrder($activStatus['current_status']);
+            $activStatus['current_status_fr'] = translateStatusOrder($activStatus['current_status']);
         }
         unset($activStatus);
 
@@ -111,6 +125,7 @@ class EmployeeController
 
         $pageTitle = 'Gerer les commandes - Vite & Gourmand';
         $h1 = 'Gérer les commandes';
+        $extraJs = ['/assets/js/employee/orders.js'];
         require_once __DIR__ . '/../../views/employee/orders.php';
     }
 

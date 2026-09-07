@@ -183,11 +183,20 @@ a {
 .btn-filters {
     background-color: $dark;
     color: $white;
+
+    &:hover {
+        background-color: $primary;
+        border: 1px solid $dark;
+    }
 }
 
 .btn-white {
     background-color: $white;
     color: $dark;
+
+    &:hover {
+        background-color: $light;
+    }
 }
 
 .hero {
@@ -2399,5 +2408,204 @@ img {
             padding-right: 350px
         }
     }
+}
+
+//--- EMPLOYE ORDERS
+.page-employee-orders {
+    h2 {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .container {
+        @include media-breakpoint-up(lg) {
+            padding-left: 350px;
+            padding-right: 350px;
+        }
+    }
+    
+    .section-filters {
+        .row.filters {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin: 0px;
+            row-gap: 2rem;
+        }
+
+        .status-filter,
+        .status-client {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0rem;
+            width: fit-content;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
+
+            /*.bouton {
+            padding: 0px;
+        }*/
+        }
+
+        .boutons-filters {
+            display: flex;
+            flex-direction: row;
+            row-gap: 1rem;
+            width: fit-content;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            
+        }
+
+        .checkboxes {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 5px;
+            margin: 0rem;
+            margin-left: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    .section-employee-orders {
+        fieldset {
+                background-color: white;
+                border: 1px solid $dark;
+                border-radius: 10px;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                margin-bottom: 25px;
+                
+                legend {
+                    @extend h4;
+                    margin-bottom: 1rem;
+                }
+
+                table {
+                    width: 100%;
+                    background-color: white;
+                    margin-bottom: 0rem;
+
+                    tr,
+                    th {
+                        background-color: white;
+                    }
+
+                    th {
+                        width: 100%;
+                    }
+
+                    td {
+                        background-color: white;
+                        color: $dark;
+                        line-height: 1.2rem;
+                        text-align: start;
+                        @extend small;
+                    }
+
+                    td:first-child {
+                        width: 40%;
+                        font-weight: 500;
+                    }
+
+                    td:last-child {
+                        width: 60%;
+                        text-align: end;
+                    }
+
+                }
+
+
+                .status-select {
+                    width: 100%;
+                    padding-bottom: 0.5rem;
+                    padding-top: 0.5rem;
+                    text-align: center;
+
+                    .btn {
+                        width: 100%;
+                    }
+
+                    
+                }
+
+                .status-select_input {
+                    &:hover {
+                        border: 1px solid $dark;
+                    }
+                }
+
+                .cancel-form {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: start;
+
+                    input, 
+                    textarea {
+                        width: 100%;
+                        border-radius: 5px;
+                        margin-bottom: 1rem;
+
+                        &.is-valid {
+                        border: 2px solid rgba($success, 1) !important;
+                        }
+                    
+                        &.is-invalid {
+                            border: 2px solid rgba($danger, 1) !important;
+                        }
+                    }
+                }
+
+                .boutons {
+                    display: flex;
+                    flex-direction: row;
+                    text-align: center;
+                    align-items: stretch;
+                    justify-content: space-around;
+                    padding-bottom: 0.5rem;
+                    padding-top: 0.5rem;
+                    margin-top: 2rem;
+                    height: 100%;
+
+                    .btn {
+                    
+                        width: 45%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        /*height: 100%;*/
+                    }
+
+                    .btn-secondary {
+                        border: 0px solid rgba($color: $secondary, $alpha: 0);
+                    }
+                }
+            }
+    }
+
+    .section-pagination {
+        .row {
+            justify-content: space-between;
+        }
+        ul {
+        justify-content: center;
+        text-align: center;
+        }
+    }
+
 }
 
