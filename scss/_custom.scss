@@ -2891,6 +2891,7 @@ img {
             padding-top: 25px;
             padding-bottom: 25px;
             width: fit-content;
+            min-width: 350px;
         
             .col-12 {
                 padding-top: 0.5rem;
@@ -2967,6 +2968,87 @@ img {
     }
 
 }
+
+//--- EMPLOYE - MENUS HISTORY
+.page-employee-order-history {
+    h2 {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .title {
+        justify-content: start;
+        text-align: start;
+    }
+
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 350px;
+            padding-right: 350px;
+        }
+    }
+
+    .section-employee-order-history {
+
+
+        fieldset {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 10px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            width: 100%;
+
+            table {
+                width: 100%;
+                background-color: white;
+                margin-bottom: 0rem;
+
+                tr,
+                th {
+                    background-color: white;
+                }
+
+                td {
+                    background-color: white;
+                    color: $dark;
+                    line-height: 1.2rem;
+                    text-align: end;
+                    width: 30%;
+                    margin-bottom: 1rem;
+                }
+
+                .btn {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                th {
+                    width: 50%;
+                    font-weight: 500;
+                }
+
+            }
+        
+            .col-12 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .row {
+                margin-bottom: 0px;
+            }
+            
+            legend {
+                @extend h4;
+                margin-bottom: 0.5rem;
+            }
+
+        }
+    }
+}
+
 
 //--- EMPLOYE - DISHES
 .page-employee-dish {
