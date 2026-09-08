@@ -23,6 +23,69 @@ class DishModel
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getAllWithFilters(array $filters = [], int $limit = 6, int $offset = 0): array
+    {
+        $conditions = [];
+        $params = [];
+
+        if (!empty($filters['dish_type'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':dish_type' . $i, array_keys($filters['dish_type'])));
+            $conditions[] = 'd.dish_type IN (' . $placeholders . ')';
+            foreach ($filters['dish_type'] as $i => $dishType) {
+                $params[':dish_type' . $i] = $dishType;
+            }
+        }
+
+        if (!empty($filters['allergen'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':allergen_' . $i, array_keys($filters['allergen'])));
+            $conditions[] = 'da.allergen_id IN (' . $placeholders . ')';
+            foreach ($filters['allergen'] as $i => $allergenId) {
+                $params[':allergen_' . $i] = (int) $allergenId;
+            }
+        }
+
+        if (!empty($filters['search'])) {
+            $conditions[] = 'd.title LIKE :search';
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+
+        $where = !empty($conditions)
+        ? 'WHERE ' . implode(' AND ', $conditions)
+        : '';
+
+        $stmt = $this->db->prepare("
+            SELECT 
+                d.dish_id,
+                d.title,
+                d.description,
+                d.dish_type,
+                GROUP_CONCAT(DISTINCT a.label SEPARATOR ', ') AS allergens_labels,
+                GROUP_CONCAT(DISTINCT a.allergen_id SEPARATOR ', ') AS allergens_ids,
+                COUNT(DISTINCT md.menu_id) AS menu_count
+            FROM dish d
+            LEFT JOIN dish_allergen da ON d.dish_id = da.dish_id
+            LEFT JOIN allergen a ON da.allergen_id = a.allergen_id
+            LEFT JOIN menu_dish md ON d.dish_id = md.dish_id
+            $where
+            GROUP BY d.dish_id
+            ORDER BY d.title ASC
+            LIMIT :limit
+            OFFSET :offset
+        ");
+
+        $params[':limit'] = $limit;
+        $params[':offset'] = $offset;
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getByID(int $id): array
     {
         $stmt = $this->db->prepare("
@@ -138,7 +201,7 @@ class DishModel
         $result = $stmt->fetch();
 
 
-        if (!$result) return []; // Retourne un tableau vide si aucune information n'est trouvée
+        if (!$result) return []; 
         // Extraire les valeurs de l'ENUM
         // COLUMN_TYPE retourne : enum('starter','main','dessert')
         preg_match_all("/'([^']+)'/", $result['COLUMN_TYPE'], $matches);
@@ -156,5 +219,53 @@ class DishModel
         $stmt->execute([':dish_id' => $dishId]);
         $result = $stmt->fetch();
         return (int) $result['total'];
+    }
+
+    public function getCountWithFilters(array $filters = []): int
+    {
+        $conditions = [];
+        $params = [];
+
+        if (!empty($filters['dish_type'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':dish_type' . $i, array_keys($filters['dish_type'])));
+            $conditions[] = 'd.dish_type IN (' . $placeholders . ')';
+            foreach ($filters['dish_type'] as $i => $dishType) {
+                $params[':dish_type' . $i] = (int) $dishType;
+            }
+        }
+
+        if (!empty($filters['allergen'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':allergen_' . $i, array_keys($filters['allergen'])));
+            $conditions[] = 'da.allergen_id IN (' . $placeholders . ')';
+            foreach ($filters['allergen'] as $i => $allergenId) {
+                $params[':allergen_' . $i] = (int) $allergenId;
+            }
+        }
+
+        if (!empty($filters['search'])) {
+            $conditions[] = 'd.title LIKE :search';
+            $params[':search'] = '%' . $filters['search'] . '%';
+        }
+
+        $where = !empty($conditions)
+        ? 'WHERE ' . implode(' AND ', $conditions)
+        : '';
+
+        $stmt = $this->db->prepare("
+            SELECT COUNT(*) AS total
+            FROM dish d
+            LEFT JOIN dish_allergen da ON d.dish_id = da.dish_id
+            LEFT JOIN allergen a ON da.allergen_id = a.allergen_id
+            LEFT JOIN menu_dish md ON d.dish_id = md.dish_id
+            $where
+        ");
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+
+        $stmt->execute();
+        return (int) $stmt->fetch()['total'];
     }
 }

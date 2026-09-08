@@ -401,11 +401,31 @@ class EmployeeController
 
     public function listDishes(): void
     {
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 6;
+
+        // Récupérer les filtres depuis GET
+        $filters = [
+            'diets'   => $_GET['diet']   ?? [],
+            'dish_type'   => $_GET['dish_type']  ?? [],
+            'allergen' => $_GET['allergen'] ?? [],
+            'search' => $_GET['search'] ?? '',
+        ];
+        $offset = ($currentPage -1) * $perPage;
+
+        $totalDishes = $this->dishModel->getCountWithFilters($filters);
+        $totalPages = ceil($totalDishes / $perPage);
+
         $dishesType = $this->dishModel->getDishTypes();
         $diets = $this->dietModel->getAll();
         $allergens = $this->allergenModel->getAll();
-        $dishes = $this->dishModel->getAll();
+        $dishes = $this->dishModel->getAllWithFilters($filters, $perPage, $offset);
         $basePath = $this->getBasePath();
+
+        $dishesTypeFr = array_map(fn($type) => [
+            'dish_type' => $type,
+            'label'     => translateDishType($type)
+        ], $dishesType);
 
         //Pour chaque plat récupérer le nombre de menu associés
         foreach ($dishes as &$dish) {
@@ -413,11 +433,13 @@ class EmployeeController
             $dish['dish_allergens'] = $this->allergenModel->getAllergensByDishId($dish['dish_id']);
             $pictures = $this->pictureModel->getByMenuId($dish['dish_id']);
             $dish['dish_picture'] = $pictures[0] ?? null;
+            $dish['dish_type_Fr'] = translateDishType($dish['dish_type']);
         }
         unset($dish);
 
         $pageTitle = 'Gérer des plats - Vite & Gourmand';
         $h1 = 'Gérer les plats';
+        $extraJs = ['/assets/js/employee/dish.js'];
         require_once __DIR__ . '/../../views/employee/dish.php';
     } 
 

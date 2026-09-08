@@ -218,7 +218,7 @@ hr {
 }
 
 h6, .h6, h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
-.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -256,11 +256,11 @@ h3, .page-client-update-order .section-client-update-order .container fieldset l
   }
 }
 
-h4, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
   font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
-  h4, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+  h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
     font-size: 1.5rem;
   }
 }
@@ -12016,7 +12016,7 @@ h3, .page-client-update-order .section-client-update-order .container fieldset l
   font-size: 24px;
 }
 
-h4, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
+h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4 {
   color: #341E34;
   font-family: "Lato", sans-serif;
   font-weight: 600;
@@ -12976,6 +12976,8 @@ img {
 }
 .page-order1 .section-order1-intro .container h2, .page-order1 .section-order1-intro .container .h2,
 .page-order1 .section-order1-intro .container h4,
+.page-order1 .section-order1-intro .container .page-employee-dish .section-employee-dishes fieldset legend,
+.page-employee-dish .section-employee-dishes fieldset .page-order1 .section-order1-intro .container legend,
 .page-order1 .section-order1-intro .container .page-employee-menus .section-employee-menus fieldset legend,
 .page-employee-menus .section-employee-menus fieldset .page-order1 .section-order1-intro .container legend,
 .page-order1 .section-order1-intro .container .page-employee-reviews .section-employee-reviews fieldset legend,
@@ -14358,13 +14360,13 @@ img {
   justify-content: start;
   margin: 0px;
   row-gap: 1rem;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
 }
 @media (min-width: 1200px) {
   .page-employee-menus .section-filters .row.filters-checkbox {
     justify-content: center;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    /*overflow-x: auto;*/
   }
 }
 .page-employee-menus .section-filters .search {
@@ -14449,6 +14451,8 @@ img {
   padding-right: 2rem;
   padding-top: 25px;
   padding-bottom: 25px;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .page-employee-menus .section-employee-menus fieldset .col-12 {
   padding-top: 0.5rem;
@@ -14502,6 +14506,199 @@ img {
 }
 @media (min-width: 1200px) {
   .page-employee-menus .section-pagination ul {
+    justify-content: flex-end;
+  }
+}
+
+.page-employee-dish h2, .page-employee-dish .h2 {
+  justify-content: center;
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .page-employee-dish .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-employee-dish .section-filters form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.page-employee-dish .section-filters .row.filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: center;
+  margin: 0px;
+  row-gap: 1rem;
+  width: 100%;
+}
+.page-employee-dish .section-filters .row.filters-checkbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: start;
+  margin: 0px;
+  row-gap: 1rem;
+  /*overflow-x: auto;*/
+}
+@media (min-width: 1200px) {
+  .page-employee-dish .section-filters .row.filters-checkbox {
+    justify-content: center;
+    flex-wrap: nowrap;
+    /*overflow-x: auto;*/
+  }
+}
+.page-employee-dish .section-filters .search {
+  margin-top: 1rem;
+}
+.page-employee-dish .section-filters .search .search-wrapper {
+  position: relative;
+  z-index: 1;
+}
+.page-employee-dish .section-filters .search .search-wrapper input {
+  width: 100%;
+  padding-left: 2rem;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.page-employee-dish .section-filters .search .search-wrapper .bi-search {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(52, 30, 52, 0.5);
+  pointer-events: none;
+}
+@media (max-width: 1199.98px) {
+  .page-employee-dish .section-filters .search {
+    width: 100%;
+  }
+}
+.page-employee-dish .section-filters .employee-diet-filter,
+.page-employee-dish .section-filters .employee-allergens-filter,
+.page-employee-dish .section-filters .employee-dish-type-filter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  /*.bouton {
+      padding: 0px;
+  }*/
+}
+.page-employee-dish .section-filters .boutons-filters {
+  display: flex;
+  flex-direction: row;
+  row-gap: 1rem;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.page-employee-dish .section-filters .checkboxes {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 5px;
+  margin: 0rem;
+  margin-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.page-employee-dish .section-employee-dishes .row.dishes {
+  gap: 50px;
+  justify-content: center;
+  align-items: stretch;
+  text-align: start;
+}
+.page-employee-dish .section-employee-dishes fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 330px;
+}
+.page-employee-dish .section-employee-dishes fieldset .col-12 {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.page-employee-dish .section-employee-dishes fieldset .row {
+  margin-bottom: 0px;
+}
+.page-employee-dish .section-employee-dishes fieldset legend {
+  margin-bottom: 0.5rem;
+}
+.page-employee-dish .section-employee-dishes fieldset img,
+.page-employee-dish .section-employee-dishes fieldset .img {
+  max-width: 9rem;
+  border-radius: 10px;
+}
+.page-employee-dish .section-employee-dishes fieldset .row.boutons form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1rem;
+}
+.page-employee-dish .section-employee-dishes fieldset .row.boutons .col-12 {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: stretch;
+  justify-content: space-around;
+  height: 100%;
+}
+.page-employee-dish .section-employee-dishes fieldset .row.boutons .allergen {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.page-employee-dish .section-employee-dishes fieldset .row.boutons .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-employee-dish .section-employee-dishes .new-dish {
+  text-align: center;
+}
+.page-employee-dish .section-employee-dishes .new-dish form {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.page-employee-dish .section-employee-dishes .new-dish .btn {
+  width: 50%;
+}
+.page-employee-dish .section-pagination .row {
+  justify-content: space-between;
+  text-align: center;
+}
+.page-employee-dish .section-pagination ul {
+  justify-content: center;
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .page-employee-dish .section-pagination ul {
     justify-content: flex-end;
   }
 }/*# sourceMappingURL=main.css.map */

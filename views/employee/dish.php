@@ -2,117 +2,233 @@
 /**
  * @var string $h1
  * @var array $dishesType
+ * @var array $dishesTypeFr
  * @var array $diets
  * @var array $allergens
  * @var array $dishes
  * @var string $basePath
  * @var array $dishAllergens
+ * @var int $totalPages
+ * @var int $currentPage
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
-<br>
-<main>
-    <h1><?=  htmlspecialchars($h1)?></h1>
-    <div>
-        <form action="/employe/menus" method="POST">
-            <!-- Champs barre de recherche -->
-            <label for="search">Recherche</label>
-            <input type="texte" id="search" name="search">
+<main class="page-employee-dish">
+    <section class="section-filters">
+        <div class="container">
+            <h2><?=  htmlspecialchars($h1)?></h2>
 
-            <!-- Filtre Catégorie -->
-                <select name="dish_type" id="dish_type" required>
-                    <option value="default">Catégorie</option>
-                    <?php foreach ($dishesType as $dishType): ?>
-                        <option 
-                            value="<?= htmlspecialchars($dishType) ?>"
-                            <?= (($dish['dish_type'] ?? '') === $dishType) ? 'selected' : '' ?>
-                        >
-                            <?= htmlspecialchars(translateDishType($dishType)) ?>
-                        </option>   
-                    <?php endforeach; ?>  
-                </select>            
+            <form action="/employe/plats" method="GET">
+                <div class="row filters">
 
-            <!-- Filtre Régime -->
-                <select name="diet" id="diet">
-                    <option value="default">Régime</option>
-                    <?php foreach ($diets as $diet): ?>
-                    <option value="<?= $diet['diet_id'] ?>">
-                        <?= $diet['label'] ?>
-                    </option>
-                    <?php endforeach; ?>    
-                </select>
+                    <!-- Champs barre de recherche -->
+                    <div class="col-12 col-xl-3 search">
+                        <div class="search-wrapper">
+                            <i class="bi bi-search"></i>
+                            <input 
+                                type="text" 
+                                id="search" 
+                                name="search" 
+                                placeholder="Rechercher ..."
+                                value="<?= htmlspecialchars($_GET['search'] ?? '') ?>"
+                            >
+                        </div>
+                    </div>
 
-            <!-- Allergènes -->
-            <fieldset>
-                <legend>Allergènes</legend>
+                    <div class="col-12 col-xl-9">
+                        <div class="row filters-checkbox">
 
-                <?php foreach ($allergens as $allergen): ?>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="allergen_ids[]"
-                            value="<?= htmlspecialchars($allergen['allergen_id']) ?>"
-                            <?php if (isset($dishAllergens) && in_array($allergen['allergen_id'], array_column($dishAllergens, 'allergen_id'))): ?>
-                                checked
+                            <!-- Filtre Catégorie -->
+                            <div class="row employee-dish-type-filter">
+                                <div class="col-auto bouton">
+                                    <button type="button" id="dish-type-filter-btn" class="btn btn-filters">
+                                        Catégorie <i class="bi bi-chevron-compact-down"></i>
+                                    </button>
+                                </div> 
+                                <div id="dish-type_filter" class="col-auto checkboxes d-none" >
+                                    <?php
+                                    // Chargement initial = pas de filtre status dans l'URL
+                                    $isInitialLoadType = !isset($_GET['dish_type']);
+                                    ?>
+                                    <?php foreach ($dishesTypeFr as $dishType) : ?>
+                                    <div>
+                                        <input 
+                                            type="checkbox" 
+                                            id="<?= htmlspecialchars($dishType['dish_type'])?>" 
+                                            name="dish_type[]"
+                                            value="<?= htmlspecialchars($dishType['dish_type']) ?>"
+                                            <?= $isInitialLoadType || in_array($dishType['dish_type'], $_GET['dish_type'] ?? []) 
+                                            ? 'checked' : '' ?>
+                                        >
+                                        <label for="<?= htmlspecialchars($dishType['dish_type'])?>"><?= htmlspecialchars($dishType['label'])?></label>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>   
+                            </div>
+                        
+
+                            <!-- Filtre Allergènes -->
+                            <div class="row employee-allergens-filter">
+                                <div class="col-auto bouton">
+                                    <button type="button" id="allergens-filter-btn" class="btn btn-filters">
+                                        Allergènes <i class="bi bi-chevron-compact-down"></i>
+                                    </button>
+                                </div> 
+                                <div id="allergens-filter" class="col-auto checkboxes d-none" >
+                                    <?php
+                                    // Chargement initial = pas de filtre status dans l'URL
+                                    $isInitialLoadAllergen = !isset($_GET['allergen']);
+                                    ?>
+                                    <?php foreach ($allergens as $allergen) : ?>
+                                    <div>
+                                        <input 
+                                            type="checkbox" 
+                                            id="<?= htmlspecialchars($allergen['allergen_id'])?>" 
+                                            name="allergen[]"
+                                            value="<?= htmlspecialchars($allergen['allergen_id']) ?>"
+                                            <?= $isInitialLoadAllergen || in_array($allergen['allergen_id'], $_GET['allergen'] ?? []) 
+                                            ? 'checked' : '' ?>
+                                        >
+                                        <label for="<?= htmlspecialchars($allergen['allergen_id'])?>"><?= htmlspecialchars($allergen['label'])?></label>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div> 
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                    
+                        <!-- Boutons -->
+                        <div class="row boutons-filters">
+                            <div class="col-auto bouton">
+                                <button type="submit" class="btn btn-primary">Filtrer</button>
+                            </div>
+                            <div class="col-auto bouton">
+                                <a href="<?= $basePath ?>/plats" class="btn btn-secondary">Réinitialiser</a>
+                            </div>
+                        </div>
+                    
+
+                        
+                    
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section-employee-dishes">
+        <div class="container">
+            <div class="row dishes">
+                <?php foreach ($dishes as $dish): ?>
+                    <fieldset class="col-12 col-xl-3">
+                        <legend><?= htmlspecialchars($dish['title']) ?></legend>
+
+                        <div class="col-12">
+                            <?= htmlspecialchars($dish['dish_type_Fr']) ?>
+                        </div>
+
+                        <div class="col-12">
+                            Nombre de menus associés : <?= htmlspecialchars($dish['menu_count']) ?>
+                        </div>
+
+                        <div class="col-12 allergen">
+                            Allergènes : 
+                            <?= !empty($dish['allergens_labels'])
+                                ? htmlspecialchars($dish['allergens_labels'])
+                                : 'Aucun' ?>
+                        </div>
+
+
+                        <div class="col-12">
+                            <?php if ($dish['dish_picture'] !== null): ?>
+                                    <img
+                                        src="<?= htmlspecialchars($dish['dish_picture']['url']) ?>"
+                                        alt="<?= htmlspecialchars($dish['dish_picture']['alt_text']) ?>"
+                                    >
+                            <?php else: ?>
+                                <div class="img">
+                                <small> Pas de photos disponibles</small>
+                                </div>
                             <?php endif; ?>
-                        >
-                        <?= htmlspecialchars($allergen['label']) ?>
-                    </label>
-                <?php endforeach; ?>
+                        </div>
                             
-            </fieldset>
+                        <div class="row boutons">
+                            <div class="col-12">
+                                <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/supprimer" method="POST">
+                                    <a href="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier" class="btn btn-primary">Modifier</a>
+                                    
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form> 
+                            </div>
+                        </div>
+                    </fieldset>
+                <?php endforeach; ?>
 
-            <!-- Boutons -->
-            <input type="button" value="Filtrer">
-            <input type="button" value="Reinitialiser">
-        </form>
-    </div>
-    <section>
-        <?php foreach ($dishes as $dish): ?>
-        <h3><?= htmlspecialchars($dish['title']) ?></h3>
-
-        <p><?= htmlspecialchars($dish['dish_type']) ?></p>
-        <p>Nombre de menus associés : <?= htmlspecialchars($dish['menu_count']) ?></p>
-        <p>Allergènes : 
-            <?php if (!empty($dish['dish_allergens'])): ?>
-                <?= htmlspecialchars(implode(', ', array_column($dish['dish_allergens'], 'label' ))) ?>
-            <?php else: ?>
-                Aucun
-            <?php endif; ?>
-        </p>
-        <p>
-            <?php if ($dish['dish_picture'] !== null): ?>
-                    <img
-                        src="<?= htmlspecialchars($dish['dish_picture']['url']) ?>"
-                        alt="<?= htmlspecialchars($dish['dish_picture']['alt_text']) ?>"
-                        style="max-width: 80px";
-                    >
-            <?php else: ?>
-                Pas de photos disponibles
-            <?php endif; ?>
-        </p>
-
-        <a href="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier">Modifier</a>
-        <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/supprimer" method="POST">
-            <button type="submit">
-                Supprimer
-            </button>
-        </form> 
-        <?php endforeach; ?>
+                <div class="col-12 new-dish">
+                    <form action="/employe/plats/creer" method="POST">
+                        <button type="submit" class="btn btn-primary">
+                            Créer un nouveau plat
+                        </button>
+                    </form> 
+                </div>
+            </div>
+        </div>
     </section> 
-    <br>
-    <div>
-        <form action="/employe/plats/creer" method="POST">
-            <input type="submit" value="Créer un nouveau plat">
-        </form> 
-        <a href="">Precedent</a>
-        <a href="">Suivant</a>
-        <a href="">n°page</a>/nbr page totales
-    </div>
+
+    <!-- Pagination -->
+    <section class="section-pagination">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-xl-4">
+                    <a href="<?= $basePath ?>/">retour au dashboard</a>
+                </div>
+
+                <?php if ($totalPages > 1): ?>
+                    <div class="col-12 col-xl-8">
+                        <nav aria-label="Pagination des menus">
+                            <ul class="pagination">
+                                <!-- Précédent -->
+                                <?php
+                                $queryParams = $_GET;
+                                $queryParams['page'] = $currentPage - 1;
+                                ?>
+                                <li class="page-item <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                                    <a class="page-link" href="?<?= http_build_query($queryParams) ?>">
+                                        <i class="bi bi-chevron-left"></i>
+                                    </a>
+                                </li>
+
+                                <!-- Pages -->
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <?php
+                                    $queryParams['page'] = $i;
+                                    ?>
+                                    <li class="page-item <?= $i === $currentPage ? 'active' : '' ?>">
+                                        <a class="page-link" href="?<?= http_build_query($queryParams) ?>"><?= $i ?></a>
+                                    </li>
+                                <?php endfor; ?>
+                                
+                                <!-- Suivant -->
+                                <?php
+                                $queryParams['page'] = $currentPage + 1;
+                                ?>
+                                <li class="page-item <?= $currentPage >= $totalPages ? 'disabled' : '' ?>">
+                                    <a class="page-link" href="?<?= http_build_query($queryParams) ?>">
+                                        <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
 </main>
 <br>
 
 <?php
-//require_once __DIR__ . '/../layouts/footer.php';
+require_once __DIR__ . '/../layouts/footer.php';
 ?>

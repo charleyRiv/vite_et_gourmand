@@ -2790,12 +2790,12 @@ img {
             justify-content: start;
             margin: 0px;
             row-gap: 1rem;
-            overflow-x: auto;
+            /*overflow-x: auto;*/
 
             @include media-breakpoint-up(xl) {
                 justify-content: center;
                 flex-wrap: nowrap;
-                overflow-x: auto;
+                /*overflow-x: auto;*/
             }
         }
 
@@ -2890,6 +2890,7 @@ img {
             padding-right: 2rem;
             padding-top: 25px;
             padding-bottom: 25px;
+            width: fit-content;
         
             .col-12 {
                 padding-top: 0.5rem;
@@ -2951,6 +2952,236 @@ img {
     .section-pagination {
         .row {
             justify-content: space-between;
+        }
+        ul {
+            justify-content: center;
+            text-align: center;
+            
+            @include media-breakpoint-up(xl) {
+                justify-content: flex-end;
+            }
+    
+        }
+
+        
+    }
+
+}
+
+//--- EMPLOYE - DISHES
+.page-employee-dish {
+    h2 {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+    }
+    
+    .section-filters {
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .row.filters {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: start;
+            justify-content: center;
+            margin: 0px;
+            row-gap: 1rem;
+            width: 100%;
+        }
+
+        .row.filters-checkbox {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: start;
+            margin: 0px;
+            row-gap: 1rem;
+            /*overflow-x: auto;*/
+
+            @include media-breakpoint-up(xl) {
+                justify-content: center;
+                flex-wrap: nowrap;
+                /*overflow-x: auto;*/
+            }
+        }
+
+        .search {
+            margin-top: 1rem;
+            
+            .search-wrapper {
+                position: relative;
+                z-index: 1;
+                
+
+                input {
+                    width: 100%;
+                    padding-left: 2rem; // ← espace pour l'icône
+                    border-radius: 5px;
+                    border: 1px solid rgba($dark, 1);
+                }
+            
+                .bi-search {
+                    position: absolute;
+                    left: 0.5rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: rgba($dark, 0.5);
+                    pointer-events: none;
+                }
+            }
+            @include media-breakpoint-down(xl) {
+                width: 100%;
+            }
+        }
+
+        .employee-diet-filter,
+        .employee-allergens-filter,
+        .employee-dish-type-filter {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0rem;
+            width: fit-content;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
+
+            /*.bouton {
+            padding: 0px;
+        }*/
+        }
+
+        .boutons-filters {
+            display: flex;
+            flex-direction: row;
+            row-gap: 1rem;
+            justify-content: flex-start;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .checkboxes {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 5px;
+            margin: 0rem;
+            margin-left: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    .section-employee-dishes {
+        .row.dishes {
+            gap: 50px;
+            justify-content: center;
+            align-items: stretch;
+            text-align: start;
+        }
+
+        fieldset {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 10px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            width: fit-content;
+            max-width: 330px;
+        
+            .col-12 {
+                padding-top: 0.2rem;
+                padding-bottom: 0.2rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .row {
+                margin-bottom: 0px;
+            }
+            
+            legend {
+                @extend h4;
+                margin-bottom: 0.5rem;
+            }
+
+            img,
+            .img {
+                max-width: 9rem;
+                border-radius: 10px;
+            }
+
+            .row.boutons {
+
+                form {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding-top: 1rem;
+                }
+
+                .col-12 {
+                    display: flex;
+                    flex-direction: row;
+                    text-align: center;
+                    align-items: stretch;
+                    justify-content: space-around;
+                    height: 100%;
+                }
+
+                .allergen {
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    white-space: normal;
+                }
+
+                .btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                }
+            }
+        }
+
+        .new-dish {
+            text-align: center;
+            form {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+            }
+            .btn {
+                width: 50%;
+                
+            }
+        }
+    }
+
+    .section-pagination {
+        .row {
+            justify-content: space-between;
+            text-align: center;
         }
         ul {
             justify-content: center;
