@@ -323,7 +323,8 @@ class EmployeeController
         $menuPictureUrls = array_column($pictures, 'url');
 
         $pageTitle = 'Gérer le menu ' . $menu['title'] . ' - Vite & Gourmand';
-        $h1 = 'Gérer le menus ' . $menu['title'];
+        $h1 = 'Gérer : ' . $menu['title'];
+        $extraJs = ['/assets/js/employee/menusForm.js'];
         require_once __DIR__ . '/../../views/employee/menusForm.php';
     } 
 
