@@ -6,79 +6,93 @@
 require_once __DIR__ . '/../layouts/header.php';
 ?>
 
-<br>
-<main>
-    <h1><?=  htmlspecialchars($h1)?></h1>
-    
-    <?php foreach ($contents as $content) : ?>
-    <section>
-        <form action="/employe/contenus/<?= $content['content_id'] ?>/modifier" method="POST">
+<main class="page-employee-content">
+    <section class="section-employee-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2><?=  htmlspecialchars($h1)?></h2>
+                </div>
 
-            <!-- Champs Présentation de l'entreprise -->
-            <h3><?= htmlspecialchars($content['page'])?> / <?= htmlspecialchars($content['section'])?></h3>
-            <br>
-            <textarea 
-                id="content-<?= $content['content_id'] ?>" 
-                name="content" 
-                rows="10"
-                cols="70"
+                <?php foreach ($contents as $content) : ?>
+                <div class="content-form">
+                    <form action="/employe/contenus/<?= $content['content_id'] ?>/modifier" method="POST">
                 
-            >
-            <?= htmlspecialchars($content['content']) ?>
-            </textarea>
-            <br>
-
-            <!-- Champs Modifier -->
-            <button 
-                type="button" 
-                class="btn-modify" 
-                data-id="<?= $content['content_id'] ?>"
-            >
-            Modifier
-            </button>
-            
-            <!-- Champs Update -->
-            <button 
-                type="submit"
-                class="btn-submit"
-                style="display: box;"
-            >
-            Valider
-        </button>
-        </form>
-        <form action="/employe/contenus/<?= $content['content_id'] ?>/supprimer" method="post">
-            <button type="submit">Supprimer</button>
-        </form>
+                        <!-- Contenu -->
+                        <div class="col-12">
+                            <h4><?= htmlspecialchars($content['page'])?> / <?= htmlspecialchars($content['section'])?></h4>
+                            <textarea 
+                                id="content-<?= $content['content_id'] ?>" 
+                                name="content"
+                                disabled><?= htmlspecialchars($content['content']) ?></textarea>
+                        </div>
+                
+                        <div class="col-12 boutons">
+                    
+                            <!-- Modifier -->
+                            <button type="button" id="btn-modify-<?= $content['content_id'] ?>" class="btn btn-primary" data-id="<?= $content['content_id'] ?>">Modifier</button>
+                            
+                            <!-- Valider -->
+                            <button type="submit" id="btn-validated-<?= $content['content_id'] ?>" class="btn btn-success d-none" data-id="<?= $content['content_id'] ?>">Valider</button>
+                    
+                    </form>
+                            <!-- Supprimer -->
+                            <form action="/employe/contenus/<?= $content['content_id'] ?>/supprimer" method="post">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </section>
-    <?php endforeach; ?>
 
-    <!-- Créer un nouveau contenu -->
-    <br>
-    <button type="button" class="btn-create">Créer un nouveau contenu</button>
-    <fieldset style="display: box;">
-        <form action="/employe/contenus/creer" method="post">
-            <label for="page">Page</label>
-            <input type="text" name="page" id="page" required>
-            <br>
-            <label for="section">Section</label>
-            <input type="text" name="section" id="section" required>
-            <br>
-            <label for="content">Contenu</label>
-            <textarea 
-                name="content" 
-                id="content" 
-                rows="10"
-                cols="70"
-                required>
-            </textarea>
-            <br>
-            <button type="submit">Créer</button>
-        </form>
-    </fieldset>
-    
+    <hr>
+
+    <section class="section-new-content">
+        <div class="container">
+            <div class="row">
+                    <div class="col-12 new">
+                        <!-- Créer un nouveau contenu -->
+                        <button type="button" id="btn-new" class="btn btn-primary">Créer un nouveau contenu</button>
+                    </div>
+                    
+                        <form action="/employe/contenus/creer" method="post">
+                            <fieldset id="new-form" class="d-none">
+                            <div class="col field">
+                                <label for="page">Page</label>
+                                <input type="text" name="page" id="page" required>
+                                <div class="invalid-feedback">Veuillez saisir une page</div>
+                            </div>
+                            
+                            <div class="col field">
+                                <label for="section">Section</label>
+                                <input type="text" name="section" id="section" required>
+                                <div class="invalid-feedback">Veuillez saisir une section</div>
+                            </div>
+                            
+                            <div class="col field">
+                                <label for="content">Contenu</label>
+                                <textarea 
+                                    name="content" 
+                                    id="content" 
+                                    required>
+                                </textarea>
+                                <div class="invalid-feedback">Veuillez saisir un contenu</div>
+                            </div>
+                            
+                            <div class="col-12 bouton-new">
+                                <button type="submit" id="btn-submit-new" class="btn btn-success">Créer</button>
+                            </div>
+                            </fieldset>
+                        </form>
+                    
+            </div>
+        </div>
+    </section>
 </main>
-<br>
+
 
 <?php
-//require_once __DIR__ . '/../layouts/footer.php';
+require_once __DIR__ . '/../layouts/footer.php';
 ?>

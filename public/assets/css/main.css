@@ -15122,4 +15122,69 @@ img {
 .page-employee-dish-update .section-pictures .row.new-picture .col-12.bouton {
   justify-content: center;
   text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .page-employee-content .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-employee-content h2, .page-employee-content .h2 {
+  text-align: center;
+}
+.page-employee-content .section-employee-content .content-form h4, .page-employee-content .section-employee-content .content-form .h4, .page-employee-content .section-employee-content .content-form .page-client-review .container fieldset legend, .page-client-review .container fieldset .page-employee-content .section-employee-content .content-form legend, .page-employee-content .section-employee-content .content-form .page-employee-orders .section-employee-orders fieldset legend, .page-employee-orders .section-employee-orders fieldset .page-employee-content .section-employee-content .content-form legend, .page-employee-content .section-employee-content .content-form .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-reviews .section-employee-reviews fieldset .page-employee-content .section-employee-content .content-form legend, .page-employee-content .section-employee-content .content-form .page-employee-menus .section-employee-menus fieldset legend, .page-employee-menus .section-employee-menus fieldset .page-employee-content .section-employee-content .content-form legend, .page-employee-content .section-employee-content .content-form .page-employee-order-history .section-employee-order-history fieldset legend, .page-employee-order-history .section-employee-order-history fieldset .page-employee-content .section-employee-content .content-form legend, .page-employee-content .section-employee-content .content-form .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-dish .section-employee-dishes fieldset .page-employee-content .section-employee-content .content-form legend {
+  text-align: start;
+}
+.page-employee-content .section-employee-content .content-form textarea {
+  width: 100%;
+}
+.page-employee-content .section-employee-content .content-form .boutons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.page-employee-content .section-new-content .new {
+  text-align: center;
+}
+.page-employee-content .section-new-content fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 2rem;
+  margin-left: 150px;
+  margin-right: 150px;
+  padding: 1rem;
+  border: 1px solid #87C093;
+  border-radius: 10px;
+}
+.page-employee-content .section-new-content fieldset .field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  width: 100%;
+}
+.page-employee-content .section-new-content fieldset textarea,
+.page-employee-content .section-new-content fieldset input {
+  width: 100%;
+}
+.page-employee-content .section-new-content fieldset textarea.is-valid,
+.page-employee-content .section-new-content fieldset input.is-valid {
+  border: 2px solid #2e7d4f;
+}
+.page-employee-content .section-new-content fieldset textarea.is-invalid,
+.page-employee-content .section-new-content fieldset input.is-invalid {
+  border: 2px solid #c0392b;
+}
+.page-employee-content .section-new-content fieldset textarea {
+  min-height: 5rem;
+}
+.page-employee-content .section-new-content fieldset .bouton-new {
+  text-align: center;
+}
+.page-employee-content .section-new-content fieldset .bouton-new .btn {
+  width: 30%;
 }/*# sourceMappingURL=main.css.map */

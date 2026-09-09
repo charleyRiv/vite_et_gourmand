@@ -589,6 +589,7 @@ class EmployeeController
 
         $pageTitle = 'Gérer des contenus - Vite & Gourmand';
         $h1 = 'Gérer les contenus';
+        $extraJs = ['/assets/js/employee/contentForm.js'];
         require_once __DIR__ . '/../../views/employee/contentForm.php';
     } 
 

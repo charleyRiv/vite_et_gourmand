@@ -3720,3 +3720,88 @@ img {
         }
     }
 }
+
+//--- EMPLOYE - CONTENT
+.page-employee-content {
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 200px;
+            padding-right: 200px;
+        }
+    }
+
+    h2 {
+        text-align: center;
+    }
+    .section-employee-content {
+        .content-form {
+            
+            h4 {
+                text-align: start;
+            }
+
+            textarea {
+                width: 100%;
+            }
+
+            .boutons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+    }
+
+    .section-new-content {
+        .new {
+            text-align: center;     
+        }
+
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: start;
+            gap: 2rem;
+            margin-left: 150px;
+            margin-right: 150px;
+            padding: 1rem;
+            border: 1px solid $secondary;
+            border-radius: 10px;
+
+            .field {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: start;
+                width: 100%;
+            }
+
+            textarea,
+            input {
+                width: 100%;
+
+                &.is-valid {
+                    border: 2px solid rgba($success, 1);
+                }
+            
+                &.is-invalid {
+                    border: 2px solid rgba($danger, 1);
+                }
+            }
+
+            textarea {
+                min-height: 5rem;
+            }
+
+            .bouton-new {
+                text-align: center;
+                .btn {
+                    width: 30%
+                }
+            }
+
+        }
+    }
+}
