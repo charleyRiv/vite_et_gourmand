@@ -586,6 +586,7 @@ class EmployeeController
     public function showEditContentForm(): void
     {
         $contents = $this->contentModel->getAll();
+        $basePath = $this->getBasePath();
 
         $pageTitle = 'Gérer des contenus - Vite & Gourmand';
         $h1 = 'Gérer les contenus';

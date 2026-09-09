@@ -2,6 +2,7 @@
 /**
  * @var string $h1
  * @var array $contents
+ * @var string $basePath
  */
 require_once __DIR__ . '/../layouts/header.php';
 ?>
@@ -88,6 +89,12 @@ require_once __DIR__ . '/../layouts/header.php';
                         </form>
                     
             </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <a href="<?= $basePath ?>/">Retour au dashboard</a>
         </div>
     </section>
 </main>
