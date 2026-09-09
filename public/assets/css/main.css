@@ -448,7 +448,7 @@ th {
   border-width: 0;
 }
 
-label {
+label, .page-employee-dish-update .section-employee-dish-form .field-allergen .label-title {
   display: inline-block;
 }
 
@@ -2570,7 +2570,7 @@ textarea.form-control-lg {
   min-height: calc(3.5rem + calc(var(--bs-border-width) * 2));
   line-height: 1.25;
 }
-.form-floating > label {
+.form-floating > label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .label-title {
   position: absolute;
   top: 0;
   left: 0;
@@ -2589,7 +2589,7 @@ textarea.form-control-lg {
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-floating > label {
+  .form-floating > label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .label-title {
     transition: none;
   }
 }
@@ -2624,19 +2624,22 @@ textarea.form-control-lg {
   padding-bottom: 0.625rem;
   padding-left: 0.75rem;
 }
-.form-floating > .form-control:not(:-moz-placeholder) ~ label {
+.form-floating > .form-control:not(:-moz-placeholder) ~ label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control:not(:-moz-placeholder) ~ .label-title {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:focus ~ label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control:focus ~ .label-title,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control:not(:placeholder-shown) ~ .label-title,
 .form-floating > .form-control-plaintext ~ label,
-.form-floating > .form-select ~ label {
+.page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control-plaintext ~ .label-title,
+.form-floating > .form-select ~ label,
+.page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-select ~ .label-title {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label {
+.form-floating > .form-control:-webkit-autofill ~ label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control:-webkit-autofill ~ .label-title {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > textarea:not(:-moz-placeholder) ~ label::after {
+.form-floating > textarea:not(:-moz-placeholder) ~ label::after, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > textarea:not(:-moz-placeholder) ~ .label-title::after {
   position: absolute;
   inset: 1rem 0.375rem;
   z-index: -1;
@@ -2645,8 +2648,9 @@ textarea.form-control-lg {
   background-color: var(--bs-body-bg);
   border-radius: var(--bs-border-radius);
 }
-.form-floating > textarea:focus ~ label::after,
-.form-floating > textarea:not(:placeholder-shown) ~ label::after {
+.form-floating > textarea:focus ~ label::after, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > textarea:focus ~ .label-title::after,
+.form-floating > textarea:not(:placeholder-shown) ~ label::after,
+.page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > textarea:not(:placeholder-shown) ~ .label-title::after {
   position: absolute;
   inset: 1rem 0.375rem;
   z-index: -1;
@@ -2655,13 +2659,13 @@ textarea.form-control-lg {
   background-color: var(--bs-body-bg);
   border-radius: var(--bs-border-radius);
 }
-.form-floating > textarea:disabled ~ label::after {
+.form-floating > textarea:disabled ~ label::after, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > textarea:disabled ~ .label-title::after {
   background-color: var(--bs-secondary-bg);
 }
-.form-floating > .form-control-plaintext ~ label {
+.form-floating > .form-control-plaintext ~ label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > .form-control-plaintext ~ .label-title {
   border-width: var(--bs-border-width) 0;
 }
-.form-floating > :disabled ~ label,
+.form-floating > :disabled ~ label, .page-employee-dish-update .section-employee-dish-form .field-allergen .form-floating > :disabled ~ .label-title,
 .form-floating > .form-control:disabled ~ label {
   color: #6c757d;
 }
@@ -14669,7 +14673,7 @@ img {
   gap: 3rem;
   width: 33%;
 }
-.page-employee-menu .section-employee-menu .details label {
+.page-employee-menu .section-employee-menu .details label, .page-employee-menu .section-employee-menu .details .page-employee-dish-update .section-employee-dish-form .field-allergen .label-title, .page-employee-dish-update .section-employee-dish-form .field-allergen .page-employee-menu .section-employee-menu .details .label-title {
   flex: 1;
 }
 .page-employee-menu .section-employee-menu .details input {
@@ -14952,4 +14956,170 @@ img {
   .page-employee-dish .section-pagination ul {
     justify-content: flex-end;
   }
+}
+
+@media (min-width: 1200px) {
+  .page-employee-dish-update .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-employee-dish-update small, .page-employee-dish-update .small, .page-employee-dish-update .page-employee-orders .section-employee-orders fieldset table td, .page-employee-orders .section-employee-orders fieldset table .page-employee-dish-update td, .page-employee-dish-update .page-employee-reviews .section-employee-reviews fieldset, .page-employee-reviews .section-employee-reviews .page-employee-dish-update fieldset {
+  color: #A14F08;
+}
+.page-employee-dish-update input.is-valid,
+.page-employee-dish-update textarea.is-valid,
+.page-employee-dish-update select.is-valid {
+  border: 2px solid #2e7d4f;
+}
+.page-employee-dish-update input.is-invalid,
+.page-employee-dish-update textarea.is-invalid,
+.page-employee-dish-update select.is-invalid {
+  border: 2px solid #c0392b;
+}
+.page-employee-dish-update .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.page-employee-dish-update h2, .page-employee-dish-update .h2 {
+  text-align: center;
+}
+.page-employee-dish-update .section-employee-dish-form .row {
+  margin-bottom: 1.5rem;
+}
+.page-employee-dish-update .section-employee-dish-form .field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.page-employee-dish-update .section-employee-dish-form .field input {
+  /*margin-bottom: 1.5rem;*/
+  text-align: start;
+  border-radius: 5px;
+  width: 100%;
+}
+.page-employee-dish-update .section-employee-dish-form .field select {
+  text-align: left;
+  vertical-align: top;
+  border-radius: 5px;
+  width: 100%;
+}
+.page-employee-dish-update .section-employee-dish-form .input {
+  /*margin-bottom: 1.5rem;*/
+  text-align: start;
+  border-radius: 5px;
+}
+.page-employee-dish-update .section-employee-dish-form textarea {
+  text-align: left;
+  vertical-align: top;
+  border-radius: 5px;
+  width: 100%;
+}
+.page-employee-dish-update .section-employee-dish-form .field-allergen .label-title {
+  display: block;
+}
+.page-employee-dish-update .section-employee-dish-form .field-allergen fieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.page-employee-dish-update .section-employee-dish-form .field-allergen fieldset .allergen-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.page-employee-dish-update .section-employee-dish-form .bouton-valider-dish {
+  text-align: start;
+}
+.page-employee-dish-update .section-pictures .row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.page-employee-dish-update .section-pictures fieldset {
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  gap: 3rem;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.page-employee-dish-update .section-pictures fieldset img {
+  width: 100%;
+  border-radius: 10px;
+}
+.page-employee-dish-update .section-pictures fieldset form {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+}
+.page-employee-dish-update .section-pictures fieldset form button {
+  background-color: rgba(192, 57, 43, 0.5);
+}
+.page-employee-dish-update .section-pictures .add-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 1.77;
+  min-height: 150px;
+}
+.page-employee-dish-update .section-pictures .add-picture button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.page-employee-dish-update .section-pictures .add-picture button:hover::after {
+  content: "Ajouter une photo";
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(251, 156, 117, 0.8);
+  color: #341E34;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.page-employee-dish-update .section-pictures .row.new-picture {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #fb9c75;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.page-employee-dish-update .section-pictures .row.new-picture .col-12 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-employee-dish-update .section-pictures .row.new-picture .col-12 input {
+  width: 50%;
+  text-align: end;
+}
+.page-employee-dish-update .section-pictures .row.new-picture .col-12.bouton {
+  justify-content: center;
+  text-align: center;
 }/*# sourceMappingURL=main.css.map */

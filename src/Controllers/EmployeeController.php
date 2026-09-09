@@ -432,7 +432,7 @@ class EmployeeController
         foreach ($dishes as &$dish) {
             $dish['menu_count'] = $this->dishModel->getCountDishByMenus($dish['dish_id']);
             $dish['dish_allergens'] = $this->allergenModel->getAllergensByDishId($dish['dish_id']);
-            $pictures = $this->pictureModel->getByMenuId($dish['dish_id']);
+            $pictures = $this->pictureModel->getByDishId($dish['dish_id']);
             $dish['dish_picture'] = $pictures[0] ?? null;
             $dish['dish_type_Fr'] = translateDishType($dish['dish_type']);
         }
@@ -481,7 +481,8 @@ class EmployeeController
         
         $errors = [];       
         $pageTitle = 'Gérer le plat - Vite & Gourmand';
-        $h1 = 'Gérer le plat ' . $dish['title'];
+        $h1 = 'Gérer : ' . $dish['title'];
+        $extraJs = ['/assets/js/employee/dishForm.js'];
         require_once __DIR__ . '/../../views/employee/dishForm.php';
     } 
 
@@ -695,7 +696,7 @@ class EmployeeController
         $this->pictureModel->deleteFromDish($pictureId);
 
         // Redirection vers la page précédente
-        $redirect = $_POST['redirect'] ?? '/employe/commandes';
+        $redirect = $_POST['redirect'] ?? $this->getBasePath() . '/plats';
         header('Location: ' . $redirect);
         exit();
     }

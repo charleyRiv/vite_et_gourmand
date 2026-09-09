@@ -252,7 +252,7 @@ class DishModel
         : '';
 
         $stmt = $this->db->prepare("
-            SELECT COUNT(*) AS total
+            SELECT COUNT(DISTINCT d.dish_id) AS total
             FROM dish d
             LEFT JOIN dish_allergen da ON d.dish_id = da.dish_id
             LEFT JOIN allergen a ON da.allergen_id = a.allergen_id
