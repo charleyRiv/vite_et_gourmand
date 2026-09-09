@@ -3805,3 +3805,50 @@ img {
         }
     }
 }
+
+//--- EMPLOYE - MESSAGES
+.page-messages {
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 350px;
+            padding-right: 350px;
+        }
+    }
+    h2 {
+        text-align: center;
+    }
+    .section-filtres {
+        justify-content: center;
+        text-align: center;
+
+        .filtres {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .boutons {
+            padding-left: 5rem;
+        }
+    }
+
+    .section-messages {
+        .message {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            row-gap: 1rem;
+            padding: 1rem;
+
+            span {
+                color: $info;
+                font-weight: 500;
+            }
+        }
+    }
+}

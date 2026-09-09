@@ -15187,4 +15187,42 @@ img {
 }
 .page-employee-content .section-new-content fieldset .bouton-new .btn {
   width: 30%;
+}
+
+@media (min-width: 1200px) {
+  .page-messages .container {
+    padding-left: 350px;
+    padding-right: 350px;
+  }
+}
+.page-messages h2, .page-messages .h2 {
+  text-align: center;
+}
+.page-messages .section-filtres {
+  justify-content: center;
+  text-align: center;
+}
+.page-messages .section-filtres .filtres {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.page-messages .section-filtres .boutons {
+  padding-left: 5rem;
+}
+.page-messages .section-messages .message {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 1rem;
+  padding: 1rem;
+}
+.page-messages .section-messages .message span {
+  color: #144680;
+  font-weight: 500;
 }/*# sourceMappingURL=main.css.map */
