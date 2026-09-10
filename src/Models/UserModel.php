@@ -190,6 +190,56 @@ class UserModel{
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getAllEmployeeWithFilters(array $filters = []): ?array
+    {
+        $conditions = ['role_id = 2'];
+        $params = [];
+
+        if (!empty($filters['email'])) {
+            $placeholders = implode(',', array_map(fn($i) => ':email_' . $i, array_keys($filters['email'])));
+            $conditions[] = 'email IN (' . $placeholders . ')';
+            foreach ($filters['email'] as $i => $email) {
+                $params[':email_' . $i] = $email;
+            }
+        }
+
+        if (in_array('is_active', $filters['status']) && !in_array('is_inactive', $filters['status'])) {
+            $conditions[] = 'is_active = 1';
+        } elseif (!in_array('is_active', $filters['status']) && in_array('is_inactive', $filters['status'])) {
+            $conditions[] = 'is_active = 0';
+        }
+
+        if (!empty($filters['search'])) {
+            $conditions[] = 'last_name LIKE :search_last OR first_name LIKE :search_first';
+            $params[':search_last'] = '%' . $filters['search'] . '%';
+            $params[':search_first'] = '%' . $filters['search'] . '%';
+        }
+
+        $where = !empty($conditions)
+            ? 'WHERE ' . implode(' AND ', $conditions)
+            : '';
+
+        $stmt = $this->db->prepare("
+            SELECT 
+                user_id,
+                last_name,
+                first_name,
+                email,
+                is_active
+            FROM user
+            $where
+            ORDER BY last_name ASC
+        ");
+
+        foreach ($params as $key => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($key, $value, $type);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     public function createEmployee(array $data): int
     {
         $stmt = $this->db->prepare("

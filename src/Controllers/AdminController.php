@@ -19,10 +19,18 @@ class AdminController extends EmployeeController{
 
     public function showEmployee(): void
     {
-        $users = $this->userModel->getAllEmployee();
+        $filters= [
+            'email' => $_GET['email'] ?? [],
+            'status' => $_GET['status'] ?? [],
+            'search' => $_GET['search'] ?? '',
+        ];
+
+        $allusers = $this->userModel->getAllEmployee();
+        $users = $this->userModel->getAllEmployeeWithFilters($filters);
 
         $pageTitle = 'Gerer les employés - Vite & Gourmand';
         $h1 = 'Gérer les employés';
+        $extraJs = ['/assets/js/admin/employeeForm.js'];
         require_once __DIR__ . '/../../views/admin/employeeForm.php';
     }
 

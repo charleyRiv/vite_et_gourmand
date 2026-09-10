@@ -3852,3 +3852,209 @@ img {
         }
     }
 }
+
+//--- ADMIN - GESTION EMPLOYE
+.page-gestion-employee {
+    .container {
+        @include media-breakpoint-up(xl) {
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+    }
+    h2 {
+        text-align: center;
+    }
+
+    .section-filtres {
+
+        .show {
+
+        }
+        .search {
+            margin-top: 0.25rem;
+            
+            .search-wrapper {
+                position: relative;
+                z-index: 1;
+                
+
+                input {
+                    width: 100%;
+                    padding-left: 2rem; // ← espace pour l'icône
+                    border-radius: 5px;
+                    border: 1px solid rgba($dark, 1);
+                }
+            
+                .bi-search {
+                    position: absolute;
+                    left: 0.5rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: rgba($dark, 0.5);
+                    pointer-events: none;
+                }
+            }
+            @include media-breakpoint-down(xl) {
+                width: 100%;
+            }
+        }
+
+        .filtres-grp {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: start;
+
+            @include media-breakpoint-up(xl) {
+                flex-direction: row;
+                justify-content: center;
+                align-items: start;
+            }
+
+            .filtres {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            .checkboxes {
+                background-color: white;
+                border: 1px solid $dark;
+                border-radius: 5px;
+                margin: 0rem;
+                /*margin-left: 1rem;*/
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        .boutons-filtres {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: start;
+            gap: 1rem;
+        }
+    }
+
+    .section-show-employee {
+
+        .row {
+            /*gap: 1rem;*/
+            justify-content: center;
+        }
+        fieldset {
+            background-color: white;
+            border: 1px solid $dark;
+            border-radius: 10px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            margin-left: 10px;
+            margin-right: 10px;
+            max-width: 350px;
+
+            .col-12{
+                padding-bottom: 0.5rem;
+
+                &:first-child {
+                    padding-top: 10px;
+                }
+            }
+
+
+            .boutons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-top: 1rem;
+            }
+
+        }
+
+    }
+
+    .section-new-employee {
+        .container {
+            padding-left: 15%;
+            padding-right: 15%;
+            @include media-breakpoint-up(xl) {
+                padding-left: 33%;
+                padding-right: 33%;
+            }
+            
+        }
+        .bouton {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .new-employee-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid $secondary;
+            background-color: rgba($color: $secondary, $alpha: 0.15);
+            border-radius: 10px;
+            padding: 1rem;
+
+            input {
+                width: 100%;
+
+                    &.is-valid {
+                        border: 2px solid rgba($success, 1);
+                    }
+                
+                    &.is-invalid {
+                        border: 2px solid rgba($danger, 1);
+                    }
+                }
+
+            .invalid-feedback {
+                color: $danger;
+                font-size: 0.85rem;
+                margin-top: 0.25rem;
+            }
+
+            .btn {
+                margin-top: 2rem;
+                min-width: 30%;
+            }
+
+            .input-eye-wrapper {
+                position: relative;
+                display: block;
+
+                input {
+                    width: 100%;
+                    padding-right: 2.5rem;
+                }
+            
+                .btn-eye {
+                    position: absolute;
+                    right: 0.75rem;
+                    top: 0;
+                    height: 35px; // ← hauteur standard d'un input Bootstrap
+                    display: flex;
+                    align-items: center;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    color: $dark;
+                    padding: 0;
+                
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            
+            } 
+
+        }
+        
+    }
+}

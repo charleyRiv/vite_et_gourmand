@@ -15225,4 +15225,170 @@ img {
 .page-messages .section-messages .message span {
   color: #144680;
   font-weight: 500;
+}
+
+@media (min-width: 1200px) {
+  .page-gestion-employee .container {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+.page-gestion-employee h2, .page-gestion-employee .h2 {
+  text-align: center;
+}
+.page-gestion-employee .section-filtres .search {
+  margin-top: 0.25rem;
+}
+.page-gestion-employee .section-filtres .search .search-wrapper {
+  position: relative;
+  z-index: 1;
+}
+.page-gestion-employee .section-filtres .search .search-wrapper input {
+  width: 100%;
+  padding-left: 2rem;
+  border-radius: 5px;
+  border: 1px solid #341e34;
+}
+.page-gestion-employee .section-filtres .search .search-wrapper .bi-search {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(52, 30, 52, 0.5);
+  pointer-events: none;
+}
+@media (max-width: 1199.98px) {
+  .page-gestion-employee .section-filtres .search {
+    width: 100%;
+  }
+}
+.page-gestion-employee .section-filtres .filtres-grp {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: start;
+}
+@media (min-width: 1200px) {
+  .page-gestion-employee .section-filtres .filtres-grp {
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+  }
+}
+.page-gestion-employee .section-filtres .filtres-grp .filtres {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.page-gestion-employee .section-filtres .filtres-grp .checkboxes {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 5px;
+  margin: 0rem;
+  /*margin-left: 1rem;*/
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.page-gestion-employee .section-filtres .boutons-filtres {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  gap: 1rem;
+}
+.page-gestion-employee .section-show-employee .row {
+  /*gap: 1rem;*/
+  justify-content: center;
+}
+.page-gestion-employee .section-show-employee fieldset {
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 10px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 350px;
+}
+.page-gestion-employee .section-show-employee fieldset .col-12 {
+  padding-bottom: 0.5rem;
+}
+.page-gestion-employee .section-show-employee fieldset .col-12:first-child {
+  padding-top: 10px;
+}
+.page-gestion-employee .section-show-employee fieldset .boutons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+.page-gestion-employee .section-new-employee .container {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+@media (min-width: 1200px) {
+  .page-gestion-employee .section-new-employee .container {
+    padding-left: 33%;
+    padding-right: 33%;
+  }
+}
+.page-gestion-employee .section-new-employee .bouton {
+  justify-content: center;
+  text-align: center;
+}
+.page-gestion-employee .section-new-employee .new-employee-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #87C093;
+  background-color: rgba(135, 192, 147, 0.15);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.page-gestion-employee .section-new-employee .new-employee-form input {
+  width: 100%;
+}
+.page-gestion-employee .section-new-employee .new-employee-form input.is-valid {
+  border: 2px solid #2e7d4f;
+}
+.page-gestion-employee .section-new-employee .new-employee-form input.is-invalid {
+  border: 2px solid #c0392b;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .invalid-feedback {
+  color: #C0392B;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .btn {
+  margin-top: 2rem;
+  min-width: 30%;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .input-eye-wrapper {
+  position: relative;
+  display: block;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .input-eye-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .input-eye-wrapper .btn-eye {
+  position: absolute;
+  right: 0.75rem;
+  top: 0;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #341E34;
+  padding: 0;
+}
+.page-gestion-employee .section-new-employee .new-employee-form .input-eye-wrapper .btn-eye:hover {
+  color: #FB9C75;
 }/*# sourceMappingURL=main.css.map */

@@ -167,7 +167,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <?php endforeach; ?>
 
                 <div class="col-12 new-dish">
-                    <form action="/employe/plats/creer" method="POST">
+                    <form action="<?= $basePath ?>/plats/creer" method="POST">
                         <button type="submit" class="btn btn-primary">
                             Créer un nouveau plat
                         </button>

@@ -285,7 +285,7 @@ class EmployeeController
         ]);
 
         // Redirection
-        header('Location: /employe/menus/' . $id . '/modifier');
+        header('Location: ' . $this->getBasePath() . '/menus/' . $id . '/modifier');
         exit();
     }
 
@@ -451,9 +451,10 @@ class EmployeeController
             'description' => '',
             'dish_type' => 'main', // valeur par défaut
         ]);
+        $basePath = $this->getBasePath();
         
         // Redirection
-        header('Location: /employe/plats/' . $id . '/modifier');
+        header('Location: ' . $basePath . '/plats/' . $id . '/modifier');
         exit();
     }
 
