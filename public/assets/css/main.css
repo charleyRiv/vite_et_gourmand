@@ -218,7 +218,7 @@ hr {
 }
 
 h6, .h6, h5, .page-client-order .section-client-order-menu fieldset .cancel-form .cancel-form-label,
-.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-order-history .section-employee-order-history fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+.page-client-order .section-client-order-historique fieldset .cancel-form .cancel-form-label, .h5, h4, .page-employee-dish .section-employee-dishes fieldset legend, .page-employee-order-history .section-employee-order-history fieldset legend, .page-employee-menus .section-employee-menus fieldset legend, .page-employee-reviews .section-employee-reviews fieldset legend, .page-employee-orders .section-employee-orders fieldset legend, .page-client-review .container fieldset legend, .h4, h3, .page-admin-statistique .section-kpi .kpi-info, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3, h2, .h2, h1, .hero .hero-title, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -245,12 +245,12 @@ h2, .h2 {
   }
 }
 
-h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+h3, .page-admin-statistique .section-kpi .kpi-info, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 @media (min-width: 1200px) {
-  h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+  h3, .page-admin-statistique .section-kpi .kpi-info, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
   .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
     font-size: 1.75rem;
   }
@@ -12013,7 +12013,7 @@ h2, .h2 {
   font-size: 34px;
 }
 
-h3, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
+h3, .page-admin-statistique .section-kpi .kpi-info, .page-client-update-order .section-client-update-order .container fieldset legend, .section-order4 .container .row fieldset legend,
 .section-order-confirmation .container .row fieldset legend, .section-order3 .container .row fieldset legend, .page-order1 .section-order1-form .container fieldset legend, .h3 {
   color: #341E34;
   font-weight: 400;
@@ -15396,4 +15396,142 @@ img {
 }
 .page-gestion-employee .section-new-employee .new-employee-form .input-eye-wrapper .btn-eye:hover {
   color: #FB9C75;
+}
+
+@media (min-width: 1200px) {
+  .page-admin-statistique .container {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+.page-admin-statistique h2, .page-admin-statistique .h2 {
+  text-align: start;
+}
+.page-admin-statistique .section-kpi {
+  background-color: rgba(237, 224, 206, 0.7);
+}
+.page-admin-statistique .section-kpi .row {
+  gap: 1rem;
+}
+.page-admin-statistique .section-kpi fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  border: 1px solid #341E34;
+  border-radius: 15px;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 1200px) {
+  .page-admin-statistique .section-kpi fieldset {
+    max-width: 23%;
+  }
+}
+.page-admin-statistique .section-kpi label, .page-admin-statistique .section-kpi .page-employee-dish-update .section-employee-dish-form .field-allergen .label-title, .page-employee-dish-update .section-employee-dish-form .field-allergen .page-admin-statistique .section-kpi .label-title {
+  width: 100%;
+  text-align: center;
+}
+.page-admin-statistique .section-kpi .kpi-info {
+  color: #2E7D4F;
+  text-align: center;
+}
+.page-admin-statistique .section-orders .filters {
+  align-items: end;
+}
+.page-admin-statistique .section-orders .date-filters {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+.page-admin-statistique .section-orders .date-from-filter,
+.page-admin-statistique .section-orders .date-to-filter {
+  display: flex;
+  flex-direction: column;
+}
+.page-admin-statistique .section-orders .bouton-filter {
+  justify-content: flex-end;
+}
+.page-admin-statistique .section-orders .order-graphique {
+  width: 100%;
+  aspect-ratio: 1.5;
+}
+.page-admin-statistique .section-orders table {
+  width: 100%;
+  border: 1px solid #341E34;
+}
+.page-admin-statistique .section-orders table th {
+  background-color: #EDE0CE;
+  text-align: center;
+}
+.page-admin-statistique .section-orders table th:first-child {
+  text-align: start;
+}
+.page-admin-statistique .section-orders table td {
+  background-color: white;
+  text-align: center;
+}
+.page-admin-statistique .section-orders table td:first-child {
+  text-align: start;
+}
+.page-admin-statistique .section-ca {
+  background-color: rgba(237, 224, 206, 0.5);
+}
+.page-admin-statistique .section-ca .darken {
+  background-color: rgb(249.5633802817, 120.4436619718, 67.4366197183);
+  border: 1px solid #341E34;
+  font-weight: 500;
+}
+.page-admin-statistique .section-ca .graph-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.page-admin-statistique .section-ca .options-filters {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  align-items: start;
+}
+@media (min-width: 1200px) {
+  .page-admin-statistique .section-ca .options-filters {
+    flex-direction: row;
+    align-items: end;
+  }
+}
+.page-admin-statistique .section-ca .date-filters {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+.page-admin-statistique .section-ca .date-from-filter,
+.page-admin-statistique .section-ca .date-to-filter {
+  display: flex;
+  flex-direction: column;
+}
+.page-admin-statistique .section-ca .bouton-filter {
+  justify-content: flex-end;
+}
+.page-admin-statistique .section-ca .ca-graphique {
+  width: 100%;
+  aspect-ratio: 1.5;
+}
+.page-admin-statistique .section-ca table {
+  width: 100%;
+  border: 1px solid #341E34;
+}
+.page-admin-statistique .section-ca table th {
+  background-color: #EDE0CE;
+  text-align: center;
+}
+.page-admin-statistique .section-ca table th:first-child {
+  text-align: start;
+}
+.page-admin-statistique .section-ca table td {
+  background-color: white;
+  text-align: center;
+}
+.page-admin-statistique .section-ca table td:first-child {
+  text-align: start;
 }/*# sourceMappingURL=main.css.map */

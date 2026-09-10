@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ── Graphique commandes par menu ──────────────────────
     const ctxOrders = document.getElementById('ordersChart');
+    let chartOrders = null;
+
     if (ctxOrders) {
-        new Chart(ctxOrders.getContext('2d'), {
+        chartOrders = new Chart(ctxOrders.getContext('2d'), {
             type: 'bar',
             data: {
                 labels: chartLabels,
@@ -64,11 +66,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     y: { beginAtZero: true, ticks: { stepSize: 1 } }
                 }
             }
-        });
+        }); 
+        
+    // ResizeObserver sur le conteneur
+    const containerOrders = document.getElementById('chartOrders-container');
+    const resizeObserverOrders = new ResizeObserver(() => {
+        chartOrders.resize();
+    });
+    resizeObserverOrders.observe(containerOrders);
     }
+
+    window.addEventListener('resize', function() {
+        if (chartOrders) chartOrders.resize();
+    })
+
 
     // ── Graphique CA en barres ────────────────────────────
     const ctxBar = document.getElementById('barChart');
+    let chartCaBar = null;
+
     if (ctxBar) {
         const barChartDatasets = barDatasets.map((data, index) => ({
             label: barMode === 'month' ? 'CA mensuel' : barLabels[index],
@@ -77,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             borderRadius: 3
         }));
 
-        new Chart(ctxBar.getContext('2d'), {
+        chartCaBar = new Chart(ctxBar.getContext('2d'), {
             type: 'bar',
             data: {
                 labels: barLabels,
@@ -85,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: { display: barMode !== 'month' },
                     title: {
@@ -103,10 +120,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        // ResizeObserver sur le conteneur
+        const containerCaBar = document.getElementById('chartCa-container');
+        const resizeObserverCaBar = new ResizeObserver(() => {
+            chartCaBar.resize();
+        });
+        resizeObserverCaBar.observe(containerCaBar);
     }
+
+    window.addEventListener('resize', function() {
+        if (chartCaBar) chartCaBar.resize();
+    })
 
     // ── Graphique CA en ligne ─────────────────────────────
     const ctxLine = document.getElementById('lineChart');
+    let chartCaLine = null;
+
     if (ctxLine) {
         const lineChartDatasets = lineDatasets.map((dataset, index) => ({
             label: dataset.label,
@@ -117,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fill: lineMode === 'total'
         }));
 
-        new Chart(ctxLine.getContext('2d'), {
+        chartCaLine = new Chart(ctxLine.getContext('2d'), {
             type: 'line',
             data: {
                 labels: lineLabels,
@@ -125,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: { display: lineMode === 'by_menu' },
                     title: {
@@ -141,8 +172,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
+
         });
+        // ResizeObserver sur le conteneur
+            const containerCaLine = document.getElementById('chartCa-container');
+            const resizeObserverCaLine = new ResizeObserver(() => {
+                chartCaLine.resize();
+            });
+            resizeObserverCaLine.observe(containerCaLine);
     }
+
+    window.addEventListener('resize', function() {
+        if (chartCaLine) chartCaLine.resize();
+    })
 
     // ── Switch entre les graphiques CA ────────────────────
     const btnBar  = document.getElementById('btn-bar');
@@ -153,6 +195,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (btnBar && btnLine) {
         btnBar.addEventListener('click', function() {
+            btnBar.classList.add('darken');
+            btnLine.classList.remove('darken');
             // Mettre à jour le champ hidden active_chart dans le formulaire barres
             document.querySelector('#bar-filters [name="active_chart"]').value = 'bar';
             
@@ -165,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         btnLine.addEventListener('click', function() {
+            btnLine.classList.add('darken');
+            btnBar.classList.remove('darken');
             // Mettre à jour le champ hidden active_chart dans le formulaire barres
             document.querySelector('#line-filters [name="active_chart"]').value = 'line';
 
