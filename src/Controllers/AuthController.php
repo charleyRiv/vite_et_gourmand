@@ -49,6 +49,28 @@ class AuthController {
 
         $errors = [];
 
+        // ─ Protection brute force ────────────────────────────
+        if (!Session::has('login_attempts')) {
+            Session::set('login_attempts', 0);
+            Session::set('login_last_attempt', time());
+        }
+
+        if (Session::get('login_attempts') >= 5) {
+            $waitTime    = 15 * 60;
+            $lastAttempt = Session::get('login_last_attempt');
+
+            if (time() - $lastAttempt < $waitTime) {
+                $remaining = ceil(($waitTime - (time() - $lastAttempt)) / 60);
+                $errors[]  = "Trop de tentatives. Réessayez dans $remaining minute(s).";
+                $pageTitle = 'Connexion - Vite & Gourmand';
+                $h1        = 'Formulaire de connexion';
+                require_once __DIR__ . '/../../views/auth/login.php';
+                return;
+            }
+            Session::set('login_attempts', 0);
+        }
+
+        // -- Validation --------------------
         $email = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
 
@@ -65,6 +87,9 @@ class AuthController {
 
                 if ($user === null || !$this->authServices->verifyPassword($password, $user['password']))
                     {
+                        // ← Incrémente le compteur en cas d'échec
+                        Session::set('login_attempts', Session::get('login_attempts') + 1);
+                        Session::set('login_last_attempt', time());
                         $errors[] = 'Email ou mot de passe incorrect';
                     }
             }
@@ -85,6 +110,8 @@ class AuthController {
                 return;
             }
 
+        // -- Connexion réussie
+        Session::set('login_attemps', 0); // réinitialise le compteur
         // régénérer l'ID de session (sécurité)
         Session ::regenerate();
 
