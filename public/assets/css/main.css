@@ -12142,6 +12142,7 @@ a:hover {
 .hero {
   position: relative;
   height: 360px;
+  background-image: var(--hero-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
