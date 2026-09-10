@@ -191,11 +191,13 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <div class="col-12">
                             <?php if ($review['validation_status'] === 'pending') : ?>
                                 <form action="/employe/avis/<?= htmlspecialchars($review['review_id']) ?>/validate" method="POST">
+                                    <?= csrfField() ?>
                                         <!-- Champs Valider -->
                                         <button type="submit" class="btn btn-success">Valider</button>
                                 </form>
 
                                 <form action="/employe/avis/<?= htmlspecialchars($review['review_id']) ?>/refused" method="POST">
+                                    <?= csrfField() ?>
                                         <!-- Champs Refuser -->
                                         <button type="submit" class="btn btn-danger">Refuser</button>
                                 </form>

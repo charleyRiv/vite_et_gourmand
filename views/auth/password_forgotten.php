@@ -44,6 +44,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     <?php else: ?>
                     
                         <form action="/mot-de-passe-oublie" method="POST">
+                            <?= csrfField() ?>
                             <div class="reinit-password-form">
                                 <!-- Champs Email -->
                                 <div class="col-12 reinit-password-label">

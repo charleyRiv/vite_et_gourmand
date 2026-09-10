@@ -47,6 +47,7 @@ require_once __DIR__ . '/../layouts/header.php';
     <section class="section-client-review-rate">
         <div class="container">
             <form action="/mon-espace/commande/<?= htmlspecialchars($order['order_id']) ?>/avis" method="POST">
+                <?= csrfField() ?>
                 <div class="row">
                     
                     <!-- Champs Rating -->

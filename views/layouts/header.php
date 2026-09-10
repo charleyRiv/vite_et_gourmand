@@ -82,6 +82,7 @@
 
                         <li class="nav-item">
                             <form action="/deconnexion" method="post">
+                                <?= csrfField() ?>
                                 <button type="submit" class="btn btn-outline-primary btn-sm">
                                     Déconnexion
                                 </button>

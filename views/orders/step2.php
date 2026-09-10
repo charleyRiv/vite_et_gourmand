@@ -14,6 +14,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <h2><?=  htmlspecialchars($h1)?></h2>
 
                 <form action="/commande/etape-2" method="POST">
+                    <?= csrfField() ?>
                     <div class="row order2-form">
                         <div class="col-12 order2-label">
                             <label for="title">Séléctionner un menu</label>

@@ -157,6 +157,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <div class="row boutons">
                             <div class="col-12">
                                 <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/supprimer" method="POST">
+                                    <?= csrfField() ?>
                                     <a href="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier" class="btn btn-primary">Modifier</a>
                                     
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -168,6 +169,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 <div class="col-12 new-dish">
                     <form action="<?= $basePath ?>/plats/creer" method="POST">
+                        <?= csrfField() ?>
                         <button type="submit" class="btn btn-primary">
                             Créer un nouveau plat
                         </button>

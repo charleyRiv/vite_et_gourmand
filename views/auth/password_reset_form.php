@@ -37,6 +37,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <?php elseif (isset($user) && $user !== null): ?>
                 
                     <form action="/mot-de-passe-oublie/reinitialisation" method="POST">
+                        <?= csrfField() ?>
                         <div class="reset-password-form">
                             <!-- Token caché - transmis avec le formulaire-->
                             <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">

@@ -58,7 +58,8 @@ require_once __DIR__ . '/../layouts/hero.php';
 
                         <!-- Colonne de droite -->
                         <div class="col-12 col-lg-4 boutons-next">
-                            <form action="/mon-espace/supprimer" method="post">
+                            <form action="/mon-espace/supprimer" method="post" id="delete-form">
+                                <?= csrfField() ?>
                                 <div class="boutons">
                                     <div class="col-5 col-lg-12 modify">
                                         <a href="/mon-espace/profil" class="btn btn-primary">Modifier</a>
@@ -67,9 +68,7 @@ require_once __DIR__ . '/../layouts/hero.php';
                                     <div class="col-5 col-lg-12">
                                         <button 
                                             type="submit"
-                                            class="btn btn-danger"
-                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')"
-                                        >
+                                            class="btn btn-danger">
                                             Supprimer mon compte
                                         </button>
                                     </div>

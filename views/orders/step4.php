@@ -190,6 +190,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 
                 <form action="/commande/etape-4" method="POST">
+                    <?= csrfField() ?>
                     <div class="order4-submit">
                         <!--CGV -->
                         <fieldset>

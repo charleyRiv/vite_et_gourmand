@@ -42,7 +42,7 @@ class UserController {
         
         $pageTitle = 'Mon Espace - Vite & Gourmand';
         $h1 = 'Mon Espace';
-
+        $extraJs = ['/assets/js/user/dashboard.js'];
         require_once __DIR__ . '/../../views/user/dashboard.php';
     }
 
@@ -187,7 +187,7 @@ class UserController {
         //Calcul de la distance
         $distanceService = new DistanceService();
 
-        $distance = floor($distanceService->getDistance($address)) ?? 0;
+        $distance = floor($distanceService->getDistance($address) ?? 0);
 
         //Calcul des frais kilométriques
         if (strtolower($data['delivery_city']) !== 'bordeaux') {
@@ -204,8 +204,11 @@ class UserController {
             $order = $this->orderModel->getById($id);
             $menu = $this->menuModel->getById($order['menu_id']);
             $menus = $this->menuModel->getAll();
+            $review = $this->reviewModel->getByOrderId($id);
+    
+            $pageTitle = "Modifier ma commande - Vite & Gourmand";
             $h1 = 'Modifier ma commande n°' . $id;
-            $extraJs = ['/assets/js/user/orders.js'];
+            $extraJs = ['/assets/js/user/updateOrdersForm.js'];
             require_once __DIR__ . '/../../views/user/updateOrdersForm.php';
             return;
         }
@@ -213,7 +216,7 @@ class UserController {
         $this->orderModel->updateOrder($id, $data);
 
         // Redirection
-        header('Location: /mon-espace');
+        header('Location: /mon-espace/commande/' . $id);
         exit();
     }
 

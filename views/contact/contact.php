@@ -15,6 +15,7 @@ require_once __DIR__ . '/../layouts/hero.php';
     <section class="section-contact">
         <div class="container">
                 <form action="/contact" id="contact-form" method="POST">
+                    <?= csrfField() ?>
                 <div class="row">
                     <!-- Champs Email --> 
                     <div class="col-12 contact-label">

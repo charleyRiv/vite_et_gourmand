@@ -140,17 +140,20 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <?php if ($user['is_active'] === 1) : ?>
                                 <!-- Désactiver -->
                                 <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/desactiver" method="POST">
+                                    <?= csrfField() ?>
                                     <button type="submit" class="btn btn-primary">Désactiver</button>
                                 </form>
                                 <?php else: ?>
                                 <!-- Activer -->
                                 <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/activer" method="POST">
+                                    <?= csrfField() ?>
                                     <button type="submit" class="btn btn-primary">Activer</button>
                                 </form>
                                 <?php endif; ?>
                             
                                 <!-- Supprimer -->
                                 <form action="/admin/employes/<?= htmlspecialchars($user['user_id']) ?>/supprimer" method="POST">
+                                    <?= csrfField() ?>
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
                             
@@ -179,6 +182,7 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
 
             <form action="/admin/employes/creer" method="POST" id="new-employee-form" class="d-none">
+                <?= csrfField() ?>
                 <div class="row new-employee-form">
                     <!-- Champs Nom -->
                     <div class="col-12">

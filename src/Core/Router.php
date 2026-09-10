@@ -18,7 +18,19 @@ class Router {
         ];
     }
 
-    public function dispatch(string $httpMethod, string $requestUri): void {
+    public function dispatch(string $httpMethod, string $requestUri): void 
+    {
+        //Vérification CSRF pour toutes les requêtes POST
+        if ($httpMethod === 'POST') {
+            if (!validateCsrfToken($_POST['csrf_token'] ?? '')) {
+                http_response_code(403);
+                require_once __DIR__ . '/../../views/errors/403.php';
+                exit();
+            }
+            //Régénère le token après validation
+            Session::remove('csrf_token');
+        }
+
         // Nettoyer l'URI 
         $path = parse_url($requestUri, PHP_URL_PATH);
         $path = rtrim($path, '/') ?: '/';

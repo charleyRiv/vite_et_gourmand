@@ -113,4 +113,33 @@ function getStatusClass(string $status): string
     };
 }
 
+// Generer token CSRF
+
+function generateCsrfToken(): string
+{
+    if (!Session::has('csrf_token')) {
+        Session::set('csrf_token', bin2hex(random_bytes(32)));
+    }
+    return Session::get('csrf_token'); 
+}
+
+function validateCsrfToken(string $token): bool
+{
+    return Session::has('csrf_token')
+        && hash_equals(Session::get('csrf_token'), $token);
+}
+
+function regenerateCsrfToken(): void
+{
+    Session::remove('csrf_token');
+    generateCsrfToken();
+}
+
+function csrfField(): string
+{
+    return '<input type="hidden" name="csrf_token" value="' 
+        . htmlspecialchars(generateCsrfToken()) 
+        . '">';
+}
+
 ?>

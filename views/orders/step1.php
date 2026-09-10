@@ -46,6 +46,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <div class="container">
             <div class="row">
                 <form action="/commande/etape-1" method="POST">
+                    <?= csrfField() ?>
                     <fieldset class="order1-user-form">
                         <legend>Contact client</legend>
                         <!-- Champs Nom -->

@@ -161,6 +161,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 
                         <form action="/employe/commandes/<?= $order['order_id'] ?>/gerer" method="POST">
+                            <?= csrfField() ?>
                             <div class="col-12 status-select">
                                 <!-- Champs Satut -->
                                 <select name="current_status" class="btn status-select-input <?= getStatusClass($order['current_status']) ?>">

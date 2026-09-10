@@ -11,6 +11,7 @@ require_once __DIR__ . '/../layouts/header.php';
     <section class="section-login">
         <div class="container">
             <form action="/connexion" method="POST">
+                <?= csrfField() ?>
                 <div class="row">
                     <div class="col-12">
                         <h1><?=  htmlspecialchars($h1)?></h1>

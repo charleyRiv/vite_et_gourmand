@@ -19,6 +19,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </div>
 
                 <form action="/commande/etape-3" method="POST">
+                    <?= csrfField() ?>
                     <div class="order3-form">
                         <div class="col-12 warning">
                             <p>Le menu sélectionné est prévu pour <?= $menu['min_persons'] ?> personnes minimum</p>

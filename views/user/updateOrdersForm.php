@@ -17,6 +17,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </div>
             
                 <form action="/mon-espace/commande/<?= $order['order_id'] ?>/modifier" method="Post">
+                    <?= csrfField() ?>
                     <div class="col-12">
                         <h3>Informations de livraisons </h3>
                     </div>

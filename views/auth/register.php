@@ -25,6 +25,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <?php endif; ?>
                             
                     <form action="/inscription" method="POST">
+                        <?= csrfField() ?>
                         <div class="register-form">
                             <div class="row g-5 register-name">
                                     <!-- Champs Nom -->

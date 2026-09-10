@@ -22,6 +22,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </div>
 
                 <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier" method="POST">
+                    <?= csrfField() ?>
                     <div class="col-12 title">
                         <!-- Champs Titre plat -->
                         <div class="field">
@@ -116,6 +117,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 >
                                 <!-- Bouton supprimer la photo -->
                                 <form action="<?= $basePath ?>/plats/photos/<?= $picture['picture_id'] ?>/supprimer" method="post">
+                                    <?= csrfField() ?>
                                     <input type="hidden" name="dish_id" value="<?= $dish['dish_id'] ?>">
                                     <button type="submit" onclick="return confirm('Supprimer cette photo ?')" class="btn btn-danger">
                                         <i class="bi bi-x-square"></i> Supprimer
@@ -140,6 +142,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         id="form-new-picture" class="d-none"
                         
                     >
+                    <?= csrfField() ?>
 
                         <div class="row new-picture" >
                             <div class="col-12">

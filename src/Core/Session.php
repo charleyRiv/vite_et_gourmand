@@ -36,4 +36,14 @@ class Session
         return isset($_SESSION['user_id']);
     }
 
+    public static function has(string $key): bool
+    {
+        return isset($_SESSION[$key]);
+    }
+
+    public static function remove(string $key) : void 
+    {
+        unset($_SESSION[$key]);    
+    }
+
 }

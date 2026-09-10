@@ -15,7 +15,8 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 <div class="col-12">
                 <form action="/employe/mot-de-passe" method="POST">
-                        <button type="submit" class="btn btn-dashboard">Modifier mon mot de passe</button>
+                    <?= csrfField() ?>
+                    <button type="submit" class="btn btn-dashboard">Modifier mon mot de passe</button>
                 </form>
                 </div>
 

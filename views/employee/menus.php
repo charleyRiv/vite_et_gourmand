@@ -173,6 +173,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <div class="row boutons">
                             <div class="col-12">
                                 <form action="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/supprimer" method="POST">
+                                    <?= csrfField() ?>
                                     <a href="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/modifier" class="btn btn-primary">Modifier</a>
                                     <button type="submit" class="btn btn-danger"> Supprimer</button>
                                 </form> 
@@ -183,6 +184,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 <div class="col-12 new-menu">
                     <form action="/employe/menus/creer" method="POST">
+                        <?= csrfField() ?>
                         <button type="submit" class="btn btn-primary">
                             Créer un nouveau menu
                         </button>

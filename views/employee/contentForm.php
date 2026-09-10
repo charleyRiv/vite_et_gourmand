@@ -18,6 +18,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <?php foreach ($contents as $content) : ?>
                 <div class="content-form">
                     <form action="/employe/contenus/<?= $content['content_id'] ?>/modifier" method="POST">
+                        <?= csrfField() ?>
                 
                         <!-- Contenu -->
                         <div class="col-12">
@@ -39,6 +40,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     </form>
                             <!-- Supprimer -->
                             <form action="/employe/contenus/<?= $content['content_id'] ?>/supprimer" method="post">
+                                <?= csrfField() ?>
                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>
                         </div>
@@ -59,6 +61,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     </div>
                     
                         <form action="/employe/contenus/creer" method="post">
+                            <?= csrfField() ?>
                             <fieldset id="new-form" class="d-none">
                             <div class="col field">
                                 <label for="page">Page</label>

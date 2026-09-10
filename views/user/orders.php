@@ -105,6 +105,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             </div>
 
                                 <form action="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>/annuler" method="POST">
+                                    <?= csrfField() ?>
                                     <div class="cancel-form d-none" id="cancel-form">
                                         <div class="col-12">
                                             <div class="col-12">
