@@ -668,8 +668,34 @@ class EmployeeController
 
     public function addPictureToDish(int $id): void
     {
-        $url = $this->uploadPicture('photo');
         $basePath = $this->getBasePath();
+        
+        // ── Vérification sécurité upload ──────────────────────
+        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+        $maxSize = 2 * 1024 * 1024; // 2Mo
+
+        if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
+            // erreur upload
+            header('Location: ' . $basePath . '/plats/' . $id . '/modifier?error=upload');
+            exit();
+        }
+
+        // Vérifie le type MIME réel (pas celui déclaré par le navigateur)
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $finfo->file($_FILES['photo']['tmp_name']);
+
+        if (!in_array($mimeType, $allowedMimes)) {
+            header('Location: ' . $basePath . '/plats/' . $id . '/modifier?error=type');
+            exit();
+        }
+
+        if ($_FILES['photo']['size'] > $maxSize) {
+            header('Location: ' . $basePath . '/plats/' . $id . '/modifier?error=size');
+            exit();
+        }
+
+        $url = $this->uploadPicture('photo');
+        
 
         if ($url === null) {
             // Redirection avec message d'erreur
@@ -706,11 +732,37 @@ class EmployeeController
 
     public function addPictureToMenu(int $id): void
     {
-        $url = $this->uploadPicture('photo');$basePath = $this->getBasePath();
+        $basePath = $this->getBasePath();
+
+        // ── Vérification sécurité upload ──────────────────────
+        $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+        $maxSize = 2 * 1024 * 1024; // 2Mo
+
+        if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
+            // erreur upload
+            header('Location: ' . $basePath . '/menus/' . $id . '/modifier?error=upload');
+            exit();
+        }
+
+        // Vérifie le type MIME réel (pas celui déclaré par le navigateur)
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $finfo->file($_FILES['photo']['tmp_name']);
+
+        if (!in_array($mimeType, $allowedMimes)) {
+            header('Location: ' . $basePath . '/menus/' . $id . '/modifier?error=type');
+            exit();
+        }
+
+        if ($_FILES['photo']['size'] > $maxSize) {
+            header('Location: ' . $basePath . '/menus/' . $id . '/modifier?error=size');
+            exit();
+        }
+
+        $url = $this->uploadPicture('photo');
 
         if ($url === null) {
             // Redirection avec message d'erreur
-            header('Location: ' . $basePath . '/plats/' . $id . '/modifier');
+            header('Location: ' . $basePath . '/menus/' . $id . '/modifier');
             exit();
         }
 
