@@ -16,7 +16,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     <h2><?=  htmlspecialchars($h1)?></h2>
                 </div>
             
-                <form action="/mon-espace/commande/<?= $order['order_id'] ?>/modifier" method="Post">
+                <form action="/mon-espace/commande/<?= htmlspecialchars($order['order_id']) ?>/modifier" method="Post">
                     <?= csrfField() ?>
                     <div class="col-12">
                         <h3>Informations de livraisons </h3>
@@ -177,7 +177,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <select id="menu_id" name="menu_id" class="client-update-order-input" required>
                                     <option value=""></option>
                                     <?php foreach ($menus as $men): ?>
-                                        <option value="<?= $men['menu_id']?>"
+                                        <option value="<?= htmlspecialchars($men['menu_id'])?>"
                                         <?= ($men['menu_id'] == $order['menu_id']) ? 'selected' : '' ?>
                                     >
                                             <?= htmlspecialchars($men['title'])?>
@@ -199,15 +199,15 @@ require_once __DIR__ . '/../layouts/header.php';
                                     type="number" 
                                     id="nb_persons" 
                                     name="nb_persons" 
-                                    min="<?= $menu['min_persons'] ?>"
+                                    min="<?= htmlspecialchars($menu['min_persons']) ?>"
                                     value="<?= htmlspecialchars($order['nb_persons'])?>"
                                     class="client-update-order-input"
                                     required
                                 >
-                                <div class="invalid-feedback">min <?= $menu['min_persons'] ?> personnes.</div>
+                                <div class="invalid-feedback">min <?= htmlspecialchars($menu['min_persons']) ?> personnes.</div>
                             </div>
                             <div class="col-12 warning">
-                                <p>Le menu sélectionné est prévu pour <span id="min-persons-display"><?= $menu['min_persons'] ?></span> personnes minimum</p>
+                                <p>Le menu sélectionné est prévu pour <span id="min-persons-display"><?= htmlspecialchars($menu['min_persons']) ?></span> personnes minimum</p>
                             </div>  
                         </fieldset>
 
@@ -220,8 +220,8 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <td>Prix du menu <br>
                                     <small>
                                         <span id="price-per-person-display">
-                                            <?= $menu['price_per_person']?></span> € x
-                                        <span id="nb-display"><?= $menu['min_persons']?></span> personnes
+                                            <?= htmlspecialchars($menu['price_per_person'])?></span> € x
+                                        <span id="nb-display"><?= htmlspecialchars($menu['min_persons'])?></span> personnes
                                     </small>
                                     </td>
                                     <td id="menu-price">-- €</td>

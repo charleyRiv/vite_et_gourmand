@@ -22,7 +22,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     <?= csrfField() ?>
                     <div class="order3-form">
                         <div class="col-12 warning">
-                            <p>Le menu sélectionné est prévu pour <?= $menu['min_persons'] ?> personnes minimum</p>
+                            <p>Le menu sélectionné est prévu pour <?= htmlspecialchars($menu['min_persons']) ?> personnes minimum</p>
                         </div>
 
                         <!-- Champs Nombre de personnes -->
@@ -35,12 +35,12 @@ require_once __DIR__ . '/../layouts/header.php';
                                 type="number" 
                                 id="nb_persons" 
                                 name="nb_persons" 
-                                min="<?= $menu['min_persons'] ?>"
-                                value="<?= $menu['min_persons'] ?>"
+                                min="<?= htmlspecialchars($menu['min_persons']) ?>"
+                                value="<?= htmlspecialchars($menu['min_persons']) ?>"
                                 class="order3-input"
                                 required
                             >
-                            <div class="invalid-feedback">min <?= $menu['min_persons'] ?> personnes.</div>
+                            <div class="invalid-feedback">min <?= htmlspecialchars($menu['min_persons']) ?> personnes.</div>
                     </div>
                         </div>
 
@@ -51,8 +51,8 @@ require_once __DIR__ . '/../layouts/header.php';
                             <tr>
                                 <td>Prix du menu <br>
                                 <small>
-                                    <?= $menu['price_per_person']?> € x
-                                    <span id="nb-display"><?= $menu['min_persons']?></span> personnes
+                                    <?= htmlspecialchars($menu['price_per_person'])?> € x
+                                    <span id="nb-display"><?= htmlspecialchars($menu['min_persons'])?></span> personnes
                                 </small>
                                 </td>
                                 <td id="menu-price">-- €</td>

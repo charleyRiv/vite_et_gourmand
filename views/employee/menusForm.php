@@ -35,7 +35,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     </div>
                 <?php endif; ?>
     
-                <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/modifier" method="POST">
+                <form action="<?= $basePath ?>/menus/<?= htmlspecialchars($menu['menu_id']) ?>/modifier" method="POST">
                     <?= csrfField() ?>
                     <div class="col-12 title">
                         <!-- Champs Titre -->
@@ -80,7 +80,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         <?php foreach ($themes as $theme): ?>
                                             <option 
                                                 value="<?= htmlspecialchars($theme['theme_id']) ?>"
-                                                <?= (($menu['theme_id'] ?? '') == $theme['theme_id']) ? 'selected' : '' ?>
+                                                <?= htmlspecialchars(($menu['theme_id'] ?? '') == $theme['theme_id']) ? 'selected' : '' ?>
                                             >
                                                 <?= htmlspecialchars($theme['label']) ?>
                                             </option>   
@@ -102,7 +102,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <?php foreach ($diets as $diet): ?>
                                         <option 
                                             value="<?= htmlspecialchars($diet['diet_id']) ?>"
-                                            <?= (($menu['diet_id'] ?? '') == $diet['diet_id']) ? 'selected' : '' ?>
+                                            <?= htmlspecialchars(($menu['diet_id'] ?? '') == $diet['diet_id']) ? 'selected' : '' ?>
                                         >
                                             <?= htmlspecialchars($diet['label']) ?>
                                         </option>   
@@ -253,14 +253,14 @@ require_once __DIR__ . '/../layouts/header.php';
                     </form>
                                         
                         <?php if ($menu['is_active'] === 1):?>
-                            <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/desactiver" method="POST">
+                            <form action="<?= $basePath ?>/menus/<?= htmlspecialchars($menu['menu_id']) ?>/desactiver" method="POST">
                                 <?= csrfField() ?>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-danger">Désactiver</button>
                                 </div>
                             </form>
                         <?php else: ?>
-                            <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/activer" method="POST">
+                            <form action="<?= $basePath ?>/menus/<?= htmlspecialchars($menu['menu_id']) ?>/activer" method="POST">
                                 <?= csrfField() ?>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-secondary">Activer</button>
@@ -304,7 +304,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         alt="<?= htmlspecialchars($picture['alt_text']) ?>"
                                     >
                                 
-                                    <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/photos/copier-depuis-plat" method="post">
+                                    <form action="<?= $basePath ?>/menus/<?= htmlspecialchars($menu['menu_id']) ?>/photos/copier-depuis-plat" method="post">
                                         <?= csrfField() ?>
                                         <input type="hidden" name="url" value="<?= htmlspecialchars($picture['url']) ?>">
                                         <input type="hidden" name="alt_text" value="<?= htmlspecialchars($picture['alt_text']) ?>">
@@ -333,9 +333,9 @@ require_once __DIR__ . '/../layouts/header.php';
                                         alt="<?= htmlspecialchars($picture['alt_text']) ?>"
                                     >
                                     <!-- Bouton supprimer la photo -->
-                                    <form action="/employe/menus/photos/<?= $picture['picture_id'] ?>/supprimer" method="post">
+                                    <form action="/employe/menus/photos/<?= htmlspecialchars($picture['picture_id']) ?>/supprimer" method="post">
                                         <?= csrfField() ?>
-                                        <input type="hidden" name="menu_id" value="<?= $menu['menu_id'] ?>">
+                                        <input type="hidden" name="menu_id" value="<?= htmlspecialchars($menu['menu_id']) ?>">
                                         <button type="submit" onclick="return confirm('Supprimer cette photo ?')" class="btn btn-danger">
                                             <i class="bi bi-x-square"></i> Supprimer 
                                         </button>
@@ -355,7 +355,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </div>
 
                 <form
-                    action="/employe/menus/<?= $menu['menu_id'] ?>/photos/ajouter"
+                    action="/employe/menus/<?= htmlspecialchars($menu['menu_id']) ?>/photos/ajouter"
                     method="post"
                     enctype="multipart/form-data"
                 > 

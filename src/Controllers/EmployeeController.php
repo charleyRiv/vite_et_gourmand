@@ -86,8 +86,8 @@ class EmployeeController
 
         // Récupérer les filtres depuis GET
         $filters = [
-            'status'   => $_GET['status']   ?? [],
-            'client'   => $_GET['client']   ?? [],
+            'status'   => array_map('htmlspecialchars',$_GET['status']   ?? []),
+            'client'   => array_map('htmlspecialchars',$_GET['client']   ?? []),
         ];
         $offset = ($currentPage -1) * $perPage;
 
@@ -244,10 +244,10 @@ class EmployeeController
 
         // Récupérer les filtres depuis GET
         $filters = [
-            'diets'   => $_GET['diet']   ?? [],
-            'themes'   => $_GET['theme']  ?? [],
-            'status' => $_GET['status'] ?? [],
-            'search' => $_GET['search'] ?? '',
+            'diets'   => array_map('htmlspecialchars',$_GET['diet']   ?? []),
+            'themes'   => array_map('htmlspecialchars',$_GET['theme']  ?? []),
+            'status' => array_map('htmlspecialchars',$_GET['status'] ?? []),
+            'search' => htmlspecialchars($_GET['search'] ?? ''),
         ];
         $offset = ($currentPage -1) * $perPage;
 
@@ -407,10 +407,10 @@ class EmployeeController
 
         // Récupérer les filtres depuis GET
         $filters = [
-            'diets'   => $_GET['diet']   ?? [],
-            'dish_type'   => $_GET['dish_type']  ?? [],
-            'allergen' => $_GET['allergen'] ?? [],
-            'search' => $_GET['search'] ?? '',
+            'diets'   => array_map('htmlspecialchars',$_GET['diet']   ?? []),
+            'dish_type'   => array_map('htmlspecialchars',$_GET['dish_type']  ?? []),
+            'allergen' => array_map('htmlspecialchars',$_GET['allergen'] ?? []),
+            'search' => htmlspecialchars($_GET['search'] ?? ''),
         ];
         $offset = ($currentPage -1) * $perPage;
 
@@ -540,10 +540,10 @@ class EmployeeController
 
         // Récupérer les filtres depuis GET
         $filters = [
-            'rate'   => $_GET['rate']   ?? [],
-            'date_from'   => $_GET['date_from']  ?? [],
-            'date_to' => $_GET['date_to'] ?? [],
-            'status' => $_GET['status'] ?? [],
+            'rate' => array_map('htmlspecialchars',$_GET['rate']   ?? []),
+            'date_from' => htmlspecialchars($_GET['date_from']  ?? []),
+            'date_to' => htmlspecialchars($_GET['date_to'] ?? []),
+            'status' => array_map('htmlspecialchars',$_GET['status'] ?? []),
         ];
         $offset = ($currentPage -1) * $perPage;
 
@@ -808,8 +808,8 @@ class EmployeeController
     {
         $basePath = $this->getBasePath();
         $filters = [
-            'date_from' => $_GET['date_from'] ?? null,
-            'date_to' => $_GET['date_to'] ?? null
+            'date_from' => htmlspecialchars($_GET['date_from'] ?? null),
+            'date_to' => htmlspecialchars($_GET['date_to'] ?? null)
         ];
 
         $messages = $this->contactModel->getAllWithFilters($filters);

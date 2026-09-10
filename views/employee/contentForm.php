@@ -17,14 +17,14 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 <?php foreach ($contents as $content) : ?>
                 <div class="content-form">
-                    <form action="/employe/contenus/<?= $content['content_id'] ?>/modifier" method="POST">
+                    <form action="/employe/contenus/<?= htmlspecialchars($content['content_id']) ?>/modifier" method="POST">
                         <?= csrfField() ?>
                 
                         <!-- Contenu -->
                         <div class="col-12">
                             <h4><?= htmlspecialchars($content['page'])?> / <?= htmlspecialchars($content['section'])?></h4>
                             <textarea 
-                                id="content-<?= $content['content_id'] ?>" 
+                                id="content-<?= htmlspecialchars($content['content_id']) ?>" 
                                 name="content"
                                 disabled><?= htmlspecialchars($content['content']) ?></textarea>
                         </div>
@@ -32,14 +32,14 @@ require_once __DIR__ . '/../layouts/header.php';
                         <div class="col-12 boutons">
                     
                             <!-- Modifier -->
-                            <button type="button" id="btn-modify-<?= $content['content_id'] ?>" class="btn btn-primary" data-id="<?= $content['content_id'] ?>">Modifier</button>
+                            <button type="button" id="btn-modify-<?= htmlspecialchars($content['content_id']) ?>" class="btn btn-primary" data-id="<?= htmlspecialchars($content['content_id']) ?>">Modifier</button>
                             
                             <!-- Valider -->
-                            <button type="submit" id="btn-validated-<?= $content['content_id'] ?>" class="btn btn-success d-none" data-id="<?= $content['content_id'] ?>">Valider</button>
+                            <button type="submit" id="btn-validated-<?= htmlspecialchars($content['content_id']) ?>" class="btn btn-success d-none" data-id="<?= htmlspecialchars($content['content_id']) ?>">Valider</button>
                     
                     </form>
                             <!-- Supprimer -->
-                            <form action="/employe/contenus/<?= $content['content_id'] ?>/supprimer" method="post">
+                            <form action="/employe/contenus/<?= htmlspecialchars($content['content_id']) ?>/supprimer" method="post">
                                 <?= csrfField() ?>
                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>

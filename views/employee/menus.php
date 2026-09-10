@@ -167,14 +167,14 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
 
                         <div class="col-12">
-                            Statut : <?= $menu['is_active'] === 1 ? 'actif' : 'inactif' ?>  
+                            Statut : <?= htmlspecialchars($menu['is_active']) === 1 ? 'actif' : 'inactif' ?>  
                         </div>
 
                         <div class="row boutons">
                             <div class="col-12">
-                                <form action="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/supprimer" method="POST">
+                                <form action="<?=$basePath ?>/menus/<?= htmlspecialchars($menu['menu_id'])?>/supprimer" method="POST">
                                     <?= csrfField() ?>
-                                    <a href="<?=$basePath ?>/menus/<?= $menu['menu_id']?>/modifier" class="btn btn-primary">Modifier</a>
+                                    <a href="<?=$basePath ?>/menus/<?= htmlspecialchars($menu['menu_id'])?>/modifier" class="btn btn-primary">Modifier</a>
                                     <button type="submit" class="btn btn-danger"> Supprimer</button>
                                 </form> 
                             </div>

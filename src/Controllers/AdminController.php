@@ -20,9 +20,9 @@ class AdminController extends EmployeeController{
     public function showEmployee(): void
     {
         $filters= [
-            'email' => $_GET['email'] ?? [],
-            'status' => $_GET['status'] ?? [],
-            'search' => $_GET['search'] ?? '',
+            'email' => array_map('htmlspecialchars',$_GET['email'] ?? []),
+            'status' => array_map('htmlspecialchars',$_GET['status'] ?? []),
+            'search' => htmlspecialchars($_GET['search'] ?? ''),
         ];
 
         $allusers = $this->userModel->getAllEmployee();

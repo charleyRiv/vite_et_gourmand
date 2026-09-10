@@ -67,13 +67,13 @@ require_once __DIR__ . '/../layouts/header.php';
 
                                         <tr>
                                             <td>Nombre de personnes</td>
-                                            <td><?= $order['nb_persons'] ?></td>
+                                            <td><?= htmlspecialchars($order['nb_persons']) ?></td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td>Prix</td>
-                                            <td><?= $order['total_price']?> €</td>
+                                            <td><?= htmlspecialchars($order['total_price'])?> €</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -83,14 +83,14 @@ require_once __DIR__ . '/../layouts/header.php';
                             <div class="col-12 col-lg-4 boutons-next">
                                 <div class="boutons">
                                     <div class="col-12 status">
-                                        <div class="btn <?= getStatusClass($order['current_status']) ?>"><?= $order['current_status_FR']?></div>
+                                        <div class="btn <?= getStatusClass($order['current_status']) ?>"><?= htmlspecialchars($order['current_status_FR'])?></div>
                                     </div>
     
                                     <!-- Si le statut est "pending" possibilité de modifier ou annuler la commande -->
                                     <?php if ($order['current_status'] === 'pending') : ?>
                                         <div class="row pending-options">
                                             <div class="col-5 col-lg-12">
-                                                <a href="/mon-espace/commande/<?= $order['order_id']?>/modifier" class="btn btn-primary">Modifier</a>
+                                                <a href="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>/modifier" class="btn btn-primary">Modifier</a>
                                             </div>
                                     
                                             <div class="col-5 col-lg-12">
@@ -128,7 +128,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         
                         <?php if ($order['current_status'] === 'completed' && !empty($review)) : ?> 
                             <div class="col-12 post">
-                                <a href="/mon-espace/commande/<?= $order['order_id']?>/avis" class="btn btn-primary">Poster un avis</a>
+                                <a href="/mon-espace/commande/<?= htmlspecialchars($order['order_id'])?>/avis" class="btn btn-primary">Poster un avis</a>
                             </div> 
                         <?php endif; ?>
                         <?php if ($order['current_status'] === 'completed' && empty($review)) : ?>  
@@ -152,7 +152,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <fieldset>
                             <div class="row historique">
                                 <div class="col-12 col-lg-8 infos">
-                                    <?= $status['modified_at']?>
+                                    <?= htmlspecialchars($status['modified_at'])?>
                                 </div>
                                 <div class="col-12 col-lg-4 boutons-next">
                                     <div class="boutons">

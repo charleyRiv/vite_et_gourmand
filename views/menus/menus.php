@@ -67,10 +67,10 @@ require_once __DIR__ . '/../layouts/hero.php';
                                     <input 
                                         type="checkbox" 
                                         name="themes[]" 
-                                        value="<?= $theme['theme_id']?>"
+                                        value="<?= htmlspecialchars($theme['theme_id'])?>"
                                         <?= in_array($theme['theme_id'], $_GET['themes'] ?? []) ? 'checked' : '' ?>
                                     >
-                                    <?= $theme['label'] ?>
+                                    <?= htmlspecialchars($theme['label']) ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>
@@ -87,10 +87,10 @@ require_once __DIR__ . '/../layouts/hero.php';
                                     <input 
                                         type="checkbox" 
                                         name="diets[]" 
-                                        value="<?= $diet['diet_id']?>"
+                                        value="<?= htmlspecialchars($diet['diet_id'])?>"
                                         <?= in_array($diet['diet_id'], $_GET['diets'] ?? []) ? 'checked' : '' ?>
                                     >
-                                    <?= $diet['label'] ?>
+                                    <?= htmlspecialchars($diet['label']) ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>                        

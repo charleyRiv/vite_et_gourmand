@@ -23,7 +23,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <select id="menu_id" name="menu_id" class="order2-input" required>
                                 <option value=""></option>
                                 <?php foreach ($menus as $menu): ?>
-                                    <option value="<?= $menu['menu_id']?>"
+                                    <option value="<?= htmlspecialchars($menu['menu_id'])?>"
                                     <?= ($preselectedMenuId == $menu['menu_id']) ? 'selected' : '' ?>
                                     >
                                         <?= htmlspecialchars($menu['title'])?>

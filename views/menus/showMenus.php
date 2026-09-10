@@ -86,8 +86,8 @@ require_once __DIR__ . '/../layouts/hero.php';
                                 <div class="col-12 d-none d-lg-block">
                                     <?php if (!empty($dish['picture'])): ?>
                                         <img 
-                                            src="<?= $dish['picture']['url'] ?>"
-                                            alt="<?= $dish['picture']['alt_text'] ?>"
+                                            src="<?= htmlspecialchars($dish['picture']['url']) ?>"
+                                            alt="<?= htmlspecialchars($dish['picture']['alt_text']) ?>"
                                             class="menu-picture-dish"
                                         >
                                     <?php else : ?>
@@ -142,7 +142,7 @@ require_once __DIR__ . '/../layouts/hero.php';
                 </div>
                 <div class="row g-0 mb-0 menu-commande">
                     <div class="col-12 col-lg-auto justify-content-flex-end">
-                        <a href="/commande/etape-1?menu_id=<?= $menu['menu_id'] ?>" class="btn btn-primary">Commander</a>
+                        <a href="/commande/etape-1?menu_id=<?= htmlspecialchars($menu['menu_id']) ?>" class="btn btn-primary">Commander</a>
                     </div>
                     <div class="col-12 col-lg-auto justify-content-flex-start">
                         <a href="/menus">Revenir à la liste des menus</a>

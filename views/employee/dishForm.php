@@ -21,7 +21,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     <h2><?=  htmlspecialchars($h1)?></h2>
                 </div>
 
-                <form action="<?= $basePath ?>/plats/<?= $dish['dish_id'] ?>/modifier" method="POST">
+                <form action="<?= $basePath ?>/plats/<?= htmlspecialchars($dish['dish_id']) ?>/modifier" method="POST">
                     <?= csrfField() ?>
                     <div class="col-12 title">
                         <!-- Champs Titre plat -->

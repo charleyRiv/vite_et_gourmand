@@ -27,7 +27,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <tbody>
                             <tr>
                                 <td>Date</td>
-                                <td><?= $order['DateFr']?></td>
+                                <td><?= htmlspecialchars($order['DateFr'])?></td>
                             </tr>
                             <tr>
                                 <td>Menu choisi</td>

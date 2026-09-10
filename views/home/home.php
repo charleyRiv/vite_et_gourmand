@@ -88,10 +88,10 @@ require_once __DIR__ . '/../layouts/hero.php';
                             <!-- Date et lien -->
                             <div class="row justify-content-between align-items-center text-info">
                                 <div class="col-auto">
-                                    <p class="mb-0">Il y a <?= $review['since'] ?></p>
+                                    <p class="mb-0">Il y a <?= htmlspecialchars($review['since']) ?></p>
                                 </div>
                                 <div class="col-auto">
-                                    <a href ="/menus/<?= $review['menu_id']?>">Voir le menu</a>
+                                    <a href ="/menus/<?= htmlspecialchars($review['menu_id'])?>">Voir le menu</a>
                                 </div>
                             </div>
                         </article> 

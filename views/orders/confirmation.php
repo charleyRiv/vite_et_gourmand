@@ -107,7 +107,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                             <tr>
                                 <td>Nombre de personnes</td>
-                                <td><?= $order['nb_persons'] ?></td>
+                                <td><?= htmlspecialchars($order['nb_persons']) ?></td>
                             </tr>
                         </tbody>
                     </table>    
@@ -132,7 +132,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                             <tr>
                                 <td>Nombre de personnes</td>
-                                <td>x <?= $order['nb_persons'] ?></td>
+                                <td>x <?= htmlspecialchars($order['nb_persons']) ?></td>
                             </tr>
 
                             <tr>
@@ -142,23 +142,23 @@ require_once __DIR__ . '/../layouts/header.php';
 
                             <tr>
                                 <td>Prix du menu</td>
-                                <td><?= $order['calculated_menu_price'] ?> €</td>
+                                <td><?= htmlspecialchars($order['calculated_menu_price']) ?> €</td>
                             </tr>
 
                             <tr>
                                 <td>Réduction 10% <br>
-                                    (<?= $order['nb_persons'] ?> pers. > <?= $menu['min_persons'] ?> min + 5)
+                                    (<?= htmlspecialchars($order['nb_persons']) ?> pers. > <?= $menu['min_persons'] ?> min + 5)
                                 </td>
-                                <td>- <?= $order['discount']?> €</td>
+                                <td>- <?= htmlspecialchars($order['discount'])?> €</td>
                             </tr>
 
                             <tr>
                                 <?php if ((float) $order['delivery_fees'] > 0): ?>
                                     <td>Frais de livraison <br>
-                                        (<?= $userInfos['city'] ?> - hors Bordeaux) <br>
-                                        (5€ + 0,59€ x <?= $distance ?> km)
+                                        (<?= htmlspecialchars($userInfos['city']) ?> - hors Bordeaux) <br>
+                                        (5€ + 0,59€ x <?= htmlspecialchars($distance) ?> km)
                                     </td>
-                                    <td>+ <?= $order['delivery_fees']?> €</td>
+                                    <td>+ <?= htmlspecialchars($order['delivery_fees'])?> €</td>
                                 <?php else: ?>
                                     <td>Frais de livraison <br>
                                         (Bordeaux)
@@ -174,7 +174,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         <tfoot>
                             <tr>
                                 <td>Total TTC</td>
-                                <td><?= $order['total_price']?> €</td>
+                                <td><?= htmlspecialchars($order['total_price'])?> €</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -188,7 +188,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
                 <div class="col-12">
                     <p>Un mail de confirmation vous a été envoyé à 
-                        <?= $maskedEmail ?>
+                        <?= htmlspecialchars($maskedEmail) ?>
                     </p>
                 </div>
 

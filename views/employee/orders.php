@@ -91,7 +91,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 <?php foreach ($orders as $order) : ?>
                     <fieldset>
                         <div class="col-12">
-                            <h5>Commande n°<?= $order['order_id'] ?></h5>
+                            <h5>Commande n°<?= htmlspecialchars($order['order_id']) ?></h5>
                         </div> 
                         
                         <div class="employee-orders-menu">
@@ -160,7 +160,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
 
                 
-                        <form action="/employe/commandes/<?= $order['order_id'] ?>/gerer" method="POST">
+                        <form action="/employe/commandes/<?= htmlspecialchars($order['order_id']) ?>/gerer" method="POST">
                             <?= csrfField() ?>
                             <div class="col-12 status-select">
                                 <!-- Champs Satut -->
@@ -203,7 +203,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             <div class="col-12 boutons">
                                 <button type="submit" class="col-6 btn btn-primary" id="submit-btn">valider</button>
                             
-                                <a href="<?= $basePath ?>/commandes/<?= $order['order_id'] ?>/historique" class="col-4 btn btn-secondary">Voir l'historique</a>
+                                <a href="<?= $basePath ?>/commandes/<?= htmlspecialchars($order['order_id']) ?>/historique" class="col-4 btn btn-secondary">Voir l'historique</a>
                             </div>
                         </form>                    
                     </fieldset>

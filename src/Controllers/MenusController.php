@@ -36,11 +36,11 @@ class MenusController {
 
         // Récupérer les filtres depuis GET
         $filters = [
-            'prix_min'   => $_GET['prix_min']   ?? null,
-            'prix_max'   => $_GET['prix_max']   ?? null,
-            'themes'     => $_GET['themes']     ?? [],
-            'diets'      => $_GET['diets']      ?? [],
-            'nb_persons' => $_GET['nb_persons'] ?? null,
+            'prix_min' => isset($_GET['prix_min']) ? (float) $_GET['prix_min'] : null,
+            'prix_max' => isset($_GET['prix_max']) ? (float) $_GET['prix_max'] : null,
+            'themes' => array_map('intval',$_GET['themes'] ?? []),
+            'diets' => array_map('intval',$_GET['diets'] ?? []),
+            'nb_persons' => isset($_GET['nb_persons']) ? $_GET['nb_persons'] : null,
         ];
         $offset = ($currentPage -1) * $perPage;
 
