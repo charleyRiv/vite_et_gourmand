@@ -6,6 +6,16 @@ class Session
     public static function start(): void
     {
         if (session_status() === PHP_SESSION_NONE) {
+            $isProduction = $_ENV['APP_ENV'] === 'production';
+
+            session_set_cookie_params([
+                'lifetime' => 0,
+                'path' => '/',
+                'secure' => $isProduction,
+                'httponly' => true,
+                'samesite' => 'Strict'
+            ]);
+            
             session_start();
         }
     }
