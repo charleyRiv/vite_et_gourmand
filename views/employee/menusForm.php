@@ -269,45 +269,56 @@ require_once __DIR__ . '/../layouts/header.php';
             </div>
         </div>
     </section>
-    <?php foreach ($menuDishes as $dish): ?>
-
-        <?php
-        // Filtrer les photos du plat non encore ajoutées au menu
-        $availablePictures = array_filter(
-            $dish['pictures'],
-            fn($pic) => !in_array($pic['url'], $menuPictureUrls)
-        );
-        ?>
-
-        <?php if (!empty($availablePictures)): ?>
-            <div>
-                <p><?= htmlspecialchars($dish['title']) ?></p>
-
-                <?php foreach ($availablePictures as $picture): ?>
-                    <img
-                        src="<?= htmlspecialchars($picture['url']) ?>"
-                        alt="<?= htmlspecialchars($picture['alt_text']) ?>"
-                        style="max-width: 150px;"
-                    >
-                    <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/photos/copier-depuis-plat" method="post">
-                        <input type="hidden" name="url" value="<?= htmlspecialchars($picture['url']) ?>">
-                        <input type="hidden" name="alt_text" value="<?= htmlspecialchars($picture['alt_text']) ?>">
-                        <input type="hidden" name="title" value="<?= htmlspecialchars($picture['title'] ?? '') ?>">
-                        <button type="submit">Ajouter cette photo au menu</button>
-                    </form>
-                <?php endforeach; ?>
-
-            </div>
-        <?php endif; ?>
-
-    <?php endforeach; ?>
+    
 
     <section class="section-pictures">
         <div class="container">
             <div class="row photos">
                 <h2>Photos du menu</h2>
 
-                
+                <!-- Photo disponibles -->
+                <?php foreach ($menuDishes as $dish): ?>
+
+                    <?php
+                    // Filtrer les photos du plat non encore ajoutées au menu
+                    $availablePictures = array_filter(
+                        $dish['pictures'],
+                        fn($pic) => !in_array($pic['url'], $menuPictureUrls)
+                    );
+                    ?>
+            
+                    <?php if (!empty($availablePictures)): ?>
+                        <div>
+                            <div class="col">
+                                <?= htmlspecialchars($dish['title']) ?>
+                            </div>
+                    
+                            <?php foreach ($availablePictures as $picture): ?>
+                            <div class="col-6 col-xl-3">
+                                <fieldset>
+                                    <img
+                                        src="<?= htmlspecialchars($picture['url']) ?>"
+                                        alt="<?= htmlspecialchars($picture['alt_text']) ?>"
+                                    >
+                                
+                                    <form action="<?= $basePath ?>/menus/<?= $menu['menu_id'] ?>/photos/copier-depuis-plat" method="post">
+                                        <input type="hidden" name="url" value="<?= htmlspecialchars($picture['url']) ?>">
+                                        <input type="hidden" name="alt_text" value="<?= htmlspecialchars($picture['alt_text']) ?>">
+                                        <input type="hidden" name="title" value="<?= htmlspecialchars($picture['title'] ?? '') ?>">
+
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary">Ajouter cette photo au menu</button>
+                                        </div>
+                                    </form>
+                                </fieldset>
+                            </div>
+                            <?php endforeach; ?>
+                            
+                        </div>
+                    <?php endif; ?>
+                            
+                <?php endforeach; ?>
+
                     <!-- Photos existantes -->
                     <?php if (!empty($pictures)): ?>
                         <?php foreach ($pictures as $picture): ?>

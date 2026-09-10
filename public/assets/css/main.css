@@ -14714,6 +14714,9 @@ img {
 .page-employee-menu .section-pictures fieldset form button {
   background-color: rgba(192, 57, 43, 0.5);
 }
+.page-employee-menu .section-pictures fieldset form button.btn-primary, .page-employee-menu .section-pictures fieldset form button.btn-dashboard:hover {
+  background-color: rgba(251, 156, 117, 0.5);
+}
 .page-employee-menu .section-pictures .add-picture {
   display: flex;
   justify-content: center;
@@ -14746,7 +14749,8 @@ img {
   row-gap: 1rem;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid #fb9c75;
+  border: 1px solid #87c093;
+  background-color: rgba(135, 192, 147, 0.15);
   border-radius: 10px;
   padding: 1rem;
 }
@@ -15105,7 +15109,8 @@ img {
   row-gap: 1rem;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid #fb9c75;
+  border: 1px solid #87c093;
+  background-color: rgba(135, 192, 147, 0.15);
   border-radius: 10px;
   padding: 1rem;
 }

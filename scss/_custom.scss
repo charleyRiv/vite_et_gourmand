@@ -3210,6 +3210,10 @@ img {
                 button {
                     background-color: rgba($color: $danger, $alpha: 0.5);
                 }
+
+                button.btn-primary {
+                    background-color: rgba($color: $primary, $alpha: 0.5);
+                }
             }
 
             
@@ -3251,7 +3255,8 @@ img {
             row-gap: 1rem;
             justify-content: space-between;
             width: 100%;
-            border: 1px solid rgba($color: $primary, $alpha: 1);
+            border: 1px solid rgba($color: $secondary, $alpha: 1);
+            background-color: rgba($color: $secondary, $alpha: 0.15);
             border-radius: 10px;
             padding: 1rem;
 
@@ -3691,7 +3696,8 @@ img {
             row-gap: 1rem;
             justify-content: space-between;
             width: 100%;
-            border: 1px solid rgba($color: $primary, $alpha: 1);
+            border: 1px solid rgba($color: $secondary, $alpha: 1);
+            background-color: rgba($color: $secondary, $alpha: 0.15);
             border-radius: 10px;
             padding: 1rem;
             
