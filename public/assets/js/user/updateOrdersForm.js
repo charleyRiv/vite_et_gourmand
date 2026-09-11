@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Récupérer le jour de la semaine (0=Dimanche, 6=Samedi)
-        const date    = new Date(dateStr + 'T00:00:00');
+        const date = new Date(dateStr + 'T00:00:00');
         const dayOfWeek = date.getDay();
         
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         today.setHours(0, 0, 0, 0);
         if (date <= today) {
             heureLivraisonInput.innerHTML = '<option value="">-- Créneaux indisponibles --</option>';
-            heureLivraisonInput.disabled  = true;
+            heureLivraisonInput.disabled = true;
             return;
         }
 
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!schedule) {
             heureLivraisonInput.innerHTML = '<option value="">-- Créneaux indisponibles--</option>';
-            heureLivraisonInput.disabled  = true;
+            heureLivraisonInput.disabled = true;
             return;
         }
 
@@ -115,17 +115,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Boucle sur chaque tranche horaire
         schedule.forEach(function(slot) {
             const start = slot.start.split(':');
-            const end   = slot.end.split(':');
+            const end = slot.end.split(':');
 
             let startMinutes = parseInt(start[0]) * 60 + parseInt(start[1]);
-            let endMinutes   = parseInt(end[0])   * 60 + parseInt(end[1]);
+            let endMinutes = parseInt(end[0])   * 60 + parseInt(end[1]);
 
             for (let minutes = startMinutes; minutes <= endMinutes; minutes += 30) {
-                const hours  = Math.floor(minutes / 60).toString().padStart(2, '0');
-                const mins   = (minutes % 60).toString().padStart(2, '0');
+                const hours = Math.floor(minutes / 60).toString().padStart(2, '0');
+                const mins = (minutes % 60).toString().padStart(2, '0');
 
                 const option = document.createElement('option');
-                option.value       = `${hours}:${mins}`;
+                option.value = `${hours}:${mins}`;
                 option.textContent = `${hours}h${mins}`;
                 heureLivraisonInput.appendChild(option);
             }
@@ -147,9 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
             validate: (val) => {
                 if (!val) return false;
 
-                const date      = new Date(val + 'T00:00:00');
+                const date = new Date(val + 'T00:00:00');
                 const dayOfWeek = date.getDay();
-                const tomorrow  = new Date();
+                const tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1);
                 tomorrow.setHours(0, 0, 0, 0);
 

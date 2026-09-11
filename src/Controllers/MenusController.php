@@ -56,7 +56,7 @@ class MenusController {
         //Pour chaque menu récupérer la photo du plat principal
         foreach ($menus as &$menu){
             $menu['pictures'] = $this->pictureModel->getByMenuId($menu['menu_id']);
-            $pictures = $menu['pictures'][0];
+            $pictures = $menu['pictures'][0] ?? null;
             $menu['diets'] = $this->dietModel->getDietByMenuId($menu['menu_id']);
             $menu['themes'] = $this->themeModel->getThemeByMenuId($menu['menu_id']);
             $menu['dishes'] = $this->dishModel->getByMenuId($menu['menu_id']);

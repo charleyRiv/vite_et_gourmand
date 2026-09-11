@@ -21,7 +21,9 @@ class Router {
     public function dispatch(string $httpMethod, string $requestUri): void 
     {
         //Vérification CSRF pour toutes les requêtes POST
-        if ($httpMethod === 'POST') {
+        $excludedFromCsrf = ['/api/delivery-fees'];  // Route API à exclure
+
+        if ($httpMethod === 'POST' && !in_array($requestUri, $excludedFromCsrf)) {
             if (!validateCsrfToken($_POST['csrf_token'] ?? '')) {
                 http_response_code(403);
                 require_once __DIR__ . '/../../views/errors/403.php';
