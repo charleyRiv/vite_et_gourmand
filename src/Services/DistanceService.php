@@ -26,10 +26,11 @@ class DistanceService
 
     private function geocode(string $address): ?array
     {
-        $url = 'https://api-adresse.data.gouv.fr/search?'
+        $url = 'https://data.geopf.fr/geocodage/search?'
             . http_build_query([
                 'q'     => $address,
-                'limit' => 1
+                'limit' => 1,
+                'index' => 'address'
             ]); 
 
         $response = file_get_contents($url);
