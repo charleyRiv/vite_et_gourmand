@@ -48,9 +48,9 @@ require_once __DIR__ . '/../layouts/hero.php';
                                     <span id="prix_max_label"><?= htmlspecialchars($_GET['prix_max'] ?? '0') ?> €</span>
                                 </div>
                                 <div class="price-slider">
-                                    <input type="range" id="prix_min" name="prix_min" min="0" max="200" step="5" 
+                                    <input type="range" id="prix_min" name="prix_min" min="0" max="200" step="2" 
                                     value="<?= htmlspecialchars($_GET['prix_min'] ?? '0') ?>">
-                                    <input type="range" id="prix_max" name="prix_max" min="0" max="200" step="5" 
+                                    <input type="range" id="prix_max" name="prix_max" min="0" max="200" step="2" 
                                     value="<?= htmlspecialchars($_GET['prix_max'] ?? '200') ?>">
                                 </div>
                             </div>
@@ -81,6 +81,10 @@ require_once __DIR__ . '/../layouts/hero.php';
                             <div class="col-12">
                                     <h4>Régime alimentaire</h4>
                                 </div>
+                            <?php
+                                // Chargement initial = pas de filtre status dans l'URL
+                                $isInitialLoadDiet = !isset($_GET['diets']);
+                                ?>
                             <?php foreach ($diets as $diet): ?>
                             <div class="col-auto">
                                 <label>
@@ -138,8 +142,10 @@ require_once __DIR__ . '/../layouts/hero.php';
                         <div class="col-12 col-lg-6">
                             <article class="menus">
                             <!-- Photo du plat principale - A utiliser comme fond de la zone -->
-                            <?php if (!empty($pictures)): ?>
-                                <div class="menus-overlay" style="background-image: url(<?= htmlspecialchars($pictures['url']) ?>)">
+                            <?php if (!empty($menu['main_pictures'])): ?>
+                                <div class="menus-overlay" style="background-image: url(<?= htmlspecialchars($menu['main_pictures']['url']) ?>)">
+                            <?php else : ?>
+                                <div class="menus-overlay" style="background-image: url('/assets/images/uploads/default.png')">
                             <?php endif;?>
                                     <div class="col-12">
                                         <h3><?= htmlspecialchars($menu['title']) ?></h3>

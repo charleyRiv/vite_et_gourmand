@@ -347,7 +347,7 @@ class MenuModel
 
     public function getAllWithFilters(array $filters = [], int $limit = 4, int $offset = 0): array
     {
-        $conditions = [];
+        $conditions = ['m.is_active = 1'];
         $params = [];
 
         if (!empty($filters['prix_min'])) {
