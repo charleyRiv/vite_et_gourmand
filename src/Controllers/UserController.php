@@ -83,6 +83,7 @@ class UserController {
     {
         $user_id = Session::get('user_id');
 
+
         $this->userModel->deleteUser($user_id);
 
         Session::destroy();

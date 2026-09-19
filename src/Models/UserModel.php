@@ -166,11 +166,26 @@ class UserModel{
 
     public function deleteUser(int $id): bool 
     {
+        $randomPassword = password_hash(bin2hex(random_bytes(32)), PASSWORD_BCRYPT);
+
         $stmt = $this->db->prepare("
-            DELETE FROM user 
-            WHERE user_id = :id
-        ");
-        return $stmt->execute([':id' => $id]);
+        UPDATE user SET
+            last_name  = 'Compte',
+            first_name = 'Supprimé',
+            email  = CONCAT('deleted_', user_id, '@deleted.fr'),
+            phone  = '',
+            street_number = '',
+            street_type = '',
+            street_name = '',
+            zip_code = '',
+            city = '',
+            country = '',
+            modified_at = current_timestamp,
+            password   = :password,
+            is_active  = 0
+        WHERE user_id = :id
+    ");
+        return $stmt->execute([':id' => $id, ':password' => $randomPassword]);
     }
 
     //Fonction coté administrateur
