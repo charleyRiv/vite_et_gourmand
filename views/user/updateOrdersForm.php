@@ -46,8 +46,8 @@ require_once __DIR__ . '/../layouts/header.php';
 
                                     <!-- Heure -->
                                 <div class="col-12 col-xl-6">
-                                    <label for="heure_livraison" class=" col-12 client-update-order-label time">Heure de livraison</label>
-                                    <select id="heure_livraison" name="heure_livraison" class="col-12 client-update-order-input time" required>
+                                    <label for="delivery_time" class=" col-12 client-update-order-label time">Heure de livraison</label>
+                                    <select id="delivery_time" name="delivery_time" class="col-12 client-update-order-input time" required>
                                         <option value="">-- Choisir un créneau --</option>
                                         <?php
                                         $start = strtotime('09:00');
@@ -79,7 +79,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <input 
                                     type="text" 
                                     id="street_number" 
-                                    name="street_number" 
+                                    name="delivery_street_number" 
                                     value="<?= htmlspecialchars($order['delivery_street_number'] ?? '')?>"
                                     class="client-update-order-input"
                                     required
@@ -94,7 +94,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <input 
                                         type="text" 
                                         id="street_type" 
-                                        name="street_type" 
+                                        name="delivery_street_type" 
                                         value="<?= htmlspecialchars($order['delivery_street_type']?? '')?>"
                                         class="client-update-order-input"
                                         required
@@ -109,7 +109,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <input 
                                         type="text" 
                                         id="street_name" 
-                                        name="street_name" 
+                                        name="delivery_street_name" 
                                         value="<?= htmlspecialchars($order['delivery_street_name']?? '')?>"
                                         class="client-update-order-input"
                                         required
@@ -125,7 +125,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <input 
                                         type="text" 
                                         id="zip_code" 
-                                        name="zip_code" 
+                                        name="delivery_zip_code" 
                                         value="<?= htmlspecialchars($order['delivery_zip_code']?? '')?>"
                                         class="client-update-order-input"
                                         required
@@ -139,7 +139,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     <input 
                                         type="text" 
                                         id="city" 
-                                        name="city" 
+                                        name="delivery_city" 
                                         value="<?= htmlspecialchars($order['delivery_city']??'')?>"
                                         class="client-update-order-input"
                                         required
@@ -157,7 +157,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                 <input 
                                     type="text" 
                                     id="country" 
-                                    name="country" 
+                                    name="delivery_country" 
                                     value="<?= htmlspecialchars($order['delivery_country']??'')?>"
                                     class="client-update-order-input"
                                     required
@@ -265,6 +265,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 <script>
     const menusData = <?= json_encode(array_column($menus, null, 'menu_id')) ?>;
+    var savedDeliveryTime = '<?= htmlspecialchars(substr($order['delivery_time'] ?? '', 0, 5)) ?>';
 </script>
 
 <?php

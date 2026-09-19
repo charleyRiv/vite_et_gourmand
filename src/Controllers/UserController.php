@@ -201,6 +201,7 @@ class UserController {
         $errors = $this->validateOrderData($data);
 
         if(!empty($errors)) {
+            var_dump($errors);
             $order = $this->orderModel->getById($id);
             $menu = $this->menuModel->getById($order['menu_id']);
             $menus = $this->menuModel->getAll();
@@ -292,7 +293,8 @@ class UserController {
     {
         $errors = [];
 
-        if (empty($data['event_date']))
+        if (empty($data['event_date'])
+            || empty($data['delivery_time']))
             $errors[] = 'La date de la prestation est obligatoire';
 
         if (empty($data['delivery_time']))

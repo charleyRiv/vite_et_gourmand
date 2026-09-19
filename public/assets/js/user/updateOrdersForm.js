@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ── Références ────────────────────────────────────────
     const dateLivraisonInput = document.getElementById('date_livraison');
-    const heureLivraisonInput = document.getElementById('heure_livraison');
+    const heureLivraisonInput = document.getElementById('delivery_time');
     const streetNumberInput = document.getElementById('street_number');
     const streetTypeInput = document.getElementById('street_type');
     const streetNameInput = document.getElementById('street_name');
@@ -136,10 +136,22 @@ document.addEventListener('DOMContentLoaded', function() {
         updateTimeSlots(this.value);
     });
 
-    // Initialiser si une date est déjà sélectionnée
-    if (dateLivraisonInput.value) {
-        updateTimeSlots(dateLivraisonInput.value);
-    }
+//    // Initialiser si une date est déjà sélectionnée
+//    if (dateLivraisonInput.value) {
+//        updateTimeSlots(dateLivraisonInput.value);
+//
+//        // Valide la date au chargement
+//        validateField(dateLivraisonInput, rules.date);
+//
+//        if (typeof savedDeliveryTime !== 'undefined' && savedDeliveryTime) {
+//            heureLivraisonInput.value = savedDeliveryTime;
+//            //Valide l'heure après assignation
+//            validateField(heureLivraisonInput, rules.time);
+//        }
+//
+//        updateSubmitBtn();
+//
+//    }
 
     // ── Validation ────────────────────────────────────────
     const rules = {
@@ -220,8 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
     //Mise à jour du bouton submit
     function updateSubmitBtn() {
         const allValid =
-            rules.date.validate(dateLivraisonInput.value) &&
-            rules.time.validate(heureLivraisonInput.value) &&
             rules.streetNumber.validate(streetNumberInput.value) &&
             rules.streetType.validate(streetTypeInput.value) &&
             rules.streetName.validate(streetNameInput.value) &&
@@ -237,8 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ── Validation initiale des champs pré-remplis ────────
     function validatePrefilledFields() {
         const fields = [
-            { input: dateLivraisonInput, rule: rules.date },
-            { input: heureLivraisonInput, rule: rules.time },
             { input: streetNumberInput, rule: rules.streetNumber },
             { input: streetTypeInput, rule: rules.streetType },
             { input: streetNameInput, rule: rules.streetName },
@@ -405,6 +413,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // ── Initialisation ────────────────────────────────────
     submitBtn.disabled = true;
     validatePrefilledFields();
+
+    // Initialiser si une date est déjà sélectionnée
+    if (dateLivraisonInput.value) {
+        updateTimeSlots(dateLivraisonInput.value);
+
+        // Valide la date au chargement
+        validateField(dateLivraisonInput, rules.date);
+
+        if (typeof savedDeliveryTime !== 'undefined' && savedDeliveryTime) {
+            heureLivraisonInput.value = savedDeliveryTime;
+            //Valide l'heure après assignation
+            validateField(heureLivraisonInput, rules.time);
+        }
+
+        updateSubmitBtn();
+
+    }
+    
     calculatePrices();
 
 });
