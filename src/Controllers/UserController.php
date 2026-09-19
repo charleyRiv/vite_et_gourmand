@@ -97,6 +97,7 @@ class UserController {
         $menu = $this->menuModel->getById($order['menu_id']);
         $dishes = $this->menuModel->getDishesByMenuId($order['menu_id']);
         $statuses = $this->orderModel->getStatusHistory($id);
+        $review = $this->reviewModel->getByOrderId($id);
 
         $order['current_status_FR'] = translateStatusOrder($order['current_status']);
         //Traduction des status en francais
@@ -341,7 +342,7 @@ class UserController {
             $errors[] = 'Les noms et prénoms sont obligatoires';
 
         if (empty($data['email']))
-            $errors[] = "l'email est obligatoir";
+            $errors[] = "l'email est obligatoire";
 
         return $errors;
     }

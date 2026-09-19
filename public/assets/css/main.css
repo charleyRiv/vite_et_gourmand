@@ -12243,19 +12243,29 @@ img {
 
 .section-avis .container .row {
   margin-bottom: 25px;
+  align-items: stretch;
 }
 .section-avis .container .row:last-child {
   margin-bottom: 0rem;
 }
 .section-avis .home-avis-client {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: white;
   border: 1px solid #341E34;
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  height: 100%;
 }
 .section-avis .home-avis-client .row {
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 0.1rem;
 }
 .section-avis .home-avis-client .row:last-child {
   margin-bottom: 0;
@@ -12264,8 +12274,8 @@ img {
   color: #144680;
 }
 .section-avis .home-avis-client .separator {
-  margin: 0 -1.5rem;
-  margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 0.1rem;
   border-color: #341E34;
   opacity: 1;
 }

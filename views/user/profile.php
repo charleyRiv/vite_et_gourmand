@@ -24,7 +24,7 @@ require_once __DIR__ . '/../layouts/header.php';
                     </ul>
                 <?php endif; ?>
                             
-                    <form action="/inscription" method="POST">
+                    <form action="/mon-espace/profil" method="POST">
                         <?= csrfField() ?>
                         <div class="profil-client-form">
                             <div class="row profil-client-name">
@@ -36,7 +36,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="last_name" 
                                         name="last_name" 
-                                        value= "<?= htmlspecialchars($_POST['last_name'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['last_name'] ??'') ?>"
                                         class="profil-client-input"
                                         required
                                     >
@@ -51,7 +51,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="first_name" 
                                         name="first_name"
-                                        value= "<?= htmlspecialchars($_POST['first_name'] ??'') ?>" 
+                                        value= "<?= htmlspecialchars($user['first_name'] ??'') ?>" 
                                         class="profil-client-input"
                                         required
                                     >
@@ -70,7 +70,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     id="phone" 
                                     name="phone"
                                     class="profil-client-input"
-                                    value= "<?= htmlspecialchars($_POST['phone'] ??'') ?>"
+                                    value= "<?= htmlspecialchars($user['phone'] ??'') ?>"
                                 >
                                 <div class="invalid-feedback">Veuillez saisir un numéro de téléphone valide</div>
                             </div>
@@ -87,7 +87,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     id="email" 
                                     name="email"
                                     class="profil-client-input"
-                                    value= "<?= htmlspecialchars($_POST['email'] ??'') ?>" 
+                                    value= "<?= htmlspecialchars($user['email'] ??'') ?>" 
                                     required
                                 >
                                 <div class="invalid-feedback">Veuillez saisir une adresse email valide</div>
@@ -102,7 +102,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="street_number" 
                                         name="street_number"
-                                        value= "<?= htmlspecialchars($_POST['street_number'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['street_number'] ??'') ?>"
                                         class="profil-client-input"
                                     >
                                     <div class="invalid-feedback">Veuillez saisir un numéro de rue valide</div>
@@ -117,7 +117,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="street_type" 
                                         name="street_type"
-                                        value= "<?= htmlspecialchars($_POST['street_type'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['street_type'] ??'') ?>"
                                         class="profil-client-input"
                                     >
                                     <div class="invalid-feedback">Veuillez saisir un type de voie valide</div>
@@ -132,7 +132,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="street_name" 
                                         name="street_name"
-                                        value= "<?= htmlspecialchars($_POST['street_name'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['street_name'] ??'') ?>"
                                         class="profil-client-input"
                                     >  
                                     <div class="invalid-feedback">Veuillez saisir un nom de voie valide</div>
@@ -149,7 +149,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="zip_code" 
                                         name="zip_code"
-                                        value= "<?= htmlspecialchars($_POST['zip_code'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['zip_code'] ??'') ?>"
                                         class="profil-client-input"
                                     >
                                     <div class="invalid-feedback">Veuillez saisir un code postal valide</div>
@@ -163,7 +163,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                         type="text" 
                                         id="city" 
                                         name="city"
-                                        value= "<?= htmlspecialchars($_POST['city'] ??'') ?>"
+                                        value= "<?= htmlspecialchars($user['city'] ??'') ?>"
                                         class="profil-client-input"
                                     >
                                     <div class="invalid-feedback">Veuillez saisir un nom de ville valide</div>
@@ -180,7 +180,7 @@ require_once __DIR__ . '/../layouts/header.php';
                                     id="country" 
                                     name="country"
                                     class="profil-client-input"
-                                    value= "<?= htmlspecialchars($_POST['country'] ??'') ?>"
+                                    value= "<?= htmlspecialchars($user['country'] ??'') ?>"
                                 >
                                 <div class="invalid-feedback">Veuillez saisir un nom de pays valide</div>
                             </div>

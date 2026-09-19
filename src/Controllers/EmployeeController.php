@@ -541,8 +541,8 @@ class EmployeeController
         // Récupérer les filtres depuis GET
         $filters = [
             'rate' => array_map('htmlspecialchars',$_GET['rate']   ?? []),
-            'date_from' => htmlspecialchars($_GET['date_from']  ?? []),
-            'date_to' => htmlspecialchars($_GET['date_to'] ?? []),
+            'date_from' => htmlspecialchars($_GET['date_from']  ?? ''),
+            'date_to' => htmlspecialchars($_GET['date_to'] ?? ''),
             'status' => array_map('htmlspecialchars',$_GET['status'] ?? []),
         ];
         $offset = ($currentPage -1) * $perPage;

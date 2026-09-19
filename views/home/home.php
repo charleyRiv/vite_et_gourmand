@@ -62,11 +62,11 @@ require_once __DIR__ . '/../layouts/hero.php';
                     <div class="col-12 col-xl-4">
                         <article class="home-avis-client">
                             <!-- Nom + rating -->
-                            <div class="row justify-content-between align-items-center">
-                                <div class="col-auto text-info">
+                            <div class="row">
+                                <div class="col-auto col-xl-12 text-info">
                                     <p class="mb-0"><?= htmlspecialchars($review['first_name'])?> <?= htmlspecialchars($review['last_name'])?></p>
                                 </div>
-                                <div class="col-auto">
+                                <div class="col-auto col-xl-12">
                                     <?php for ($i = 1; $i <= 5; $i++): ?>
                                         <?php if ($i <= $review['rating']): ?>
                                             <img src="/assets/images/uploads/icone_starOn.svg" alt="étoile" class="etoile mb-1">
@@ -83,10 +83,11 @@ require_once __DIR__ . '/../layouts/hero.php';
                                 </div>
                             </div>
 
-                            <hr class="separator">
+                            
 
                             <!-- Date et lien -->
                             <div class="row justify-content-between align-items-center text-info">
+                                <hr class="separator">
                                 <div class="col-auto">
                                     <p class="mb-0">Il y a <?= htmlspecialchars($review['since']) ?></p>
                                 </div>

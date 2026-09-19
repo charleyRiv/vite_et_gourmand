@@ -73,6 +73,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // ── Validation initiale des champs pré-remplis ────────
+    function validatePrefilledFields() {
+        const fields = [
+            { input: lastNameInput, rule: rules.lastName },
+            { input: firstNameInput, rule: rules.firstName },
+            { input: phoneInput, rule: rules.phone },
+            { input: emailInput, rule: rules.email },
+            { input: streetNumberInput, rule: rules.streetNumber },
+            { input: streetTypeInput, rule: rules.streetType },
+            { input: streetNameInput, rule: rules.streetName },
+            { input: zipCodeInput, rule: rules.zipCode },
+            { input: cityInput, rule: rules.city },
+            { input: countryInput, rule: rules.country },
+        ];
+
+        fields.forEach(({ input, rule }) => {
+            if (input && input.value.trim() !== '') {
+                validateField(input, rule);
+            }
+        });
+
+        updateSubmitBtn();
+    }
+
     //Mise à jour du bouton submit
     function updateSubmitBtn() {
         const allValid =
@@ -136,5 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Etat initial - bouton désactivé
     submitBtn.disabled = true;
+    validatePrefilledFields();
 
 });
