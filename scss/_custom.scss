@@ -2620,6 +2620,33 @@ img {
         justify-content: center;
         text-align: center;
         }
+
+        .pagination {
+            justify-content: end;
+
+            .page-link {
+                background-color: $dark;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary;
+                    border-color: $dark;
+                    color: $white;
+                }
+            }
+        
+            .page-item.active .page-link {
+                background-color: $primary;
+                border-color: $dark;
+                color: $white;
+            }
+        
+            .page-item.disabled .page-link {
+                background-color: $dark;
+                color: rgba($white, 0.4);
+            }
+        
+        }
     }
 
 }
@@ -2763,6 +2790,32 @@ img {
         ul {
         justify-content: center;
         text-align: center;
+        }
+        .pagination {
+            justify-content: end;
+
+            .page-link {
+                background-color: $dark;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary;
+                    border-color: $dark;
+                    color: $white;
+                }
+            }
+        
+            .page-item.active .page-link {
+                background-color: $primary;
+                border-color: $dark;
+                color: $white;
+            }
+        
+            .page-item.disabled .page-link {
+                background-color: $dark;
+                color: rgba($white, 0.4);
+            }
+        
         }
     }
 
@@ -2978,7 +3031,32 @@ img {
             }
     
         }
+        .pagination {
+            justify-content: end;
 
+            .page-link {
+                background-color: $dark;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary;
+                    border-color: $dark;
+                    color: $white;
+                }
+            }
+        
+            .page-item.active .page-link {
+                background-color: $primary;
+                border-color: $dark;
+                color: $white;
+            }
+        
+            .page-item.disabled .page-link {
+                background-color: $dark;
+                color: rgba($white, 0.4);
+            }
+        
+        }
         
     }
 
@@ -3523,7 +3601,33 @@ img {
             @include media-breakpoint-up(xl) {
                 justify-content: flex-end;
             }
-        }   
+        }  
+        .pagination {
+            justify-content: end;
+
+            .page-link {
+                background-color: $dark;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary;
+                    border-color: $dark;
+                    color: $white;
+                }
+            }
+        
+            .page-item.active .page-link {
+                background-color: $primary;
+                border-color: $dark;
+                color: $white;
+            }
+        
+            .page-item.disabled .page-link {
+                background-color: $dark;
+                color: rgba($white, 0.4);
+            }
+        
+        } 
     }
 }
 

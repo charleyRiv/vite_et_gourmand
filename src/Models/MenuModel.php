@@ -278,7 +278,7 @@ class MenuModel
 
     public function countWithFilters(array $filters = []): int
     {
-        $conditions = ['m.is_active = 1'];
+        $conditions = [];
         $params     = [];
 
         if (!empty($filters['prix_min'])) {
@@ -320,6 +320,7 @@ class MenuModel
             }
         }
 
+
         if (!empty($filters['search'])) {
             $conditions[] = 'm.title LIKE :search';
             $params[':search'] = '%' . $filters['search'] . '%';
@@ -347,7 +348,8 @@ class MenuModel
 
     public function getAllWithFilters(array $filters = [], int $limit = 4, int $offset = 0): array
     {
-        $conditions = ['m.is_active = 1'];
+        
+        $conditions = [];
         $params = [];
 
         if (!empty($filters['prix_min'])) {
@@ -388,6 +390,7 @@ class MenuModel
                 $conditions[] = 'm.is_active = 0';
             }
         }
+
 
         if (!empty($filters['search'])) {
             $conditions[] = 'm.title LIKE :search';

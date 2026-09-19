@@ -167,7 +167,7 @@ require_once __DIR__ . '/../layouts/header.php';
                         </div>
 
                         <div class="col-12">
-                            Statut : <?= htmlspecialchars($menu['is_active']) === 1 ? 'actif' : 'inactif' ?>  
+                            Statut : <?= (int) $menu['is_active'] === 1 ? 'actif' : 'inactif' ?>  
                         </div>
 
                         <div class="row boutons">

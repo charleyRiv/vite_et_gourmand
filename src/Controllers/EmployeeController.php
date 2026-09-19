@@ -263,6 +263,7 @@ class EmployeeController
         $statuses = array_unique(array_column($menus, 'is_active'));
         sort($statuses);
 
+
         $pageTitle = 'Gérer des menus - Vite & Gourmand';
         $h1 = 'Gérer les menus';
         $extraJs = ['/assets/js/employee/menus.js'];
