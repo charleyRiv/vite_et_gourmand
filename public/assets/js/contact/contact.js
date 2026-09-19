@@ -76,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSubmitBtn();
     });
 
+    //Alerte de confirmation
+    if (typeof showSuccessPopup !== 'undefined' && showSuccessPopup) {
+        alert('Votre message a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
+    }
+
+
     //Etat initial - bouton désactivé
     submitBtn.disabled = true;
 

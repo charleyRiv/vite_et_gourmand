@@ -659,9 +659,12 @@ img {
     }
 
     .menu-dish {
+        display: flex;
+        flex-direction: column;
         align-items: stretch;
         justify-content: space-between;
         padding: 10px;
+        height: 100%;
         
 
         .menu-picture-dish {
@@ -680,6 +683,7 @@ img {
             padding-top: 2rem;
             padding-bottom: 2rem;
             margin-top: 10px;
+            height: 100%;
 
 
             @include media-breakpoint-up(lg) {

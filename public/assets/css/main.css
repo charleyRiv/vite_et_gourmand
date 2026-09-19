@@ -12540,9 +12540,12 @@ img {
   align-items: center;
 }
 .section-menu-details .menu-dish {
+  display: flex;
+  flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
   padding: 10px;
+  height: 100%;
 }
 .section-menu-details .menu-dish .menu-picture-dish {
   width: 100%;
@@ -12559,6 +12562,7 @@ img {
   padding-top: 2rem;
   padding-bottom: 2rem;
   margin-top: 10px;
+  height: 100%;
 }
 @media (min-width: 992px) {
   .section-menu-details .menu-dish .menu-details {

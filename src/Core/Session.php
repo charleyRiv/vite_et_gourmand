@@ -34,6 +34,11 @@ class Session
     {
         session_unset();
         session_destroy();
+
+        // Régénère ID pour effacer le cookie
+        session_start();
+        session_regenerate_id(true);
+        session_destroy();
     }
 
     public static function regenerate(): void 

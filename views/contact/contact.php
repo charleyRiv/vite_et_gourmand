@@ -3,6 +3,7 @@
  * @var string $h1
  * @var array $user
  * @var string $heroImage
+ * @var bool $success
  */
 require_once __DIR__ . '/../layouts/header.php';
 
@@ -63,7 +64,9 @@ require_once __DIR__ . '/../layouts/hero.php';
             </div>
         </div>
     </section>
+    
 </main>
+
 
 <?php
 require_once __DIR__ . '/../layouts/footer.php';

@@ -39,10 +39,11 @@ class ContactController {
             'content' => trim($_POST['content'])
         ];
 
+
         $this->contactModel->send($data);
         $this->mailService->sendContactNotification($data);
         //Redirection
-        header('Location: /contact');
+        header('Location: /');
         exit();
     }
 }
