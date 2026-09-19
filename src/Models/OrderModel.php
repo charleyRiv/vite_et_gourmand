@@ -188,6 +188,46 @@ class OrderModel
         return $stmt->fetchAll();
     }
 
+    public function getAllByUser(int $id): ?array
+    {
+        //requete
+        $stmt = $this->db->prepare("
+            SELECT
+                co.order_id,
+                co.order_date,
+                co.event_date,
+                co.delivery_time,
+                co.delivery_street_number,
+                co.delivery_street_type,
+                co.delivery_street_name,
+                co.delivery_zip_code,
+                co.delivery_city,
+                co.delivery_country,
+                co.nb_persons,
+                co.calculated_menu_price,
+                co.delivery_fees,
+                co.discount,
+                co.total_price,
+                co.current_status,
+                co.material_lent,
+                u.first_name,
+                u.last_name,
+                u.email,
+                u.phone,
+                m.title AS menu_title
+            FROM customer_order co
+            JOIN user u ON co.user_id = u.user_id
+            JOIN menu m ON co.menu_id = m.menu_id
+            WHERE u.user_id = :user_id
+            ORDER BY co.event_date ASC
+        ");
+
+        $stmt->execute([
+            ':user_id' => $id
+        ]);
+        return $stmt->fetchAll()?:[];
+    }
+
     public function getByStatus(string $current_status): ?array
     {
         $stmt = $this->db->prepare("

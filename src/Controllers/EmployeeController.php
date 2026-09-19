@@ -809,8 +809,8 @@ class EmployeeController
     {
         $basePath = $this->getBasePath();
         $filters = [
-            'date_from' => htmlspecialchars($_GET['date_from'] ?? null),
-            'date_to' => htmlspecialchars($_GET['date_to'] ?? null)
+            'date_from' => htmlspecialchars($_GET['date_from'] ?? ''),
+            'date_to' => htmlspecialchars($_GET['date_to'] ?? '')
         ];
 
         $messages = $this->contactModel->getAllWithFilters($filters);

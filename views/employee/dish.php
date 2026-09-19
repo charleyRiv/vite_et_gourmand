@@ -149,7 +149,10 @@ require_once __DIR__ . '/../layouts/header.php';
                                     >
                             <?php else: ?>
                                 <div class="img">
-                                <small> Pas de photos disponibles</small>
+                                <img
+                                        src="/assets/images/uploads/default.png"
+                                        alt="photo bientôt disponible"
+                                    >
                                 </div>
                             <?php endif; ?>
                         </div>

@@ -3540,6 +3540,8 @@ img {
             .img {
                 max-width: 9rem;
                 border-radius: 10px;
+                aspect-ratio: 16 / 9;
+                object-fit: cover;
             }
 
             .row.boutons {

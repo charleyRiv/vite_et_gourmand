@@ -14990,6 +14990,9 @@ img {
 .page-employee-dish .section-employee-dishes fieldset .img {
   max-width: 9rem;
   border-radius: 10px;
+  aspect-ratio: 16/9;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .page-employee-dish .section-employee-dishes fieldset .row.boutons form {
   display: flex;

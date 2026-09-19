@@ -30,7 +30,7 @@ class UserController {
         $user_id = Session::get('user_id');
         $user = $this->userModel->findById($user_id);
 
-        $orders = $this->orderModel->getAllWithFilters(['user_id' => $user_id]);
+        $orders = $this->orderModel->getAllByUser($user_id);
 
         //Formatter la date et heure de livraison
         foreach ($orders as &$order) {

@@ -121,6 +121,7 @@ require_once __DIR__ . '/../layouts/hero.php';
             </div>
         </div>
     </section>
+    
 </main>
 
 <?php
