@@ -30,13 +30,23 @@ require_once __DIR__ . '/../layouts/hero.php';
                 </div>
 
                 <!-- Carousel photos du menu -->
-                <?php if (!empty($menu['pictures'])): ?>
+                <?php
+                    // Complète les photos jusqu'à 3 avec l'image par défaut
+                    $pictures = $menu['pictures'] ?? [];
+                    $defaultPicture = [
+                        'url'      => '/assets/images/uploads/default.png',
+                        'alt_text' => 'Image non disponible'
+                    ];
+                    while (count($pictures) < 3) {
+                        $pictures[] = $defaultPicture;
+                    }
+                ?>
                 <div class="col-12 mb-4 d-lg-none">
                     <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel">
                 
                         <!-- Indicators -->
                         <div class="carousel-indicators">
-                            <?php foreach ($menu['pictures'] as $index => $picture): ?>
+                            <?php foreach ($pictures as $index => $picture): ?>
                                 <button 
                                     type="button" 
                                     data-bs-target="#menuCarousel" 
@@ -49,7 +59,7 @@ require_once __DIR__ . '/../layouts/hero.php';
                             
                         <!-- Slides -->
                         <div class="carousel-inner">
-                            <?php foreach ($menu['pictures'] as $index => $picture): ?>
+                            <?php foreach ($pictures as $index => $picture): ?>
                                 <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                                     <img 
                                         src="<?= htmlspecialchars($picture['url']) ?>"
@@ -74,7 +84,6 @@ require_once __DIR__ . '/../layouts/hero.php';
                             
                     </div>
                 </div>
-                <?php endif; ?>
 
                 <div class="row g-0 mb-0">
                     <?php foreach ($dishes as $dish): ?>
@@ -91,7 +100,11 @@ require_once __DIR__ . '/../layouts/hero.php';
                                             class="menu-picture-dish"
                                         >
                                     <?php else : ?>
-                                        <p>Image indisponible</p>
+                                        <img 
+                                            src="/assets/images/uploads/default.png"
+                                            alt="Image bientôt disponible"
+                                            class="menu-picture-dish"
+                                        >
                                     <?php endif; ?>
                                 </div>
                             </div>
