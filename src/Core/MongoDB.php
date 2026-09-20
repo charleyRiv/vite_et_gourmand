@@ -18,7 +18,7 @@ class MongoDBConnection
     public static function getInstance(): Client
     {
         if (self::$instance === null) {
-            $uri = $_ENV['MONGODB_URI'] ?? 'mongodb://localhost:27017';
+            $uri = $_ENV['MONGO_URI'] ?? 'mongodb://localhost:27017';
             // @phpstan-ignore-next-line
             self::$instance = new Client($uri);
         }
@@ -28,7 +28,7 @@ class MongoDBConnection
     // @phpstan-ignore-next-line
     public static function getDatabase(): Database
     {
-        $dbName = $_ENV['MONGODB_DB'] ?? 'vg_stats';
+        $dbName = $_ENV['MONGO_DB'] ?? 'vg_stats';
         return self::getInstance()->selectDatabase($dbName);
     }
 
