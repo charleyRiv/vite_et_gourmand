@@ -1,5 +1,7 @@
 {
     "require": {
+        "php": "^8.2",
+        "ext-mongodb": "*",
         "phpmailer/phpmailer": "^7.1",
         "mongodb/mongodb": "^2.4.1",
         "cloudinary/cloudinary_php": "^3.1"
