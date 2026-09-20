@@ -198,7 +198,8 @@ class MailService {
     {
         try {
             $this->mailer->clearAddresses();
-            $this->mailer->addAddress('contact@viteetgourmand.fr', 'Vite & Gourmand');            $this->mailer->addReplyTo($data['email']);
+            $this->mailer->addAddress($_ENV['MAIL_TO'] ?? 'contact@viteetgourmand.fr', 'Vite & Gourmand');            
+            $this->mailer->addReplyTo($data['email']);
 
             $this->mailer->isHTML(true);
             $this->mailer->Subject = " Message client -Vite & Gourmand";

@@ -888,6 +888,8 @@ class EmployeeController
 
     private function uploadPicture(string $inputName): ?string
     {
+        $tmpPath = $_FILES[$inputName]['tmp_name'];
+
         // Vérifier qu'un fichier a été envoyé
         if (empty($_FILES[$inputName]['name'])) {
             return null; // Aucun fichier n'a été envoyé
@@ -911,14 +913,20 @@ class EmployeeController
             return null; // Fichier trop volumineux
         }
 
-        //Générer un nom unique
+        // En production : Cloudinary
+        if ($_ENV['APP_ENV'] === 'production') {
+            $cloudinary = new CloudinaryService();
+            return $cloudinary->upload($tmpPath);
+        }
+
+        // En développement : local / Générer un nom unique
         $extension = pathinfo($_FILES[$inputName]['name'], PATHINFO_EXTENSION);
         $filename= uniqid('img_', true) . '.' . strtolower($extension);
         $uploadDir = __DIR__ . '/../../public/assets/images/uploads/';
         $uploadPath = $uploadDir . $filename;
 
         // Déplacer le fichier téléchargé vers le répertoire de destination
-        if (!move_uploaded_file($_FILES[$inputName]['tmp_name'], $uploadPath)) {
+        if (!move_uploaded_file($tmpPath, $uploadPath)) {
             return null; // Échec du déplacement du fichier
         }
 
