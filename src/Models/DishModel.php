@@ -180,12 +180,28 @@ class DishModel
 
     public function deleteDish(int $id): void
     {
-        $stmt = $this->db->prepare("
+        // Vérifie qu'aucun menu n'est lié
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM menu_dish WHERE dish_id = :id");
+        $stmt->execute([':id' => $id]);
+        $count = (int) $stmt->fetchColumn();
+
+        if ($count > 0) {
+            throw new \Exception("Impossible de supprimer ce plat - il est associé à $count menu(s).");
+        }
+
+        // Supprime les photos
+        $this->db->prepare("DELETE FROM picture_dish WHERE dish_id = :id")->execute([':id' => $id]);
+
+        // Supprime les allergènes associés
+        $this->db->prepare("DELETE FROM dish_allergen WHERE dish_id = :id")->execute([':id' => $id]);
+
+        // Supprime le plat
+        $stmtb = $this->db->prepare("
         DELETE FROM dish 
         WHERE dish_id = :id
         ");
 
-        $stmt->execute([':id' => $id]);
+        $stmtb->execute([':id' => $id]);
     }
 
     public function getDishTypes(): array

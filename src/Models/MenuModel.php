@@ -262,10 +262,26 @@ class MenuModel
 
     public function deleteMenu(int $id): bool
     {
-        $stmt = $this->db->prepare("
+        // Vérifie qu'aucune commande n'est liée
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM customer_order WHERE menu_id = :id");
+        $stmt->execute([':id' => $id]);
+        $count = (int) $stmt->fetchColumn();
+
+        if ($count > 0) {
+            throw new \Exception("Impossible de supprimer ce menu - il est lié à $count commande(s).");
+        }
+        // Supprime les photos du menu
+        $this->db->prepare("DELETE FROM picture_menu WHERE menu_id = :id")->execute([':id' => $id]);
+
+        // Supprime les associations menu-plat
+        $this->db->prepare("DELETE FROM menu_dish WHERE menu_id = :id")->execute([':id' => $id]);
+
+
+        // Supprimer le menu
+        $stmt2 = $this->db->prepare("
             DELETE FROM menu WHERE menu_id = :id
         ");
-        return $stmt->execute([':id' => $id]);
+        return $stmt2->execute([':id' => $id]);
     }
 
     public function deleteMenuDishes(int $menuId): bool
