@@ -41,6 +41,7 @@ class MenusController {
             'themes' => array_map('intval',$_GET['themes'] ?? []),
             'diets' => array_map('intval',$_GET['diets'] ?? []),
             'nb_persons' => isset($_GET['nb_persons']) ? $_GET['nb_persons'] : null,
+            'status' => ['is_active'],
         ];
         $offset = ($currentPage -1) * $perPage;
 
