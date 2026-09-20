@@ -23,6 +23,11 @@ Thumbs.db
 # Uploads utilisateurs (images des menus)
 public/assets/images/uploads/*
 !public/assets/images/uploads/.gitkeep
+# Force upload des images statiques
+!public/assets/images/uploads/Logo_Figma.svg
+!public/assets/images/uploads/icone_*.svg
+!public/assets/images/uploads/hero_banner_*.jpeg
+!public/assets/images/uploads/equipe_*.webp
 
 # Fichiers de configuration IDE
 .idea/
