@@ -60,8 +60,8 @@ CREATE TABLE `customer_order` (
   PRIMARY KEY (`order_id`),
   KEY `user_id` (`user_id`),
   KEY `menu_id` (`menu_id`),
-  CONSTRAINT `1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
+  CONSTRAINT `fk_customer_order_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `fk_customer_order_menu` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,8 +107,8 @@ CREATE TABLE `dish_allergen` (
   `allergen_id` int(11) NOT NULL,
   PRIMARY KEY (`dish_id`,`allergen_id`),
   KEY `allergen_id` (`allergen_id`),
-  CONSTRAINT `1` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`),
-  CONSTRAINT `2` FOREIGN KEY (`allergen_id`) REFERENCES `allergen` (`allergen_id`)
+  CONSTRAINT `fk_dish_allergen_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`),
+  CONSTRAINT `fk_dish_allergen_allergen` FOREIGN KEY (`allergen_id`) REFERENCES `allergen` (`allergen_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,7 +128,7 @@ CREATE TABLE `history_status_order` (
   `order_id` int(11) NOT NULL,
   PRIMARY KEY (`history_id`),
   KEY `order_id` (`order_id`),
-  CONSTRAINT `1` FOREIGN KEY (`order_id`) REFERENCES `customer_order` (`order_id`)
+  CONSTRAINT `fk_history_status_order_customer_order` FOREIGN KEY (`order_id`) REFERENCES `customer_order` (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,8 +153,8 @@ CREATE TABLE `menu` (
   PRIMARY KEY (`menu_id`),
   KEY `theme_id` (`theme_id`),
   KEY `diet_id` (`diet_id`),
-  CONSTRAINT `1` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`theme_id`),
-  CONSTRAINT `2` FOREIGN KEY (`diet_id`) REFERENCES `diet` (`diet_id`)
+  CONSTRAINT `fk_menu_theme` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`theme_id`),
+  CONSTRAINT `fk_menu_diet` FOREIGN KEY (`diet_id`) REFERENCES `diet` (`diet_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,8 +170,8 @@ CREATE TABLE `menu_dish` (
   `dish_id` int(11) NOT NULL,
   PRIMARY KEY (`menu_id`,`dish_id`),
   KEY `dish_id` (`dish_id`),
-  CONSTRAINT `1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`),
-  CONSTRAINT `2` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`)
+  CONSTRAINT `fk_menu_dish_menu` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`),
+  CONSTRAINT `fk_menu_dish_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -226,7 +226,7 @@ CREATE TABLE `picture_dish` (
   `dish_id` int(11) NOT NULL,
   PRIMARY KEY (`picture_id`),
   KEY `dish_id` (`dish_id`),
-  CONSTRAINT `1` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`)
+  CONSTRAINT `fk_picture_dish_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish` (`dish_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -247,7 +247,7 @@ CREATE TABLE `picture_menu` (
   `menu_id` int(11) NOT NULL,
   PRIMARY KEY (`picture_id`),
   KEY `menu_id` (`menu_id`),
-  CONSTRAINT `1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
+  CONSTRAINT `fk_picture_menu_menu` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -269,8 +269,8 @@ CREATE TABLE `review` (
   PRIMARY KEY (`review_id`),
   UNIQUE KEY `order_id` (`order_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `1` FOREIGN KEY (`order_id`) REFERENCES `customer_order` (`order_id`),
-  CONSTRAINT `2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `fk_review_customer_order` FOREIGN KEY (`order_id`) REFERENCES `customer_order` (`order_id`),
+  CONSTRAINT `fk_review_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -349,7 +349,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `public_token` (`public_token`),
   UNIQUE KEY `email` (`email`),
   KEY `role_id` (`role_id`),
-  CONSTRAINT `1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+  CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
