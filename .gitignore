@@ -1,6 +1,6 @@
 # Variables d'environnement - NE JAMAIS COMMITER
 .env
-.env.example
+! .env.example
 
 vendor/
 node_modules/
