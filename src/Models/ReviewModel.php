@@ -200,11 +200,12 @@ class ReviewModel
                 r.user_id,
                 u.last_name,
                 u.first_name,
-                co.menu_id
+                co.menu_id,
+                u.is_active
             FROM review r
             JOIN customer_order co ON r.order_id = co.order_id
             JOIN user u ON r.user_id = u.user_id
-            WHERE r.validation_status = 'validated'
+            WHERE r.validation_status = 'validated' AND u.is_active = 1
             ORDER BY reviewed_at DESC
             LIMIT 3
         ");
