@@ -56,7 +56,7 @@ require_once __DIR__ . '/../layouts/header.php';
                 </fieldset>
 
                 <fieldset class="col-12 col-xl-3">
-                    <label>Nombre de commandes en cours</label>
+                    <label>Nombre de commandes en cours <br><small>(commandes terminées exclues)</small></label>
                     <div class="kpi-info">
                         <?=  htmlspecialchars($kpi['ActiveOrders']) ?>
                     </div>

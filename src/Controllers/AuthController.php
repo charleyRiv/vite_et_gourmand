@@ -44,7 +44,6 @@ class AuthController {
     public function login(): void 
     {
         //Détruire toute session existante
-        Session::destroy();
         Session::start();
 
         $errors = [];
