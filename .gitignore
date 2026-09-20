@@ -1,8 +1,9 @@
 # Variables d'environnement - NE JAMAIS COMMITER
 .env
+! .env.example
 
-# Dépendances
-
+vendor/
+node_modules/
 
 # Fichiers système macOS
 .DS_Store
