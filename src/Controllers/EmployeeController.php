@@ -401,8 +401,7 @@ class EmployeeController
             //header('Location: /employe/menus');
             exit();
         } catch (\Exception $e) {
-            error_log('deleteMenu error: ' . $e->getMessage());
-            die($e->getMessage());
+            header('Location: ' . $this->getBasePath() . '/menus?error=' . urlencode($e->getMessage()));
         }
     }
 
@@ -530,10 +529,14 @@ class EmployeeController
 
     public function deleteDish(int $id): void
     {
-        $this->dishModel->deleteDish($id);
-        
-        // Redirection
-        header('Location: ' . $this->getBasePath() . '/plats');
+        try {
+            $this->dishModel->deleteDish($id);
+
+            // Redirection
+            header('Location: ' . $this->getBasePath() . '/plats');
+        } catch (\Exception $e) {
+            header('Location: ' . $this->getBasePath() . '/plats?error=' . urlencode($e->getMessage()));
+        }
         exit();
     }
 
