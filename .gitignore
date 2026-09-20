@@ -5,7 +5,6 @@
 vendor/
 node_modules/
 
-
 # Fichiers système macOS
 .DS_Store
 .AppleDouble
@@ -28,6 +27,8 @@ public/assets/images/uploads/*
 !public/assets/images/uploads/icone_*.svg
 !public/assets/images/uploads/hero_banner_*.jpeg
 !public/assets/images/uploads/equipe_*.webp
+!public/assets/images/uploads/404_error_002.png
+!public/assets/images/uploads/403_error_001.png
 
 # Fichiers de configuration IDE
 .idea/
