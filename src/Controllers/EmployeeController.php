@@ -393,12 +393,17 @@ class EmployeeController
 
     public function deleteMenu(int $id): void
     {
-        $this->menuModel->deleteMenu($id);
-        
-        // Redirection
-        header('Location: ' . $this->getBasePath() . '/menus');
-        //header('Location: /employe/menus');
-        exit();
+        try {
+            $this->menuModel->deleteMenu($id);
+
+            // Redirection
+            header('Location: ' . $this->getBasePath() . '/menus');
+            //header('Location: /employe/menus');
+            exit();
+        } catch (\Exception $e) {
+            error_log('deleteMenu error: ' . $e->getMessage());
+            die($e->getMessage());
+        }
     }
 
     public function listDishes(): void
