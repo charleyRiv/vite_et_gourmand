@@ -21,7 +21,7 @@ $schedule = $contentModel->getByFilter('footer', 'Horaires');
                         </a>
                         <a href="">
                             <img 
-                                src="/assets/images/uploads/icone_instagram.svg"
+                                src="/assets/images/uploads/icone_Instagram.svg"
                                 alt="instagram"
                                 class="icone">
                         </a>
