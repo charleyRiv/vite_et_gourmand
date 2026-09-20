@@ -29,6 +29,7 @@ public/assets/images/uploads/*
 !public/assets/images/uploads/equipe_*.webp
 !public/assets/images/uploads/404_error_002.png
 !public/assets/images/uploads/403_error_001.png
+!public/assets/images/uploads/default.png
 
 # Fichiers de configuration IDE
 .idea/
