@@ -15,6 +15,7 @@ Application web de traiteur événementiel bordelais fictif, développée dans l
 - Flatpickr — sélection de dates
 - PHPMailer — envoi d'emails
 - api-adresse.data.gouv.fr + OpenRouteService — calcul frais de livraison
+- Cloudinary — stockage des images en production
 
 ---
 
@@ -143,13 +144,70 @@ vite_et_gourmand/
 
 ---
 ## Accès de test
+**URL** : https://vite-et-gourmand-ecf-ric-0dd976d99ab7.herokuapp.com/
 
 | Rôle | Email | Mot de passe |
 |---|---|---|
-| Client | client@test.fr | Mot2Pass/Test |
-| Employé | employe@test.fr | Mot2Pass/Test |
-| Administrateur | admin@test.fr | Mot2Pass/Admin |
+| Client | testMail@mail.fr | Mot2Pass/Test |
+| Employé | employeTest@mail.com | Mot2Pass/Test |
+| Administrateur | admin2@viteetgourmand.fr | Mot2Pass/Admin |
 
+---
+## Déploiement sur Heroku
+
+### Prérequis
+- Compte Heroku
+- Heroku CLI installé
+- Compte JawsDB (MariaDB)
+- Compte MongoDB Atlas
+- Compte Cloudinary
+- Compte Gmail ou Mailtrap
+
+### Étapes
+
+#### 1. Créer l'application Heroku
+```bash
+heroku create nom-de-app
+```
+
+#### 2. Configurer JawsDB (MariaDB)
+```bash
+heroku addons:create jawsdb:kitefin
+heroku config:get JAWSDB_URL
+```
+
+Importer la base de données :
+```bash
+mysql -u DB_USER -h DB_HOST -p DB_NAME --ssl-verify-server-cert=FALSE < database/schema.sql
+mysql -u DB_USER -h DB_HOST -p DB_NAME --ssl-verify-server-cert=FALSE < database/seed.sql
+```
+
+#### 3. Configurer les variables d'environnement
+```bash
+heroku config:set APP_ENV=production
+heroku config:set DB_HOST=...
+heroku config:set DB_NAME=...
+heroku config:set DB_USER=...
+heroku config:set DB_PASS=...
+heroku config:set MONGO_URI=mongodb+srv://...
+heroku config:set MONGO_DB=vg_stats
+heroku config:set ORS_API_KEY=...
+heroku config:set MAIL_HOST=smtp.gmail.com
+heroku config:set MAIL_PORT=587
+heroku config:set MAIL_USER=...
+heroku config:set MAIL_PASSWORD=...
+heroku config:set MAIL_FROM=...
+heroku config:set MAIL_FROM_NAME="Vite & Gourmand"
+heroku config:set MAIL_TO=...
+heroku config:set CLOUDINARY_CLOUD_NAME=...
+heroku config:set CLOUDINARY_API_KEY=...
+heroku config:set CLOUDINARY_API_SECRET=...
+```
+
+#### 4. Déployer
+```bash
+git push heroku main
+```
 ---
 
 ## Sécurité
@@ -168,10 +226,6 @@ vite_et_gourmand/
 
 Application déployée sur Heroku :
 [https://vite-et-gourmand-ecf-ric-0dd976d99ab7.herokuapp.com/](https://vite-et-gourmand-ecf-ric-0dd976d99ab7.herokuapp.com/)
-
-> ⚠️ Les fichiers uploadés étant stockés localement, 
-> un service de stockage externe (Cloudinary) sera nécessaire 
-> en raison du système de fichiers éphémère d'Heroku.
 
 ---
 
