@@ -25,6 +25,7 @@ if (getenv('APP_ENV') === 'development') {
     error_reporting(E_ALL);
 }
 
+
 // Loading core classes
 require_once __DIR__ . '/../src/Core/Router.php';
 require_once __DIR__ . '/../src/Core/Database.php';
