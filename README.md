@@ -166,7 +166,8 @@ vite_et_gourmand/
 
 ## Déploiement
 
-Le déploiement est prévu sur **Heroku**.
+Application déployée sur Heroku :
+[https://vite-et-gourmand-ecf-ric-0dd976d99ab7.herokuapp.com/](https://vite-et-gourmand-ecf-ric-0dd976d99ab7.herokuapp.com/)
 
 > ⚠️ Les fichiers uploadés étant stockés localement, 
 > un service de stockage externe (Cloudinary) sera nécessaire 
