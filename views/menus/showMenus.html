@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+    <div id="app-hero"></div>
+
+    <main class="page-menu-details">
+        <section class="section-menu-details">
+            <div class="container">
+                <div class="row" id="menu-detail">
+                    <div class="col-12 text-center">
+                        <p>Chargement du menu...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/menus/showMenus.js"></script>
+    <script>
+        loadLayouts('', '/assets/images/uploads/hero_banner_charte_001.jpeg')
+            .then(() => initShowMenu());
+    </script>
+</body>
+</html>

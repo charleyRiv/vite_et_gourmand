@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menus - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+    <div id="app-hero"></div>
+
+    <main class="page-menus">
+            
+        <!-- Filtres -->
+        <section class="menus-filters">
+            <div class="d-flex">
+                <button type="button" class="btn btn-filters" id="btn-filters">
+                    Filtres <i class="bi bi-chevron-compact-down"></i>
+                </button>
+            </div>
+        
+            <div class="filters-aside" id="filters-aside">
+                <div class="filters-aside-header">
+                    <h4 class="mb-0">Filtres</h4>
+                    <button type="button" class="btn-close" id="btn-close-filters"></button>
+                </div>
+            
+                <form id="filtres-form">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 price-filter">
+                                <h4>Prix</h4>
+                                <div class="price-range">
+                                    <div class="price-labels">
+                                        <span id="prix_min_label">0 €</span>
+                                        <span id="prix_max_label">200 €</span>
+                                    </div>
+                                    <div class="price-slider">
+                                        <input type="range" id="prix_min" name="prix_min" min="0" max="200" step="2" value="0">
+                                        <input type="range" id="prix_max" name="prix_max" min="0" max="200" step="2" value="200">
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="col-12 theme-filter">
+                                <h4>Thème</h4>
+                                <div id="themes-checkboxes"></div>
+                            </div>
+                        
+                            <div class="col-12 diet-filter">
+                                <h4>Régime alimentaire</h4>
+                                <div id="diets-checkboxes"></div>
+                            </div>
+                        
+                            <div class="col-12 pers-filter">
+                                <h4>Nombre de personnes</h4>
+                                <input type="number" id="nb_persons" min="1" max="300" value="20">
+                            </div>
+                        
+                            <div class="col-12 mt-2">
+                                <button type="submit" class="btn btn-primary w-100">Appliquer</button>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button type="button" id="btn-reset" class="btn btn-secondary w-100">Réinitialiser</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+            <div class="filters-overlay" id="filters-overlay"></div>
+        </section>
+    
+        <!-- Liste des menus -->
+        <section class="section-menus">
+            <div class="container">
+                <div class="row g-4" id="menus-list">
+                    <div class="col-12 text-center">
+                        <p>Chargement des menus...</p>
+                    </div>
+                </div>
+            
+                <div class="row justify-content-between align-items-center mt-4">
+                    <div class="col-12 col-lg-auto text-end text-lg-start">
+                        <a href="/commande/etape-1" class="btn btn-primary">Commander</a>
+                    </div>
+                    <div class="col-12 col-lg-auto text-center text-lg-end">
+                        <nav aria-label="Pagination des menus">
+                            <ul class="pagination" id="pagination"></ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/menus/menus.js"></script>
+    <script>
+        // Initialise les composants avec le titre et l'image du hero
+        loadLayouts('Nos Menus', '/assets/images/uploads/hero_banner_charte_001.jpeg')
+            .then(() => {
+                initMenus();
+            });
+    </script>
+    
+</body>
+</html>

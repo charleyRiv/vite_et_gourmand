@@ -1,0 +1,97 @@
+<?php
+
+require_once __DIR__ . '/../Models/MenuModel.php';
+require_once __DIR__ . '/../Models/DishModel.php';
+require_once __DIR__ . '/../Models/AllergenModel.php';
+require_once __DIR__ . '/../Models/DietModel.php';
+require_once __DIR__ . '/../Models/ThemeModel.php';
+require_once __DIR__ . '/../Models/PictureModel.php';
+
+class MenusApiController
+{
+    private MenuModel $menuModel;
+    private DishModel $dishModel;
+    private AllergenModel $allergenModel;
+    private DietModel $dietModel;
+    private ThemeModel $themeModel;
+    private PictureModel $pictureModel;
+
+    public function __construct()
+    {
+        $this->menuModel = new MenuModel();
+        $this->dishModel = new DishModel();
+        $this->allergenModel = new AllergenModel();
+        $this->dietModel = new DietModel();
+        $this->themeModel = new ThemeModel();
+        $this->pictureModel = new PictureModel();
+    }
+
+    public function getMenus(): void
+    {
+        header('Content-Type: application/json');
+
+        $currentPage = (int) ($_GET['page'] ?? 1);
+        $perPage = 4;
+
+        $filters = [
+            'prix_min' => isset($_GET['prix_min']) ? (float) $_GET['prix_min'] : null,
+            'prix_max' => isset($_GET['prix_max']) ? (float) $_GET['prix_max'] : null,
+            'themes' => array_map('intval', $_GET['themes'] ?? []),
+            'diets' => array_map('intval', $_GET['diets']  ?? []),
+            'nb_persons' => isset($_GET['nb_persons']) ? $_GET['nb_persons'] : null,
+            'status' => ['is_active'],
+        ];
+
+        $offset = ($currentPage - 1) * $perPage;
+
+        $totalMenus = $this->menuModel->countWithFilters($filters);
+        $totalPages = (int) ceil($totalMenus / $perPage);
+        
+        $menus = $this->menuModel->getAllWithFilters($filters, $perPage, $offset);
+
+        foreach ($menus as &$menu) {
+            $pictures = $this->pictureModel->getByMenuId($menu['menu_id']);
+            $menu['main_picture'] = $pictures[0] ?? null;
+            $menu['diets'] = $this->dietModel->getDietByMenuId($menu['menu_id']);
+            $menu['themes'] = $this->themeModel->getThemeByMenuId($menu['menu_id']);
+        }
+        unset($menu);
+
+        echo json_encode([
+            'menus' => $menus,
+            'totalPages' => $totalPages,
+            'currentPage' => $currentPage,
+            'themes' => $this->themeModel->getAll(),
+            'diets'=> $this->dietModel->getAll(),
+        ]);
+        exit();
+    }
+
+    public function getMenu(int $id): void
+    {
+        header('Content-Type: application/json');
+
+        $menu = $this->menuModel->getById($id);
+
+        if ($menu === null) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Menu introuvable']);
+            exit();
+        }
+
+        $menu['pictures'] = $this->pictureModel->getByMenuId($menu['menu_id']);
+        $menu['diets'] = $this->dietModel->getDietByMenuId($menu['menu_id']);
+        $menu['themes'] = $this->themeModel->getThemeByMenuId($menu['menu_id']);
+        $menu['dishes'] = $this->dishModel->getByMenuId($id);
+
+        foreach ($menu['dishes'] as &$dish) {
+            $dish['allergens'] = $this->allergenModel->getAllergensByDishId($dish['dish_id']);
+            $dish['dish_type'] = translateDishType($dish['dish_type']);
+            $dish['picture'] = $this->pictureModel->getByDishId($dish['dish_id'])[0] ?? null;
+        }
+        unset($dish);
+
+        echo json_encode($menu);
+        exit();
+    }
+}

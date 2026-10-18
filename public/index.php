@@ -44,10 +44,28 @@ Session::start();
 // Définition des routes
 $router = new Router();
 
+// Routes API
+// Dans index.php
+$router->get('/api/session',    'ApiController', 'session');
+$router->get('/api/csrf-token', 'ApiController', 'csrfToken');
+$router->get('/api/schedule',   'ApiController', 'schedule');
+$router->get('/api/home/contents', 'ApiController', 'homeContents');
+$router->get('/api/home/reviews',  'ApiController', 'homeReviews');
+$router->get('/api/menus', 'MenusApiController', 'getMenus');
+$router->get('/api/menus/{id}', 'MenusApiController', 'getMenu');
+
+// Routes layout
+$router->get('/layouts/header', 'LayoutsController', 'header');
+$router->get('/layouts/footer', 'LayoutsController', 'footer');
+$router->get('/layouts/hero',   'LayoutsController', 'hero');
+
 // Public routes
 $router->get('/', 'HomeController', 'index');
+$router->get('/home-v2', 'HomeController', 'indexHtml');
 $router->get('/menus', 'MenusController', 'index');
+$router->get('/menus-v2', 'MenusController', 'indexHtml');
 $router->get('/menus/{id}', 'MenusController', 'show');
+$router->get('/menus-v2/{id}', 'MenusController', 'showHtml');
 $router->get('/contact', 'ContactController', 'showContactForm');
 $router->post('/contact', 'ContactController', 'contact');
 $router->get('/legal', 'LegalController', 'legal');

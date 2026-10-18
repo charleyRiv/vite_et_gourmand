@@ -15,6 +15,13 @@ class HomeController {
         $this->reviewModel = new ReviewModel();
         $this->contentModel = new ContentModel();
     }
+
+    public function indexHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/home/home.html');
+        exit();
+    }
+    
     public function index(): void{
 
         //récuperer les contenus

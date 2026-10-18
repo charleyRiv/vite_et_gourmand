@@ -29,6 +29,16 @@ class MenusController {
     }
 
 
+    public function indexHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/menus/menus.html');
+    }
+
+    public function showHtml(int $id): void
+    {
+        readfile(__DIR__ . '/../../views/menus/showMenus.html');
+        exit();
+    }
     public function index(): void
     {
         $currentPage = (int) ($_GET['page'] ?? 1);
