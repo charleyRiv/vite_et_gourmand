@@ -18,6 +18,35 @@ class ContactController {
         $this->userModel = new UserModel();
         $this->contactModel = new ContactModel();
     }
+
+    public function showContactHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/contact/contact.html');
+        exit();
+    }
+
+    public function sendContact(): void
+    {
+        header('Content-Type: application/json');
+
+        $data = [
+            'email' => trim($_POST['email'] ?? ''),
+            'title' => trim($_POST['title'] ?? ''),
+            'content' => trim($_POST['content'] ?? '')
+        ];
+
+        if (empty($data['email']) || empty($data['title']) || empty($data['content'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Tous les champs sont obligatoires']);
+            exit();
+        }
+
+        $this->contactModel->send($data);
+        $this->mailService->sendContactNotification($data);
+
+        echo json_encode(['success' => true]);
+        exit();
+    }
     public function showContactForm(): void
     {
         if (Session::isLoggedIn()){

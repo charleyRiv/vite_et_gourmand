@@ -53,6 +53,7 @@ $router->get('/api/home/contents', 'ApiController', 'homeContents');
 $router->get('/api/home/reviews',  'ApiController', 'homeReviews');
 $router->get('/api/menus', 'MenusApiController', 'getMenus');
 $router->get('/api/menus/{id}', 'MenusApiController', 'getMenu');
+$router->post('/api/contact', 'ContactController', 'sendContact');
 
 // Routes layout
 $router->get('/layouts/header', 'LayoutsController', 'header');
@@ -68,6 +69,7 @@ $router->get('/menus/{id}', 'MenusController', 'show');
 $router->get('/menus-v2/{id}', 'MenusController', 'showHtml');
 $router->get('/contact', 'ContactController', 'showContactForm');
 $router->post('/contact', 'ContactController', 'contact');
+$router->get('/contact-v2', 'ContactController', 'showContactHtml');
 $router->get('/legal', 'LegalController', 'legal');
 $router->get('/cgv', 'CgvController', 'cgv');
 

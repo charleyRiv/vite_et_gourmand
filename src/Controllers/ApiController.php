@@ -9,6 +9,7 @@ class ApiController
             'isLoggedIn' => Session::isLoggedIn(),
             'role'       => $_SESSION['role'] ?? null,
             'first_name' => $_SESSION['first_name'] ?? null,
+            'email'      => Session::get('email'),
         ]);
         exit();
     }
@@ -45,7 +46,7 @@ class ApiController
         echo json_encode($contents);
         exit();
     }
-    
+
     public function homeReviews(): void
     {
         header('Content-Type: application/json');

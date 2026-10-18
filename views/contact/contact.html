@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+    <div id="app-hero"></div>
+
+    <main class="page-contact">
+        <section class="section-contact">
+            <div class="container">
+                <form id="contact-form">
+                    <div class="row">
+
+                        <!-- Email -->
+                        <div class="col-12 contact-label">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col-12 contact-input">
+                            <input 
+                                type="text" 
+                                id="email" 
+                                name="email" 
+                                class="w-100 contact-email"
+                                placeholder="mail@mail.fr"
+                                required>
+                            <div class="invalid-feedback">Veuillez saisir une adresse email valide.</div>
+                        </div>
+
+                        <!-- Titre -->
+                        <div class="col-12 contact-label">
+                            <label for="title">Titre</label>
+                        </div>
+                        <div class="col-12 contact-input">
+                            <input 
+                                type="text" 
+                                id="title" 
+                                name="title" 
+                                placeholder="Titre" 
+                                class="w-100 contact-title" 
+                                required>
+                            <div class="invalid-feedback">Le titre doit contenir au moins 3 caractères.</div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="col-12 contact-label">
+                            <label for="content">Message</label>
+                        </div>
+                        <div class="col-12 contact-input">
+                            <textarea 
+                                id="content" 
+                                name="content" 
+                                class="w-100 contact-content" 
+                                required></textarea>
+                            <div class="invalid-feedback">Le message doit contenir au moins 10 caractères.</div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-12 btn">
+                            <button type="submit" id="btn-submit" class="btn btn-primary">Envoyer</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/contact/contact.js"></script>
+    <script>
+        loadLayouts('Nous contacter', '/assets/images/uploads/hero_banner_charte_001.jpeg')
+            .then(() => initContact());
+    </script>
+</body>
+</html>
