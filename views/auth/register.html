@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-register">
+        <section class="section-register">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Formulaire d'inscription</h1>
+                    </div>
+
+                    <!-- Messages erreurs -->
+                    <div class="col-12" id="register-messages"></div>
+
+                    <form id="register-form">
+                        <div class="register-form">
+
+                            <div class="row g-5 register-name">
+                                <div class="col-12 col-lg-6">
+                                    <label for="last_name" class="register-label">Nom <span>*</span></label>
+                                    <input type="text" id="last_name" name="last_name" class="register-input" required>
+                                    <div class="invalid-feedback">Veuillez saisir votre nom</div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label for="first_name" class="register-label">Prénom <span>*</span></label>
+                                    <input type="text" id="first_name" name="first_name" class="register-input" required>
+                                    <div class="invalid-feedback">Veuillez saisir votre prénom</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 register-label">
+                                <label for="phone">Téléphone</label>
+                            </div>
+                            <div class="col-12 register-input">
+                                <input type="text" id="phone" name="phone" class="register-input">
+                                <div class="invalid-feedback">Veuillez saisir un numéro de téléphone valide</div>
+                            </div>
+
+                            <div class="col-12 register-label">
+                                <label for="email">Email <span>*</span></label>
+                            </div>
+                            <div class="col-12 register-input">
+                                <input type="text" id="email" name="email" class="register-input" required>
+                                <div class="invalid-feedback">Veuillez saisir une adresse email valide</div>
+                            </div>
+
+                            <div class="row g-5 register-street">
+                                <div class="col-12 col-lg-2">
+                                    <label for="street_number" class="register-label">N° Voie</label>
+                                    <input type="text" id="street_number" name="street_number" class="register-input">
+                                    <div class="invalid-feedback">Numéro de rue invalide</div>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="street_type" class="register-label">Type de voie</label>
+                                    <input type="text" id="street_type" name="street_type" class="register-input">
+                                    <div class="invalid-feedback">Type de voie invalide</div>
+                                </div>
+                                <div class="col-12 col-lg-7">
+                                    <label for="street_name" class="register-label">Nom de la voie</label>
+                                    <input type="text" id="street_name" name="street_name" class="register-input">
+                                    <div class="invalid-feedback">Nom de voie invalide</div>
+                                </div>
+                            </div>
+
+                            <div class="row g-5 register-city">
+                                <div class="col-12 col-lg-6">
+                                    <label for="zip_code" class="register-label">Code postal</label>
+                                    <input type="text" id="zip_code" name="zip_code" class="register-input">
+                                    <div class="invalid-feedback">Code postal invalide</div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label for="city" class="register-label">Ville</label>
+                                    <input type="text" id="city" name="city" class="register-input">
+                                    <div class="invalid-feedback">Ville invalide</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 register-label">
+                                <label for="country">Pays</label>
+                            </div>
+                            <div class="col-12 register-input">
+                                <input type="text" id="country" name="country" class="register-input">
+                                <div class="invalid-feedback">Pays invalide</div>
+                            </div>
+
+                            <div class="col-12 register-label">
+                                <label for="password">Mot de passe <span>*</span></label>
+                            </div>
+                            <div class="input-eye-wrapper">
+                                <input type="password" id="password" name="password" class="register-input pe-5" required>
+                                <button type="button" class="btn-eye" id="btn-eye-password">
+                                    <i class="bi bi-eye" id="icon-eye-password"></i>
+                                </button>
+                                <div class="invalid-feedback">8 caractères minimum, 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial</div>
+                            </div>
+                            <div class="col-12 register-detail">
+                                <small>8 caractères minimum, dont au moins 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial</small>
+                            </div>
+
+                            <div class="col-12 register-label">
+                                <label for="password_confirm">Confirmation mot de passe <span>*</span></label>
+                            </div>
+                            <div class="input-eye-wrapper">
+                                <input type="password" id="password_confirm" name="password_confirm" class="register-input pe-5" required>
+                                <button type="button" class="btn-eye" id="btn-eye-passwordConf">
+                                    <i class="bi bi-eye" id="icon-eye-passwordConf"></i>
+                                </button>
+                                <div class="invalid-feedback">Les mots de passe ne correspondent pas</div>
+                            </div>
+
+                            <div class="col-12">
+                                <small><span>*</span> Champs obligatoires</small>
+                            </div>
+
+                            <div class="col-12 register-consent">
+                                <div class="d-flex gap-2">
+                                    <input type="checkbox" id="consent" name="consent" value="1" class="mt-1 register-input" required>
+                                    <label for="consent" class="mb-0">
+                                        J'accepte la <a href="/legal">politique de confidentialité</a>
+                                    </label>
+                                    <div class="invalid-feedback">Veuillez accepter la politique de confidentialité</div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 btn-register">
+                                <button type="submit" class="btn btn-success" id="btn-submit" disabled>M'inscrire</button>
+                            </div>
+
+                            <div class="col-12 register-login">
+                                <a href="/connexion-v2">J'ai déjà un compte. Me connecter</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/auth/register.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initRegister());
+    </script>
+</body>
+</html>

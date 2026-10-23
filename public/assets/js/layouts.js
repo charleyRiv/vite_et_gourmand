@@ -44,15 +44,10 @@ async function loadLayouts(heroTitle = '', heroImage = '') {
     } else {
         navAuth.innerHTML = `
             <li class="nav-item">
-                <a class="nav-link" href="${dashboardUrl}">
-                    <i class="bi bi-person-fill"></i>
-                </a>
+                <a class="nav-link" href="/connexion-v2">Connexion</a>
             </li>
             <li class="nav-item">
-                <form action="/deconnexion" method="post" id="logout-form">
-                    <input type="hidden" name="csrf_token" id="csrf-token-logout">
-                    <button type="submit" class="btn btn-outline-primary btn-sm">Déconnexion</button>
-                </form>
+                <a class="btn btn-primary btn-sm" href="/inscription-v2">S'inscrire</a>
             </li>`;
     }
 

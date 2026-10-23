@@ -18,22 +18,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
      // ── Flatpickr ─────────────────────────────────────────
     flatpickr('#date_livraison', {
-        minDate: new Date().fp_incr(1), // ← méthode native Flatpickr pour demain
-        locale: flatpickr.l10ns.fr,     // ← objet locale
+        minDate: new Date().fp_incr(1), 
+        locale: flatpickr.l10ns.fr,     
         disable: [
             function(date) {
-                return date.getDay() === 0 || date.getDay() === 4; // Dimanche et Jeudi
+                return date.getDay() === 0 || date.getDay() === 4; 
             }
         ],
         onDayCreate: function(dObj, dStr, fp, dayElem) {
-            // Ajoute un style inline sur les jours désactivés
+        
             if (dayElem.classList.contains('disabled')) {
                 dayElem.style.opacity = '0.3';
                 dayElem.style.textDecoration = 'line-through';
                 dayElem.style.cursor = 'not-allowed';
             }
         },
-        dateFormat: 'Y-m-d',            // ← format de la valeur envoyée en POST
+        dateFormat: 'Y-m-d',            
         onChange: function(selectedDates, dateStr) {
             validateField(dateInput, rules.date);
             updateTimeSlots(dateStr);

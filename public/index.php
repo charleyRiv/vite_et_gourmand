@@ -54,6 +54,10 @@ $router->get('/api/home/reviews',  'ApiController', 'homeReviews');
 $router->get('/api/menus', 'MenusApiController', 'getMenus');
 $router->get('/api/menus/{id}', 'MenusApiController', 'getMenu');
 $router->post('/api/contact', 'ContactController', 'sendContact');
+$router->post('/api/login',    'AuthController', 'loginApi');
+$router->post('/api/register',   'AuthController', 'registerApi');
+$router->post('/api/password-forgotten',  'AuthController', 'requestModifyPasswordApi');
+$router->post('/api/reset-password', 'AuthController', 'resetPasswordApi');
 
 // Routes layout
 $router->get('/layouts/header', 'LayoutsController', 'header');
@@ -77,13 +81,17 @@ $router->get('/cgv', 'CgvController', 'cgv');
 // ── Authentification ──────────────────────────────────────
 $router->get('/connexion', 'AuthController', 'showLoginForm');
 $router->post('/connexion', 'AuthController', 'login');
+$router->get('/connexion-v2',  'AuthController', 'showLoginHtml');
 $router->post('/deconnexion', 'AuthController', 'logout');
 $router->get('/inscription', 'AuthController', 'showRegisterForm');
 $router->post('/inscription', 'AuthController', 'register');
+$router->get('/inscription-v2',  'AuthController', 'showRegisterHtml');
 $router->get('/mot-de-passe-oublie', 'AuthController', 'passwordForgotten');
 $router->post('/mot-de-passe-oublie', 'AuthController', 'requestModifyPassword');
+$router->get('/mot-de-passe-oublie-v2',  'AuthController', 'showPasswordForgottenHtml');
 $router->get('/mot-de-passe-oublie/reinitialisation', 'AuthController', 'showResetPasswordForm');
 $router->post('/mot-de-passe-oublie/reinitialisation', 'AuthController', 'resetPassword');
+$router->get('/mot-de-passe-oublie/reinitialisation-v2', 'AuthController', 'showResetPasswordHtml');
 
 // __ Orders ───────────────────────────────────────────────
 $router->get('/commande/etape-1', 'OrdersController', 'step1');

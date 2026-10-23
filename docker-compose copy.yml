@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+
+  # ── Application PHP ───────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: veg_app
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - veg_network
+
+  # ── Serveur Apache ────────────────────────────────────
+  webserver:
+    image: httpd:2.4
+    container_name: veg_webserver
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/apache/vhost.conf:/usr/local/apache2/conf/extra/vhost.conf
+    depends_on:
+      - app
+    networks:
+      - veg_network
+
+  # ── Base de données MariaDB ───────────────────────────
+  db:
+    image: mariadb:10.11
+    container_name: veg_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vite_et_gourmand
+      MYSQL_USER: veg_user
+      MYSQL_PASSWORD: veg_password
+    volumes:
+      - veg_db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - veg_network
+
+  # ── MongoDB ───────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: veg_mongo
+    environment:
+      MONGO_INITDB_DATABASE: vg_stats
+    volumes:
+      - veg_mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - veg_network
+
+networks:
+  veg_network:
+    driver: bridge
+
+volumes:
+  veg_db_data:
+  veg_mongo_data:

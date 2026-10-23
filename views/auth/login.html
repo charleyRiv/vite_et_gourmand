@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-login">
+        <section class="section-login">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>Formulaire de connexion</h1>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="col-12" id="login-messages"></div>
+
+                    <div class="login-form">
+
+                        <!-- Email -->
+                        <div class="col-12 login-label">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col-12 login-input">
+                            <input 
+                                type="text" 
+                                id="email" 
+                                name="email"
+                                class="login-email"
+                                autocomplete="email"
+                                required>
+                            <div class="invalid-feedback">Veuillez saisir une adresse email valide.</div>
+                        </div>
+
+                        <!-- Mot de passe -->
+                        <div class="col-12 login-label">
+                            <label for="password">Mot de passe</label>
+                        </div>
+                        <div class="col-12 login-input">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                class="login-password"
+                                autocomplete="current-password"
+                                required>
+                            <div class="invalid-feedback">Le mot de passe doit contenir au moins 8 caractères.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <a href="/mot-de-passe-oublie-v2">Mot de passe oublié ?</a>
+                        </div>
+
+                        <div class="col-12 btn">
+                            <button type="submit" id="btn-submit" class="btn btn-primary" disabled>
+                                Se connecter
+                            </button>
+                        </div>
+
+                        <div class="col-12 login-subscribe">
+                            <a href="/inscription-v2">Je n'ai pas encore de compte. Je m'inscris</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/auth/login.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initLogin());
+    </script>
+</body>
+</html>

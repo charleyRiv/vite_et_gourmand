@@ -19,6 +19,225 @@ class AuthController {
         $this->mailService = new MailService();
     }
 
+    public function loginApi(): void
+    {
+        header('Content-Type: application/json');
+
+        $errors = [];
+
+        // ── Protection brute force ────────────────────────────
+        if (!Session::has('login_attempts')) {
+            Session::set('login_attempts', 0);
+            Session::set('login_last_attempt', time());
+        }
+
+        if (Session::get('login_attempts') >= 5) {
+            $waitTime = 15 * 60;
+            $lastAttempt = Session::get('login_last_attempt');
+
+            if (time() - $lastAttempt < $waitTime) {
+                $remaining = ceil(($waitTime - (time() - $lastAttempt)) / 60);
+                http_response_code(429);
+                echo json_encode(['error' => "Trop de tentatives. Réessayez dans $remaining minute(s)."]);
+                exit();
+            }
+            Session::set('login_attempts', 0);
+        }
+
+        $email = trim($_POST['email']    ?? '');
+        $password = $_POST['password'] ?? '';
+
+        if (empty($email) || empty($password)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Veuillez renseigner votre email et votre mot de passe.']);
+            exit();
+        }
+
+        $user = $this->userModel->findByMail($email);
+
+        if ($user === null || !$this->authServices->verifyPassword($password, $user['password'])) {
+            Session::set('login_attempts', Session::get('login_attempts') + 1);
+            Session::set('login_last_attempt', time());
+            http_response_code(401);
+            echo json_encode(['error' => 'Email ou mot de passe incorrect.']);
+            exit();
+        }
+
+        if ($user['is_active'] === 0) {
+            http_response_code(403);
+            echo json_encode(['error' => 'Ce compte a été désactivé.']);
+            exit();
+        }
+
+        // Connexion réussie
+        Session::set('login_attempts', 0);
+        Session::regenerate();
+        Session::set('role', $user['label']);
+        Session::set('user_id', $user['user_id']);
+        Session::set('first_name', $user['first_name']);
+        Session::set('email', $user['email']);
+
+        $redirect = match($user['label']) {
+            'administrateur' => '/admin',
+            'employe' => '/employe',
+            default => '/mon-espace'
+        };
+
+        echo json_encode(['success' => true, 'redirect' => $redirect]);
+        exit();
+    }
+
+    public function showLoginHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/auth/login.html');
+        exit();
+    }
+
+    public function registerApi(): void
+    {
+        header('Content-Type: application/json');
+
+        $errors = [];
+
+        $firstName = trim($_POST['first_name'] ?? '');
+        $lastName = trim($_POST['last_name'] ?? '');
+        $phone = trim($_POST['phone'] ?? '');
+        $email = trim($_POST['email']  ?? '');
+        $streetNumber = trim($_POST['street_number'] ?? '');
+        $streetType = trim($_POST['street_type'] ?? '');
+        $streetName = trim($_POST['street_name'] ?? '');
+        $zipCode = trim($_POST['zip_code'] ?? '');
+        $city = trim($_POST['city'] ?? '');
+        $country = trim($_POST['country'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $passwordConf = $_POST['password_confirm'] ?? '';
+        $consent = $_POST['consent'] ?? '';
+
+        if (empty($firstName))
+            $errors[] = 'Le prénom est obligatoire';
+        if (empty($lastName))
+            $errors[] = 'Le nom est obligatoire';
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))
+            $errors[] = 'L\'adresse mail est invalide';
+        if (!$this->authServices->validatePasswordStrength($password))
+            $errors[] = 'Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
+        if ($password !== $passwordConf)
+            $errors[] = 'Les mots de passe ne correspondent pas';
+        if (empty($consent))
+            $errors[] = 'Vous devez accepter la politique de confidentialité';
+        if (empty($errors) && $this->userModel->findByMail($email) !== null)
+            $errors[] = 'Cette adresse email est déjà utilisée';
+
+        if (!empty($errors)) {
+            http_response_code(400);
+            echo json_encode(['errors' => $errors]);
+            exit();
+        }
+
+        $this->userModel->createUser([
+            'public_token'  => $this->authServices->generateUUID(),
+            'email' => $email,
+            'password' => $this->authServices->hashPassword($password),
+            'last_name' => $lastName,
+            'first_name' => $firstName,
+            'phone' => $phone,
+            'street_number' => $streetNumber,
+            'street_type' => $streetType,
+            'street_name' => $streetName,
+            'zip_code' => $zipCode,
+            'city' => $city,
+            'country' => $country,
+            'role_id' => 1
+        ]);
+
+        $this->mailService->sendWelcome($email, $firstName);
+
+        echo json_encode(['success' => true, 'redirect' => '/connexion-v2?registered=1']);
+        exit();
+    }
+
+    public function showRegisterHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/auth/register.html');
+        exit();
+    }
+
+    public function requestModifyPasswordApi(): void
+    {
+        header('Content-Type: application/json');
+
+        $email = trim($_POST['email'] ?? '');
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Veuillez renseigner une adresse mail valide.']);
+            exit();
+        }
+
+        $user = $this->userModel->findByMail($email);
+
+        if ($user !== null) {
+            $token = bin2hex(random_bytes(32));
+            $expiresAt = date('Y-m-d H:i:s', strtotime('+30 minutes'));
+            $this->userModel->setResetToken($user['user_id'], $token);
+            $this->mailService->sendPasswordReset($email, $token);
+        }
+
+        // Toujours retourner succès pour ne pas révéler si l'email existe
+        echo json_encode(['success' => true]);
+        exit();
+    }
+
+    public function showPasswordForgottenHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/auth/password_forgotten.html');
+        exit();
+    }
+
+    public function resetPasswordApi(): void
+    {
+        header('Content-Type: application/json');
+
+        $token = $_POST['token'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $passwordConf = $_POST['password_confirm'] ?? '';
+
+        // Vérifie le token
+        $user = $this->userModel->findByResetToken($token);
+
+        if ($user === null) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Ce lien de réinitialisation est invalide ou expiré.']);
+            exit();
+        }
+
+        if (!$this->authServices->validatePasswordStrength($password)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.']);
+            exit();
+        }
+
+        if ($password !== $passwordConf) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Les mots de passe ne correspondent pas.']);
+            exit();
+        }
+
+        $this->userModel->updatePassword(
+            $user['user_id'],
+            $this->authServices->hashPassword($password)
+        );
+
+        echo json_encode(['success' => true, 'redirect' => '/connexion-v2?reset=1']);
+        exit();
+    }
+
+    public function showResetPasswordHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/auth/password_reset_form.html');
+        exit();
+    }
+
     // GET /Connexion - affiche le formulaire
     public function showLoginForm(): void 
     {
@@ -60,9 +279,9 @@ class AuthController {
 
             if (time() - $lastAttempt < $waitTime) {
                 $remaining = ceil(($waitTime - (time() - $lastAttempt)) / 60);
-                $errors[]  = "Trop de tentatives. Réessayez dans $remaining minute(s).";
+                $errors[] = "Trop de tentatives. Réessayez dans $remaining minute(s).";
                 $pageTitle = 'Connexion - Vite & Gourmand';
-                $h1        = 'Formulaire de connexion';
+                $h1 = 'Formulaire de connexion';
                 require_once __DIR__ . '/../../views/auth/login.php';
                 return;
             }
