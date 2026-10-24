@@ -21,7 +21,7 @@ function initConfirmation() {
 
     async function loadConfirmation() {
         try {
-            const res  = await fetch('/api/commande/confirmation');
+            const res = await fetch('/api/commande/confirmation');
             const data = await res.json();
 
             if (data.error) {
