@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de commande - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-order-confirmation">
+        <section class="section-order-confirmation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Commande confirmée !</h2>
+                    </div>
+
+                    <!-- Contenu chargé par JS -->
+                    <div id="confirmation-content">
+                        <p class="text-center">Chargement de votre confirmation...</p>
+                    </div>
+
+                    <div class="col-12 back">
+                        <a href="/home-v2" class="btn btn-primary">Retour à l'accueil</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/orders/confirmation.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initConfirmation());
+    </script>
+</body>
+</html>

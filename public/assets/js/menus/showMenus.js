@@ -79,7 +79,7 @@ function initShowMenu() {
             const allergens = dish.allergens && dish.allergens.length > 0
                 ? `<div class="col-12 menu-allergen">
                     allergènes : ${escapeHtml(dish.allergens.map(a => a.label).join(', '))}
-                   </div>`
+                    </div>`
                 : '';
 
             return `
@@ -158,7 +158,7 @@ function initShowMenu() {
 
             <div class="row g-0 mb-0 menu-commande">
                 <div class="col-12 col-lg-auto">
-                    <a href="/commande/etape-1?menu_id=${menu.menu_id}" class="btn btn-primary">
+                    <a href="/commande/etape-1-v2?menu_id=${menu.menu_id}" class="btn btn-primary">
                         Commander
                     </a>
                 </div>

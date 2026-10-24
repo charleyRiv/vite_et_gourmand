@@ -58,6 +58,10 @@ $router->post('/api/login',    'AuthController', 'loginApi');
 $router->post('/api/register',   'AuthController', 'registerApi');
 $router->post('/api/password-forgotten',  'AuthController', 'requestModifyPasswordApi');
 $router->post('/api/reset-password', 'AuthController', 'resetPasswordApi');
+$router->get('/api/user/profile', 'ApiController', 'userProfile');
+$router->get('/api/commande/session-step2', 'ApiController', 'sessionStep2');
+$router->get('/api/commande/session-step4', 'ApiController', 'sessionStep4');
+$router->get('/api/commande/confirmation', 'ApiController', 'sessionConfirmation');
 
 // Routes layout
 $router->get('/layouts/header', 'LayoutsController', 'header');
@@ -96,13 +100,22 @@ $router->get('/mot-de-passe-oublie/reinitialisation-v2', 'AuthController', 'show
 // __ Orders ───────────────────────────────────────────────
 $router->get('/commande/etape-1', 'OrdersController', 'step1');
 $router->post('/commande/etape-1', 'OrdersController', 'storeStep1');
+$router->get('/commande/etape-1-v2',  'OrdersController', 'showStep1Html');
+$router->post('/api/commande/etape-1', 'OrdersController', 'storeStep1Api');
 $router->get('/commande/etape-2', 'OrdersController', 'step2');
 $router->post('/commande/etape-2', 'OrdersController', 'storeStep2');
+$router->get('/commande/etape-2-v2',   'OrdersController', 'showStep2Html');
+$router->post('/api/commande/etape-2', 'OrdersController', 'storeStep2Api');
 $router->get('/commande/etape-3', 'OrdersController', 'step3');
 $router->post('/commande/etape-3', 'OrdersController', 'storeStep3');
+$router->get('/commande/etape-3-v2',   'OrdersController', 'showStep3Html');
+$router->post('/api/commande/etape-3', 'OrdersController', 'storeStep3Api');
 $router->get('/commande/etape-4', 'OrdersController', 'step4');
 $router->post('/commande/etape-4', 'OrdersController', 'storeStep4');
+$router->get('/commande/etape-4-v2',   'OrdersController', 'showStep4Html');
+$router->post('/api/commande/etape-4', 'OrdersController', 'storeStep4Api');
 $router->get('/commande/confirmation', 'OrdersController', 'confirmation');
+$router->get('/commande/confirmation-v2', 'OrdersController', 'showConfirmationHtml');
 
 // ── Client area ─────────────────────────────────────────
 $router->get('/mon-espace', 'UserController', 'dashboard');

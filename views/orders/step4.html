@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande — Étape 4 - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-order4">
+        <section class="section-order4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Commander - Etape 4/4</h2>
+                    </div>
+                    <div class="col-12 info">
+                        <p>Vérifiez attentivement les informations ci-dessous avant de confirmer votre commande.<br>
+                            Aucune modification ne sera possible après validation.</p>
+                    </div>
+
+                    <!-- Chargement -->
+                    <div id="order4-content">
+                        <p class="text-center">Chargement du récapitulatif...</p>
+                    </div>
+
+                    <!-- Formulaire de validation -->
+                    <form id="order4-form">
+                        <div class="order4-submit">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-1 order4-input">
+                                        <input type="checkbox" id="cgv" name="cgv" value="1">
+                                    </div>
+                                    <div class="col-11 order4-label">
+                                        <label>J'ai lu et j'accepte les
+                                            <a href="/cgv">conditions générales de vente</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1 order4-input">
+                                        <input type="checkbox" id="conditions" name="conditions" value="1">
+                                    </div>
+                                    <div class="col-11 order4-label">
+                                        <label>Je confirme avoir pris connaissance des conditions spécifiques.</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p>Vos données sont protégées conformément au RGPD.
+                                        Aucune information bancaire n'est stockée sur nos serveurs.</p>
+                                </div>
+                            </fieldset>
+
+                            <div class="col-12 back">
+                                <a href="/commande/etape-1-v2" class="btn btn-primary">Modifier ma commande</a>
+                            </div>
+                            <div class="col-12 validate">
+                                <button type="submit" class="btn btn-success" id="btn-submit" disabled>
+                                    Valider ma commande
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/orders/step4.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initStep4());
+    </script>
+</body>
+</html>

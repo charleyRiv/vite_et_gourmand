@@ -19,10 +19,20 @@ class OrdersController {
     public function __construct()
     {
         AuthMiddleware::requireRole(['client']);
+            if (str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
+            if (!Session::isLoggedIn()) {
+                header('Content-Type: application/json');
+                http_response_code(401);
+                echo json_encode(['error' => 'Non authentifié']);
+                exit();
+            }
+        } else {
+            AuthMiddleware::requireRole(['client']);
+        }
+
         $this->orderModel = new OrderModel();
         $this->userModel = new UserModel();
         $this->menuModel = new MenuModel();
-        //$this->dishModel = new DishModel();
         $this->mailService = new MailService();
     }
     public function step1(): void 
@@ -50,6 +60,38 @@ class OrdersController {
         exit();
     }
 
+    public function storeStep1Api(): void
+    {
+        header('Content-Type: application/json');
+
+        $data = [
+            'last_name' => trim($_POST['last_name']?? ''),
+            'first_name' => trim($_POST['first_name']?? ''),
+            'phone' => trim($_POST['phone']?? ''),
+            'email' => trim($_POST['email']?? ''),
+            'date_livraison'=> trim($_POST['date_livraison'] ?? ''),
+            'heure_livraison'=> trim($_POST['heure_livraison'] ?? ''),
+            'street_number' => trim($_POST['street_number'] ?? ''),
+            'street_type' => trim($_POST['street_type'] ?? ''),
+            'street_name' => trim($_POST['street_name'] ?? ''),
+            'zip_code' => trim($_POST['zip_code'] ?? ''),
+            'city' => trim($_POST['city'] ?? ''),
+            'country' => trim($_POST['country'] ?? ''),
+        ];
+
+        // Stocke en session comme l'ancienne version
+        Session::set('order_step1', $data);
+
+        echo json_encode(['success' => true, 'redirect' => '/commande/etape-2-v2']);
+        exit();
+    }
+
+    public function showStep1Html(): void
+    {
+        readfile(__DIR__ . '/../../views/orders/step1.html');
+        exit();
+    }
+
     public function step2(): void 
     {
         //Vérifier que l'étape 1 a été complétée avant d'accéder à l'étape 2
@@ -68,15 +110,38 @@ class OrdersController {
         require_once __DIR__ . '/../../views/orders/step2.php';
     }
 
-        public function storeStep2(): void 
-        {
-            // Stocker les données dans la session
-            Session::set('order_step2', $_POST);
+    public function storeStep2(): void 
+    {
+        // Stocker les données dans la session
+        Session::set('order_step2', $_POST);
+        // Rediriger vers l'étape suivante
+        header('Location: /commande/etape-3');
+        exit();
+    }
 
-            // Rediriger vers l'étape suivante
-            header('Location: /commande/etape-3');
+    public function storeStep2Api(): void
+    {
+        header('Content-Type: application/json');
+
+        $menuId = (int) ($_POST['menu_id'] ?? 0);
+
+        if ($menuId === 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Veuillez sélectionner un menu.']);
             exit();
         }
+
+        Session::set('order_step2', ['menu_id' => $menuId]);
+
+        echo json_encode(['success' => true, 'redirect' => '/commande/etape-3-v2']);
+        exit();
+    }
+
+    public function showStep2Html(): void
+    {
+        readfile(__DIR__ . '/../../views/orders/step2.html');
+        exit();
+    }
 
     public function step3(): void 
     {
@@ -130,6 +195,30 @@ class OrdersController {
 
         // Rediriger vers l'étape suivante
         header('Location: /commande/etape-4');
+        exit();
+    }
+
+    public function storeStep3Api(): void
+    {
+        header('Content-Type: application/json');
+
+        $nbPersons = (int) ($_POST['nb_persons'] ?? 0);
+
+        if ($nbPersons <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Nombre de personnes invalide.']);
+            exit();
+        }
+
+        Session::set('order_step3', ['nb_persons' => $nbPersons]);
+
+        echo json_encode(['success' => true, 'redirect' => '/commande/etape-4-v2']);
+        exit();
+    }
+
+    public function showStep3Html(): void
+    {
+        readfile(__DIR__ . '/../../views/orders/step3.html');
         exit();
     }
 
@@ -309,14 +398,99 @@ class OrdersController {
         exit();
     }
 
+    public function storeStep4Api(): void
+    {
+        header('Content-Type: application/json');
+
+        try {
+            $cgv        = $_POST['cgv']        ?? '';
+            $conditions = $_POST['conditions'] ?? '';
+
+            if (empty($cgv) || empty($conditions)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Veuillez accepter les conditions.']);
+                exit();
+            }
+
+            $step1 = Session::get('order_step1');
+            $step2 = Session::get('order_step2');
+            $step3 = Session::get('order_step3');
+
+            if (!$step1 || !$step2 || !$step3) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Session expirée. Veuillez recommencer votre commande.']);
+                exit();
+            }
+
+            $menuId    = (int) $step2['menu_id'];
+            $nbPersons = (int) $step3['nb_persons'];
+            $menu      = $this->menuModel->getById($menuId);
+            $menuPrice = (float) $menu['price_per_person'] * $nbPersons;
+            $discount  = $nbPersons >= $menu['min_persons'] + 5 ? $menuPrice * 0.1 : 0;
+
+            $distanceService = new DistanceService();
+            $address = $step1['street_number'] . ' ' . $step1['street_type'] . ' '
+                    . $step1['street_name']   . ' ' . $step1['zip_code']    . ' '
+                    . $step1['city']          . ' ' . $step1['country'];
+
+            $distance     = $distanceService->getDistance($address) ?? 0;
+            $deliveryFees = $distance > 0 ? 5 + (0.59 * $distance) : 0;
+            $total        = $menuPrice - $discount + $deliveryFees;
+
+            $orderId = $this->orderModel->createOrder([
+                'user_id'                => Session::get('user_id'),
+                'menu_id'                => $menuId,
+                'event_date'             => $step1['date_livraison'],
+                'delivery_time'          => $step1['heure_livraison'],
+                'delivery_street_number' => $step1['street_number'],
+                'delivery_street_type'   => $step1['street_type'],
+                'delivery_street_name'   => $step1['street_name'],
+                'delivery_zip_code'      => $step1['zip_code'],
+                'delivery_city'          => $step1['city'],
+                'delivery_country'       => $step1['country'],
+                'nb_persons'             => $nbPersons,
+                'calculated_menu_price'  => $menuPrice,
+                'delivery_fees'          => $deliveryFees,
+                'discount'               => $discount,
+                'total_price'            => $total,
+                'current_status'         => 'pending',
+                'material_lent'  => 0,
+            ]);
+
+            $this->mailService->sendOrderConfirmation($step1['email'], [
+                'order_id'   => $orderId,
+                'first_name' => $step1['first_name'],
+                'menu_title' => $menu['title'],
+                'event_date' => $step1['date_livraison'],
+                'total'      => $total,
+            ]);
+
+            Session::set('last_order_id', $orderId);
+            Session::remove('order_step1');
+            Session::remove('order_step2');
+            Session::remove('order_step3');
+
+            echo json_encode(['success' => true, 'redirect' => '/commande/confirmation-v2']);
+            exit();
+
+        } catch (\Exception $e) {
+            error_log('storeStep4Api error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
+            http_response_code(500);
+            echo json_encode(['error' => $e->getMessage()]);
+            exit();
+        }
+    }
+
+    public function showStep4Html(): void
+    {
+        readfile(__DIR__ . '/../../views/orders/step4.html');
+        exit();
+    }
+
     public function confirmation(): void 
     {
         $orderId = Session::get('last_order_id');
 
-        //if (!$orderId) {
-        //    header('Location: /');
-        //    exit();
-        //}
         $order = $this->orderModel->getById($orderId);
         
         $userInfos = $this->userModel->findById($order['user_id']);
@@ -327,20 +501,21 @@ class OrdersController {
         $orderDateFr = formatDateFr($order['event_date']);
         $orderTimeFr = formatTimeFr($order['delivery_time']);
 
-        //var_dump($userInfos['email']);
-        //exit();
-        //masquer l'email
         $maskedEmail= maskEmail($userInfos['email']);
         
         //Recupérer la distance
         $distance = ($order['delivery_fees'] - 5)/0.59;
 
-        //Nettoyer la session
-        //Session::set('last_order_id', null);
 
         $pageTitle = 'Commandes - confirmation - Vite & Gourmand';
         $h1= 'Commande n°' . $orderId;
         require_once __DIR__ . '/../../views/orders/confirmation.php';
+    }
+
+    public function showConfirmationHtml(): void
+    {
+        readfile(__DIR__ . '/../../views/orders/confirmation.html');
+        exit();
     }
 
 

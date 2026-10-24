@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande — Étape 3 - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-order3">
+        <section class="section-order3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Commander - Etape 3/4</h2>
+                    </div>
+                    <div class="col-12">
+                        <p>Veuillez renseigner le nombre de personnes qui dégusteront ce menu</p>
+                    </div>
+
+                    <form id="order3-form">
+                        <div class="order3-form">
+                            <div class="col-12 warning" id="min-persons-warning">
+                                <!-- Rempli par JS -->
+                            </div>
+
+                            <div class="col-12 order3-label">
+                                <label for="nb_persons">Nombre de personnes</label>
+                            </div>
+                            <div class="col-2">
+                                <input 
+                                    type="number" 
+                                    id="nb_persons" 
+                                    name="nb_persons"
+                                    class="order3-input"
+                                    required>
+                                <div class="invalid-feedback" id="nb-persons-feedback">
+                                    Nombre de personnes insuffisant.
+                                </div>
+                            </div>
+                        </div>
+
+                        <fieldset class="order3-prices">
+                            <legend>Prix</legend>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Prix du menu<br>
+                                        <small>
+                                            <span id="price-per-person-display">--</span> € x
+                                            <span id="nb-display">--</span> personnes
+                                        </small>
+                                    </td>
+                                    <td id="menu-price">-- €</td>
+                                </tr>
+                                <tr>
+                                    <td>Réduction 10%<br>
+                                        <small>-10% si vous commandez pour 5 personnes de plus que le minimum requis</small>
+                                    </td>
+                                    <td id="discount-price">-- €</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong><br>
+                                        <small>hors frais de livraison</small>
+                                    </td>
+                                    <td id="total-price"><strong>-- €</strong></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+
+                        <div class="row next-step">
+                            <div class="col-6 back">
+                                <a href="/commande/etape-2-v2" class="btn btn-primary">Précédent</a>
+                            </div>
+                            <div class="col-6 btn-next">
+                                <button type="submit" id="btn-submit" class="btn btn-primary" disabled>
+                                    Suivant
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/orders/step3.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initStep3());
+    </script>
+</body>
+</html>

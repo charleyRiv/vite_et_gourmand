@@ -59,7 +59,7 @@ require_once __DIR__ . '/../layouts/header.php';
                             </tr> 
                             <tr>
                                 <td>Réduction 10% <br>
-                                    <small> -10% si vous comandez pour
+                                    <small> -10% si vous commandez pour
                                             5 personnes de plus que le minimum requis
                                     </small>
                                 </td>

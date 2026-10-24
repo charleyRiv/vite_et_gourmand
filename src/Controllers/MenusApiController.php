@@ -26,6 +26,12 @@ class MenusApiController
         $this->pictureModel = new PictureModel();
     }
 
+    public function getMenuById(int $id): void
+    {
+        // alias de getMenu() déjà existant
+        $this->getMenu($id);
+    }
+
     public function getMenus(): void
     {
         header('Content-Type: application/json');

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande — Étape 2 - Vite & Gourmand</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+    <div id="app-header"></div>
+
+    <main class="page-order2">
+        <section class="section-order2-form">
+            <div class="container">
+                <div class="row">
+                    <h2>Commander - Etape 2/4</h2>
+
+                    <form id="order2-form">
+                        <div class="row order2-form">
+                            <div class="col-12 order2-label">
+                                <label for="menu_id">Sélectionner un menu</label>
+                            </div>
+                            <div class="col-12">
+                                <select id="menu_id" name="menu_id" class="order2-input" required>
+                                    <option value="">-- Choisir un menu --</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Veuillez sélectionner un menu.
+                                </div>
+                            </div>
+
+                            <div class="col-6 back">
+                                <a href="/commande/etape-1-v2" class="btn btn-primary">Précédent</a>
+                            </div>
+                            <div class="col-6 btn-next">
+                                <button type="submit" id="btn-submit" class="btn btn-primary" disabled>
+                                    Suivant
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/layouts.js"></script>
+    <script src="/assets/js/orders/step2.js"></script>
+    <script>
+        loadLayouts('', '')
+            .then(() => initStep2());
+    </script>
+</body>
+</html>
